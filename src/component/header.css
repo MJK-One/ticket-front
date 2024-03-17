@@ -1,0 +1,122 @@
+  ul {
+    list-style-type: none;
+  }
+  .App-header {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(0, 0, 0, .08);
+  }
+  
+  .header-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding: 0 30px;
+    box-sizing: border-box;
+  }
+  
+  .h-t-logo-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 1260px;
+    height: 50px;
+    padding: 0;
+    gap: 20px;
+    margin-right: 20px;
+  }
+  
+  .header-search {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+    max-width: 452px;
+  }
+  .search-form {
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    border-radius: 25px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(0, 0, 0, .15);
+  }
+  .search-form input{
+    height: 18px;
+    flex: 1;
+    margin-left: 16px;
+    font-style: normal;
+    font-weight: 700;
+    /* font-size: 15px; */
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    color: #111;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  .search-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    margin: 0 16px 0 0;
+    padding: 0;
+  }
+  
+  .header-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+  }
+  
+  .h-b-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    padding: 0;
+    gap: 20px;
+    width: 100%;
+    max-width: 1280px;
+  }
+  .h-b-menu ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 39px;
+    padding: 0;
+    gap: 22px;
+    border-radius: 6px;
+    white-space: nowrap;
+    list-style-type: none;
+    margin: 0;
+  }
+  .h-b-menu li {
+    display: flex;
+    align-items: center;
+    height: 39px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
+  }
+  

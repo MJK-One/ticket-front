@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './component/header';
+import Main from './mainpage/main';
+import Musicall from './mainpage/musicall';
+import Consert from './mainpage/consert';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Header/>
+        <Routes>
+          <Route path="/" element={<Main />} /> {/* 기본 경로를 Main 컴포넌트로 설정 */}
+          <Route path="/musicall" element={<Musicall />} />
+          <Route path="/consert" element={<Consert />} /> 
+        </Routes>
+      </Router>
+    </>
   );
 }
 
