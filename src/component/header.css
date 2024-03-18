@@ -1,6 +1,10 @@
   ul {
     list-style-type: none;
   }
+  a{
+    text-decoration: none;
+  color: black;
+  }
   .App-header {
     display: flex;
     flex-direction: column;
@@ -103,7 +107,7 @@
     align-items: center;
     height: 39px;
     padding: 0;
-    gap: 22px;
+    gap : 0;
     border-radius: 6px;
     white-space: nowrap;
     list-style-type: none;
@@ -112,11 +116,29 @@
   .h-b-menu li {
     display: flex;
     align-items: center;
-    height: 39px;
+    height: 38px;
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
     line-height: 19px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0);
+    margin-right : 20px;
+    position: relative;
   }
+  .h-b-menu li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0px; 
+    height: 2px;
+    background-color: #000;
+    opacity: 0; 
+    transition: opacity 0.3s; 
+  }
+  .h-b-menu li:hover::after, .h-b-menu ul li.active::after {
+    opacity: 1;
+  }
+  
+
+
   
