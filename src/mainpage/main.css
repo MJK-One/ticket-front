@@ -1,0 +1,13 @@
+.swiper {
+    padding-top : 10px !important;
+}
+.swiper-wrapper {
+    position: absolute;
+    margin-left: -40px;
+}
+.swiper-slide {
+    width : 254px !important;
+    height : 318px !important;
+    border : 1px solid #000;
+    margin-right : 15px !important;
+}
