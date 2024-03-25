@@ -1,0 +1,34 @@
+#contents {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+.advertising {
+    width : 1500px;
+    height : 500px;
+    padding-top : 30px;
+}
+.rank {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+.rank h2 {
+    font-style: normal;
+    font-weight: 700; 
+    font-size: 28px;
+}
+.mon-ticket {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.mon-ticket h2{
+    font-style: normal;
+    font-weight: 700; 
+    font-size: 28px;
+}

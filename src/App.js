@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './component/header';
-import Main from './mainpage/main';
+import Main from './mainpage/main/main';
 import Musicall from './mainpage/musicall';
 import Consert from './mainpage/consert';
 
