@@ -2,27 +2,28 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width : 130vh;
+    width : 144vh;
     border : 1px solid #000;
+    margin-left : 30px;
 }
 .openticket {
-    width : 60vh;
+    width : 65vh;
     height : 23vh;
     border : 1px solid #000;
-    margin : 10px;
+    margin : 10px 3vh 10px 3vh;
     display: flex;
     flex-direction: row;
 }
 .openticket-img {
     width : 17vh;
     height : 21vh;
-    margin : 1vh;
+    margin : 10px;
     border: 1px solid #000;
 }
 .openticket-info {
     display: flex;
     flex-direction: column;
-    width : 38vh;
+    width : 40vh;
     height : 21vh;
     margin : 1vh 0px;
     border: 1px solid #000;
