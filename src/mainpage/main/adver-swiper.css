@@ -50,3 +50,9 @@
     stroke-dasharray: 125.6;
     transform: rotate(-90deg);
   }
+  .adverSwiper .swiper-pagination .swiper-pagination-clickable .swiper-pagination-bullets .swiper-pagination-horizontal {
+    width: 30%;
+  }
+  /* .adverSwiper .swiper-pagination-bullet {
+
+  } */

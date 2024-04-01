@@ -11,7 +11,7 @@ const BasicSwiper = () => (
             slidesPerView={'auto'}
             spaceBetween={10}
             slidesOffsetBefore={0}
-            slidesOffsetAfter={5}
+            slidesOffsetAfter={0}
             navigation
             className="basicSwiper"
             centeredSlides={false}

@@ -6,9 +6,10 @@
     align-items: center; 
 }
 .advertising {
-    width : 1500px;
-    height : 500px;
+    width : 145vh;
+    height : 45vh;
     padding-top : 30px;
+    border : 1px solid #000;
 }
 .rank {
     padding-top: 30px;

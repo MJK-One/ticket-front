@@ -1,5 +1,5 @@
 import React from 'react';
-import './mon-ticket.css';
+import './openticket.css';
 
 export default function Openticket() {
   return (
