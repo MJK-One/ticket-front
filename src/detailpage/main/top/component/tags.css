@@ -1,0 +1,58 @@
+.tagList {
+    display: inline-block;
+    margin-right: 0.7rem;
+    vertical-align: middle;
+}
+
+.tagList .tagItem {
+    display: inline-block;
+    margin-left: 0.4rem;
+}
+
+.tagList .tagItem:first-child {
+    margin-left: 0;
+}
+
+.tagList .tagButton {
+    display: inline-block;
+    padding: 0 0.4rem;
+    vertical-align: middle;
+    box-sizing: border-box;
+
+    border: 0.08rem solid #ddd;
+    border-radius: 0.25rem;
+    
+    min-width: 4.2rem;
+    height: 1.5rem;
+    line-height: 1.4rem;
+
+    color: #666;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.tagList .tagButton.is-accent {
+    color: #ff7262;
+    font-weight: 700;
+    border-color: #ffe4d5;
+}
+
+.tagList .tagButton::after {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_tagarrow_new2.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    position: relative;
+    display: inline-block;
+    top: -0.02rem;
+    left: 0.125rem;
+
+    width: 0.53rem;
+    height: 0.53rem;
+
+    content: '';
+}
+
+.tagList .tagButton.is-accent::after {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_tagarrow_new.png');
+}
