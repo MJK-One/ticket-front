@@ -1,30 +1,113 @@
-.openticket-con {
+.openticket-container {
+    margin-top : 50px;
+}
+.by-site {
     display: flex;
-    flex-direction: row;
+    gap : 20px;
+    align-items: center;
+    justify-content: center;
+}
+.by-site div {
+    border: 1px solid #aaa;
+    border-radius: 30px;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    padding: 10px 20px;
+}
+.by-site div.active {
+    border :inherit;
+    background-color: #1774e6;
+    color: white;
+}
+.controll-list {
+    margin-left:20px;
+    justify-content: center;
+    width : 1310px;
+}
+.view-type button {
+    width : 36px;
+    height : 36px;
+    background-color: transparent;
+    border: none;
+}
+.view-type {
+    float: left;
+}
+.view-sort {
+    float : right;
+}
+.view-sort li{
+    display: inline;
+    align-items: center; 
+    justify-content: center;
+    padding: 0 10px 0 10px;
+}
+.view-sort li:not(:last-child) {
+    border-right: 1px solid #ccc;
+}
+
+.openticket-arrange {
+    display : flex;
     flex-wrap: wrap;
-    width : 144vh;
-    border : 1px solid #000;
-    margin-left : 30px;
+    width : 135vh;
+    margin-top : 20px;
 }
 .openticket {
-    width : 65vh;
-    height : 23vh;
-    border : 1px solid #000;
-    margin : 10px 3vh 10px 3vh;
-    display: flex;
-    flex-direction: row;
+    width : 200px;
+    height : 375px;
+    margin : 0 auto 20px;
 }
 .openticket-img {
-    width : 17vh;
-    height : 21vh;
-    margin : 10px;
-    border: 1px solid #000;
+    width : 191px;
+    height : 254px;
+    border : 1px solid #000;
+    border-radius: 10px;
 }
 .openticket-info {
+    margin-top: 10px;
+    width : 180px;
+}
+.openticket-info .title {
+    margin-top : 5px;
+    font-weight: 700;
+    font-size: 17px;
+}
+.openticket-info .day {
+    margin-top : 5px;
+}
+.open-Timer {
     display: flex;
-    flex-direction: column;
-    width : 40vh;
-    height : 21vh;
-    margin : 1vh 0px;
-    border: 1px solid #000;
+    flex-direction: row;
+    align-items: center;
+    height: 1.5rem;
+    padding: 0;
+    border-radius: 4px;
+}
+.Timer-banner {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+    padding: .2rem .6rem;
+    border-radius: 4px 0 0 4px;
+    color : white;
+    background: #1774e6;
+}
+.Timer-day {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+    padding: .05rem .6rem;
+    color: #1774e6;
+    gap: 1rem;
+    background: #fff;
+    border: 1px solid  #1774e6;
+    border-left-width: 0;
+    border-radius: 0 4px 4px 0;
 }

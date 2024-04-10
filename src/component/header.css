@@ -21,7 +21,10 @@
     padding: 0 30px;
     box-sizing: border-box;
   }
-  
+  .logo-img {
+    width : 100px;
+    height : 45px;
+  }
   .h-t-logo-search {
     display: flex;
     flex-direction: row;
@@ -30,10 +33,10 @@
     max-width: 1260px;
     height: 50px;
     padding: 0;
-    gap: 20px;
+    gap: 40px;
     margin-right: 20px;
   }
-  
+
   .header-search {
     display: flex;
     flex-direction: column;

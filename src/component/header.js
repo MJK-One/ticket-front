@@ -17,7 +17,7 @@ function Header() {
               <div className="header-top">
                 <div className="h-t-logo-search">
                   <div className="header-logo">
-                  <Link to="/" className="linksty">티켓 로그</Link></div>
+                  <Link to="/" className="linksty"><img className="logo-img" alt="" src="img/TOW.png" /></Link></div>
                   <div className="header-search">
                       <div className="search-form">
                       <input gtm-label="검색창" type="text" placeholder="검색창" value=""/>
