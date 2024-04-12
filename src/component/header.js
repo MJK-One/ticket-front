@@ -7,7 +7,7 @@ function CustomLink({ to, children }) {
   const isActive = location.pathname === to;
   const className = isActive ? 'active' : null;
 
-  return <li className={className}><Link to={to}>{children}</Link></li>;
+  return <li className={className}><div className="menu-img">로고</div><div className="menu-title"><Link to={to}>{children}</Link></div></li>;
 }
 
 function Header() {
@@ -33,6 +33,10 @@ function Header() {
                   <ul>             
                     <CustomLink to="/musicall">뮤지컬</CustomLink>
                     <CustomLink to="/consert">콘서트</CustomLink>
+                    <CustomLink to="/">전시/행사</CustomLink>
+                    <CustomLink to="/">클래식/무용</CustomLink>
+                    <CustomLink t0="/">연극</CustomLink>
+                    <CustomLink to="/">아동/가족</CustomLink>
                   </ul>
                 </div>
               </div>
