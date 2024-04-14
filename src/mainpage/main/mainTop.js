@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './mainTop.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Navigation, Autoplay} from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css/navigation';
-import 'swiper/css/autoplay'
+import 'swiper/css/autoplay';
 
 const slidesData = [
   { id: 1, img: '이미지1', name: '이름1' },
@@ -19,28 +19,59 @@ const slidesData = [
 ];
 
 export default function MainTop() {
+  const [enableNavigation, setEnableNavigation] = useState(true);
+
+  useEffect(() => {
+    const updateNavigation = () => {
+      if (window.innerWidth <= 1000) {
+        setEnableNavigation(false);
+      } else {
+        setEnableNavigation(true);
+      }
+    };
+
+    updateNavigation(); // 컴포넌트 마운트 시 실행
+    window.addEventListener('resize', updateNavigation); // 윈도우 크기 변경 시 실행
+
+    return () => window.removeEventListener('resize', updateNavigation); // 컴포넌트 언마운트 시 이벤트 리스너 제거
+  }, []);
+
   return (
     <div className='maintop-con'>
       <Swiper
         modules={[Navigation, Autoplay]}
-        slidesPerView={5}
-        spaceBetween={10}
         centeredSlides={true}
         loop={true}
         autoplay={true}
         allowTouchMove={false}
-        navigation={true}
+        navigation={enableNavigation} // 조건부 navigation 활성화
         className="maintop-con-sw"
+        breakpoints={{
+          1200: {
+            slidesPerView: 5,
+            spaceBetween: 10,
+            allowTouchMove : false,
+          },
+          200: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            allowTouchMove : true,
+          },
+        }}
       >
         {slidesData.map(slide => (
           <SwiperSlide key={slide.id}>
             <div className='poster'>
               <div className='poster-img'>{slide.img}</div>
-              <div className='poster-info'>{slide.name}</div>
+              <div className='poster-info'>
+                  <div className='poster-info-cl'>종류</div>
+                  <div className='poster-info-title'>{slide.name}</div>
+                  <div className='poster-info-day'>2024.04.12</div>
+              </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
     </div>
-    );
-  }
+  );
+};

@@ -8,7 +8,7 @@ function BySite({ to, children, onClick, className }) {
 
 export default function Openticket() {
   
-  const [activeSite, setActiveSite] = useState('');
+  const [activeSite, setActiveSite] = useState('all');
 
   //Site 별 나열 로직
   const handleSiteClick = (site) => {
@@ -18,6 +18,11 @@ export default function Openticket() {
 
   return (
     <div className='openticket-container'>
+      <div className='openticket-month'>
+        <button className='month-left'>◀</button>
+        <div className='month'><a href="#">2024.04</a></div>
+        <button className='month-right'>▶</button>
+      </div>
       <menu className='by-site'>
         <BySite
           to="all"
@@ -57,7 +62,7 @@ export default function Openticket() {
         </ul>
       </div> */}
       <div className='openticket-arrange'>
-        {[...Array(12)].map((value, index) => {  
+        {[...Array(10)].map((value, index) => {  
         return (  
           <div className='openticket' key={index}>
             <div className='openticket-img'>

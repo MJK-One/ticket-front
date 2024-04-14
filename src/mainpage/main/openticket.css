@@ -1,5 +1,22 @@
-.openticket-container {
-    margin-top : 50px;
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.openticket-month {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.openticket-month .month {
+    font-size : 50px;
+    font-weight: 700;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.openticket-month button {
+    width : 30px;
+    height : 30px;
 }
 .by-site {
     display: flex;
@@ -14,13 +31,14 @@
     align-items: center; 
     justify-content: center;
     padding: 10px 20px;
+    cursor: pointer;
 }
 .by-site div.active {
     border :inherit;
     background-color: #1774e6;
     color: white;
 }
-.controll-list {
+/* .controll-list {
     margin-left:20px;
     justify-content: center;
     width : 1310px;
@@ -28,8 +46,6 @@
 .view-type button {
     width : 36px;
     height : 36px;
-    background-color: transparent;
-    /* border: none; */
 }
 .view-type {
     float: left;
@@ -45,18 +61,26 @@
 }
 .view-sort li:not(:last-child) {
     border-right: 1px solid #ccc;
-}
-
+} */
 .openticket-arrange {
     display : flex;
     flex-wrap: wrap;
-    width : 135vh;
+    width : 1100px;
     margin-top : 20px;
+}
+@media screen and (max-width: 1000px) {
+    .openticket-arrange {
+        display : flex;
+        flex-wrap: wrap;
+        width : 650px;
+        margin-top : 20px;
+    }
 }
 .openticket {
     width : 200px;
     height : 375px;
     margin : 0 auto 20px;
+    cursor: pointer;
 }
 .openticket-img {
     width : 191px;
