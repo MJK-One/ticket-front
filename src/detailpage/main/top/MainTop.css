@@ -1,0 +1,451 @@
+.summary {
+    position: relative;
+    padding-bottom: 4rem;
+    font-size: 0;
+}
+
+/*summary top*/
+.summaryTop {
+    margin-bottom: 1rem;
+}
+
+.summaryTop .tag {
+    display: inline-block;
+    margin-bottom: 0.6rem;
+    width: 100%;
+    color: #666;
+}
+
+.summaryTop .tag .tagText {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.85rem;
+}
+
+.summaryTop .prdTitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /*텍스트 2줄로 제한*/
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis; /*텍스트가 넘어가면 ...으로*/
+    overflow: hidden;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 130%;
+}
+
+.summaryTop .prdTitleBottom {
+    margin-top: 0.5rem;
+}
+
+.prdTitleBottom .prdStar {
+    margin-right: 0.6rem;
+
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0;
+    color: #666;
+}
+
+.prdStar .prdStarBack {/*안 칠해진 별 5개(바탕)*/
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_star.png');
+    background-repeat: repeat-x;
+    background-size: 1rem, 1rem;
+
+    display: inline-block;
+    position: relative;
+    width: 5rem;
+    height: 1rem;
+
+    vertical-align: middle;
+
+}
+
+.prdStar .prdStarIcon {/*별점에 따라 별이 칠해짐*/
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_star_on.png');
+    background-repeat: repeat-x;
+    background-size: 1rem 1rem;
+
+    display: block;
+    height: 100%;
+}
+
+.prdStar .prdStarIcon[data-star='5'] {
+    width: 100%;
+}
+
+.prdStar .prdStarIcon[data-star='4.5'] {
+    width: 90%;
+}
+
+.prdStar .prdStarIcon[data-star='4'] {
+    width: 80%;
+}
+
+.prdStar .prdStarIcon[data-star='3.5'] {
+    width: 70%;
+}
+
+.prdStar .prdStarIcon[data-star='3'] {
+    width: 60%;
+}
+
+.prdStar .prdStarIcon[data-star='2.5'] {
+    width: 50%;
+}
+
+.prdStar .prdStarIcon[data-star='2'] {
+    width: 40%;
+}
+
+.prdStar .prdStarIcon[data-star='1.5'] {
+    width: 30%;
+}
+
+.prdStar .prdStarIcon[data-star='1'] {
+    width: 20%;
+}
+
+.prdStar .prdStarIcon[data-star='0.5'] {
+    width: 10%;
+}
+
+.prdStar .prdStarIcon[data-star='0'] {
+    width: 0%;
+}
+
+
+.prdStar .prdStarScore {
+    display: inline-block;
+    margin-left: 0.25rem;
+    vertical-align: middle;
+    line-height: 140%;
+
+    font-size: 0.9rem;
+}
+
+/*summary body*/
+    /*posterBox*/
+.summaryBody .posterBox {
+    display: inline-block;
+    width: 18rem;
+}
+
+.posterBox .posterBoxTop {
+    background-color: #f0f0f0;
+    position: relative;
+    height: 24rem;
+}
+
+.posterBox .posterBoxImage {
+    display: block;
+    box-sizing: border-box;
+    border: 0.08rem solid #dadee3;
+
+    width: 100%;
+    height: 100%;
+}
+
+.posterBox .posterBoxPlayBtn {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_playBtn.png');
+    background-repeat: no-repeat;
+    background-size: 2.5rem 2.5rem;
+
+    position: absolute;
+    left: 0.9rem;
+    bottom: 0.9rem;
+
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.posterBox .posterBoxBottom {
+    margin-top: 0.7rem;
+    font-size: 0;
+}
+
+.posterBox .prdCast {
+    float: left;
+    margin-top: 0.1rem;
+    font-size: 0;
+}
+
+.prdCast .prdCastWrap {
+    display: inline-block;
+}
+
+.prdCast .prdCastBtn {
+    position: relative;
+    display: inline-block;
+    line-height: 1.5rem;
+
+    font-size: 0.9rem;
+    font-weight: inherit;
+
+    cursor: pointer;
+}
+
+.prdCast .prdCastBtn::before { /*좋아요 하트*/
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_heart.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+
+    position: relative;
+    display: inline-block;
+    top: 0.1rem;
+    padding-right: 0.4rem;
+
+    width: 1rem;
+    height: 0.9rem;
+
+    content: '';
+}
+
+.prdCast .prdCastBtn.is-toggled::before { /*하트 선택됨*/
+    background-position: 0 -0.9rem;
+}
+
+.prdCast .prdCastNum {
+    display: inline-block;
+
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    margin-left: 0.3rem;
+}
+
+.share {
+    float: right;
+}
+
+.share .shareList {
+    font-size: 0;
+}
+
+.share .shareItem {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_sns.png');
+    background-repeat: no-repeat;
+    background-color: #999;
+    border-radius: 50%;
+
+    display: inline-block;
+    margin-left: 0.5rem;
+
+    width: 1.7rem;
+    height: 1.7rem;
+}
+
+.share .shareItem:first-child {
+    margin-left: 0;
+}
+
+.share .is-facebook {
+    background-position: 0 -0;
+}
+
+.share .is-twitter {
+    background-position: 0 -1.7rem;
+}
+
+.share .shareItem .link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+    /*info*/
+.summaryBody .info {
+    display: inline-block;
+    vertical-align: top;
+
+    margin-top: 0.25rem;
+    margin-left: 1.5rem;
+
+    width: 31rem;
+}
+
+.summaryBody .info .infoItem {
+    margin-top: 0.9rem;
+    padding-left: 1.5rem;
+    font-size: 0;
+}
+
+.summaryBody .info .infoItem:first-child {
+    margin-top: 0;
+    line-height: 1.3rem;
+}
+
+.summaryBody .info .infoLabel {
+    display: inline-block;
+    box-sizing: border-box;
+    vertical-align: top;
+
+    line-height: 160%;
+    padding-right: 0.3rem;
+    width: 6rem;
+
+    color: #000;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.summaryBody .info .infoDesc {
+    display: inline-block;
+    max-width: 23rem;
+    vertical-align: top;
+}
+
+.summaryBody .info .infoBtn {
+    position: relative;
+    vertical-align: middle;
+    line-height: 160%;
+
+    text-align: left;
+    color: #000;
+    font-size: 1rem;
+    font-weight: inherit;
+}
+
+.summaryBody .info .infoBtn i {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_more.png');
+    background-repeat: no-repeat;
+
+    display: inline-block;
+    position: relative;
+    margin-left: 0.2rem;
+    overflow: hidden;
+
+    top: -0.125rem;
+    width: 0.3rem;
+    height: 0.4rem;
+}
+
+.summaryBody .info .infoText {
+    position: relative;
+    line-height: 160%;
+    max-width: 23rem;
+
+    color: #000;
+    font-size: 1rem;
+}
+
+.summaryBody .info .infoPriceList {
+    margin-bottom: 0.5rem;
+    font-size: 0;
+}
+
+.summaryBody .info .infoPriceItem {
+    display: flex;
+    margin-top: 0.8rem;
+    line-height: 1.25rem;
+    gap: 0.4rem;
+    
+    color: #000;
+    font-size: 0;
+}
+
+.summaryBody .info .infoPriceItem:first-child {
+    margin-top: 0;
+}
+
+.summaryBody .info .is-largePrice {
+    margin-bottom: 0.9rem;
+    font-weight: bold;
+}
+
+.summaryBody .info .infoPriceItem span {
+    display: inline-block;
+    vertical-align: middle;
+    word-break: keep-all; /**/
+
+    font-size: 0.9rem;
+}
+
+.summaryBody .info .infoPriceItem .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    min-width: 2rem;
+    max-width: 18rem;
+
+    color: #666;
+}
+
+.summaryBody .info .infoPriceItem .price {
+    font-weight: bold;
+}
+
+.summaryBody .info .infoPriceItem .name + .price {
+    vertical-align: top;
+}
+
+.summaryBody .info .infoBenefitGuide {
+    display: inline-block;
+    margin-right: 1.25rem;
+}
+
+.summaryBody .info .infoBenefitList {
+    margin-top: 0.6rem;
+    margin-bottom: 0.3rem;
+}
+
+.summaryBody .info .infoLink {
+    position: relative;
+    display: block;
+    line-height: 150%;
+
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.summaryBody .info .infoLink::after {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_smallArrow.png');
+    background-repeat: no-repeat;
+
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0.2rem;
+    margin-left: 0.25rem;
+
+    width: 0.25rem;
+    height: 0.4rem;
+
+    content: '';
+}
+
+.summaryBody .info .infoLink + .infoLink {
+    margin-top: 0.7rem;
+}
+
+.summaryBody .info [class^='logo-'] {
+    overflow: hidden;
+    display: inline-block;
+    text-indent: -500%;
+}
+
+.summaryBody .info .logo-nolpoint {
+    background-image: url('//openimage.interpark.com/ticket-mobile/pages/product/log_nol.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    padding-right: 0.5rem;
+    vertical-align: top;
+
+    width: 2rem;
+    height: 1.25rem;
+}
+
+.summaryBody .info .logo-toping {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/logo_toping_new.png');
+    background-repeat: no-repeat;
+
+    padding-right: 0.4rem;
+    vertical-align: top;
+
+    margin-top: 0.2rem;
+
+    width: 2.6rem;
+    height: 0.8rem;
+}

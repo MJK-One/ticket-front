@@ -1,0 +1,94 @@
+.sideBtnWrap {
+    margin-top: 1.2rem;
+}
+
+/* sideBtn */
+.sideBtn {
+    display: table;
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 3.4rem;
+    padding: 0 1rem;
+
+    /*font-size: 1rem;*/
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+
+    background-color: #8e43e7;
+    border: 0.08rem solid #8e43e7;
+    border-radius: 0.6rem;
+}
+
+.sideBtn + .sideBtn {
+    margin-top: 0.6rem;
+}
+
+.sideBtn.is-primary {
+    font-size: 1.125rem;
+}
+
+.sideBtn.is-foreign {
+    height: 3.4rem;
+    line-height: 3.4rem;
+
+    font-size: 0.88rem;
+    font-weight: bold;
+    color: #8e43e7;
+
+    background-color: #fff;
+}
+
+.sideBtn > span {
+    display: table-cell;
+    height: 100%;
+
+    vertical-align: middle;
+    text-align: center;
+    line-height: 120%;
+}
+
+.sideBtn.is-foreign .slash {
+    padding: 0 0.3rem;
+}
+
+
+/*side link*/
+.sideBtnLink {
+    display: block;
+    width: 100%;
+    height: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sideBtnLink.is-nolpoint, .sideBtnLink.is-playdb {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_smallArrow.png');
+    background-repeat: no-repeat;
+    background-position: center right 0.3rem;
+
+    color: #666;
+    font-size: 0.88rem;
+    text-align: right;
+    line-height: 1rem;
+
+    margin-top: 1.1rem;
+    padding-right: 0.9rem;
+    vertical-align: middle;
+
+    box-sizing: border-box;
+}
+
+.sideBtnLink.is-playdb .logo-playdb {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/logo_playdb.png');
+    background-repeat: no-repeat;
+    background-position: top 0 left 0;
+    background-size: 100% auto;
+
+    display: inline-block;
+    width: 3.7rem;
+    height: 1rem;
+
+    margin-left: 0.3rem;
+    vertical-align: middle;
+}
