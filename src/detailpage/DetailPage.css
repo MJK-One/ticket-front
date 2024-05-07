@@ -1,0 +1,48 @@
+@import './detailFont.css';
+
+/*공통 css*/
+html, body, div, h2, h3, span, p, ul {
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    font-size: 100%;
+}
+
+div {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+i {
+    font-style: normal;
+}
+
+a[role='button'] {
+    cursor: pointer;
+}
+
+.blind {
+    display: none;
+}
+
+/*container*/
+#container {
+    position: relative;
+    width: 100%;
+}
+
+.contents {
+    width: 80rem;
+    margin: 0 auto;
+}
+
+.productWrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
