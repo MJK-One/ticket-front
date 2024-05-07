@@ -1,8 +1,3 @@
-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
 .openticket-month {
     display: flex;
     align-items: center;
@@ -14,9 +9,15 @@ button {
     margin-left: 20px;
     margin-right: 20px;
 }
+.openticket-month .month :hover {
+    color: #1774e6;
+}
 .openticket-month button {
-    width : 30px;
+    width : 60px;
     height : 30px;
+}
+.openticket-month button:hover {
+    color: #1774e6;
 }
 .by-site {
     display: flex;
@@ -67,6 +68,14 @@ button {
     flex-wrap: wrap;
     width : 1100px;
     margin-top : 20px;
+}
+@media screen and (min-width: 1001px) and (max-width : 1300px) {
+    .openticket-arrange {
+        display : flex;
+        flex-wrap: wrap;
+        width : 900px;
+        margin-top : 20px;
+    }
 }
 @media screen and (max-width: 1000px) {
     .openticket-arrange {
