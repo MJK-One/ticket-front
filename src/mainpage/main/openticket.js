@@ -20,7 +20,7 @@ export default function Openticket() {
     <div className='openticket-container'>
       <div className='openticket-month'>
         <button className='month-left'>◀</button>
-        <div className='month'><a href="#">2024.04</a></div>
+        <div className='month'><a href="#none" onClick="">2024.04</a></div>
         <button className='month-right'>▶</button>
       </div>
       <menu className='by-site'>
