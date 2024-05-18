@@ -11,6 +11,22 @@ function Ticektlist() {
         setShowButton(false); // 버튼을 숨깁니다.
     };
 
+    //데이터
+    const tickets = [
+        {
+          id: 1,
+          timer: 'D-1 12:00',
+          title: '오픈티켓 제목 1',
+          date: '2024.4.10',
+        },
+        {
+          id: 2,
+          timer: 'D-2 15:00',
+          title: '오픈티켓 제목 2',
+          date: '2024.4.11',
+        },
+      ];
+
     return (
         <div className='ticketlist'>
             <div class="tl-t">티켓오픈</div>
@@ -25,7 +41,7 @@ function Ticektlist() {
                                 <div className='s-openticket-info'>
                                     <div className='s-open-Timer'>
                                         <div className='s-Timer-banner'>OPEN</div>
-                                        <div className='s-Timer-day'>D-1 12:00</div>
+                                        <div className='s-Timer-day'>D-1</div>
                                     </div>
                                     <div className='s-title'>오픈티켓 제목</div>
                                     <div className='s-day'>2024.4.10</div>
