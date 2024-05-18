@@ -8,7 +8,27 @@ function CustomLink({ to, children }) {
   const isActive = location.pathname === to;
   const className = isActive ? 'active' : null;
 
-  return <li className={className}><div className="menu-img">로고</div><div className="menu-title"><Link to={to}>{children}</Link></div></li>;
+  const iconImg = () => {
+    let iconName = children;
+    let baseSrc = "img/icon/";
+
+    switch (iconName) {
+      case '뮤지컬' :
+        return baseSrc + "musical_icon.png";
+      case '콘서트' :
+        return baseSrc + "concert_icon.png";
+      case '전시/행사' :
+        return baseSrc + "exh_icon.png";
+      case '클래식/무용' :
+        return baseSrc + "classic_icon.png";
+      case '연극' :
+        return baseSrc + "play_icon.png";
+      case '아동/가족' :
+        return baseSrc + "child_icon.png";
+    };
+  };
+
+  return <li className={className}><div className="menu-img"><img alt="" src={iconImg()} /></div><div className="menu-title"><Link to={to}>{children}</Link></div></li>;
 }
 
 function Header() {

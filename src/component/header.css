@@ -240,6 +240,10 @@ button {
   .h-b-menu .menu-img {
     height: 50px;
   }
+  .h-b-menu .menu-img img {
+    height: 50px;
+    width: auto;
+  }
   .h-b-menu .menu-title {
     text-decoration-line: none;
     color : black;
