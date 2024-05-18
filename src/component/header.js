@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from 'react-router-dom';
 import './header.css';
 
+//메뉴 버튼 클릭시 Router 연결, CSS active
 function CustomLink({ to, children }) {
   const location = useLocation();
   const isActive = location.pathname === to;
@@ -21,9 +22,11 @@ function Header() {
                   <div className="header-search">
                       <div className="search-form">
                       <input gtm-label="검색창" type="text" placeholder="검색창" value=""/>
+                      <Link to="/search">
                         <button className="search-btn">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20"><path stroke="#3A3A3A" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.6" d="m17.875 17.877-4.607-4.607c-.462-.462-1.198-.56-1.729-.197-1.345.943-3.084 1.356-4.92.943-2.26-.5-4.087-2.328-4.588-4.587A6.157 6.157 0 0 1 8.23 1.876c3.045.098 5.638 2.534 5.923 5.56.079.844-.02 1.66-.245 2.416l-.295.726"></path></svg>
                         </button>
+                      </Link>  
                       </div>
                   </div>
                 </div>
@@ -37,6 +40,7 @@ function Header() {
                     <CustomLink to="/classicdance">클래식/무용</CustomLink>
                     <CustomLink t0="/house">연극</CustomLink>
                     <CustomLink to="/youngfamily">아동/가족</CustomLink>
+                    <CustomLink to="/detail">디테일</CustomLink>
                   </ul>
                 </div>
               </div>

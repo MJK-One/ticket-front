@@ -5,6 +5,7 @@ import Main from './mainpage/main/main';
 import Musicall from './mainpage/musicall';
 import Consert from './mainpage/consert';
 import DetailPage from './detailpage/DetailPage';
+import Search from './search/search';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/musicall" element={<Musicall />} />
           <Route path="/consert" element={<Consert />} />
           <Route path='/detail' element={<DetailPage />} />
+          <Route path='/search' element={<Search />} />
         </Routes>
       </Router>
     </>

@@ -1,0 +1,16 @@
+#search-content {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.search-container {
+    display: flex;
+    flex-direction: row;
+}
+.filter{
+    width : 24rem;
+}
+.tickets{
+    width : 1000px;
+    margin-top : 40px;
+}

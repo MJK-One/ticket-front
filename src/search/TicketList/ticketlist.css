@@ -1,0 +1,82 @@
+.ticketlist {
+}
+.tl-t {
+    font-weight: 700;
+    width : 833px;
+    height : 40px;
+    align-content: center;
+    border-bottom: 1px solid #eee;
+}
+.s-openticket-arrange {
+    display : flex;
+    flex-wrap: wrap;
+    width : 900px;
+    margin-top : 20px;
+}
+.s-openticket {
+    width : 191px;
+    height : 375px;
+    margin : 0 9px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+.s-openticket-img {
+    width : 191px;
+    height : 254px;
+    border : 1px solid #000;
+    border-radius: 10px;
+}
+.s-openticket-info {
+    margin-top: 10px;
+    width : 180px;
+}
+.s-openticket-info .title {
+    margin-top : 5px;
+    font-weight: 700;
+    font-size: 17px;
+}
+.s-openticket-info .day {
+    margin-top : 5px;
+}
+.s-open-Timer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 1.5rem;
+    padding: 0;
+    border-radius: 4px;
+}
+.s-Timer-banner {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+    padding: .2rem .6rem;
+    border-radius: 4px 0 0 4px;
+    color : white;
+    background: #1774e6;
+}
+.s-Timer-day {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+    padding: .05rem .6rem;
+    color: #1774e6;
+    gap: 1rem;
+    background: #fff;
+    border: 1px solid  #1774e6;
+    border-left-width: 0;
+    border-radius: 0 4px 4px 0;
+}
+.s-tl-plus {
+    border : 1px solid #dadee3;
+    border-radius: 10px;
+    width : 833px;
+    height: 50px;
+    align-content: center;
+}

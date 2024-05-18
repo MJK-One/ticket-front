@@ -18,10 +18,11 @@ const slidesData = [
   { id: 9, img: '이미지9', name: '이름9' },
 ];
 
-export default function MainTop() {
+export default function MainTop() { 
   const [enableNavigation, setEnableNavigation] = useState(true);
 
-  useEffect(() => {
+  //창 크기 width 1000기준으로 Enable 활성화 여부
+  useEffect(() => { 
     const updateNavigation = () => {
       if (window.innerWidth <= 1000) {
         setEnableNavigation(false);
@@ -38,7 +39,7 @@ export default function MainTop() {
 
   return (
     <div className='maintop-con'>
-      <Swiper
+      <Swiper //Swiper Module Setting
         modules={[Navigation, Autoplay]}
         centeredSlides={true}
         loop={true}
