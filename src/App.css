@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Freesentatio";
+    font-weight: normal;
+    src: url("./font/Freesentation-4Regular.ttf") format("truetype");
+  }
+  
+  body {
+    font-family: "Freesentatio";
+  }

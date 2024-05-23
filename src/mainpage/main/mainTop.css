@@ -19,6 +19,26 @@
     background-color: #000;
     color : white;
   }  */
+  .maintop-con-sw .swiper-button-prev {
+    top: var(--swiper-navigation-top-offset, 42%);
+    width: calc(var(--swiper-navigation-size) / 44 * 90);
+    margin-left : 30px;
+    opacity: 0.5;
+    background-color: #1774e6;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+  }
+  .maintop-con-sw .swiper-button-next {
+    top: var(--swiper-navigation-top-offset, 42%);
+    width: calc(var(--swiper-navigation-size) / 44 * 90);
+    margin-right : 30px;
+    opacity: 0.5;
+    background-color: #1774e6;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+  }
   .poster {
     height : 410px;
     width : 270px;
