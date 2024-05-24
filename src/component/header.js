@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, redirect, useLocation } from 'react-router-dom';
 import './header.css';
 
 //메뉴 버튼 클릭시 Router 연결, CSS active
@@ -25,6 +25,8 @@ function CustomLink({ to, children }) {
         return baseSrc + "play_icon.png";
       case '아동/가족' :
         return baseSrc + "child_icon.png";
+      default :
+        return redirect;
     };
   };
 
@@ -56,10 +58,10 @@ function Header() {
                   <ul>             
                     <CustomLink to="/musicall">뮤지컬</CustomLink>
                     <CustomLink to="/consert">콘서트</CustomLink>
-                    <CustomLink to="/exhAndevnet">전시/행사</CustomLink>
+                    <CustomLink to="/exhibitionevent">전시/행사</CustomLink>
                     <CustomLink to="/classicdance">클래식/무용</CustomLink>
-                    <CustomLink t0="/house">연극</CustomLink>
-                    <CustomLink to="/youngfamily">아동/가족</CustomLink>
+                    <CustomLink t0="/theater">연극</CustomLink>
+                    <CustomLink to="/chlidfamliy">아동/가족</CustomLink>
                     <CustomLink to="/detail">디테일</CustomLink>
                   </ul>
                 </div>
