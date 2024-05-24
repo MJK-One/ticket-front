@@ -25,46 +25,47 @@ export default function Openticket() {
     setActiveSite(site);
   };
 
-  //무한 스크롤 처음 10개후 10개씩 생성
-  const [tickets, setTickets] = useState([...Array(10).keys()]); // 초기 10개
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true); // 데이터가 더 있는지를 확인하는 상태
-  const loader = useRef(null);
-
-  const loadMoreTickets = () => {
-    if (!hasMore) return; // 데이터가 더 없으면 함수를 종료
-
-    setIsLoading(true);
-    setTimeout(() => {
-      // 예시에서는 단순히 50개 이후에는 더 이상 데이터가 없다고 가정, hasMore 사용
-      if (tickets.length >= 50) {
-        setHasMore(false);
-      } else {
-        setTickets((prev) => [...prev, ...Array(10).keys()].map((_, i) => prev.length + i));
-      }
-      setIsLoading(false);
-    }, 1000);
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !isLoading && hasMore) {
-        loadMoreTickets();
-      }
-    }, {
-      threshold: 1.0
-    });
-
-    if (loader.current) {
-      observer.observe(loader.current);
-    }
-
-    return () => {
-      if (loader.current) {
-        observer.unobserve(loader.current);
-      }
+    //무한 스크롤 처음 10개후 10개씩 생성
+    const [tickets, setTickets] = useState([...Array(10).keys()]); // 초기 10개
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasMore, setHasMore] = useState(true); // 데이터가 더 있는지를 확인하는 상태
+    const loader = useRef(null);
+  
+    const loadMoreTickets = () => {
+      if (!hasMore) return; // 데이터가 더 없으면 함수를 종료
+  
+      setIsLoading(true);
+      setTimeout(() => {
+        // 예시에서는 단순히 50개 이후에는 더 이상 데이터가 없다고 가정, hasMore 사용
+        if (tickets.length >= 50) {
+          setHasMore(false);
+        } else {
+          setTickets((prev) => [...prev, ...Array(10).keys()].map((_, i) => prev.length + i));
+        }
+        setIsLoading(false);
+      }, 1000);
     };
-  }, [isLoading, hasMore]);
+  
+    useEffect(() => {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !isLoading && hasMore) {
+          loadMoreTickets();
+        }
+      }, {
+        threshold: 1.0
+      });
+  
+      const currentLoader = loader.current;
+      if (currentLoader) {
+        observer.observe(currentLoader);
+      }
+  
+      return () => {
+        if (currentLoader) {
+          observer.unobserve(currentLoader);
+        }
+      };
+    }, [isLoading, hasMore, loadMoreTickets]);
 
   return (
     <div className='openticket-container'>
