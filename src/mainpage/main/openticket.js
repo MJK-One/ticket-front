@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './openticket.css';
 import melon from './melon.jpg'
 
@@ -31,20 +31,20 @@ export default function Openticket() {
     const [hasMore, setHasMore] = useState(true); // 데이터가 더 있는지를 확인하는 상태
     const loader = useRef(null);
   
-    const loadMoreTickets = () => {
+    const loadMoreTickets = useCallback(() => {
       if (!hasMore) return; // 데이터가 더 없으면 함수를 종료
-  
+    
       setIsLoading(true);
       setTimeout(() => {
         // 예시에서는 단순히 50개 이후에는 더 이상 데이터가 없다고 가정, hasMore 사용
         if (tickets.length >= 50) {
           setHasMore(false);
         } else {
-          setTickets((prev) => [...prev, ...Array(10).keys()].map((_, i) => prev.length + i));
+          setTickets((prev) => [...prev, ...Array(10).fill().map((_, i) => prev.length + i)]);
         }
         setIsLoading(false);
       }, 1000);
-    };
+    }, [hasMore, tickets]); // useCallback의 의존성 배열에 hasMore와 tickets 추가
   
     useEffect(() => {
       const observer = new IntersectionObserver((entries) => {
