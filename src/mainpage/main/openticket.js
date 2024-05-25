@@ -76,17 +76,21 @@ export default function Openticket() {
    }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 합니다.
   
    
-  const [currentDate, setCurrentDate] = useState(new Date());
-  // 월을 이동하는 함수입니다.
-  const moveMonth = (offset) => {
-    // 현재 날짜에 offset 만큼의 월을 더하거나 뺍니다.
-    const newDate = new Date(currentDate.setMonth(currentDate.getMonth() + offset));
-    setCurrentDate(newDate);
-  };
+   const [currentDate, setCurrentDate] = useState(new Date()); // currentDate 상태 초기화
+   // 월 이동 함수
+   const moveMonth = (num) => {
+     setCurrentDate(prev => {
+       const newDate = new Date(prev); // 현재 날짜 복사
+       newDate.setMonth(prev.getMonth() + num); // 월 변경
+       return newDate; // 새로운 날짜 반환
+     });
+   };
+   
   // 달력창 띄워주는 로직
   // const preventDefault = () =>{
 
   // };
+
   const [activeSite, setActiveSite] = useState('all');
   //Site 별 나열 로직
   const handleSiteClick = (site) => {
