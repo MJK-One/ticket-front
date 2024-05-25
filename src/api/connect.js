@@ -7,3 +7,9 @@ export const getAll = async () => {
     const res = await axios.get(`${API_SERVER_HOST}/all`);
     return res.data;
 };
+
+//MainPostController > gethome()
+export const gethome = async () => {
+    const res = await axios.get(`${API_SERVER_HOST}/home`);
+    return res.data;
+};

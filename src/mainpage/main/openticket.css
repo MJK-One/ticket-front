@@ -86,15 +86,19 @@
     }
 }
 .openticket {
-    width : 200px;
-    height : 375px;
+    width : 191px;
+    height : 410px;
     margin : 0 auto 20px;
     cursor: pointer;
+    border-bottom: 1px solid #eee;
 }
 .openticket-img {
     width : 191px;
     height : 254px;
-    border : 1px solid #000;
+}
+.openticket-img img{
+    width : 100%;
+    height: 100%;
     border-radius: 10px;
 }
 .openticket-info {
@@ -105,6 +109,13 @@
     margin-top : 5px;
     font-weight: 700;
     font-size: 17px;
+    width : 100%;
+    height : 40px;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 .openticket-info .day {
     margin-top : 5px;
@@ -143,15 +154,18 @@
     border: 1px solid  #1774e6;
     border-left-width: 0;
     border-radius: 0 4px 4px 0;
+    font-weight: 700;
 }
 .ot-info-bot {
    
 }
 .ot-info-bot .day {
     float: left;
+    color : #1774e6;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
-.ot-info-bot .tic-site {
-    float: right;
+.tic-site {
     width : 30px;
     height : 30px;
 }

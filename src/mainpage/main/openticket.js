@@ -1,13 +1,81 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect} from 'react';
 import './openticket.css';
 import melon from './melon.jpg'
+import { gethome } from '../../api/connect'; // API 함수를 불러옵니다.
+import moment from 'moment'; //날짜 변환
+import 'moment/locale/ko'; // 한국어 로케일 import
+import "moment-duration-format";
 
 //BySite Active
 function BySite({ to, children, onClick, className }) {
   return <div className={className} onClick={onClick}>{children}</div>;
 }
 
+function ByYearMonth(ticket, currentDate) {
+  // 현재 날짜의 년도와 월
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1; // getMonth()는 0부터 시작하기 때문에 +1을 해줍니다.
+
+  // 티켓 오픈 날짜의 년도와 월
+  const ticketOpenYear = moment(ticket.ticket_open_date).year();
+  const ticketOpenMonth = moment(ticket.ticket_open_date).month() + 1; // month()도 0부터 시작하기 때문에 +1을 해줍니다.
+
+  // 현재 날짜의 년도와 월이 티켓 오픈 날짜의 년도와 월과 일치하는지 확인
+  return (currentYear === ticketOpenYear) && (currentMonth === ticketOpenMonth);
+}
+
+//D-1 날짜 계산
+function calculateDateDifference(date) {
+  // 현재 날짜와 시간
+  const now = moment();
+  // 대상 날짜 (데이터베이스에서 가져온 날짜)
+  const target = moment(date);
+  // 대상 날짜까지의 차이를 계산 (밀리초 단위)
+  const diff = target.diff(now);
+  
+  // 차이가 0 미만이면, 이미 지난 날짜입니다.
+  if (diff < 0) {
+    return "";
+  }
+
+  // moment-duration-format 라이브러리를 사용하여 차이를 포맷합니다.
+  const duration = moment.duration(diff);
+
+  // 일수 차이를 계산합니다.
+  const days = duration.days();
+  
+  // 시간, 분, 초 차이를 포맷하여 가져옵니다.
+  const time = duration.format("HH:mm:ss");
+
+  // 일수 차이가 0일이 아니면 "D-n" 형식으로 반환합니다.
+  if (days > 0) {
+    return `D-${days}`;
+  } else {
+    // 일수 차이가 없으면 시간 차이만 반환합니다.
+    return `D-Day ${time}`;
+  }
+}
+
 export default function Openticket() {
+   // tickets 상태를 생성하고, 초기값은 빈 배열로 설정합니다.
+   const [tickets, setTickets] = useState([]);
+
+   // 컴포넌트가 마운트될 때 gethome() 함수를 호출하여 데이터를 불러옵니다.
+   useEffect(() => {
+       // 데이터를 비동기적으로 불러옵니다.
+       const fetchData = async () => {
+           try {
+               const result = await gethome(); // API 호출
+               setTickets(result); // 결과를 tickets 상태에 저장
+           } catch (error) {
+               console.error('데이터를 불러오는 데 실패했습니다.', error);
+           }
+       };
+
+       fetchData();
+   }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 합니다.
+  
+   
   const [currentDate, setCurrentDate] = useState(new Date());
   // 월을 이동하는 함수입니다.
   const moveMonth = (offset) => {
@@ -24,48 +92,6 @@ export default function Openticket() {
   const handleSiteClick = (site) => {
     setActiveSite(site);
   };
-
-    //무한 스크롤 처음 10개후 10개씩 생성
-    const [tickets, setTickets] = useState([...Array(10).keys()]); // 초기 10개
-    const [isLoading, setIsLoading] = useState(false);
-    const [hasMore, setHasMore] = useState(true); // 데이터가 더 있는지를 확인하는 상태
-    const loader = useRef(null);
-  
-    const loadMoreTickets = useCallback(() => {
-      if (!hasMore) return; // 데이터가 더 없으면 함수를 종료
-    
-      setIsLoading(true);
-      setTimeout(() => {
-        // 예시에서는 단순히 50개 이후에는 더 이상 데이터가 없다고 가정, hasMore 사용
-        if (tickets.length >= 50) {
-          setHasMore(false);
-        } else {
-          setTickets((prev) => [...prev, ...Array(10).fill().map((_, i) => prev.length + i)]);
-        }
-        setIsLoading(false);
-      }, 1000);
-    }, [hasMore, tickets]); // useCallback의 의존성 배열에 hasMore와 tickets 추가
-  
-    useEffect(() => {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && !isLoading && hasMore) {
-          loadMoreTickets();
-        }
-      }, {
-        threshold: 1.0
-      });
-  
-      const currentLoader = loader.current;
-      if (currentLoader) {
-        observer.observe(currentLoader);
-      }
-  
-      return () => {
-        if (currentLoader) {
-          observer.unobserve(currentLoader);
-        }
-      };
-    }, [isLoading, hasMore, loadMoreTickets]);
 
   return (
     <div className='openticket-container'>
@@ -91,9 +117,9 @@ export default function Openticket() {
           className={activeSite === 'interpark' ? 'active' : ''}
         >인터파크</BySite>
         <BySite
-          to="melon"
-          onClick={() => handleSiteClick('melon')}
-          className={activeSite === 'melon' ? 'active' : ''}
+          to="Melon Ticket"
+          onClick={() => handleSiteClick('Melon Ticket')}
+          className={activeSite === 'Melon Ticket' ? 'active' : ''}
         >멜론</BySite>
         <BySite
           to="ticketlink"
@@ -118,28 +144,27 @@ export default function Openticket() {
         </ul>
       </div> */}
       <div className='openticket-arrange'>
-        {tickets.map((value, index) => (
-          <div className='openticket' key={index}>
-            <div className='openticket-img'>
-              이미지
-            </div>
-            <div className='openticket-info'>
-              <div className='open-Timer'>
-                <div className='Timer-banner'>OPEN</div>
-                <div className='Timer-day'>D-1 12:00</div>
+        {tickets
+           .filter(ticket => ByYearMonth(ticket, currentDate))
+          .filter(ticket => activeSite === 'all' || ticket.sales_site === activeSite) // activeSite에 따라 필터링
+          .map(ticket => (
+            <div className='openticket' key={ticket.id}>
+              <div className='openticket-img'>
+                <img src={ticket.image_url} alt={`${ticket.event_name} 이미지`} />
               </div>
-              <div className='title'>오픈티켓 제목</div>
-              <div className='ot-info-bot'>
-                <div className='day'>2024.4.10</div>
+              <div className='openticket-info'>
+                <div className='open-Timer'>
+                  <div className='Timer-banner'>OPEN</div>
+                  <div className='Timer-day'>{calculateDateDifference(ticket.ticket_open_date)}</div>
+                </div>
+                <div className='title'>{ticket.event_name}</div>
+                <div className='ot-info-bot'>
+                  <div className='day'>{moment(ticket.ticket_open_date).format('M.DD(ddd) HH:mm')}</div>
+                </div>
                 <div className='tic-site'><img src={melon} alt="멜론"></img></div>
               </div>
             </div>
-          </div>
         ))}
-        <div ref={loader}>
-          {isLoading}
-          {!hasMore && !isLoading} {/* 데이터가 더 없을 때 메시지 출력 */}
-        </div>
       </div>      
     </div>
   );
