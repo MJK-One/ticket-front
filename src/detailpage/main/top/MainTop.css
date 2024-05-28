@@ -146,7 +146,7 @@
 }
 
 .info .infoItem .is-place {
-    /*font-weight: bold;*/
+    font-weight: bold;
 }
 
 .summaryBody .info .infoItem:first-child {
@@ -192,7 +192,8 @@
 .btnList {
     width: 18.5rem;
     margin-left: 1.5rem;
-    z-index: 1;
+    z-index: 99;
+    position: relative;
 }
 
 .bookingBtn {
@@ -232,7 +233,22 @@
     border-top: none;
 
     display: none;
+
+    position: absolute;
+    left: 0;
 }
+
+/* absolute를 위한 높이 조정 */
+.is-direct:nth-child(3) .bookingBtn {
+    top: calc(4rem * 2);
+}
+.is-direct:nth-child(4) .bookingBtn {
+    top: calc(4rem * 3);
+}
+.is-direct:nth-child(5) .bookingBtn {
+    top: calc(4rem * 4);
+}
+/**/
 
 .is-direct .bookingBtn:hover {
     background-color: #deecfd;

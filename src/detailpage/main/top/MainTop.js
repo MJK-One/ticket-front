@@ -18,23 +18,31 @@ const MainTop = () => {
         //숫자 아직 적용 안함
     }
 
-        //p tag 항목
+        //p or a tag 항목
     //데이터 불러오기(가데이터)
-    const infoPeriod = "2024.03.22 ~2023.06.23";
-    const infoPlace = "샤롯데씨어터"; //장소
+    const infoPeriod = "2024.03.22 ~ 2023.06.23";
+        //장소
+    const placeData = "샤롯데씨어터";
+    const infoPlace = placeData + " ▸";
+    const placeLink = "https://map.naver.com/p/search/"+placeData;
     const infoOpenDateTime = "yyyy-MM-dd hh:mm";
     const infoPreOpenDateTime = "정보없음";
 
-    const infoP = [{label: '공연 기간', text: infoPeriod},
-        {label: '공연 장소', text: infoPlace},
+    const infoList = [
+        {label: '공연 기간', text: infoPeriod},
+        {label: '공연 장소', text: infoPlace, link: placeLink},
         {label: '티켓 오픈', text: infoOpenDateTime},
-        {label: '선예매 오픈', text: infoPreOpenDateTime}]; //p태그인 info
+        {label: '선예매 오픈', text: infoPreOpenDateTime}]; //p 또는 a 태그인 info
 
-    const infoItemP = Array.from({length: infoP.length}).map((_, i) => (
+    const infoItem = infoList.map((item, i) => (
         <li className='infoItem' key={`PMT-info-p-${i}`}>
-            <strong className='infoLabel'>{infoP[i].label}</strong>
+            <strong className='infoLabel'>{item.label}</strong>
             <div className='infoDesc'>
-                <p className={`infoText ${infoP[i].label == '공연 장소' ? 'is-place' : ''}`}>{infoP[i].text}</p>
+                {item.label === '공연 장소' ? (
+                    <a href={item.link} className='infoText is-place' target="_blank" rel="noopener noreferrer">{item.text}</a>
+                ) : (
+                    <p className='infoText'>{item.text}</p>
+                )}
             </div>
         </li>
     ));
@@ -92,7 +100,7 @@ const MainTop = () => {
 
                     <div className='infoBox'>
                         <ul className='info'>
-                            {infoItemP}
+                            {infoItem}
                         </ul>
 
                         {/* 예매 버튼 */}
