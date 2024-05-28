@@ -6,20 +6,24 @@
 
 /*summary top*/
 .summaryTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 1rem;
+    
 }
 
-.summaryTop .tag {
+.summaryTop .genre, .summaryTop .regDate, .summaryTop .view {
     display: inline-block;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.1rem;
     width: 100%;
     color: #666;
 }
 
-.summaryTop .tag .tagText {
+.summaryTop .genreText, .summaryTop .regDateText, .summaryTop .viewText {
     display: inline-block;
     vertical-align: middle;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .summaryTop .prdTitle {
@@ -29,113 +33,33 @@
     text-overflow: ellipsis; /*텍스트가 넘어가면 ...으로*/
     overflow: hidden;
 
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     line-height: 130%;
 }
 
-.summaryTop .prdTitleBottom {
-    margin-top: 0.5rem;
+.summaryTopLeft {
+    width: 38rem;
 }
 
-.prdTitleBottom .prdStar {
-    margin-right: 0.6rem;
-
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-    color: #666;
-}
-
-.prdStar .prdStarBack {/*안 칠해진 별 5개(바탕)*/
-    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_star.png');
-    background-repeat: repeat-x;
-    background-size: 1rem, 1rem;
-
-    display: inline-block;
-    position: relative;
-    width: 5rem;
-    height: 1rem;
-
-    vertical-align: middle;
-
-}
-
-.prdStar .prdStarIcon {/*별점에 따라 별이 칠해짐*/
-    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_star_on.png');
-    background-repeat: repeat-x;
-    background-size: 1rem 1rem;
-
-    display: block;
-    height: 100%;
-}
-
-.prdStar .prdStarIcon[data-star='5'] {
-    width: 100%;
-}
-
-.prdStar .prdStarIcon[data-star='4.5'] {
-    width: 90%;
-}
-
-.prdStar .prdStarIcon[data-star='4'] {
-    width: 80%;
-}
-
-.prdStar .prdStarIcon[data-star='3.5'] {
-    width: 70%;
-}
-
-.prdStar .prdStarIcon[data-star='3'] {
-    width: 60%;
-}
-
-.prdStar .prdStarIcon[data-star='2.5'] {
-    width: 50%;
-}
-
-.prdStar .prdStarIcon[data-star='2'] {
-    width: 40%;
-}
-
-.prdStar .prdStarIcon[data-star='1.5'] {
-    width: 30%;
-}
-
-.prdStar .prdStarIcon[data-star='1'] {
-    width: 20%;
-}
-
-.prdStar .prdStarIcon[data-star='0.5'] {
-    width: 10%;
-}
-
-.prdStar .prdStarIcon[data-star='0'] {
-    width: 0%;
-}
-
-
-.prdStar .prdStarScore {
-    display: inline-block;
-    margin-left: 0.25rem;
-    vertical-align: middle;
-    line-height: 140%;
-
-    font-size: 0.9rem;
+.summaryTopRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 1rem;
 }
 
 /*summary body*/
     /*posterBox*/
 .summaryBody .posterBox {
     display: inline-block;
-    width: 18rem;
+    width: 15rem;
 }
 
 .posterBox .posterBoxTop {
     background-color: #f0f0f0;
     position: relative;
-    height: 24rem;
+    height: 20rem;
 }
 
 .posterBox .posterBoxImage {
@@ -145,19 +69,6 @@
 
     width: 100%;
     height: 100%;
-}
-
-.posterBox .posterBoxPlayBtn {
-    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_playBtn.png');
-    background-repeat: no-repeat;
-    background-size: 2.5rem 2.5rem;
-
-    position: absolute;
-    left: 0.9rem;
-    bottom: 0.9rem;
-
-    width: 2.5rem;
-    height: 2.5rem;
 }
 
 .posterBox .posterBoxBottom {
@@ -178,7 +89,7 @@
 .prdCast .prdCastBtn {
     position: relative;
     display: inline-block;
-    line-height: 1.5rem;
+    line-height: 1.3rem;
 
     font-size: 0.9rem;
     font-weight: inherit;
@@ -193,7 +104,7 @@
 
     position: relative;
     display: inline-block;
-    top: 0.1rem;
+    top: 0.15rem;
     padding-right: 0.4rem;
 
     width: 1rem;
@@ -215,54 +126,15 @@
     margin-left: 0.3rem;
 }
 
-.share {
-    float: right;
-}
-
-.share .shareList {
-    font-size: 0;
-}
-
-.share .shareItem {
-    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_sns.png');
-    background-repeat: no-repeat;
-    background-color: #999;
-    border-radius: 50%;
-
-    display: inline-block;
-    margin-left: 0.5rem;
-
-    width: 1.7rem;
-    height: 1.7rem;
-}
-
-.share .shareItem:first-child {
-    margin-left: 0;
-}
-
-.share .is-facebook {
-    background-position: 0 -0;
-}
-
-.share .is-twitter {
-    background-position: 0 -1.7rem;
-}
-
-.share .shareItem .link {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
     /*info*/
 .summaryBody .info {
     display: inline-block;
     vertical-align: top;
 
     margin-top: 0.25rem;
-    margin-left: 1.5rem;
+    margin-left: 3rem;
 
-    width: 31rem;
+    width: 20rem;
 }
 
 .summaryBody .info .infoItem {
@@ -285,9 +157,9 @@
     padding-right: 0.3rem;
     width: 6rem;
 
-    color: #000;
+    color: #5e5e5e;
     font-size: 1rem;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 .summaryBody .info .infoDesc {

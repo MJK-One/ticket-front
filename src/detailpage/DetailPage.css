@@ -37,12 +37,12 @@ a[role='button'] {
 }
 
 .contents {
-    width: 80rem;
+    width: 70rem;
     margin: 0 auto;
 }
 
 .productWrapper {
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }

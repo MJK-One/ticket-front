@@ -3,10 +3,6 @@
     padding-bottom: 0 !important;
 }
 
-.detail ul, .detail li{
-    list-style: none;
-}
-
 .detail .content {
     position: relative;
     margin: 0 0 6.25rem 0;
