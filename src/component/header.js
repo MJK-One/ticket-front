@@ -13,16 +13,14 @@ function CustomLink({ to, children }) {
     let baseSrc = "img/icon/";
 
     switch (iconName) {
-      case '뮤지컬' :
+      case '뮤지컬/연극' :
         return baseSrc + "musical_icon.png";
       case '콘서트' :
         return baseSrc + "concert_icon.png";
       case '전시/행사' :
         return baseSrc + "exh_icon.png";
-      case '클래식/무용' :
+      case '클래식' :
         return baseSrc + "classic_icon.png";
-      case '연극' :
-        return baseSrc + "play_icon.png";
       case '아동/가족' :
         return baseSrc + "child_icon.png";
       default :
@@ -56,12 +54,11 @@ function Header() {
               <div className="header-bottom">
                 <div className="h-b-menu">
                   <ul>             
-                    <CustomLink to="/musicall">뮤지컬</CustomLink>
-                    <CustomLink to="/consert">콘서트</CustomLink>
-                    <CustomLink to="/exhibitionevent">전시/행사</CustomLink>
-                    <CustomLink to="/classicdance">클래식/무용</CustomLink>
-                    <CustomLink t0="/theater">연극</CustomLink>
-                    <CustomLink to="/chlidfamliy">아동/가족</CustomLink>
+                    <CustomLink to="/genre/musicall">뮤지컬/연극</CustomLink>
+                    <CustomLink to="/genre/consert">콘서트</CustomLink>
+                    <CustomLink to="/genre/exhibitionevent">전시/행사</CustomLink>
+                    <CustomLink to="/genre/classic">클래식</CustomLink>         
+                    {/* <CustomLink to="/chlidfamliy">아동/가족</CustomLink> */}
                     <CustomLink to="/detail">디테일</CustomLink>
                   </ul>
                 </div>

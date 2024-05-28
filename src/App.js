@@ -13,12 +13,11 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/" element={<Main />} /> {/* 기본 경로를 Main 컴포넌트로 설정*/}
-          <Route path="/musicall" element={<Main />} />
-          <Route path="/consert" element={<Main />} />
-          <Route path="/exhibitionevent" element={<Main />} />
-          <Route path="/classicdance" element={<Main />} />
-          <Route path="/theater" element={<Main />} />
-          <Route path="/chlidfamliy" element={<Main />} />
+          <Route path="/genre/musicall" element={<Main />} />
+          <Route path="/genre/consert" element={<Main />} />
+          <Route path="/genre/exhibitionevent" element={<Main />} />
+          <Route path="/genre/classic" element={<Main />} />
+          {/* <Route path="/chlidfamliy" element={<Main />} /> */}
           <Route path='/detail' element={<DetailPage />} />
           <Route path='/search' element={<Search />} />
           {/* <Route path="/" element={<Test />} /> */}

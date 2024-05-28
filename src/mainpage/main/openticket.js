@@ -1,7 +1,6 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import './openticket.css';
 import melon from './melon.jpg'
-import { gethome } from '../../api/connect'; // API 함수를 불러옵니다.
 import moment from 'moment'; //날짜 변환
 import 'moment/locale/ko'; // 한국어 로케일 import
 import "moment-duration-format";
@@ -56,26 +55,7 @@ function calculateDateDifference(date) {
   }
 }
 
-export default function Openticket() {
-   // tickets 상태를 생성하고, 초기값은 빈 배열로 설정합니다.
-   const [tickets, setTickets] = useState([]);
-
-   // 컴포넌트가 마운트될 때 gethome() 함수를 호출하여 데이터를 불러옵니다.
-   useEffect(() => {
-       // 데이터를 비동기적으로 불러옵니다.
-       const fetchData = async () => {
-           try {
-               const result = await gethome(); // API 호출
-               setTickets(result); // 결과를 tickets 상태에 저장
-           } catch (error) {
-               console.error('데이터를 불러오는 데 실패했습니다.', error);
-           }
-       };
-
-       fetchData();
-   }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 합니다.
-  
-   
+export default function Openticket({ tickets }) {
    const [currentDate, setCurrentDate] = useState(new Date()); // currentDate 상태 초기화
    // 월 이동 함수
    const moveMonth = (num) => {
@@ -149,7 +129,7 @@ export default function Openticket() {
       </div> */}
       <div className='openticket-arrange'>
         {tickets
-           .filter(ticket => ByYearMonth(ticket, currentDate))
+          .filter(ticket => ByYearMonth(ticket, currentDate))
           .filter(ticket => activeSite === 'all' || ticket.sales_site === activeSite) // activeSite에 따라 필터링
           .map(ticket => (
             <div className='openticket' key={ticket.id}>
@@ -163,8 +143,9 @@ export default function Openticket() {
                 </div>
                 <div className='title'>{ticket.event_name}</div>
                 <div className='ot-info-bot'>
-                  <div className='day'>{moment(ticket.ticket_open_date).format('M.DD(ddd) HH:mm')}</div>
+                  <div className='day'>{moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>
                 </div>
+                <div>{ticket.genre}</div>
                 <div className='tic-site'><img src={melon} alt="멜론"></img></div>
               </div>
             </div>

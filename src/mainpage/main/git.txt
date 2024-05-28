@@ -9,3 +9,8 @@ musical.js, consert.js 등 여러개의 js를 사용하지 않고 main.js만 사
 2. moment, moment-duration-format 날짜 계산하기 위한 api
 3. 10개씩 스크롤 잠깐 삭제 DB추가시 약간의 충돌 후에 추가
 4. filter 월별 and 사이트별 추가
+
+2024-05-28
+1. connect gethome 장르별 추가
+2. main.js 장르마다 데이터 나열 로직 추가
+3. openticket에서 직접적으로 connect -> main.js connect 받은 후 자식 컴포넌트 전달
