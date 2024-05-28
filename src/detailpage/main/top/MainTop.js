@@ -24,7 +24,7 @@ const MainTop = () => {
         //장소
     const placeData = "샤롯데씨어터";
     const infoPlace = placeData + " ▸";
-    const placeLink = "https://map.naver.com/p/search/"+placeData;
+    const placeLink = "https://map.naver.com/p/search/" + placeData;
     const infoOpenDateTime = "yyyy-MM-dd hh:mm";
     const infoPreOpenDateTime = "정보없음";
 

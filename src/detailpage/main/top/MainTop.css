@@ -135,12 +135,12 @@
     display: inline-block;
     vertical-align: top;
 
-    margin-top: 0.25rem;
+    margin-top: 0.3rem;
     width: 20rem;
 }
 
 .summaryBody .info .infoItem {
-    margin-top: 0.9rem;
+    margin-top: 1.3rem;
     padding-left: 1.5rem;
     font-size: 0;
 }

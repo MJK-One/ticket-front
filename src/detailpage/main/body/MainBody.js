@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import NavInfo from './component/navContent/Info/Info.js';
-//import NavReview from './component/navContent/Review/Review.js';
+import NavPlace from './component/navContent/place/place.js';
 
 import './MainBody.css';
 
@@ -23,6 +23,9 @@ const MainBody = () => {
                     <li className={`navItem ${activeNav === 'INFO' ? 'is-active' : ''}`}>
                         <a className="navLink" href="#" onClick={() => navClick('INFO')}>공연정보</a>
                     </li>
+                    <li className={`navItem ${activeNav === 'PLACE' ? 'is-active' : ''}`}>
+                        <a className="navLink" href="#" onClick={() => navClick('PLACE')}>공연장 정보</a>
+                    </li>
                     {/* 시간 남으면 공연장 정보도 추가하면 좋을듯(네이버 지도 api) */}
                 </ul>
             </nav>
@@ -30,6 +33,7 @@ const MainBody = () => {
             {/* 선택된 navliink에 따라 변경 */}
             <div>
                 {activeNav === 'INFO' && <NavInfo />}
+                {activeNav === 'PLACE' && <NavPlace />}
             </div>
 
         </div>

@@ -1,0 +1,17 @@
+.detail {
+    position: relative;
+    padding-bottom: 0 !important;
+}
+
+.detail .content {
+    position: relative;
+    margin: 0 0 6.25rem 0;
+}
+
+.detail .contentTitle {
+    margin-bottom: 1.25rem;
+    line-height: 120%;
+
+    font-size: 1.25rem;
+    font-weight: bold;
+}
