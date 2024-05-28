@@ -1,17 +1,76 @@
-.productSide {
-    position: relative;
-    width: 23rem;
-    margin-top: 3rem;
-    padding-bottom: 0.75rem;
+.filter {
+    width: 21rem;
+    margin: 0 auto;
+    border: 0.08rem solid #b6bdc7;
+    border-radius: 1rem;
 }
 
-.productSide .stickyWrap {
-    position: sticky;
-    top: 0.6rem;
+/*filterContainer*/
+.filterContainer {
+    border-top: none;
+    padding-top: 0.15rem;
+    padding-bottom: 1.5rem;
+}
 
-    width: 21.6rem;
-    height: auto;
+.filterContainer {
+    position: relative;
+    box-sizing: border-box;
+}
 
-    margin: 0.6rem 0 0 1.2rem;
-    /*z-index: ;*/
+/*filterHeader*/
+.filterHeader {
+    padding: 1.0rem 1.25rem 0;
+    width: 20rem;
+    margin: 0 auto;
+
+}
+
+/*filterToggleBtn*/
+.filterToggleBtn::after {
+    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_sideToggle.png');
+    background-repeat: no-repeat;
+
+    position: absolute;
+    top: 1.4rem;
+    right: 1.25rem;
+
+    width: 0.96rem;
+    height: 0.54rem;
+    background-size: 100%;
+    content: '';
+} /*토글 버튼*/
+
+.is-toggled .filterToggleBtn::after{
+    background-position: 0 -0.54rem;
+}
+
+.filterTitle {
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    width: 20rem;
+    margin: 0 auto;
+}
+
+.is-toggled .filterTitle {
+    color: #999;
+    transform: scale(0.85);
+    transform-origin: 0% 0%;
+    font-weight: normal;
+}
+
+.selectedData {
+    display: none;
+    font-size: 0.99rem;
+    font-weight: bold;
+    line-height: 120%;
+}
+
+.is-toggled .selectedData {
+    display: block;
+}
+
+/*Calendar*/
+.is-toggled .Calendar {
+    display: none;
 }

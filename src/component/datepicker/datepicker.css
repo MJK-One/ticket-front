@@ -12,11 +12,11 @@
 }
 
 .datepicker .picked {
-    background: #8e43e7;
+    background: #5693e0;
     color: #fff !important;
 }
 
-/*sideCalendar*/
+/*Calendar*/
 .Calendar {
     display: block;
     font-weight: normal;
