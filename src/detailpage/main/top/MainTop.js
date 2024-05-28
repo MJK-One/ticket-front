@@ -21,10 +21,12 @@ const MainTop = () => {
         //p tag 항목
     //데이터 불러오기(가데이터)
     const infoPeriod = "2024.03.22 ~2023.06.23";
+    const infoPlace = "샤롯데씨어터"; //장소
     const infoOpenDateTime = "yyyy-MM-dd hh:mm";
     const infoPreOpenDateTime = "정보없음";
 
     const infoP = [{label: '공연 기간', text: infoPeriod},
+        {label: '공연 장소', text: infoPlace},
         {label: '티켓 오픈', text: infoOpenDateTime},
         {label: '선예매 오픈', text: infoPreOpenDateTime}]; //p태그인 info
 
@@ -32,7 +34,7 @@ const MainTop = () => {
         <li className='infoItem' key={`PMT-info-p-${i}`}>
             <strong className='infoLabel'>{infoP[i].label}</strong>
             <div className='infoDesc'>
-                <p className='infoText'>{infoP[i].text}</p>
+                <p className={`infoText ${infoP[i].label == '공연 장소' ? 'is-place' : ''}`}>{infoP[i].text}</p>
             </div>
         </li>
     ));

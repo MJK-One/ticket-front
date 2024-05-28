@@ -145,6 +145,10 @@
     font-size: 0;
 }
 
+.info .infoItem .is-place {
+    /*font-weight: bold;*/
+}
+
 .summaryBody .info .infoItem:first-child {
     margin-top: 0;
     line-height: 1.3rem;
