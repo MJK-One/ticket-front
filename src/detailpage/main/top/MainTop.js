@@ -88,9 +88,42 @@ const MainTop = () => {
                         </div>
                     </div>
 
-                    <ul className='info'>
-                        {infoItemP}
-                    </ul>
+                    <div className='infoBox'>
+                        <ul className='info'>
+                            {infoItemP}
+                        </ul>
+
+                        {/* 예매 버튼 */}
+                        <ul className='btnList'>
+                            <li className='is-main'>
+                                <a className='bookingBtn' href='#'>
+                                    <span>예매 사이트 바로가기</span>
+                                </a>
+                            </li>
+                            <li className='is-direct'>
+                                <a className='bookingBtn' href='#'>
+                                    <span>예매 사이트 바로가기</span>
+                                </a>
+                            </li>
+                            <li className='is-direct'>
+                                <a className='bookingBtn' href='#'>
+                                    <span>예매 사이트 바로가기</span>
+                                </a>
+                            </li>
+                            <li className='is-direct'>
+                                <a className='bookingBtn' href='#'>
+                                    <span>예매 사이트 바로가기</span>
+                                </a>
+                            </li>
+                            <li className='is-direct'>
+                                <a className='bookingBtn' href='#'>
+                                    <span>예매 사이트 바로가기</span>
+                                </a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    
                 </div>
             </div>
         </div>
