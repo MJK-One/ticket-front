@@ -1,16 +1,25 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import './MainTop.css';
 
 const MainTop = () => {
-    //데이터 불러오기(현재 가데이터)
-    const genre = "뮤지컬";
-    const genreText = "> " + genre;
-    const prdTitle = "뮤지컬 〈헤드윅〉"; //상품 제목
-    const prdPosterSrc = "//ticketimage.interpark.com/Play/image/large/24/24001020_p.gif"; //포스터 이미지 링크
-    const prdCastNum = 7554; //좋아요 수(하트 버튼)
+    //데이터 불러오기
+    const detail = useSelector((state) => state.details.detail);
+    const status = useSelector((state) => state.details.status);
+    const error = useSelector((state) => state.details.error);
 
+    const [genre, setGenre] = useState(detail.genre);
+    const genreText = "> " + genre;
+
+    const [prdTitle, setPrdTitle] = useState(detail.event_name);//상품 제목
+    const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url);//포스터 이미지 링크
+    
+    const [regDate, setRegDate] = useState(detail.registration_date); //등록일
+    const [view, setView] = useState(detail.view_count);
 
     //티켓캐스트 하트 버튼 이벤트
+    const prdCastNum = 7554; //좋아요 수(하트 버튼)
     const [isTkHeartBtn, setisTkHeartBtn] = useState(false);
         /* 이벤트 함수 */
     const tkHeartBtnHandler = () => {
@@ -19,14 +28,21 @@ const MainTop = () => {
     }
 
         //p or a tag 항목
-    //데이터 불러오기(가데이터)
-    const infoPeriod = "2024.03.22 ~ 2023.06.23";
-        //장소
-    const placeData = "샤롯데씨어터";
+    //데이터 불러오기
+    const [startDate, setStartDate] = useState(detail.event_start_date);
+    const [endDate, setEndDate] = useState(detail.event_end_date);
+    const infoPeriod = startDate + " ~ " + endDate;
+
+    const [placeData, setPlaceData] = useState(detail.venue); //장소
     const infoPlace = placeData + " ▸";
-    const placeLink = "https://map.naver.com/p/search/" + placeData;
-    const infoOpenDateTime = "yyyy-MM-dd hh:mm";
-    const infoPreOpenDateTime = "정보없음";
+    const placeList = placeData.split(/\s+/g);
+    const placeStr = placeList.join('+');
+    const placeLink = "https://map.naver.com/p/search/" + placeStr;
+
+    const [infoOpenDateTime, setInfoOpenDateTime] = useState(detail.ticket_open_date);
+    const [infoPreOpenDateTime, setInfoPreOpenDateTime] = useState(detail.pre_sale_date);
+    if(infoOpenDateTime === null){setInfoOpenDateTime("정보없음")};
+    if(infoPreOpenDateTime === null){setInfoPreOpenDateTime("정보없음")};
 
     const infoList = [
         {label: '공연 기간', text: infoPeriod},
@@ -47,6 +63,24 @@ const MainTop = () => {
         </li>
     ));
 
+    //예매 바로가기 버튼
+    const [salesSite, setSalesSite] = useState(detail.sales_site);
+    const [detailLink, setDetailLink] = useState(detail.detail_link);
+    const bookingBtn = (
+        <li className='is-direct'>
+            <a className='bookingBtn' href={detailLink}>
+                <span>멜론 티켓 바로가기</span>
+            </a>
+        </li>
+    );
+
+    if(status === 'loading') {
+        return <div>Loading...</div>;
+    }
+
+    if(status === 'failed') {
+        return <div>Error: {error}</div>;
+    }
     
     //return
     return (
@@ -66,12 +100,12 @@ const MainTop = () => {
                     <div className='summaryTopRight'>
                         <div className='regDate'>
                             <div className='regDateText'>
-                                <span>등록일: 2024.05.29</span>
+                                <span>등록일: {regDate}</span>
                             </div>
                         </div>
                         <div className='view'>
                             <div className='viewText'>
-                                <span>조회수: 2222</span>
+                                <span>조회수: {view}</span>
                             </div>
                         </div>
                     </div>
@@ -110,26 +144,7 @@ const MainTop = () => {
                                     <span>예매 사이트 바로가기</span>
                                 </a>
                             </li>
-                            <li className='is-direct'>
-                                <a className='bookingBtn' href='#'>
-                                    <span>예매 사이트 바로가기</span>
-                                </a>
-                            </li>
-                            <li className='is-direct'>
-                                <a className='bookingBtn' href='#'>
-                                    <span>예매 사이트 바로가기</span>
-                                </a>
-                            </li>
-                            <li className='is-direct'>
-                                <a className='bookingBtn' href='#'>
-                                    <span>예매 사이트 바로가기</span>
-                                </a>
-                            </li>
-                            <li className='is-direct'>
-                                <a className='bookingBtn' href='#'>
-                                    <span>예매 사이트 바로가기</span>
-                                </a>
-                            </li>
+                            {bookingBtn}
                         </ul>
                         
                     </div>
