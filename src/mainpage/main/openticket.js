@@ -34,7 +34,7 @@ function calculateDateDifference(date) {
   
   // 차이가 0 미만이면, 이미 지난 날짜입니다.
   if (diff < 0) {
-    return "";
+    return "진행중";
   }
 
   // moment-duration-format 라이브러리를 사용하여 차이를 포맷합니다.
@@ -132,6 +132,7 @@ export default function Openticket({ tickets }) {
           .filter(ticket => ByYearMonth(ticket, currentDate))
           .filter(ticket => activeSite === 'all' || ticket.sales_site === activeSite) // activeSite에 따라 필터링
           .map(ticket => (
+          // <Link to={`/detail/${ticket.id}`}>
             <div className='openticket' key={ticket.id}>
               <div className='openticket-img'>
                 <img src={ticket.image_url} alt={`${ticket.event_name} 이미지`} />
@@ -145,10 +146,11 @@ export default function Openticket({ tickets }) {
                 <div className='ot-info-bot'>
                   <div className='day'>{moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>
                 </div>
-                <div>{ticket.genre}</div>
+                {/* <div>{ticket.genre}</div> */}
                 <div className='tic-site'><img src={melon} alt="멜론"></img></div>
               </div>
             </div>
+          // </Link>
         ))}
       </div>      
     </div>
