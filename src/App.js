@@ -18,7 +18,7 @@ function App() {
           <Route path="/genre/exhibitionevent" element={<Main />} />
           <Route path="/genre/classic" element={<Main />} />
           {/* <Route path="/chlidfamliy" element={<Main />} /> */}
-          <Route path='/detail' element={<DetailPage />} />
+          <Route path='/detail/:id' element={<DetailPage />} />
           <Route path='/search' element={<Search />} />
           {/* <Route path="/" element={<Test />} /> */}
         </Routes>

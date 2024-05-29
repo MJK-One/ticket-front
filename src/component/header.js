@@ -10,7 +10,7 @@ function CustomLink({ to, children }) {
 
   const iconImg = () => {
     let iconName = children;
-    let baseSrc = "img/icon/";
+    let baseSrc = "/img/icon/";
 
     switch (iconName) {
       case '뮤지컬/연극' :
@@ -38,7 +38,7 @@ function Header() {
               <div className="header-top">
                 <div className="h-t-logo-search">
                   <div className="header-logo">
-                  <Link to="/" className="linksty"><img className="logo-img" alt="" src="img/TOW.png" /></Link></div>
+                  <Link to="/" className="linksty"><img className="logo-img" alt="" src="/img/TOW.png" /></Link></div>
                   <div className="header-search">
                       <div className="search-form">
                       <input gtm-label="검색창" type="text" placeholder="검색창" value=""/>
