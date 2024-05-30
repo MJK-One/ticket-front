@@ -20,7 +20,7 @@ const NavInfo = () => {
     const infoList = [
         {label: '기본 정보', text: normalData},
         {label: '공연 소개', text: intro},
-        {label: '할인정보', text: agency}
+        {label: '기획사 정보', text: agency}
     ];
 
     const infoItem = infoList.map((item, i) => (

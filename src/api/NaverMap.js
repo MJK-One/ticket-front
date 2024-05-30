@@ -12,11 +12,12 @@ const addDecimalPoint = (str) => {
 const PersonalNaverMap = ({ placeData, placeType }) => {
     const navermaps = useNavermaps();
     const [coords, setCoords] = useState(new navermaps.LatLng(37.500751, 126.867891)); //초기 정보
+    const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                if (placeType === "name" && placeData) {
+                if (placeType === "name" && placeData) {//장소명 검색
                     const data = await naverSearch(placeData);
                     if (data && data.length > 0) {
                         const strMapx = data[0].mapx;
@@ -25,10 +26,13 @@ const PersonalNaverMap = ({ placeData, placeType }) => {
                         const mapx = addDecimalPoint(strMapx);
                         const mapy = addDecimalPoint(strMapy);
 
+                        console.log('naverSearch mapx: ', mapx);
+                        console.log('naverSearch mapy: ', mapy);
+
                         setCoords(new navermaps.LatLng(mapy, mapx));
                     }
                 } else {
-                    if(placeData) {
+                    if(placeData) {//주소 검색
                         navermaps.Service.geocode(
                             {query : placeData},
                             function (status, res) {
@@ -46,11 +50,17 @@ const PersonalNaverMap = ({ placeData, placeType }) => {
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
+            } finally {
+                setIsLoading(false); //데이터 불러오기 완료
             }
         };
 
         fetchData();
     }, [placeData, placeType]);
+
+    if (isLoading) {
+        return <div>Loading map...</div>; // 로딩 중 표시
+    }
 
   return (
     <MapDiv

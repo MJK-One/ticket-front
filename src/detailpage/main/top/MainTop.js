@@ -43,7 +43,8 @@ const MainTop = () => {
         }
     }, [startDate, endDate]);
 
-    const [placeData, setPlaceData] = useState(detail.venue); //장소
+    //장소
+    const [placeData, setPlaceData] = useState(detail.venue);
     const [infoPlace, setInfoPlace] = useState("정보 없음");
     const [placeLink, setPlaceLink] = useState("#");
 
