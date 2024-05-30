@@ -39,7 +39,7 @@
 }
 
 .summaryTopLeft {
-    width: 38rem;
+    width: 58rem;
 }
 
 .summaryTopRight {
@@ -131,22 +131,23 @@
 }
 
     /*info*/
+.infoBox {
+    width: 40rem;
+    margin-left: 3rem;
+}
+
 .summaryBody .info {
     display: inline-block;
     vertical-align: top;
 
     margin-top: 0.3rem;
-    width: 20rem;
+    width: 40rem;
 }
 
 .summaryBody .info .infoItem {
     margin-top: 1.3rem;
     padding-left: 1.5rem;
     font-size: 0;
-}
-
-.info .infoItem .is-place {
-    font-weight: bold;
 }
 
 .summaryBody .info .infoItem:first-child {
@@ -170,22 +171,30 @@
 
 .summaryBody .info .infoDesc {
     display: inline-block;
-    max-width: 23rem;
+    max-width: 30rem;
     vertical-align: top;
 }
 
 .summaryBody .info .infoText {
     position: relative;
     line-height: 160%;
-    max-width: 23rem;
+    max-width: 30rem;
 
     color: #000;
     font-size: 1rem;
 }
 
-.infoBox {
-    width: 20rem;
-    margin-left: 3rem;
+.info .infoItem .is-place {
+    font-weight: bold;
+
+    display: inline-block;
+    max-width: 30rem;
+    -webkit-line-clamp: 1; /*텍스트 1줄로 제한*/
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /*텍스트가 넘어가면 ...으로*/
+    white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+    
 }
 
 /* 예약 버튼 */
@@ -197,7 +206,7 @@
 }
 
 .bookingBtn {
-    display: table;
+    display: flex;
     box-sizing: border-box;
 
     width: 18.5rem;
@@ -205,6 +214,8 @@
     padding: 0 1rem;
     
     text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .is-main .bookingBtn {
@@ -259,14 +270,28 @@ li.is-direct:last-child > .bookingBtn {
 }
 
 .btnList:hover .is-direct .bookingBtn {
-    display: table;
+    display: flex;
 }
 
 .bookingBtn > span {
-    display: table-cell;
-    height: 100%;
-
-    vertical-align: middle;
     text-align: center;
     line-height: 120%;
+}
+
+/**/
+.bookingBtn > img.is-melon {
+    height: 1.2rem;
+    width: auto;
+}
+.bookingBtn > img.is-interpark {
+    height: 1.7rem;
+    width: auto;
+}
+.bookingBtn > img.is-yes24 {
+    height: 1.5rem;
+    width: auto;
+}
+.bookingBtn > img.is-ticketlink {
+    height: 1.6rem;
+    width: auto;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import './MainTop.css';
@@ -9,13 +9,13 @@ const MainTop = () => {
     const status = useSelector((state) => state.details.status);
     const error = useSelector((state) => state.details.error);
 
-    const [genre, setGenre] = useState(detail.genre);
+    const [genre, setGenre] = useState(detail.genre || "정보 없음");
     const genreText = "> " + genre;
 
-    const [prdTitle, setPrdTitle] = useState(detail.event_name);//상품 제목
-    const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url);//포스터 이미지 링크
+    const [prdTitle, setPrdTitle] = useState(detail.event_name || "NONAME");//상품 제목
+    const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url);//포스터 이미지 링크 > 기본 이미지 만들기
     
-    const [regDate, setRegDate] = useState(detail.registration_date); //등록일
+    const [regDate, setRegDate] = useState(detail.registration_date || "정보 없음"); //등록일
     const [view, setView] = useState(detail.view_count);
 
     //티켓캐스트 하트 버튼 이벤트
@@ -31,18 +31,33 @@ const MainTop = () => {
     //데이터 불러오기
     const [startDate, setStartDate] = useState(detail.event_start_date);
     const [endDate, setEndDate] = useState(detail.event_end_date);
-    const infoPeriod = startDate + " ~ " + endDate;
+    const [infoPeriod, setInfoPeriod] = useState("정보 없음")
+    
+    useEffect(() => {
+        if((startDate !== null && startDate.length > 0) && (endDate !== null && endDate.length > 0)){
+            if(startDate !== endDate) {
+                setInfoPeriod(startDate + " ~ " + endDate);
+            } else {
+                setInfoPeriod(startDate);
+            }
+        }
+    }, [startDate, endDate]);
 
     const [placeData, setPlaceData] = useState(detail.venue); //장소
-    const infoPlace = placeData + " ▸";
-    const placeList = placeData.split(/\s+/g);
-    const placeStr = placeList.join('+');
-    const placeLink = "https://map.naver.com/p/search/" + placeStr;
+    const [infoPlace, setInfoPlace] = useState("정보 없음");
+    const [placeLink, setPlaceLink] = useState("#");
 
-    const [infoOpenDateTime, setInfoOpenDateTime] = useState(detail.ticket_open_date);
-    const [infoPreOpenDateTime, setInfoPreOpenDateTime] = useState(detail.pre_sale_date);
-    if(infoOpenDateTime === null){setInfoOpenDateTime("정보없음")};
-    if(infoPreOpenDateTime === null){setInfoPreOpenDateTime("정보없음")};
+    useEffect(() => {
+        if(placeData !== null && placeData.length > 0){
+            setInfoPlace(placeData + " ▸");
+            const placeList = placeData.split(/\s+/g);
+            const placeStr = placeList.join('+');
+            setPlaceLink("https://map.naver.com/p/search/" + placeStr);
+        }
+    }, [placeData]);
+
+    const [infoOpenDateTime, setInfoOpenDateTime] = useState(detail.ticket_open_date || "정보 없음");
+    const [infoPreOpenDateTime, setInfoPreOpenDateTime] = useState(detail.pre_sale_date || "정보 없음");
 
     const infoList = [
         {label: '공연 기간', text: infoPeriod},
@@ -54,7 +69,7 @@ const MainTop = () => {
         <li className='infoItem' key={`PMT-info-p-${i}`}>
             <strong className='infoLabel'>{item.label}</strong>
             <div className='infoDesc'>
-                {item.label === '공연 장소' ? (
+                {(item.label === '공연 장소' && item.link !== "#") ? (
                     <a href={item.link} className='infoText is-place' target="_blank" rel="noopener noreferrer">{item.text}</a>
                 ) : (
                     <p className='infoText'>{item.text}</p>
@@ -66,13 +81,19 @@ const MainTop = () => {
     //예매 바로가기 버튼
     const [salesSite, setSalesSite] = useState(detail.sales_site);
     const [detailLink, setDetailLink] = useState(detail.detail_link);
-    const bookingBtn = (
-        <li className='is-direct'>
-            <a className='bookingBtn' href={detailLink}>
-                <span>멜론 티켓 바로가기</span>
-            </a>
-        </li>
-    );
+    const bookingBtn = () => {
+        if(detailLink !== null && detailLink.length > 0){
+            return (
+                <li className='is-direct' key={`PMT-info-bookingbtn-isdirect-melon`}>
+                    <a className='bookingBtn' href={detailLink}>
+                        <img className='is-melon' src='/img/other_logo/melon.png' />
+                    </a>
+                </li>
+            );
+        } else {
+            return null;
+        }
+    };
 
     if(status === 'loading') {
         return <div>Loading...</div>;
@@ -90,20 +111,20 @@ const MainTop = () => {
                 <div className='summaryTop'>
                     <div className='summaryTopLeft'>
                         <div className='genre'>
-                            <div className='genreText'>
+                            <div className='genreText' key={`PMT-info-component-genreText`}>
                                 <span>{genreText}</span>
                             </div>
                         </div>
-                        <h2 className='prdTitle'>{prdTitle}</h2>
+                        <h2 className='prdTitle' key={`PMT-info-component-prdTitle`}>{prdTitle}</h2>
                     </div>
                     
                     <div className='summaryTopRight'>
-                        <div className='regDate'>
+                        <div className='regDate' key={`PMT-info-component-regDate`}>
                             <div className='regDateText'>
                                 <span>등록일: {regDate}</span>
                             </div>
                         </div>
-                        <div className='view'>
+                        <div className='view' key={`PMT-info-component-view`}>
                             <div className='viewText'>
                                 <span>조회수: {view}</span>
                             </div>
@@ -116,12 +137,12 @@ const MainTop = () => {
                     <div className='posterBox'>
                         {/* 포스터 이미지 */}
                         <div className='posterBoxTop'>
-                            <img className='posterBoxImage' src={prdPosterSrc} alt={prdTitle} />
+                            <img className='posterBoxImage' src={prdPosterSrc} alt={prdTitle} key={`PMT-info-component-posterBox`}/>
                         </div>
 
                         {/* 좋아요 */}
                         <div className='posterBoxBottom'>
-                            <div className='prdCast'>
+                            <div className='prdCast' key={`PMT-info-component-prdCast`}>
                                 <div className='prdCastWrap'>
                                     <a className={`prdCastBtn ${isTkHeartBtn ? 'is-toggled' : ''}`} role='checkbox' onClick={tkHeartBtnHandler}>
                                         좋아요
@@ -133,18 +154,18 @@ const MainTop = () => {
                     </div>
 
                     <div className='infoBox'>
-                        <ul className='info'>
+                        <ul className='info' key={`PMT-info-component-info`}>
                             {infoItem}
                         </ul>
 
                         {/* 예매 버튼 */}
-                        <ul className='btnList'>
+                        <ul className='btnList' key={`PMT-info-component-btnList`}>
                             <li className='is-main'>
                                 <a className='bookingBtn' href='#'>
                                     <span>예매 사이트 바로가기</span>
                                 </a>
                             </li>
-                            {bookingBtn}
+                            {bookingBtn()}
                         </ul>
                         
                     </div>
