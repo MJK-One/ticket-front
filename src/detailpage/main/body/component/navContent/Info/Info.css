@@ -15,3 +15,6 @@
     font-size: 1.25rem;
     font-weight: bold;
 }
+.contentDetailText {
+    white-space: pre-wrap;
+}
