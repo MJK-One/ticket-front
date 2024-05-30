@@ -86,7 +86,7 @@ const MainTop = () => {
         if(detailLink !== null && detailLink.length > 0){
             return (
                 <li className='is-direct' key={`PMT-info-bookingbtn-isdirect-melon`}>
-                    <a className='bookingBtn' href={detailLink}>
+                    <a className='bookingBtn' href={detailLink} target="_blank" rel="noopener noreferrer">
                         <img className='is-melon' src='/img/other_logo/melon.png' />
                     </a>
                 </li>
