@@ -8,6 +8,12 @@ export const getAll = async () => {
     return res.data;
 };
 
+//naverSearch
+export const naverSearch = async (placeName) => {
+    const res = await axios.get(`${API_SERVER_HOST}/naverSearch?searchPlace=${placeName}`);
+    return res.data;
+}
+
 //MainPostController > gethome()
 export const gethome = async () => {
     const res = await axios.get(`${API_SERVER_HOST}/home`);
