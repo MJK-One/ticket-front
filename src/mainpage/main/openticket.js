@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './openticket.css';
 import melon from './melon.jpg'
 import moment from 'moment'; //날짜 변환
@@ -132,8 +133,8 @@ export default function Openticket({ tickets }) {
           .filter(ticket => ByYearMonth(ticket, currentDate))
           .filter(ticket => activeSite === 'all' || ticket.sales_site === activeSite) // activeSite에 따라 필터링
           .map(ticket => (
-          // <Link to={`/detail/${ticket.id}`}>
-            <div className='openticket' key={ticket.id}>
+          <div className='openticket' key={ticket.id}>
+            <Link to={`/detail/${ticket.id}`}>
               <div className='openticket-img'>
                 <img src={ticket.image_url} alt={`${ticket.event_name} 이미지`} />
               </div>
@@ -149,8 +150,8 @@ export default function Openticket({ tickets }) {
                 {/* <div>{ticket.genre}</div> */}
                 <div className='tic-site'><img src={melon} alt="멜론"></img></div>
               </div>
-            </div>
-          // </Link>
+            </Link>
+          </div>
         ))}
       </div>      
     </div>
