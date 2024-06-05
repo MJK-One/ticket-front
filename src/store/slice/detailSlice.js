@@ -6,7 +6,7 @@ import axios from "axios";
 export const fetchDetail = createAsyncThunk(
     'details/fetchDetail',
     async (id, thunkAPI) => {
-        const response = await axios.get(`${API_SERVER_HOST}/one?id=${id}`);
+        const response = await axios.get(`${API_SERVER_HOST}/info?id=${id}`);
         return response.data;
     }
 );
@@ -23,13 +23,13 @@ const initialState = {
       basic_info: '',
       event_description: '',
       agency_info: '',
-      detail_link: '',
       genre: '',
-      sales_site: '',
       view_count: 0,
       event_start_date: '',
       event_end_date: '',
-      venue: ''
+      venue: '',
+      address: '',
+      eventSites: [{}]
     },
     status: 'idle',
     error: null
