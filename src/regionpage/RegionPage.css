@@ -2,14 +2,14 @@ div {
     /*border: 1px solid black;*/
 }
 
-#mainContainer {
+#region-mainContainer {
     position: relative;
     width: 100%;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
 }
 
-.contents {
+#region-mainContainer .contents {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

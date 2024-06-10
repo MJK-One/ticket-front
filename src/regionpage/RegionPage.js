@@ -3,7 +3,7 @@ import './RegionPage.css';
 
 const RegionPage =  () => {
     return (
-        <div id="mainContainer">
+        <div id="region-mainContainer">
             <div className="contents">
 
                 <div className="leftBox">
