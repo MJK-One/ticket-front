@@ -156,6 +156,12 @@ button {
     display: flex;
     flex-direction: column;
   }
+  .header-top{
+    position: fixed;
+    width:100%;
+    background-color: white;
+    z-index: 9999;
+  }
   .h-t-logo-search{
     display: flex;
     flex-direction: row;
@@ -219,6 +225,7 @@ button {
   }
 
   .h-b-menu ul {
+    margin-top: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -228,13 +235,13 @@ button {
     gap : 30px;
     white-space: nowrap;
     list-style-type: none;
+    cursor: pointer;
   }
   .h-b-menu li {
     display: flex;
     flex-direction: column;
     width : 80px;
     height : 80px;
-    border : 1px solid #000;
     align-items: center;
   }
   .h-b-menu .menu-img {

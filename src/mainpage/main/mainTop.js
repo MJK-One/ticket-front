@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './mainTop.css';
+import { Link } from 'react-router-dom';
+import moment from 'moment'; //날짜 변환
+import 'moment/locale/ko'; // 한국어 로케일 import
+import "moment-duration-format";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 
-const slidesData = [
-  { id: 1, img: '이미지1', name: '이름1' },
-  { id: 2, img: '이미지2', name: '이름2' },
-  { id: 3, img: '이미지3', name: '이름3' },
-  { id: 4, img: '이미지4', name: '이름4' },
-  { id: 5, img: '이미지5', name: '이름5' },
-  { id: 6, img: '이미지6', name: '이름6' },
-  { id: 7, img: '이미지7', name: '이름7' },
-  { id: 8, img: '이미지8', name: '이름8' },
-  { id: 9, img: '이미지9', name: '이름9' },
-];
-
-export default function MainTop() { 
+export default function MainTop({ top10Tickets }) { 
   const [enableNavigation, setEnableNavigation] = useState(true);
 
   //창 크기 width 1000기준으로 Enable 활성화 여부
@@ -48,28 +40,30 @@ export default function MainTop() {
         navigation={enableNavigation} // 조건부 navigation 활성화
         className="maintop-con-sw"
         breakpoints={{
-          1200: {
+          1000: {
             slidesPerView: 5,
             spaceBetween: 10,
-            allowTouchMove : false,
+            allowTouchMove: false
           },
           200: {
             slidesPerView: 1,
             spaceBetween: 0,
-            allowTouchMove : true,
+            allowTouchMove: true
           },
         }}
       >
-        {slidesData.map(slide => (
-          <SwiperSlide key={slide.id}>
+        {top10Tickets.map(tticket => (
+          <SwiperSlide key={tticket.id}>
+            <Link to={`/detail/${tticket.id}`}>
             <div className='poster'>
-              <div className='poster-img'>{slide.img}</div>
+              <div className='poster-img'><img src={tticket.image_url} alt={`${tticket.event_name} 이미지`} /></div>
               <div className='poster-info'>
                   <div className='poster-info-cl'>종류</div>
-                  <div className='poster-info-title'>{slide.name}</div>
-                  <div className='poster-info-day'>2024.04.12</div>
+                  <div className='poster-info-title'>{tticket.event_name}</div>
+                  <div className='poster-info-day'>{moment(tticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>
               </div>
             </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

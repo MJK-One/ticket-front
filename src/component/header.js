@@ -59,7 +59,7 @@ function Header() {
                     <CustomLink to="/genre/exhibitionevent">전시/행사</CustomLink>
                     <CustomLink to="/genre/classic">클래식</CustomLink>         
                     {/* <CustomLink to="/chlidfamliy">아동/가족</CustomLink> */}
-                    <CustomLink to="/detail">디테일</CustomLink>
+                    {/* <CustomLink to="/detail">디테일</CustomLink> */}
                   </ul>
                 </div>
               </div>

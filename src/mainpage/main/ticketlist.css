@@ -1,89 +1,25 @@
-.openticket-month {
+.openticketlist-container {
+
+}
+.openticket-all {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.openticket-month .month {
-    font-size : 40px;
+.openticket-all .all {
+    font-size : 30px;
     font-weight: 700;
     margin-left: 20px;
     margin-right: 20px;
 }
-.openticket-month .month :hover {
-    color: #1774e6;
-}
-.openticket-month button {
-    width : 60px;
-    height : 30px;
-}
-.openticket-month button:hover {
-    color: #1774e6;
-}
-.by-site {
-    display: flex;
-    gap : 20px;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-}
-.by-site div {
-    border: 1px solid #aaa;
-    border-radius: 30px;
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-.by-site div.active {
-    border :inherit;
-    background-color: #1774e6;
-    color: white;
-}
-.by-site :hover {
-    background-color: #1774e6;
-    color: white;
-}
-/* .controll-list {
-    margin-left:20px;
-    justify-content: center;
-    width : 1310px;
-}
-.view-type button {
-    width : 36px;
-    height : 36px;
-}
-.view-type {
-    float: left;
-}
-.view-sort {
-    float : right;
-}
-.view-sort li{
-    display: inline;
-    align-items: center; 
-    justify-content: center;
-    padding: 0 10px 0 10px;
-}
-.view-sort li:not(:last-child) {
-    border-right: 1px solid #ccc;
-} */
-.openticket-arrange {
+.openticket-list {
     display : flex;
     flex-wrap: wrap;
     width : 1100px;
     margin-top : 20px;
 }
-@media screen and (min-width: 1001px) and (max-width : 1300px) {
-    .openticket-arrange {
-        display : flex;
-        flex-wrap: wrap;
-        width : 900px;
-        margin-top : 20px;
-    }
-}
 @media screen and (max-width: 1000px) {
-    .openticket-arrange {
+    .openticket-list {
         display : flex;
         flex-wrap: wrap;
         width : 650px;
@@ -92,10 +28,10 @@
 }
 .openticket {
     width : 191px;
-    height : 410px;
+    height : 400px;
     margin : 0 auto 20px;
     cursor: pointer;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ddd;
 }
 .openticket-img {
     width : 191px;
@@ -115,7 +51,7 @@
     font-weight: 600;
     font-size: 17px;
     width : 100%;
-    height : 40px;
+    /* height : 40px; */
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -130,6 +66,7 @@
     flex-direction: row;
     align-items: center;
     height: 1.5rem;
+    width:191px;
     padding: 0;
     border-radius: 4px;
 }
@@ -161,20 +98,50 @@
     border-radius: 0 4px 4px 0;
     font-weight: 700;
 }
-.ot-info-bot {
-   
+.open-Timer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 1.5rem;
+    padding: 0;
+    border-radius: 4px;
 }
-.ot-info-bot .day {
+.Timer-banner {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+    padding: .2rem .6rem;
+    border-radius: 4px 0 0 4px;
+    color : white;
+    background: #1774e6;
+}
+.pre-banner{
+    margin-left: 28px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+    padding: .2rem .6rem;
+    border-radius: 4px;
+    color : white;
+    background: #e61717;
+}
+.day {
     float: left;
     color : #1774e6;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
-.tic-site {
+.tic-site2 {
     width : 30px;
     height : 30px;
 }
-.tic-site img {
+.tic-site2 img {
     width : 100%;
     height : 100%;
     border-radius: 10px;
