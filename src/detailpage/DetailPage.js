@@ -9,7 +9,6 @@ import './DetailPage.css';
 const DetailPage = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const detail = useSelector((state) => state.details.detail);
     const status = useSelector((state) => state.details.status);
     const error = useSelector((state) => state.details.error);
 

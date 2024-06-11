@@ -13,7 +13,7 @@ const MainTop = () => {
     const genreText = "> " + genre;
 
     const [prdTitle, setPrdTitle] = useState(detail.event_name || "NONAME");//상품 제목
-    const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url);//포스터 이미지 링크 > 기본 이미지 만들기
+    const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url || "/img/normal_poster.png");//포스터 이미지 링크
     
     const [regDate, setRegDate] = useState(detail.registration_date || "정보 없음"); //등록일
     const [view, setView] = useState(detail.view_count);
@@ -80,21 +80,47 @@ const MainTop = () => {
     ));
 
     //예매 바로가기 버튼
-    const [salesSite, setSalesSite] = useState(detail.sales_site);
-    const [detailLink, setDetailLink] = useState(detail.detail_link);
-    const bookingBtn = () => {
-        if(detailLink !== null && detailLink.length > 0){
-            return (
-                <li className='is-direct' key={`PMT-info-bookingbtn-isdirect-melon`}>
-                    <a className='bookingBtn' href={detailLink} target="_blank" rel="noopener noreferrer">
-                        <img className='is-melon' src='/img/other_logo/melon.png' />
-                    </a>
-                </li>
-            );
-        } else {
-            return null;
+    const [sitesList, setSiteList] = useState([]);
+    useEffect(() => {
+        if (detail.eventSites) {
+            const newSitesList = detail.eventSites.map(site => ({
+                link: site.detail_link,
+                site: site.sales_site
+            }));
+            setSiteList(newSitesList);
+        }
+    }, [detail]); 
+    
+    const siteConfig = {
+        'Melon Ticket': {
+            btnClass: "is-melon",
+            btnImgSrc: "/img/other_logo/melon.png"
+        },
+        'Interpark Ticket': {
+            btnClass: "is-interpark",
+            btnImgSrc: "/img/other_logo/interpark.png"
+        },
+        'Yes24 Ticket': {
+            btnClass: "is-yes24",
+            btnImgSrc: "/img/other_logo/yes24ticket.png"
+        },
+        'Ticketlink': {
+            btnClass: "is-ticketlink",
+            btnImgSrc: "/img/other_logo/ticketlink.png"
         }
     };
+    
+    const bookingBtn = sitesList.map((item, i) => {
+        let { btnClass = "", btnImgSrc = "" } = siteConfig[item.site] || {};
+    
+        return (
+            <li className='is-direct' key={`PMT-info-bookingbtn-isdirect-${i}`}>
+                <a className='bookingBtn' href={item.link} target="_blank" rel="noopener noreferrer">
+                    <img className={btnClass} src={btnImgSrc} />
+                </a>
+            </li>
+        );
+    });
 
     if(status === 'loading') {
         return <div>Loading...</div>;
@@ -166,7 +192,7 @@ const MainTop = () => {
                                     <span>예매 사이트 바로가기</span>
                                 </a>
                             </li>
-                            {bookingBtn()}
+                            {bookingBtn}
                         </ul>
                         
                     </div>
