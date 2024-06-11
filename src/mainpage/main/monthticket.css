@@ -29,8 +29,8 @@
     height : 186px;
 }
 .monthticket-img img{
-    width : 100%;
-    height: 100%;
+    width : 131px;
+    height: 186px;
     border-radius: 10px 0 0 10px;
     border-right: 1px solid #ddd;
 }
@@ -52,16 +52,17 @@
 .monthticket-info .day {
     margin-top : 10px;
 }
-.open-Timer {
-    display: flex;
-    flex-direction: row;
+.open-Timer2 {
+    /* display: flex;
+    flex-direction: row; */
     align-items: center;
     height: 1.5rem;
-    width:191px;
+    width:230px;
     padding: 0;
     border-radius: 4px;
 }
-.Timer-banner {
+.Timer-banner2 {
+    float:left;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -73,7 +74,8 @@
     color : white;
     background: #1774e6;
 }
-.Timer-day {
+.Timer-day2 {
+    float:left;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -89,8 +91,8 @@
     border-radius: 0 4px 4px 0;
     font-weight: 700;
 }
-.pre-banner{
-    margin-left: 28px;
+.pre-banner2 {
+    float : right;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -137,7 +139,6 @@
 @media screen and (max-width: 1000px) {
     .monthticket-arrange {
         width: 700px; /* 기존 설정 유지 */
-        margin-top: 20px; /* 기존 설정 유지 */
     }
     .monthticket {
         width: 320px; /* 20% 축소 */
@@ -148,19 +149,46 @@
         width: 112px; /* 20% 축소 */
         height: 148.8px; /* 20% 축소 */
     }
+    .monthticket-img {
+        width : 140px;
+        height : 148.8px;
+    }
+    .monthticket-img img{
+        width : 131px;
+        height: 148.8px;
+        border-radius: 10px 0 0 10px;
+        border-right: 1px solid #ddd;
+    }
     .monthticket-info {
         margin: 8px 8px; 
         font-size: 17px; 
     }
     .monthticket-info .title {
         font-size: 17px;
+        margin-top : 5px;
+        font-weight: 600;
+        width : 170px;
+        height : 40px;
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
-    .open-Timer {
-        height: 1.5rem;
+    .open-Timer2 {
+        align-items: center;
+        height: 1.2rem;
+        padding: 0;
+        border-radius: 4px;
+        width: 160px;
     }
-    .Timer-banner, .Timer-day {
-        height: 1.5rem; 
-        padding: .2rem .6rem;
+    .Timer-banner2, .Timer-day2 {
+        height: 1.2rem; 
+        padding: .1rem .3rem;
+    }
+    .pre-banner2 {
+        height: 1.2rem; 
+        padding: .1rem .3rem;
     }
     .tic-site {
         margin-top: 40px; /* 20% 축소 */

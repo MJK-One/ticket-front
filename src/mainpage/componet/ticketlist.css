@@ -62,8 +62,8 @@
     margin-top : 5px;
 }
 .open-Timer {
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
     align-items: center;
     height: 1.5rem;
     width:191px;
@@ -71,24 +71,26 @@
     border-radius: 4px;
 }
 .Timer-banner {
+    float:left;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 1.5rem;
-    padding: .2rem .6rem;
+    height: 1.3rem;
+    padding: .1rem .3rem;
     border-radius: 4px 0 0 4px;
     color : white;
     background: #1774e6;
 }
 .Timer-day {
+    float:left;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 1.5rem;
+    height: 1.3rem;
     padding: .05rem .6rem;
     color: #1774e6;
     gap: 1rem;
@@ -98,35 +100,15 @@
     border-radius: 0 4px 4px 0;
     font-weight: 700;
 }
-.open-Timer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 1.5rem;
-    padding: 0;
-    border-radius: 4px;
-}
-.Timer-banner {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 1.5rem;
-    padding: .2rem .6rem;
-    border-radius: 4px 0 0 4px;
-    color : white;
-    background: #1774e6;
-}
 .pre-banner{
-    margin-left: 28px;
+    float:right;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 1.5rem;
-    padding: .2rem .6rem;
+    height: 1.3rem;
+    padding: .1rem .3rem;
     border-radius: 4px;
     color : white;
     background: #e61717;

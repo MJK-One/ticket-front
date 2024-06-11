@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './main.css';
-import MainTop from './mainTop';
+import MainTop from '../componet/mainTop';
 import Monthticket from './monthticket';
-import Ticketlist from './ticketlist';
+import Ticketlist from '../componet/ticketlist';
 import { getmonth, getTop10, getalllist} from '../../api/connect'; // API 함수를 불러옵니다.
 
 function Main() {

@@ -4,6 +4,7 @@ import './ticketlist.css';
 import moment from 'moment';
 import 'moment/locale/ko';
 import calculateDateDifference from './calculateDateDifference'; 
+import getImageForSite from '../componet/getImageForSite';
 export default function Ticketlist({ allTickets }) {  
     return (
     <div className='openticketlist-container'>
@@ -29,7 +30,7 @@ export default function Ticketlist({ allTickets }) {
                     </div>
                     <div className='title'>{ticket.event_name}</div>
                     <div className='day'>{moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>      
-                    <div className='tic-site2'>{ticket.event_id}</div>
+                    <div className='tic-site2'><img src={getImageForSite(ticket.sales_site)} alt={ticket.sales_site} /></div>
                 </div>
                 </Link>
             </div>

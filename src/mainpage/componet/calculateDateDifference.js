@@ -13,12 +13,11 @@ function calculateDateDifference(date) {
 
     const duration = moment.duration(diff);
     const days = duration.days();
-    const time = duration.format("HH:mm:ss");
-
+    
     if (days > 0) {
       return `D-${days}`;
     } else {
-      return `${time}`;
+      return `D-Day`;
     }
 }
 

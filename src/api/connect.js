@@ -31,8 +31,15 @@ export const getalllist = async () => {
     const res = await axios.get(`${API_SERVER_HOST}/alllist`);
     return res.data;
 };
-// // 장르별 데이터를 불러오는 함수 추가
-// export const getByGenre = async (genre) => {
-//     const res = await axios.get(`${API_SERVER_HOST}/home/genre/${genre}`);
-//     return res.data;
-// };
+
+//MainPostController > getgenre()
+export const getgenre = async (genre) => {
+    const res = await axios.get(`${API_SERVER_HOST}/genre/${genre}`);
+    return res.data;
+};
+
+// MainPostController > getTop10ByGenreOrderByViewCount()
+export const getTop10ByGenre = async (genre) => {
+    const res = await axios.get(`${API_SERVER_HOST}/top10/${genre}`);
+    return res.data;
+};

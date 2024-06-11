@@ -1,0 +1,23 @@
+#contents {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+.maintop {
+    width : 100%;
+    display: flex;
+    justify-content: center;
+}
+.sales_site {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+.ticket-list {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
