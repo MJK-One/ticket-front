@@ -8,13 +8,25 @@ export const naverSearch = async (placeName) => {
     return res.data;
 }
 
-//MainPostController > gethome()
-export const gethome = async () => {
-    const res = await axios.get(`${API_SERVER_HOST}/home`);
+//MainPostController > getTop10()
+export const getTop10 = async () => {
+    const res = await axios.get(`${API_SERVER_HOST}/top10`);
     return res.data;
 };
-// 장르별 데이터를 불러오는 함수 추가
-export const getByGenre = async (genre) => {
-    const res = await axios.get(`${API_SERVER_HOST}/home/genre/${genre}`);
+
+//MainPostController > getmonth()
+export const getmonth = async () => {
+    const res = await axios.get(`${API_SERVER_HOST}/month`);
     return res.data;
 };
+
+//MainPostController > getalllist()
+export const getalllist = async () => {
+    const res = await axios.get(`${API_SERVER_HOST}/alllist`);
+    return res.data;
+};
+// // 장르별 데이터를 불러오는 함수 추가
+// export const getByGenre = async (genre) => {
+//     const res = await axios.get(`${API_SERVER_HOST}/home/genre/${genre}`);
+//     return res.data;
+// };
