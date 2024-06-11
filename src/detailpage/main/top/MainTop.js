@@ -13,7 +13,7 @@ const MainTop = () => {
     const genreText = "> " + genre;
 
     const [prdTitle, setPrdTitle] = useState(detail.event_name || "NONAME");//상품 제목
-    const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url);//포스터 이미지 링크 > 기본 이미지 만들기
+    const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url || "/img/normal_poster.png");//포스터 이미지 링크
     
     const [regDate, setRegDate] = useState(detail.registration_date || "정보 없음"); //등록일
     const [view, setView] = useState(detail.view_count);

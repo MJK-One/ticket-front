@@ -4,6 +4,18 @@ svg.koreaMap {
     fill: grey;
 }
 
-path:hover {
+svg.koreaMap path:hover {
+    fill: #9aadc5;
+    cursor: pointer;
+}
+
+svg.koreaMap text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    fill: black;
+    cursor: default;
+}
+
+svg.koreaMap path.selected {
     fill: #5693e0;
 }

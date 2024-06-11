@@ -4,6 +4,7 @@ import Header from './component/header';
 import Main from './mainpage/main/main';
 import DetailPage from './detailpage/DetailPage';
 import Search from './search/search';
+import RegionPage from './regionpage/RegionPage';
 // import Test from './test';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/detail/:id' element={<DetailPage />} />
           <Route path='/search' element={<Search />} />
           {/* <Route path="/" element={<Test />} /> */}
+          <Route path='/region' element={<RegionPage />} />
         </Routes>
       </Router>
     </>
