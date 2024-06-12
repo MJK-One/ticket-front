@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from '../../component/datepicker/datepicker.js';
 import './filter.css';
 
@@ -15,6 +15,16 @@ const Filter = () => {
     setIsToggledContainer(!isToggledContainer);
   };
 
+
+  /*
+    날짜 str 받아오기
+   */
+  const [calendarDateValue, setCalendarDateValue] = useState('');
+
+  const handleDateChange = (newDate) => {
+    setCalendarDateValue(newDate);
+  };
+
   //return
   return (
     <div className='filter'>
@@ -27,12 +37,12 @@ const Filter = () => {
             <h4 className='filterTitle'>관람일</h4>
             <div className='selectedData'>
               <span className='blind'>선택된 일자:</span>
-              <span className='date'>1234</span>
+              <span className='date'>{calendarDateValue}</span>
             </div>
           </a>
         </div>
 
-        <DatePicker />
+        <DatePicker onDateChange={handleDateChange} />
       </div>
 
     </div>

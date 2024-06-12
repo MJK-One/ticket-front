@@ -1,9 +1,9 @@
 import { subMonths } from 'date-fns';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DAY_LIST , useDatepicker } from './datepickerSetting.js';
 import './datepicker.css';
 
-const DatePicker = () => {
+const DatePicker = ({ onDateChange }) => {
 
   /*
     달력, 이벤트 함수 설정
@@ -53,8 +53,12 @@ const DatePicker = () => {
   let calYear = calendar.pickDate.getFullYear();
   let calMonthnn = ("0" + (calendar.pickDate.getMonth() + 1)).slice(-2)
   let calDaynn = ("0" + calendar.pickDate.getDate()).slice(-2);
-
   let calWkday = DAY_LIST[calendar.pickDate.getDay()];
+
+  const finalDateStr = `${calYear}.${calMonthnn}.${calDaynn} (${calWkday})`;
+  useEffect(() => {
+    onDateChange(finalDateStr);
+  }, [calendar.pickDate]);
 
     /* 이벤트 함수 설정 */
   //날짜 클릭 함수
@@ -106,6 +110,8 @@ const DatePicker = () => {
                 {daysList}
                 </ul>
             </div>
+
+            <input type='hidden' name='datepicker-str' id='datepicker-str' className='datepicker-str' value={finalDateStr} />
         
         </div>
     </div>
