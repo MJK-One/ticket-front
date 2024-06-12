@@ -23,12 +23,22 @@ function CustomLink({ to, children }) {
         return baseSrc + "classic_icon.png";
       case '아동/가족' :
         return baseSrc + "child_icon.png";
+
+      case '지역별' :
+        return baseSrc + "region_icon.png";
+      case '월별' :
+        return baseSrc + "calendar_icon.png";
       default :
         return redirect;
     };
   };
 
-  return <li className={className}><div className="menu-img"><img alt="" src={iconImg()} /></div><div className="menu-title"><Link to={to}>{children}</Link></div></li>;
+  return (
+  <li className={className}>
+    <div className="menu-img"><img alt="" src={iconImg()} /></div>
+    <div className="menu-title"><Link to={to}>{children}</Link></div>
+  </li>
+  );
 }
 
 function Header() {
@@ -60,13 +70,19 @@ function Header() {
               </div>
               <div className="header-bottom">
                 <div className="h-b-menu">
-                  <ul>             
+                  <ul className="normal-header">             
                     <CustomLink to="/genre/musicall">뮤지컬/연극</CustomLink>
                     <CustomLink to="/genre/consert">콘서트</CustomLink>
                     <CustomLink to="/genre/exhibitionevent">전시/행사</CustomLink>
                     <CustomLink to="/genre/classic">클래식</CustomLink>         
                     {/* <CustomLink to="/chlidfamliy">아동/가족</CustomLink> */}
                     {/* <CustomLink to="/detail">디테일</CustomLink> */}
+                  </ul>
+                  <div className="menuDivider"></div>
+                  <ul className="sep-header">
+                    <CustomLink to="/region">지역별</CustomLink>
+                    <CustomLink to="/blah">월별</CustomLink>
+                    {/* 월별 완료되면 링크 수정하기 */}
                   </ul>
                 </div>
               </div>

@@ -132,6 +132,13 @@ button {
     margin-right : 20px;
     position: relative;
   }
+  .h-b-menu li:last-child {
+    margin-right: 0;
+  }
+  .h-b-menu .sep-header li a {
+    color: #0368e5;
+  }
+
   .h-b-menu li::after {
     content: "";
     position: absolute;
@@ -139,15 +146,27 @@ button {
     right: 0;
     bottom: 0px; 
     height: 2px;
-    background-color: #000;
     opacity: 0; 
     transition: opacity 0.3s; 
+  }
+  .h-b-menu .normal-header li::after {
+    background-color: #000;
+  }
+  .h-b-menu .sep-header li::after {
+    background-color: #0368e5;
   }
   .h-b-menu li:hover::after, .h-b-menu ul li.active::after {
     opacity: 1;
   }
   .menu-img {
     display: none;
+  }
+  .menuDivider {
+    display: flex;
+    align-items: center;
+    width: 1px;
+    height: 15px;
+    background-color: #ddd;
   }
 }
 /*--------768px 미만------------*/
