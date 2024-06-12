@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import './App.css';
+import RegionPage from './regionpage/RegionPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './component/header';
 import Main from './mainpage/main/main';
@@ -21,6 +22,7 @@ function App() {
           {/* <Route path="/chlidfamliy" element={<Main />} /> */}
           <Route path='/detail/:id' element={<DetailPage />} />
           <Route path='/search' element={<Search />} />
+          <Route path='/region' element={<RegionPage />} />
           {/* <Route path="/" element={<Test />} /> */}
         </Routes>
       </Suspense>
