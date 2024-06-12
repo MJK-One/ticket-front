@@ -2,10 +2,11 @@ import React, { Suspense, lazy } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './component/header';
-import Main from './mainpage/main/main';
-import DetailPage from './detailpage/DetailPage';
-import Search from './search/search';
-// import Test from './test';
+
+const Main = lazy(() => import('./mainpage/main/main'));
+const Genre = lazy(() => import('./mainpage/genre/genre'));
+const DetailPage = lazy(() => import('./detailpage/DetailPage'));
+const Search = lazy(() => import('./search/search'));
 
 function App() {
   return (
@@ -13,15 +14,13 @@ function App() {
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Main />} /> {/* 기본 경로를 Main 컴포넌트로 설정*/}
-          <Route path="/genre/musicall" element={<Main />} />
-          <Route path="/genre/consert" element={<Main />} />
-          <Route path="/genre/exhibitionevent" element={<Main />} />
-          <Route path="/genre/classic" element={<Main />} />
-          {/* <Route path="/chlidfamliy" element={<Main />} /> */}
-          <Route path='/detail/:id' element={<DetailPage />} />
-          <Route path='/search' element={<Search />} />
-          {/* <Route path="/" element={<Test />} /> */}
+          <Route path="/" element={<Main />} />
+          <Route path="/genre/musicall" element={<Genre />} />
+          <Route path="/genre/consert" element={<Genre />} />
+          <Route path="/genre/exhibitionevent" element={<Genre />} />
+          <Route path="/genre/classic" element={<Genre />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </Suspense>
     </Router>

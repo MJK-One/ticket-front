@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MainTop from '../componet/mainTop'; // MainTop import 추가
 import Sitemenu from './sitemenu';
 import './genre.css';
-import { getgenre, getTop10ByGenre } from '../../api/connect';
+import { getGenre, getTop10ByGenre } from '../../api/connect';
 import { useLocation } from 'react-router-dom';
 
 function Genre() {
@@ -35,7 +35,7 @@ function Genre() {
                 let topResult = [];
                 const genre = getGenreFromPath(location.pathname);
                 if (genre) {
-                    result = await getgenre(genre); // 특정 장르 데이터 호출
+                    result = await getGenre(genre); // 특정 장르 데이터 호출
                     topResult = await getTop10ByGenre(genre); // 특정 장르의 상위 10개 데이터 호출
                 } 
                 setTickets(result); // 결과를 tickets 상태에 저장
