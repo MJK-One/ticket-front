@@ -17,8 +17,8 @@ export default function Monthticket({ monthTickets }) {
       </div>
       <div className='monthticket-arrange'>
         {monthTickets.map(ticket => (
-          <Link to={`/detail/${ticket.id}`}>
-          <div className='monthticket' key={ticket.id}>
+          <Link to={`/detail/${ticket.id}`} key={ticket.id}>
+            <div className='monthticket'>
               <div className='monthticket-img'>
                 <img src={ticket.image_url} alt={`${ticket.event_name} 이미지`} />
               </div>
@@ -26,15 +26,17 @@ export default function Monthticket({ monthTickets }) {
                 <div className='open-Timer2'>
                   <div className='Timer-banner2'>OPEN</div>
                   <div className='Timer-day2'>{calculateDateDifference(ticket.ticket_open_date)}</div>
-                  {
-                    ticket.pre_sale_date !== null ? <div className='pre-banner2'>선예매</div> : null
-                  }
+                  {ticket.pre_sale_date !== null ? <div className='pre-banner2'>선예매</div> : null}
                 </div>
                 <div className='title'>{ticket.event_name}</div>
                 <div className='day'>{moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>      
-                <div className='tic-site'><img src={getImageForSite(ticket.sales_site)} alt={ticket.sales_site} /></div>
+                <div className='tic-site'>
+                  {ticket.eventSites.map(site => (
+                    <img src={getImageForSite(site.sales_site)} alt={site.sales_site} key={site.id} />
+                  ))}
+                </div>
               </div>
-          </div>
+            </div>
           </Link>
         ))}
       </div>      
