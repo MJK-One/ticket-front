@@ -20,7 +20,7 @@ export default function Monthticket({ monthTickets }) {
           <Link to={`/detail/${ticket.id}`} key={ticket.id}>
             <div className='monthticket'>
               <div className='monthticket-img'>
-                <img src={ticket.image_url} alt={`${ticket.event_name} 이미지`} />
+                <img src={ticket.image_url || "/img/normal_poster.png"} alt={`${ticket.event_name} 이미지`} />
               </div>
               <div className='monthticket-info'>
                 <div className='open-Timer2'>

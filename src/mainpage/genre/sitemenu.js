@@ -59,7 +59,7 @@ return(
                   <div className='openticket' key={ticket.id}>
                       <Link to={`/detail/${ticket.id}`}>
                           <div className='openticket-img'>
-                              <img src={ticket.image_url} alt={`${ticket.event_name} 이미지`} />
+                              <img src={ticket.image_url || "/img/normal_poster.png"} alt={`${ticket.event_name} 이미지`} />
                           </div>
                           <div className='openticket-info'>
                               <div className='open-Timer'>

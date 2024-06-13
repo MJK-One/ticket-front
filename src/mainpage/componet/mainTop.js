@@ -34,7 +34,7 @@ export default function MainTop({ top10Tickets }) {
       top10Tickets.forEach(ticket => {
         const img = new Image();
         img.crossOrigin = "Anonymous"; // CORS 문제를 피하기 위해 설정
-        img.src = ticket.image_url;
+        img.src = ticket.image_url || "/img/normal_poster.png";
         img.onload = () => {
           const canvas = document.createElement('canvas');
           canvas.width = img.width;
@@ -94,7 +94,7 @@ export default function MainTop({ top10Tickets }) {
             <Link to={`/detail/${tticket.id}`}>
               <div className='poster'>
                 <div className='poster-img'>
-                  <img src={tticket.image_url} alt={`${tticket.event_name} 이미지`} />
+                  <img src={tticket.image_url || "/img/normal_poster.png"} alt={`${tticket.event_name} 이미지`} />
                 </div>
                 <div className='poster-info' style={{ color: isSmallScreen ? textColors[tticket.id] : 'inherit' }}>
                   <div className='poster-info-cl'>{tticket.genre}</div>
