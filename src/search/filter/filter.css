@@ -6,26 +6,34 @@
 }
 
 /*filterContainer*/
-.filterContainer {
+.filterContainer:first-child {
     border-top: none;
     padding-top: 0.15rem;
+}
+
+.filterContainer:last-child {
     padding-bottom: 1.5rem;
 }
 
 .filterContainer {
     position: relative;
+    padding-bottom: 0.8rem;
+    border-top: 0.08rem solid #dadee3;
     box-sizing: border-box;
 }
 
 /*filterHeader*/
 .filterHeader {
     padding: 1.0rem 1.25rem 0;
-    width: 20rem;
+    width: 18.5rem;
     margin: 0 auto;
 
 }
 
 /*filterToggleBtn*/
+.filterToggleBtn {
+    cursor: pointer;
+}
 .filterToggleBtn::after {
     background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_sideToggle.png');
     background-repeat: no-repeat;
@@ -44,6 +52,7 @@
     background-position: 0 -0.54rem;
 }
 
+/*filterTitle*/
 .filterTitle {
     font-size: 0.9rem;
     font-weight: bold;
@@ -68,6 +77,35 @@
 
 .is-toggled .selectedData {
     display: block;
+}
+
+/*menu btn*/
+.filterMenu {
+    padding: 1.0rem 1.25rem 0;
+    width: 18.5rem;
+    margin: 0 auto;
+}
+
+.filterMenu .filterBtn {
+    cursor: pointer;
+    font-size: normal;
+    font-weight: 700;
+    text-align: center;
+    background-color: #fff;
+    border: 0.08rem solid #e8e8e8;
+
+    margin-right: 0.5rem;
+    margin-bottom: 0.7rem;
+    padding: 0 0.75rem;
+    height: 1.6rem;
+    border-radius: 1.6rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+.filterMenu .filterBtn.is-active {
+    background-color: #b9d8ff;
+    color: #0368e5;
+    border-color: #0368e5;
 }
 
 /*Calendar*/
