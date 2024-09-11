@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './main.css';
 import MainTop from '../componet/mainTop';
-import Monthticket from './monthticket';
+import RegionPage from '../../regionpage/RegionPage';
+// import Monthticket from './monthticket';
 import Ticketlist from '../componet/ticketlist';
 import { getMonth, getTop10, getAllList } from '../../api/connect';
 
@@ -50,8 +51,11 @@ function Main() {
             <section className='maintop'>
                 <MainTop top10Tickets={top10Tickets} />
             </section> 
-            <section className='ticket-month'>
+            {/* <section className='ticket-month'>
                 <Monthticket monthTickets={monthTickets} />
+            </section> */}
+            <section className='ticket-region'>
+                <RegionPage></RegionPage>
             </section>
             <section className='ticket-list'>
                 <Ticketlist allTickets={allTickets} lastTicketElementRef={lastTicketElementRef} />

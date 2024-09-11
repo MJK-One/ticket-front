@@ -10,14 +10,17 @@
     display: flex;
     justify-content: center;
 }
-.ticket-month {
+.ticket-region {
+    margin-top: 20px;
+}
+/* .ticket-month {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center; 
-}
+} */
 .ticket-list {
-    margin-top: 60px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center; 

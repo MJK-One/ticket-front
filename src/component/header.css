@@ -10,7 +10,6 @@ button {
   border: none;
   cursor: pointer;
 }
-@media screen and (min-width: 1001px) {
   .App-header {
     display: flex;
     flex-direction: column;
@@ -41,34 +40,98 @@ button {
     gap: 40px;
     margin-right: 20px;
   }
-
   .header-search {
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
     position: relative;
     width: 100%;
-    max-width: 452px;
+    max-width: 1000px;
+    z-index : 20;
   }
-  .search-form {
-    width: 100%;
+  .location-form {
+    width: 20%;
     height: 50px;
     background: #fff;
-    border-radius: 25px;
+    border-radius: 25px 0 0 25px;
     position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
     border: 1px solid rgba(0, 0, 0, .15);
+    z-index: 1;
   }
-  .search-form input{
+  .location-form form {
+    display: flex;
+    margin-left: 10px;
+    z-index: 1;
+  }
+  .location-form img {
+    width : 25px;
+    height: 25px;
+  }
+  .location-form div {
+    margin: 3px;
+  }
+  .l-title {
+    font-weight: 600;
+    color : #0368e5;
+  }
+  .l-result {
+    font-weight: 600;
+  }
+  .month-form {
+    width: 30%;
+    height: 50px;
+    background: #fff;
+    border-radius: 0;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, .15);
+    z-index: 1;
+  }
+  .month-form form {
+    margin-left: 10px;
+    display: flex;
+    z-index: 1;
+  }
+  .month-form img {
+    width : 25px;
+    height: 25px;
+  }
+  .month-form div {
+    margin: 3px;
+  }
+  .m-title {
+    color : #0368e5;
+    font-weight: 600;
+  }
+  .m-result {
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 1px;
+  }
+  .search-form {
+    width: 50%;
+    height: 50px;
+    background: #fff;
+    border-radius: 0 25px 25px 0;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, .15);
+    z-index: 1;
+  }
+  
+  .search-form input {
     height: 18px;
     flex: 1;
     margin-left: 16px;
     font-style: normal;
     font-weight: 700;
-    /* font-size: 15px; */
     line-height: 18px;
     display: flex;
     align-items: center;
@@ -78,6 +141,7 @@ button {
     outline: none;
     width: 100%;
   }
+  
   .search-btn {
     display: flex;
     flex-direction: column;
@@ -88,6 +152,103 @@ button {
     padding: 0;
   }
   
+  .l-search-filter {
+    width: 370px;
+    height: 280px;
+    background: #fff;
+    border-radius: 0 0 25px 25px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    position: absolute;
+    top: 20px;
+    z-index: 0;
+    padding-top : 40px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .location-label {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 중앙 정렬 */
+    height : 20px;
+    width: 60px; /* 고정 너비 */
+    margin: 5px 5px; /* 위아래 여백 */
+    padding: 10px; /* 안쪽 여백 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 커서 포인터로 변경 */
+    transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+  }
+  .location-label:hover {
+    background-color: #f0f0f0; /* 호버시 배경색 변화 */
+  }
+  /* 선택된 라벨의 스타일 */
+  .location-label.active {
+    background-color: #007bff; /* 선택된 라벨의 배경색을 파란색으로 설정 */
+    color: white; /* 텍스트 색상 변경 */
+  }
+  .hidden-radio {
+    display: none; /* 라디오 버튼 숨기기 */
+  }
+
+  .m-search-filter {
+    height: 340px;
+    background: #fff;
+    border-radius: 0 0 25px 25px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    position: absolute;
+    top: 20px;
+    z-index: 0;
+    padding-top : 40px;
+  }
+  .m-search-stend {
+    display: flex;
+    width : 80%;
+    height: 50px;
+  }
+  .start-m {
+    margin-left: 10px;
+    width : 100%;
+  }
+  .end-m {
+    margin-left: 80px;
+  }
+  .m-reset-btn {
+    font-size: 600;
+    position: absolute;
+    bottom: 10px;
+    height : 40px;
+    width: 70px; /* 고정 너비 */
+    margin: 5px 5px; /* 위아래 여백 */
+    padding: 10px; /* 안쪽 여백 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 커서 포인터로 변경 */
+    transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+  }
+  .m-reset-btn:hover {
+    color: white;
+    background-color: hsl(0, 100%, 50%); /* 호버시 배경색 변화 */
+  }
+  .m-search-btn {
+    font-size: 600;
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+    height : 40px;
+    width: 60px; /* 고정 너비 */
+    margin: 5px 5px; /* 위아래 여백 */
+    padding: 10px; /* 안쪽 여백 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 커서 포인터로 변경 */
+    transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+  }
+  .m-search-btn:hover {
+    color: white;
+    background-color: #007bff; /* 호버시 배경색 변화 */
+  }
   .header-bottom {
     display: flex;
     flex-direction: row;
@@ -168,9 +329,9 @@ button {
     height: 15px;
     background-color: #ddd;
   }
-}
+
 /*--------768px 미만------------*/
-@media screen and (max-width: 1000px) {
+/* @media screen and (max-width: 1000px) {
   .App-header {
     display: flex;
     flex-direction: column;
@@ -189,7 +350,7 @@ button {
     margin-top : 10px;
   }
   .logo-img {
-    width: 80px; /* 조정할 수 있음 */
+    width: 80px; 
     height: auto;
   }
   .header-search {
@@ -274,4 +435,4 @@ button {
     text-decoration-line: none;
     color : black;
   }
-}
+} */

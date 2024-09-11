@@ -44,13 +44,13 @@ const RegionPage =  () => {
     }, [region, status]);
 
 
-    if(status === 'loading') {
-        return <div>Loading...</div>;
-    }
+    // if(status === 'loading') {
+    //     return <div>Loading...</div>;
+    // }
 
-    if(status === 'failed') {
-        return <div>Error: {error}</div>;
-    }
+    // if(status === 'failed') {
+    //     return <div>Error: {error}</div>;
+    // }
 
     return (
         <div id="region-mainContainer">

@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import './App.css';
 import RegionPage from './regionpage/RegionPage';
+import MonthPage from './monthpage/monthpage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './component/header';
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/detail/:id" element={<DetailPage />} />
           <Route path="/search" element={<Search />} />
           <Route path='/region' element={<RegionPage />} />
+          <Route path='/month' element={<MonthPage />} />
         </Routes>
       </Suspense>
     </Router>
