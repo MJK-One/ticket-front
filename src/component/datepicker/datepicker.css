@@ -16,6 +16,11 @@
     color: #fff !important;
 }
 
+.datepicker .picked-btw {
+    background: #a2ccff;
+    color: #fff !important;
+}
+
 /*Calendar*/
 .Calendar {
     display: block;

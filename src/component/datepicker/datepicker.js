@@ -50,25 +50,77 @@ const DatePicker = ({ onDateChange }) => {
   }
 
   //날짜 str
-  let calYear = calendar.pickDate.getFullYear();
-  let calMonthnn = ("0" + (calendar.pickDate.getMonth() + 1)).slice(-2)
-  let calDaynn = ("0" + calendar.pickDate.getDate()).slice(-2);
-  let calWkday = DAY_LIST[calendar.pickDate.getDay()];
-
-  const finalDateStr = `${calYear}.${calMonthnn}.${calDaynn} (${calWkday})`;
+  const [finalDateStr, setFinalDateStr] = useState("전체"); //최종 날짜 문자열, 초기값: "전체"(미선택)
+  
   useEffect(() => {
+    const pickFDate = calendar.pickFirstDate;
+    const pickSDate = calendar.pickSecDate;
+
+    if(pickFDate && pickSDate){ //기간이 선택된 경우
+      //첫 번째 날짜 문자열
+      let calFYear = pickFDate.getFullYear();
+      let calFMonthnn = ("0" + (pickFDate.getMonth() + 1)).slice(-2);
+      let calFDaynn = ("0" + pickFDate.getDate()).slice(-2);
+  
+      //두 번째 날짜 문자열
+      let calSYear = pickSDate.getFullYear();
+      let calSMonthnn = ("0" + (pickSDate.getMonth() + 1)).slice(-2);
+      let calSDaynn = ("0" + pickSDate.getDate()).slice(-2);
+  
+      if(pickFDate.setHours(0, 0, 0, 0) < pickSDate.setHours(0, 0, 0, 0)){ //첫번째 날짜가 두 번째 날짜보다 이전 날짜
+        //최종 문자열
+        setFinalDateStr(`${calFYear}.${calFMonthnn}.${calFDaynn} ~ ${calSYear}.${calSMonthnn}.${calSDaynn}`);
+  
+      } else { //첫 번째 날짜가 두 번째 날짜 이후 날짜
+        //최종 문자열
+        setFinalDateStr(`${calSYear}.${calSMonthnn}.${calSDaynn} ~ ${calFYear}.${calFMonthnn}.${calFDaynn}`);
+      }
+  
+    } else if(pickFDate){ //날짜가 선택된 경우
+      //첫 번째 날짜 문자열
+      let calFYear = pickFDate.getFullYear();
+      let calFMonthnn = ("0" + (pickFDate.getMonth() + 1)).slice(-2);
+      let calFDaynn = ("0" + pickFDate.getDate()).slice(-2);
+  
+      setFinalDateStr(`${calFYear}.${calFMonthnn}.${calFDaynn}`);
+    } else {
+      setFinalDateStr("전체");
+    }
+  
     onDateChange(finalDateStr);
-  }, [calendar.pickDate]);
+
+  }, [calendar.pickFirstDate, calendar.pickSecDate, onDateChange, finalDateStr]);
+
 
     /* 이벤트 함수 설정 */
+  // 현재 달력 연도, 달
+  const calYear = calendar.pointDate.getFullYear();
+  const calMonthnn = ("0" + (calendar.pointDate.getMonth() + 1)).slice(-2);
+
   //날짜 클릭 함수
   const checkDate = (day) => { //날짜 선택
     //클릭한 날짜 yyyy-MM-dd로
-    let ckDatestr = calYear + "-" + calMonthnn + "-" + ("0" + day).slice(-2);
-    let ckDate = new Date(ckDatestr);
+    const ckDatestr = calYear + "-" + calMonthnn + "-" + ("0" + day).slice(-2);
+    const ckDate = new Date(ckDatestr);
 
-    //캘린더 날짜 바꾸기
-    calendar.setPickdate(ckDate);
+    if(calendar.pickState === 0){ //이전 상태가 미선택(0)
+      calendar.setPickFirstdate(ckDate); //날짜 선택
+      calendar.setPickState(1); //상태 > 날짜 선택
+    } else if(calendar.pickState === 1){ //이전 상태가 날짜 선택(1)
+      if(ckDate.setHours(0, 0, 0, 0) === calendar.pickFirstDate.setHours(0, 0, 0, 0)){ //같은 날짜 선택 시
+        //초기화
+        calendar.setPickFirstdate(null);
+        calendar.setPickState(0); //상태 > 미선택
+      } else { //다른 날짜 선택 시
+        calendar.setPickSecdate(ckDate);
+        calendar.setPickState(2); //상태 > 기간 선택
+      }
+
+    } else { //이전 상태가 기간 선택(2)
+      calendar.setPickSecdate(null);
+      calendar.setPickFirstdate(ckDate);
+      calendar.setPickState(1); //상태 > 날짜 선택
+    }
   };
 
 
@@ -82,7 +134,7 @@ const DatePicker = ({ onDateChange }) => {
                     <li className={`month-prev ${calendar.isPrevMonthDisabled ? 'disabled' : ''}`}
                         onClick={() => {
                         if(!calendar.isPrevMonthDisabled){
-                            calendar.setPickdate(subMonths(calendar.pickDate, 1));
+                            calendar.setPointDate(subMonths(calendar.pointDate, 1));
                         }
                         }}>
                         ‹
@@ -91,7 +143,7 @@ const DatePicker = ({ onDateChange }) => {
                     <li className={`month-next ${calendar.isNextMonthDisabled ? 'disabled' : ''}`}
                         onClick={() => {
                         if(!calendar.isNextMonthDisabled){
-                            calendar.setPickdate(subMonths(calendar.pickDate, -1));
+                            calendar.setPointDate(subMonths(calendar.pointDate, -1));
                         }
                         }}>
                         ›

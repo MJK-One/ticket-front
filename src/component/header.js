@@ -83,46 +83,10 @@ function Header() {
   };
 
   // 날짜별 필터
-  const [isToggledContainer, setIsToggledContainer] = useState(false); // toggle
+  const [calendarDateValue, setCalendarDateValue] = useState("전체");
 
-  const toggleContainerHandler = () => {
-    setIsToggledContainer(!isToggledContainer);
-  };
-
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [result, setResult] = useState('YYYY.MM.DD.');
-
-  // 날짜 선택 핸들러
-  const handleStartDateChange = (newDate) => {
-    setStartDate(newDate);
-  };
-
-  const handleEndDateChange = (newDate) => {
-    setEndDate(newDate);
-  };
-
-  // 초기화 핸들러
-  const handleReset = () => {
-  setResult('YYYY.MM.DD.');
-  };
-
-  // 적용 버튼 클릭 핸들러
-  const handleApply = () => {
-    updateResult(startDate, endDate);
-  };
-
-  const updateResult = (start, end) => {
-    if (start && end) {
-      const formattedStart = new Date(start).toLocaleDateString('ko-KR');
-      const formattedEnd = new Date(end).toLocaleDateString('ko-KR');
-      setResult(`${formattedStart}~${formattedEnd}`);
-      if(formattedStart === formattedEnd) {
-        setResult(`${formattedStart}`);
-      }
-    } else {
-      setResult('YYYY.MM.DD.');
-    }
+  const handleDateChange = (newDate) => {
+    setCalendarDateValue(newDate);
   };
   
   // 컴포넌트 마운트 시 이벤트 리스너 추가
@@ -137,6 +101,8 @@ function Header() {
   const handleSearchInputChange = (event) => {
     setSearchValue(event.target.value);
   };
+
+
     return (
         <div className="App">
           <header className="App-header">
@@ -169,46 +135,25 @@ function Header() {
                         </div>
                       )}
                       <div className="month-form" onClick={toggleMonthSearchFilter}>
-                        <form>
+                        <div className="month-input">
                           <img className="m-logo-img" alt="" src="/img/month.png" />
                           <div className="m-title">날짜</div>
-                          <div className="m-result">{result}</div> {/* 결과 값 표시 */}
-                        </form>
+                          <div className="m-result">{calendarDateValue}</div> {/* 결과 값 표시 */}
+                        </div>
                       </div>
                       {isMonthFilterVisible && (
                         <div className="m-search-filter">
                           <div className="m-search-stend">
-                            <div className="start-m">
-                              <div className="start-title">시작 날짜</div>
-                              <div className={`filterContainer ContainerBottom ${isToggledContainer ? "is-toggled" : null}`}>
-                                <div className='filterHeader'>
-                                  <a className='filterToggleBtn' role='button' onClick={toggleContainerHandler}>
-                                    <div className='selectedData'>
-                                      <span className='blind'>선택된 일자:</span>
-                                      <span className='date'>{startDate}</span>
-                                    </div>
-                                  </a>
+                            <div className="m-s-filterContainer">
+                              <div className='m-s-filterHeader'>
+                                <div className='selectedData blind'>
+                                  <span className='blind'>선택된 일자:</span>
+                                  <span className='blind'>{calendarDateValue}</span>
                                 </div>
-                                <DatePicker onDateChange={handleStartDateChange} />
                               </div>
-                            </div>
-                            <div className="end-m">
-                              <div className="end-title">마지막 날짜</div>
-                              <div className={`filterContainer ContainerBottom ${isToggledContainer ? "is-toggled" : null}`}>
-                                <div className='filterHeader'>
-                                  <a className='filterToggleBtn' role='button' onClick={toggleContainerHandler}>
-                                    <div className='selectedData'>
-                                      <span className='blind'>선택된 일자:</span>
-                                      <span className='date'>{endDate}</span>
-                                    </div>
-                                  </a>
-                                </div>
-                                <DatePicker onDateChange={handleEndDateChange} />
-                              </div>
+                              <DatePicker onDateChange={handleDateChange} />
                             </div>
                           </div>
-                          <button className="m-reset-btn" onClick={handleReset}>초기화</button>
-                          <button className="m-search-btn" onClick={handleApply}>적용</button>
                         </div>
                       )}
                       <div className="search-form">
