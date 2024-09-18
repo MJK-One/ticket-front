@@ -1,3 +1,5 @@
+@import './filterFont.css';
+
 .filter {
     width: 21rem;
     margin: 0 auto;
@@ -108,7 +110,38 @@
     border-color: #0368e5;
 }
 
+.is-toggled .filterMenu {
+    display: none;
+}
+
 /*Calendar*/
 .is-toggled .Calendar {
     display: none;
+}
+
+/* submit, reset 버튼 */
+.filterBtnsWrap {
+    width: 21rem;
+    margin: 0 auto;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.search-f-reset-btn, .search-f-submit-btn {
+    font-family: 'LINESeedKR-Bd';
+    font-size: 0.9rem;
+    width: 10rem;
+    height: 3rem;
+    border: 0.08rem solid #a4a4a4;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.search-f-reset-btn {
+    background-color: #fff;
+    margin-right: 0.5rem;
+}
+.search-f-submit-btn {
+    background-color: #5693e0;
+    font-weight: bold;
+    color: #fff;
 }
