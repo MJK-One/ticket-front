@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, redirect, useLocation } from 'react-router-dom';
 import './header.css';
 
@@ -72,15 +72,83 @@ function Header() {
     }
   };
 
-  //지역별 필터
-  const locations = ['전체', '서울', '인천', '경기', '강원', '충청남도', '충청북도', '세종',
-    '대전', '전라북도', '전라남도', '광주', '경상북도', '경상남도', '대구', '울산', '부산', '제주도']; // 지역 배열
-  const [selectedLocation, setSelectedLocation] = useState('전체');
-  const handleLocationChange = (event) => {
-    const newLocation = event.target.value;
-    setSelectedLocation(newLocation);
-    console.log(newLocation); // 클릭한 위치 값 확인
+  // 지역별 필터
+    // active 지역 useState
+  const [isActiveRegion, setIsActiveRegion] = useState({
+    Seoul: false,
+    Gyeonggi: false,
+    Incheon: false,
+    Gangwon: false,
+    Schungcheong: false,
+    Nchungcheong: false,
+    Sejong: false,
+    Daejeon: false,
+    Sgyeongsang: false,
+    Ngyeongsang: false,
+    Daegu: false,
+    Ulsan: false,
+    Busan: false,
+    Sjeolla: false,
+    Njeolla: false,
+    Gwangju: false,
+    Jeju: false
+  });
+
+    // 클릭시 useState 반전(on-off)
+  const ActiveRegionHandler = (region) => {
+    setIsActiveRegion((prevState) => ({
+      ...prevState,
+      [region]: !prevState[region]
+    }));
   };
+
+  const ResetRegionsHandler = () => {
+    setIsActiveRegion(prevState => 
+      Object.fromEntries(
+        Object.entries(prevState).map(([region, _]) => [region, false])
+      )
+    );
+  };
+
+    // 지역 배열
+  const regions = [{value: "서울", class: "Seoul"}, {value: "경기", class: "Gyeonggi"},
+    {value: "인천", class: "Incheon"}, {value: "강원", class: "Gangwon"},
+    {value: "충청북도", class: "Nchungcheong"}, {value: "충청남도", class: "Schungcheong"},
+    {value: "세종", class: "Sejong"}, {value: "대전", class: "Daejeon"},
+    {value: "경상북도", class: "Ngyeongsang"}, {value: "경상남도", class: "Sgyeongsang"},
+    {value: "대구", class: "Daegu"}, {value: "울산", class: "Ulsan"},
+    {value: "전라북도", class: "Njeolla"}, {value: "전라남도", class: "Sjeolla"},
+    {value: "부산", class: "Busan"}, {value: "광주", class: "Gwangju"},
+    {value: "제주", class: "Jeju"}
+  ];
+  
+  
+    // 선택 지역 배열, string
+      // 배열
+  const [selectedLocation, setSelectedLocation] = useState([]);
+  useEffect(() => {
+    const selectedRegions = regions
+      .filter(item => isActiveRegion[item.class])
+      .map(item => item.value); //선택된 지역 배열
+    setSelectedLocation(selectedRegions);
+  }, [isActiveRegion]);
+
+    // string: '(첫번째 지역) 외 N개 지역'으로 표기 예정
+  const [selectedLocationStr, setSelectedLocationStr] = useState("전체");
+  useEffect(() => {
+    if(selectedLocation.length > 0){ //선택된 지역이 1개 이상이라면
+      const firstLocation = selectedLocation[0]; //첫번째 선택 지역
+      const overLocationLength = selectedLocation.length - 1; //외 지역 개수
+      if(overLocationLength > 0){ //선택 지역 2개 이상
+        setSelectedLocationStr(`${firstLocation} 외 ${overLocationLength}개 지역`);
+      } else { //선택 지역 1개
+        setSelectedLocationStr(firstLocation);
+      }
+    } else { //선택 지역이 없다면
+      setSelectedLocationStr("전체");
+    }
+  }, [selectedLocation]);
+  
 
   // 날짜별 필터
   const [calendarDateValue, setCalendarDateValue] = useState("전체");
@@ -112,26 +180,34 @@ function Header() {
                   <Link to="/" className="linksty"><img className="logo-img" alt="" src="/img/TOW.png" /></Link></div>
                   <div className="header-search">
                       <div className="location-form" onClick={toggleLocationSearchFilter}>
-                        <form>
-                        <img className="l-logo-img" alt="" src="/img/map.png" />
-                        <div className="l-title">지역</div>
-                        <div className="l-result">{selectedLocation}</div>
-                        </form>
+                        <div className="location-input">
+                          <img className="l-logo-img" alt="" src="/img/map.png" />
+                          <div className="l-title">지역</div>
+                          <div className="l-result">{selectedLocationStr}</div>
+                        </div>
                       </div>
                       {isLocationFilterVisible && (
                         <div className="l-search-filter">
-                          {locations.map((location) => (
-                              <label key={location} className={`location-label ${selectedLocation === location ? 'active' : ''}`}>
-                                  <input
-                                      type="radio"
-                                      value={location}
-                                      checked={selectedLocation === location}
-                                      onChange={handleLocationChange}
-                                      className="hidden-radio"
-                                  />
-                                  {location}
-                              </label>
-                          ))}
+                          <div className="location-label-wrap">
+                            {regions.map((region) => (
+                                <label key={region.class} className={`location-label ${isActiveRegion[region.class] ? 'active' : ''}`}>
+                                    <input
+                                        type="checkbox"
+                                        value={region.value}
+                                        onChange={() => ActiveRegionHandler(region.class)}
+                                        className="hidden-ckbox"
+                                    />
+                                    {region.value}
+                                </label>
+                            ))}
+                          </div>
+                          
+                          <div className="l-reset-btn-wrap">
+                            <button onClick={ResetRegionsHandler} className="l-reset-btn">
+                              선택 초기화
+                            </button>
+                          </div>
+
                         </div>
                       )}
                       <div className="month-form" onClick={toggleMonthSearchFilter}>
