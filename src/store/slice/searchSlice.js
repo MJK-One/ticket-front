@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 //초기 상태 설정
 const initialState = {
     search: {
-        genreFilter: [{}],      // 장르 필터 상태
-        regionFilter: [{}],     // 지역 필터 상태
+        genreFilter: [],      // 장르 필터 상태
+        regionFilter: [],     // 지역 필터 상태
         period: "전체",             // 날짜 필터 상태
         searchKeyword: ''       // 검색어 상태
     }
@@ -33,8 +33,8 @@ const searchSlice = createSlice({
         },
         // 검색 필터 모두 초기화
         clearFilters: (state) => {
-            state.search.genreFilter = [{}];
-            state.search.regionFilter = [{}];
+            state.search.genreFilter = [];
+            state.search.regionFilter = [];
             state.search.period = "전체";
             state.search.searchKeyword = '';
         }
