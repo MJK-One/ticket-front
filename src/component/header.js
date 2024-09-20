@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, redirect, useLocation } from 'react-router-dom';
+import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setRegionFilter, setPeriod, setSearchKeyword } from '../store/slice/searchSlice.js';
 import './header.css';
 
 import DatePicker from '../component/datepicker/datepicker.js';
@@ -72,6 +74,13 @@ function Header() {
     }
   };
 
+  // slice 선언
+  const dispatch = useDispatch();
+  const searchSlice = useSelector((state) => state.searchs.search);
+
+  // navigate
+  const navigate = useNavigate();
+
   // 지역별 필터
     // active 지역 useState
   const [isActiveRegion, setIsActiveRegion] = useState({
@@ -94,7 +103,7 @@ function Header() {
     Jeju: false
   });
 
-    // 클릭시 useState 반전(on-off)
+    // 클릭시 지역 useState 반전(on-off)
   const ActiveRegionHandler = (region) => {
     setIsActiveRegion((prevState) => ({
       ...prevState,
@@ -170,6 +179,33 @@ function Header() {
     setSearchValue(event.target.value);
   };
 
+  // isActiveRegion 업데이트: searchSlice.regionFilter 값이 변경될 때마다
+  useEffect(() => {
+    const updatedActiveRegion = {};
+
+    regions.forEach(region => { // 해당하는 값이 있으면 true, 없으면 false
+      updatedActiveRegion[region.class] = searchSlice.regionFilter.includes(region.value);
+    });
+
+    setIsActiveRegion(updatedActiveRegion);
+  }, [searchSlice.regionFilter]);
+
+  // searchValue 업데이트: searchSlice.searchKeyword 값이 변경될 때마다
+  useEffect(() => {
+    setSearchValue(searchSlice.searchKeyword);
+  }, [searchSlice.searchKeyword])
+
+
+  // submit 버튼 핸들러
+  const headerSearchSubmitHandler = () => {
+    // slice 제어
+    dispatch(setRegionFilter(selectedLocation)); // 지역 필터
+    dispatch(setPeriod(calendarDateValue)); // 날짜 필터
+    dispatch(setSearchKeyword(searchValue)); // 검색어
+
+    navigate("/search");
+  };
+
 
     return (
         <div className="App">
@@ -236,11 +272,9 @@ function Header() {
                         <input gtm-label="검색창" type="text" placeholder="검색창"
                         value={searchValue}
                         onChange={handleSearchInputChange}/>
-                        <Link to="/search">
-                          <button className="search-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20"><path stroke="#3A3A3A" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.6" d="m17.875 17.877-4.607-4.607c-.462-.462-1.198-.56-1.729-.197-1.345.943-3.084 1.356-4.92.943-2.26-.5-4.087-2.328-4.588-4.587A6.157 6.157 0 0 1 8.23 1.876c3.045.098 5.638 2.534 5.923 5.56.079.844-.02 1.66-.245 2.416l-.295.726"></path></svg>
-                          </button>
-                        </Link>  
+                        <button className="search-btn" onClick={headerSearchSubmitHandler}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20"><path stroke="#3A3A3A" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.6" d="m17.875 17.877-4.607-4.607c-.462-.462-1.198-.56-1.729-.197-1.345.943-3.084 1.356-4.92.943-2.26-.5-4.087-2.328-4.588-4.587A6.157 6.157 0 0 1 8.23 1.876c3.045.098 5.638 2.534 5.923 5.56.079.844-.02 1.66-.245 2.416l-.295.726"></path></svg>
+                        </button>  
                       </div>
                   </div>
                 </div>

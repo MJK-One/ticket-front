@@ -5,7 +5,7 @@ const initialState = {
     search: {
         genreFilter: [{}],      // 장르 필터 상태
         regionFilter: [{}],     // 지역 필터 상태
-        period: '',             // 날짜 필터 상태
+        period: "전체",             // 날짜 필터 상태
         searchKeyword: ''       // 검색어 상태
     }
   };
@@ -35,7 +35,7 @@ const searchSlice = createSlice({
         clearFilters: (state) => {
             state.search.genreFilter = [{}];
             state.search.regionFilter = [{}];
-            state.search.period = '';
+            state.search.period = "전체";
             state.search.searchKeyword = '';
         }
     }

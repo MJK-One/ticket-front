@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setGenreFilter, setRegionFilter, setPeriod } from '../../store/slice/searchSlice.js';
 import DatePicker from '../../component/datepicker/datepicker.js';
 import './filter.css';
 
 const Filter = () => {
+  // slice 선언
+  const dispatch = useDispatch();
+  const searchSlice = useSelector((state) => state.searchs.search);
+
+  // navigate
+  const navigate = useNavigate();
+
   /*
     toggle 기능이 있는 Container에 필요한 변수, 이벤트 함수 설정
    */
@@ -72,9 +82,9 @@ const Filter = () => {
   /*
     장르
    */
-  const filterGenre = [{value: "뮤지컬/연극", class: "Musical"},
+  const filterGenre = [{value: "뮤지컬연극", class: "Musical"},
     {value: "콘서트", class: "Concert"},
-    {value: "전시/행사", class: "Exh"},
+    {value: "전시행사", class: "Exh"},
     {value: "클래식", class: "Classic"}
   ];
   const filterGenreBtns = filterGenre.map(item => (
@@ -173,6 +183,30 @@ const Filter = () => {
   };
 
   /*
+  searchSlice 변경에 따른 업데이트
+   */
+  // isActiveGenre 업데이트: searchSlice.genreFilter 값이 변경될 때마다
+  useEffect(() => {
+    const updatedActiveGenre = {};
+    filterGenre.forEach(genre => { // 해당하는 값이 있으면 true, 없으면 false
+      updatedActiveGenre[genre.class] = searchSlice.genreFilter.includes(genre.value);
+    });
+    setIsActiveGenre(updatedActiveGenre);
+  }, [searchSlice.genreFilter]);
+
+  // isActiveRegion 업데이트: searchSlice.regionFilter 값이 변경될 때마다
+  useEffect(() => {
+    const updatedActiveRegion = {};
+
+    filterRegion.forEach(region => { // 해당하는 값이 있으면 true, 없으면 false
+      updatedActiveRegion[region.class] = searchSlice.regionFilter.includes(region.value);
+    });
+
+    setIsActiveRegion(updatedActiveRegion);
+  }, [searchSlice.regionFilter]);
+
+
+  /*
   필터 버튼
   */
   const ResetBtnHandler = () => { //필터 리셋 버튼
@@ -191,8 +225,14 @@ const Filter = () => {
 
     //달력 리셋은 복잡할 것 같아서 나중에 시간나면 하겠음.
   };
-  const SubmitBtnHandler = () => { //필터 적용 버튼
 
+  const SubmitBtnHandler = () => { //필터 적용 버튼
+    //slice 제어
+    dispatch(setGenreFilter(selectedGenre)); //장르 필터
+    dispatch(setRegionFilter(selectedRegion)); //지역 필터
+    dispatch(setPeriod(calendarDateValue)); //날짜 필터
+
+    navigate("/search");
   };
 
   //return

@@ -1,5 +1,6 @@
 import { subMonths } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { DAY_LIST , useDatepicker } from './datepickerSetting.js';
 import './datepicker.css';
 
@@ -122,6 +123,33 @@ const DatePicker = ({ onDateChange }) => {
       calendar.setPickState(1); //상태 > 날짜 선택
     }
   };
+
+  /*
+  redux
+   */
+  const searchSlice = useSelector((state) => state.searchs.search);
+  // 달력 상태 업데이트: searchSlice.period 값이 변경될 때마다
+  useEffect(() => {
+    const sepPeriod = searchSlice.period.split(" ~ "); // 기간인지 아닌지 구분
+    if(sepPeriod.length === 2){ //기간이라면
+      calendar.setPickFirstdate(new Date(sepPeriod[0]));
+      calendar.setPickSecdate(new Date(sepPeriod[1]));
+      calendar.setPickState(2); //상태 > 기간 선택
+    } else if(sepPeriod.length === 1){ //"전체" or 단일 날짜
+      if(sepPeriod[0] === "전체"){
+        //초기화
+        calendar.setPickFirstdate(null);
+        calendar.setPickSecdate(null);
+        calendar.setPickState(0); //상태 > 미선택
+      } else { //단일 날짜
+        calendar.setPickFirstdate(new Date(sepPeriod[0]));
+        calendar.setPickSecdate(null);
+        calendar.setPickState(1); //상태 > 날짜 선택
+      }
+    } else {
+      console.log("error");
+    }
+  }, [searchSlice.period]);
 
 
   //return

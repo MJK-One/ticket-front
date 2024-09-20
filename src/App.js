@@ -1,8 +1,10 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import './App.css';
 import RegionPage from './regionpage/RegionPage';
 import MonthPage from './monthpage/monthpage';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { clearFilters } from './store/slice/searchSlice';
 import Header from './component/header';
 
 const Main = lazy(() => import('./mainpage/main/main'));
@@ -15,6 +17,7 @@ function App() {
     <Router>
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
+        <ClearFiltersOnNavigation /> {/* 위치 변화 감지용 컴포넌트 */}
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/genre/musicall" element={<Genre />} />
@@ -29,6 +32,21 @@ function App() {
       </Suspense>
     </Router>
   );
+}
+
+//
+function ClearFiltersOnNavigation() {
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // 페이지가 '/search가 아니면 slice 초기화'
+    if (location.pathname !== '/search') {
+      dispatch(clearFilters());
+    }
+  }, [location, dispatch]);
+
+  return null;
 }
 
 export default App;
