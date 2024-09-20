@@ -193,7 +193,12 @@ function Header() {
   // searchValue 업데이트: searchSlice.searchKeyword 값이 변경될 때마다
   useEffect(() => {
     setSearchValue(searchSlice.searchKeyword);
-  }, [searchSlice.searchKeyword])
+  }, [searchSlice.searchKeyword]);
+
+  // 달력 off가 기본이라, 날짜를 수동으로 업데이트
+  useEffect(() => {
+    setCalendarDateValue(searchSlice.period);
+  },[searchSlice.period])
 
 
   // submit 버튼 핸들러
