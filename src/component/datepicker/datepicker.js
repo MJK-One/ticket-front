@@ -127,7 +127,7 @@ const DatePicker = ({ onDateChange }) => {
   /*
   redux
    */
-  const searchSlice = useSelector((state) => state.searchs.search);
+  const searchSlice = useSelector((state) => state.searchs.searchParams);
   // 달력 상태 업데이트: searchSlice.period 값이 변경될 때마다
   useEffect(() => {
     const sepPeriod = searchSlice.period.split(" ~ "); // 기간인지 아닌지 구분

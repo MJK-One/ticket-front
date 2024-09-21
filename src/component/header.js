@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setRegionFilter, setPeriod, setSearchKeyword } from '../store/slice/searchSlice.js';
+import { fetchSearchData, resetCurPage, resetAllSearchResult, setRegionFilter, setPeriod, setSearchKeyword } from '../store/slice/searchSlice.js';
 import './header.css';
 
 import DatePicker from '../component/datepicker/datepicker.js';
@@ -76,7 +76,7 @@ function Header() {
 
   // slice 선언
   const dispatch = useDispatch();
-  const searchSlice = useSelector((state) => state.searchs.search);
+  const searchSlice = useSelector((state) => state.searchs.searchParams);
 
   // navigate
   const navigate = useNavigate();
@@ -198,17 +198,21 @@ function Header() {
   // 달력 off가 기본이라, 날짜를 수동으로 업데이트
   useEffect(() => {
     setCalendarDateValue(searchSlice.period);
-  },[searchSlice.period])
-
+  },[searchSlice.period]);
+  
 
   // submit 버튼 핸들러
   const headerSearchSubmitHandler = () => {
-    // slice 제어
-    dispatch(setRegionFilter(selectedLocation)); // 지역 필터
-    dispatch(setPeriod(calendarDateValue)); // 날짜 필터
-    dispatch(setSearchKeyword(searchValue)); // 검색어
+      // 이전 검색 결과 초기화
+      dispatch(resetCurPage());
+      dispatch(resetAllSearchResult());
 
-    navigate("/search");
+      // slice 제어
+      dispatch(setRegionFilter(selectedLocation)); // 지역 필터
+      dispatch(setPeriod(calendarDateValue)); // 날짜 필터
+      dispatch(setSearchKeyword(searchValue)); // 검색어
+
+      navigate("/search");
   };
 
 

@@ -1,88 +1,88 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { API_SERVER_HOST } from '../../api/connect';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import calculateDateDifference from '../../mainpage/componet/calculateDateDifference';
+import getImageForSite from '../../mainpage/componet/getImageForSite';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchSearchData, setUpCurPage, resetCurPage, setAllSearchResult, resetAllSearchResult } from '../../store/slice/searchSlice';
 import './ticketlist.css'
-import axios from 'axios';
 
 function Ticektlist() {
-    // slice 선언
-    const searchSlice = useSelector((state) => state.searchs.search);
+    // dispatch
+    const dispatch = useDispatch();
 
-    // 페이지 변수
-    const [curPageNum, setCurPageNum] = useState(0); //현재 페이지 번호
-    const [totalPageNum, setTotalPageNum] = useState(0); //전체 페이지 수
+    // selecter
+    const searchParams = useSelector((state) => state.searchs.searchParams); // 검색 파라미터
+    const searchCurPage = useSelector((state) => state.searchs.curPage); // 현재 검색 페이지
+    const searchResults = useSelector((state) => state.searchs.searchResults); // 검색 결과 배열
+    const totalElements = useSelector((state) => state.searchs.totalElements); // 검색 데이터 총 개수
+    const totalPages = useSelector((state) => state.searchs.totalPages); // 검색 데이터 총 페이지 수
+    const status = useSelector((state) => state.searchs.status); // 로딩 상태
+    const error = useSelector((state) => state.searchs.error); // 에러
 
-    // 총 결과 데이터 개수
-    const [totalDataNum, setTotalDataNum] = useState(0);
-
-    // slice 변경 사항 있을 시 업데이트
-    useEffect(() => {
-        // 검색 파라미터 설정
-        const searchParams = {
-            genreFilter: searchSlice.genreFilter, // 장르
-            regionFilter: searchSlice.regionFilter, //지역
-            period: searchSlice.period, // 공연 기간
-            searchKeyword: searchSlice.searchKeyword, //검색어
-            pageNum: curPageNum
-        };
-
-        async function getSearchData() {
-            try {
-                const response = await axios.post(`${API_SERVER_HOST}/getSearchData`, searchParams);
-                const { content, totalElements, totalPages } = response.data;
-    
-                // 받은 데이터를 처리하는 로직 추가
-                console.log("검색 결과:", content);
-                console.log("총 데이터 개수:", totalElements);
-                console.log("총 페이지 수:", totalPages);
-                setTotalDataNum(totalElements);
-                setTotalPageNum(totalPages);
-            } catch (error) {
-                console.error("에러: ", error);
-            }
-        }
-
-        getSearchData();
-    }, [searchSlice, curPageNum]);
+    // 페이지 데이터
+    const allResults = useSelector((state) => state.searchs.allSearchResults); // 전체 검색 결과
 
     // 정렬 방식 선택
     const [selectedSorting, setSelectedSorting] = useState("popular");
     const sortClickHandler = (sorting) => {
         setSelectedSorting(sorting);
     };
-    
-    //
-    const [ticketArray, setTicketArray] = useState([...Array(8)]); // 배열의 상태와, 그 상태를 업데이트 할 함수를 정의합니다.
-    const [showButton, setShowButton] = useState(true); // 버튼 표시 여부의 상태와, 그 상태를 업데이트 할 함수를 정의합니다.
 
-    // 버튼 클릭 이벤트 핸들러입니다.
-    const handleClick = () => {
-        setTicketArray([...Array(16)]); // 배열의 크기를 16으로 변경합니다.
-        setShowButton(false); // 버튼을 숨깁니다.
+    useEffect(() => {
+        const params = {
+            genreFilter: searchParams.genreFilter,
+            regionFilter: searchParams.regionFilter,
+            period: searchParams.period,
+            searchKeyword: searchParams.searchKeyword,
+            pageNum: 0,
+          };
+      
+          // 검색 결과 불러오기
+          dispatch(fetchSearchData(params));
+    },[searchParams]);
+
+    // 검색 결과 변경시 전체 결과 업데이트
+    useEffect(() => {
+        if(status === 'succeeded') {
+            // 페이지 번호가 0
+            if(searchCurPage === 0) {
+                dispatch(setAllSearchResult(searchResults));
+            } else {
+                const newArr = allResults.concat(searchResults);
+                dispatch(setAllSearchResult(newArr)) // 기존 데이터에 새로운 데이터 추가
+            }
+        }
+    }, [searchResults]);
+
+    // '더보기' 버튼 핸들러
+    const loadMoreHandler = () => {
+        if(searchCurPage < totalPages) {
+            const nextPage = searchCurPage + 1;
+
+            // 검색 파라미터 설정
+            const params = {
+                genreFilter: searchParams.genreFilter, // 장르
+                regionFilter: searchParams.regionFilter, //지역
+                period: searchParams.period, // 공연 기간
+                searchKeyword: searchParams.searchKeyword, //검색어
+                pageNum: nextPage //현재 페이지 번호
+            };
+
+            // 검색 데이터 불러오기
+            dispatch(fetchSearchData(params));
+            // 페이지 번호 증가
+            dispatch(setUpCurPage());
+        }
     };
 
-    //데이터
-    const tickets = [
-        {
-          id: 1,
-          timer: 'D-1 12:00',
-          title: '오픈티켓 제목 1',
-          date: '2024.4.10',
-        },
-        {
-          id: 2,
-          timer: 'D-2 15:00',
-          title: '오픈티켓 제목 2',
-          date: '2024.4.11',
-        },
-      ];
-
+    //
     return (
         <div className='ticketlist'>
             <div className='tl-top-wrap'>
                 <div className='tl-t-wrap'>
                     <div class="tl-t">티켓오픈</div>
-                    <div className='tl-st' key={'tl-subTitle'}>{`(${totalDataNum})`}</div>
+                    {status === 'succeeded' && <div className='tl-st' key={'tl-subTitle'}>{`(${totalElements})`}</div>}
                 </div>
                 <ul className='tl-sort-ul' key={'tl-sort-ul'}>
                     <li className={`tl-sort-li ${selectedSorting === "popular" ? "selected" : null}`}
@@ -99,26 +99,55 @@ function Ticektlist() {
             </div>
             
             <div class="tl-con">
-                <div className='s-openticket-arrange'>
-                    {ticketArray.map((value, index) => {  
-                        return (  
-                            <div className='s-openticket' key={index}>
-                                <div className='s-openticket-img'>
-                                    이미지
-                                </div>
-                                <div className='s-openticket-info'>
-                                    <div className='s-open-Timer'>
-                                        <div className='s-Timer-banner'>OPEN</div>
-                                        <div className='s-Timer-day'>D-1</div>
-                                    </div>
-                                    <div className='s-title'>오픈티켓 제목</div>
-                                    <div className='s-day'>2024.4.10</div>
-                                </div>
-                            </div>  
-                        );  
-                    })}
-                </div>  
-                {showButton && <button className="s-tl-plus" id="tl-plus" onClick={handleClick}>티켓오픈 더보기</button>}
+                {status === 'loading' && (
+                    <div className='s-openticket-arrange'>
+                        <div>loading...</div>
+                    </div>
+                )}
+                {status === 'failed' && (
+                    <div className='s-openticket-arrange'>
+                        <div>error: {error}</div>
+                    </div>
+                )}
+                {(status === 'succeeded' && totalElements === 0) && (
+                    <div className='s-openticket-arrange'>
+                        <div>결과 없음</div>
+                    </div>
+                )}
+                {(status === 'succeeded' && totalElements !== 0) && (
+                    <div className='s-openticket-arrange'>
+                        {allResults.map((ticket, index) => {
+                            return (  
+                                <div className='s-openticket' key={ticket.id}>
+                                    <Link to={`/detail/${ticket.id}`}>
+                                        <div className='s-openticket-img'>
+                                            <img src={ticket.image_url || "/img/normal_poster.png"} alt={`${ticket.event_name} 이미지`} />
+                                        </div>
+                                        <div className='s-openticket-info'>
+                                            <div className='s-open-Timer'>
+                                                <div className='s-Timer-banner'>OPEN</div>
+                                                <div className='s-Timer-day'>{calculateDateDifference(ticket.ticket_open_date)}</div>
+                                                {ticket.pre_sale_date !== null ? <div className='pre-banner'>선예매</div> : null}
+                                            </div>
+                                            <div className='s-title'>{ticket.event_name}</div>
+                                            <div className='s-day'>{moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>
+                                            <div className='s-tic-site2'>
+                                                {ticket.eventSites.map(site => (
+                                                    <img src={getImageForSite(site.sales_site)} alt={site.sales_site} key={site.id} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div> 
+                            );  
+                        })}
+                    </div>
+                )}  
+                {(status === 'succeeded' && searchCurPage < totalPages - 1) && (
+                    <button className="s-tl-plus" id="tl-plus" onClick={loadMoreHandler}>
+                        {`티켓오픈 더보기 (${searchCurPage + 1}/${totalPages - 1})`}
+                    </button>
+                )}
             </div>
         </div>
     ); 

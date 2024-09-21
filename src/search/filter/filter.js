@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setGenreFilter, setRegionFilter, setPeriod } from '../../store/slice/searchSlice.js';
+import { fetchSearchData, resetCurPage, resetAllSearchResult, setGenreFilter, setRegionFilter, setPeriod } from '../../store/slice/searchSlice.js';
 import DatePicker from '../../component/datepicker/datepicker.js';
 import './filter.css';
 
 const Filter = () => {
   // slice 선언
   const dispatch = useDispatch();
-  const searchSlice = useSelector((state) => state.searchs.search);
+  const searchSlice = useSelector((state) => state.searchs.searchParams);
 
   // navigate
   const navigate = useNavigate();
@@ -227,12 +227,16 @@ const Filter = () => {
   };
 
   const SubmitBtnHandler = () => { //필터 적용 버튼
-    //slice 제어
-    dispatch(setGenreFilter(selectedGenre)); //장르 필터
-    dispatch(setRegionFilter(selectedRegion)); //지역 필터
-    dispatch(setPeriod(calendarDateValue)); //날짜 필터
+      // 이전 검색 결과 초기화
+      dispatch(resetCurPage());
+      dispatch(resetAllSearchResult());
 
-    navigate("/search");
+      //slice 제어
+      dispatch(setGenreFilter(selectedGenre)); //장르 필터
+      dispatch(setRegionFilter(selectedRegion)); //지역 필터
+      dispatch(setPeriod(calendarDateValue)); //날짜 필터
+  
+      navigate("/search");
   };
 
   //return
