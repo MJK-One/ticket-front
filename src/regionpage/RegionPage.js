@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { resetCurPage, resetAllSearchResult, setRegionFilter } from '../store/slice/searchSlice';
 import { fetchRegion } from '../store/slice/regionSlice';
 
 import KoreaMap from '../component/koreaMap/koreaMap';
@@ -9,6 +10,9 @@ import './RegionPage.css';
 const RegionPage =  () => {
     //전역 상태
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    // region slice
     const status = useSelector((state) => state.regions.status);
     const error = useSelector((state) => state.regions.error);
     const click = useSelector((state) => state.regions.click);
@@ -42,6 +46,20 @@ const RegionPage =  () => {
             setRegionItemList(newRegionList);
         }
     }, [region, status]);
+
+    // submit 이벤트 함수
+    const SubmitRegionHandler = () => {
+        // 이전 검색 결과 초기화
+        dispatch(resetCurPage());
+        dispatch(resetAllSearchResult());
+
+        const region = [click];
+
+        //slice 제어
+        dispatch(setRegionFilter(region)); //지역 필터
+
+        navigate("/search");
+    };
 
 
     // if(status === 'loading') {
@@ -91,7 +109,7 @@ const RegionPage =  () => {
                     </div>
 
                     <div className="rightBoxBottom">
-                        <button className="regionGoBtn">지역별 공연 전체보기</button>
+                        <button className="regionGoBtn" onClick={SubmitRegionHandler}>지역별 공연 전체보기</button>
                     </div>
                     
                 </div>
