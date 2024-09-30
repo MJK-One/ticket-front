@@ -1,0 +1,70 @@
+.register-header {
+    height : 100px;
+    width : 100%;
+    border-bottom: 2px solid #ddd;
+}
+.register-header a {
+    position: absolute;
+    top : 30px;
+    left: 15%;
+    width: 151px;
+    height: 38px;
+}
+.register-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40vh; /* 화면 전체 높이를 사용 */
+}
+.register-one-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size : 28px;
+    font-weight: bold;
+}
+.register-one button {
+    margin-top : 15px;
+    width : 600px;
+    height : 60px;
+    border-radius: 15px;
+    background-color: #1769ff;
+    color : white;
+    font-size: 18px;
+    font-weight: bold;
+}
+.snsRegister {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2.0rem;
+}
+.snsRegister ul {
+    margin: 0;
+    padding: 0;
+    padding: 0 1.2rem;
+    display: flex; 
+}
+.snsRegister li {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 1rem; 
+}
+.snsRegister .kakaologin{
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    border : none;
+    background-color: #fedd35;
+}
+.snsRegister .naverlogin {
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    border : none;
+    background-color: #1ec800;
+}

@@ -11,12 +11,15 @@ const Main = lazy(() => import('./mainpage/main/main'));
 const Genre = lazy(() => import('./mainpage/genre/genre'));
 const DetailPage = lazy(() => import('./detailpage/DetailPage'));
 const Search = lazy(() => import('./search/search'));
+const Login = lazy(() => import('./login/login'));
+const Register = lazy(() => import('./login/register'));
+const RegisterOne = lazy(() => import('./login/registerone'));
 
 function App() {
   return (
     <Router>
-      <Header />
       <Suspense fallback={<div>Loading...</div>}>
+        <HeaderWithConditionalRendering />
         <ClearFiltersOnNavigation /> {/* 위치 변화 감지용 컴포넌트 */}
         <Routes>
           <Route path="/" element={<Main />} />
@@ -28,13 +31,29 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path='/region' element={<RegionPage />} />
           <Route path='/month' element={<MonthPage />} />
+          <Route path="/login" element={<Login />} /> 
+          <Route path="/register" element={<Register />} />
+          <Route path="registerone" element={<RegisterOne/>} />
         </Routes>
       </Suspense>
     </Router>
   );
 }
 
-//
+function HeaderWithConditionalRendering() {
+  const location = useLocation();
+  
+  // 로그인 페이지와 회원가입 페이지, 개인 회원가입 페이지 Header를 표시하지 않음
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/registerone';
+
+  return (
+    <>
+      {!isAuthPage && <Header />} 
+    </>
+  );
+}
+
+// 위치 변화 감지용 컴포넌트
 function ClearFiltersOnNavigation() {
   const location = useLocation();
   const dispatch = useDispatch();

@@ -1,0 +1,78 @@
+.registerone-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top : 40px;
+}
+.registerone-input-box {
+    height: 80px;
+}
+.registerone-input {
+    position: relative; 
+    display: table;
+    position: relative;
+    width : 450px;
+    height : 30px;
+    border-bottom: 1px solid;
+    padding : 8px;
+}
+.registerone-input .input-line {
+    display: flex;
+    align-items: center;
+    width:100%;
+    padding: 10px 0 5px 0;
+}
+.registerone-input label {
+    font-size: 18px;
+    font-weight: 700;
+    margin-left : 10px;
+    white-space: nowrap;
+}
+.registerone-input input {
+    font-size : 15px;
+    border : none;
+    width: 100%; 
+    flex-grow: 1;
+    margin : 0 10px 0 10px;
+}
+.registerone-input input:focus {
+    outline:none;
+}
+.registerone-input button{
+    margin-left: 10px; 
+    cursor: pointer; 
+    background: none; 
+    border: none; 
+    color: #000; 
+    white-space: nowrap;
+}
+.register-pw-look:hover {
+    color : #ddd;
+}
+.register-check {
+    display: block; 
+    color: orange;
+    margin-left: 10px; 
+    display: none;
+}
+.register-check.visible {
+    display: inline;
+}
+.registerone-input select {
+    border: 0;
+    font-size: 16px;
+    color: #666;
+    margin-left: 10px; 
+    flex-shrink: 0;
+}
+.register-submit {
+    margin-top: 20px;
+    width : 100%;
+    height : 50px;
+    background-color: #1769ff;
+    border-radius: 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}

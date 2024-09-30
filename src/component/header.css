@@ -15,13 +15,26 @@ button {
     flex-direction: column;
     border-bottom: 1px solid rgba(0, 0, 0, .08);
   }
+  .header-first{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 30px;
+    padding: 20px 100px;
+    box-sizing: border-box;
+  }
+  .h-t-mypage{
+    margin-left : 30px;
+  }
   .header-top {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100px;
+    height: 60px;
     padding: 0 30px;
     box-sizing: border-box;
   }
@@ -292,6 +305,7 @@ button {
     justify-content: center;
     align-items: center;
     padding: 0 30px;
+    margin-top : 20px;
     width: 100%;
     height: 40px;
     box-sizing: border-box;
@@ -325,7 +339,7 @@ button {
     height: 38px;
     font-style: normal;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 20px;
     line-height: 19px;
     margin-right : 20px;
     position: relative;

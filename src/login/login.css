@@ -1,0 +1,135 @@
+.login-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh; /* 화면 전체 높이를 사용 */
+}
+.login-box {
+    margin-top : 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width : 400px;
+    height : 111px;
+    box-sizing: border-box;
+}
+.login-box div {
+    width : 100%;
+    height : 50%;
+    display: flex;
+}
+.login-box i {
+    margin-left: 10px;
+    margin-top : 15px;
+}
+.login-box input {
+    width : 100%;
+    height : 100%;
+    padding: 1.5rem 3rem;
+    box-sizing: border-box;
+    border : none;
+    background: transparent;
+    font-weight: bold;
+}
+.login-box input:focus {
+    outline:none;
+}
+.login-id-box  {
+    border-radius: 20px 20px 0 0;
+    border : 1px solid #ddd;
+}
+.login-pw-box{
+    border-radius: 0 0 20px 20px;
+    border : 1px solid #ddd;
+}
+.login-box i{
+    position: absolute;
+}
+.login-pw-box {
+    position: relative; 
+}
+.login-box button{
+    background: transparent;
+    border: none; 
+    cursor: pointer; 
+    margin-right : 5px;
+}
+.login-btn {
+    margin-top: 20px;
+    width : 100%;
+    height : 50px;
+    background-color: #1769ff;
+    border-radius: 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+.findlist {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2.0rem;
+}
+.findlist ul {
+    margin: 0;
+    padding: 0;
+    padding: 0 1.2rem;
+    display: flex; 
+}
+.findlist li {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 1rem; 
+    transition: color 0.3s;
+}
+.findlist li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0rem; /* 선의 위치 조정 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px; /* 선의 두께 */
+    height: 20px; /* 선의 높이 */
+    background-color: #ddd; /* 선의 색상 */
+}
+.findlist li:hover a{
+    color: #1769ff; /* 마우스 오버 시 글자 색상 변경 */
+}
+.snslogin{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2.0rem;
+}
+.snslogin ul {
+    margin: 0;
+    padding: 0;
+    padding: 0 1.2rem;
+    display: flex; 
+}
+.snslogin li {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 1rem; 
+}
+.snslogin .kakaologin{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border : none;
+    background-color: #fedd35;
+}
+.snslogin .naverlogin {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border : none;
+    background-color: #1ec800;
+}

@@ -219,6 +219,10 @@ function Header() {
     return (
         <div className="App">
           <header className="App-header">
+              <div className="header-first">
+              <Link to="/login"><div className="h-t-login">로그인</div></Link>
+                <div className="h-t-mypage">마이페이지</div>
+              </div>
               <div className="header-top">
                 <div className="h-t-logo-search">
                   <div className="header-logo">
@@ -298,12 +302,11 @@ function Header() {
                     {/* <CustomLink to="/chlidfamliy">아동/가족</CustomLink> */}
                     {/* <CustomLink to="/detail">디테일</CustomLink> */}
                   </ul>
-                  <div className="menuDivider"></div>
+                  {/* <div className="menuDivider"></div>
                   <ul className="sep-header">
                     <CustomLink to="/region">지역별</CustomLink>
                     <CustomLink to="/month">날짜별</CustomLink>
-                    {/* 월별 완료되면 링크 수정하기 */}
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
           </header>
