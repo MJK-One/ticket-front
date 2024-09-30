@@ -42,3 +42,8 @@ export const getTop10ByGenre = async (genre) => {
     const res = await axios.get(`${API_SERVER_HOST}/top10/${genre}`);
     return res.data;
 };
+
+export const naverLogin = async () => {
+    const res = await axios.get(`${API_SERVER_HOST}/api/naver/login`);
+    return res.data;
+};

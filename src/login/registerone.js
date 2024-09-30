@@ -9,13 +9,16 @@ function RegisterOne() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [emailDomain, setEmailDomain] = useState("direct");
+    const [birthday, setBirthday] = useState("");
+    const [gender, setGender] = useState(""); // 성별 상태 추가
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [isPasswordMatch, setIsPasswordMatch] = useState(true);
     const [isPhoneValid, setIsPhoneValid] = useState(true);
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [emailId, setEmailId] = useState("");
-    const [showRegisterError, setShowRegisterError] = useState(false); // 등록 오류 상태 추가
-    const [isEmailExists, setIsEmailExists] = useState(false); // 이메일 존재 여부 상태
+    const [showRegisterError, setShowRegisterError] = useState(false);
+    const [isEmailExists, setIsEmailExists] = useState(false);
+    const [showBirthError, setShowBirthError] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -35,22 +38,8 @@ function RegisterOne() {
         const inputEmailId = e.target.value;
         setEmailId(inputEmailId);
         setIsEmailValid(validateEmail(inputEmailId, emailDomain));
-        setIsEmailExists(false); // 이메일 입력 시 초기화
+        setIsEmailExists(false);
     };
-
-    // const checkEmailExists = async (email) => {
-    //     try {
-    //         const response = await axios.post('/api/check-email', { email });
-    //         setIsEmailExists(response.data.exists); // 서버 응답에 따라 설정
-    //     } catch (error) {
-    //         console.error("이메일 체크 오류:", error);
-    //     }
-    // };
-    // useEffect(() => {
-    //     if (isEmailValid && emailId) {
-    //         checkEmailExists(emailId);
-    //     }
-    // }, [emailId, isEmailValid]);
 
     const handlePasswordChange = (e) => {
         const inputPassword = e.target.value;
@@ -74,7 +63,7 @@ function RegisterOne() {
     const handlePhoneChange = (e) => {
         const inputPhone = e.target.value;
         setPhoneNumber(inputPhone);
-
+        
         const phonePattern = /^(010[- ]?\d{4}[- ]?\d{4})$/;
         setIsPhoneValid(phonePattern.test(inputPhone));
     };
@@ -92,19 +81,31 @@ function RegisterOne() {
         }
     };
 
+    const handleBirthdayChange = (e) => {
+        const inputBirthday = e.target.value;
+        setBirthday(inputBirthday);
+        
+        const birthPattern = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/;
+        setShowBirthError(!birthPattern.test(inputBirthday));
+    };
+
+    const handleGenderChange = (e) => {
+        setGender(e.target.value);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const isFormValid = emailId.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== "" && phoneNumber.trim() !== "" &&
-                            isEmailValid && isPasswordValid && isPasswordMatch && isPhoneValid;
+        const isFormValid = emailId.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== "" &&
+                            phoneNumber.trim() !== "" && birthday.trim() !== "" && gender.trim() !== "" &&
+                            isEmailValid && isPasswordValid && isPasswordMatch && isPhoneValid && !showBirthError;
 
         if (isFormValid) {
             console.log("가입 완료!");
-            setShowRegisterError(false); // 오류 상태 초기화
-            // 여기에 가입 처리 로직 추가
+            setShowRegisterError(false);
         } else {
             console.log("오류가 있습니다. 모든 필드를 확인하세요.");
-            setShowRegisterError(true); // 오류 상태 설정
+            setShowRegisterError(true);
         }
     };
 
@@ -112,7 +113,6 @@ function RegisterOne() {
     const showConfirmPasswordError = confirmPassword.length >= 2 && !isPasswordMatch;
     const showPhoneError = !isPhoneValid && phoneNumber.length > 0;
     const showEmailError = !isEmailValid && emailId.length > 0;
-
     return (
         <div className="registerone-con">
             <div className="register-header">
@@ -222,6 +222,52 @@ function RegisterOne() {
                         </div>
                     </div>
                     
+                    <div className="registerone-input-box">
+                        <div className="registerone-input">
+                            <div className="input-line">
+                                <label>생년월일</label>
+                                <input 
+                                    type="text" 
+                                    className="register-birthday" 
+                                    placeholder="YYYYMMDD (8자리)" 
+                                    value={birthday} 
+                                    onChange={handleBirthdayChange} 
+                                />
+                            </div>
+                        </div>
+                        <div className={`register-check ${showBirthError ? 'visible' : ''}`}>
+                            올바른 생년월일 형식이 아닙니다. (예: 20001213)
+                        </div>
+                    </div>
+
+                    <div className="registerone-input-box">
+                        <div className="registerone-input-no">
+                            <div className="input-line">
+                                <label className="gender">성별</label>
+                                <div className="registerone-input-gender">
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            value="male" 
+                                            checked={gender === "male"} 
+                                            onChange={handleGenderChange} 
+                                        />
+                                        남성
+                                    </label>
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            value="female" 
+                                            checked={gender === "female"} 
+                                            onChange={handleGenderChange} 
+                                        />
+                                        여성
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <button className="register-submit" type="submit">가입완료</button>
                     <div className={`register-check ${showRegisterError ? 'visible' : ''}`}>
                         다시 확인해주십시오.

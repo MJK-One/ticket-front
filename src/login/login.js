@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import './login.css';
+import { naverLogin } from '../api/connect'; // naverLogin 함수를 import
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false); // 비밀번호 표시 상태
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword); // 상태 토글
+    };
+
+    const handleNaverLogin = async () => {
+        const loginUrl = await naverLogin();
+        window.location.href = loginUrl; // 네이버 로그인 URL로 리다이렉션
     };
 
     return (
@@ -55,18 +61,26 @@ function Login() {
             </form>
             <div className="findlist"> 
                 <ul>
-                    <li>로그인 찾기</li>
+                    <li>아이디 찾기</li>
                     <li>비밀번호 찾기</li>
-                    <li><Link to="/register">회원가입</Link></li>
+                    <li><Link to="/registerone">회원가입</Link></li>
                 </ul>
             </div>
             <div className="snslogin">
                 <ul>
                     <li>
-                        <div className="kakaologin"></div>
+                        <div className="kakaologin">
+                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.519531 8.61196C0.519531 11.4975 2.37093 14.0321 5.1607 15.4739L4.21824 19.0958C4.18323 19.203 4.20964 19.3196 4.28698 19.3991C4.3427 19.4564 4.41616 19.4854 4.48968 19.4854C4.55233 19.4854 4.61492 19.4648 4.66753 19.4221L8.72156 16.6072C9.30482 16.693 9.90582 16.7384 10.5195 16.7384C16.0423 16.7384 20.5195 13.1004 20.5195 8.61196C20.5195 4.12404 16.0423 0.485352 10.5195 0.485352C4.99677 0.485352 0.519531 4.12404 0.519531 8.61196Z" fill="#4E2828"/>
+                            </svg>
+                        </div>
                     </li>
                     <li>
-                        <div className="naverlogin"></div>
+                        <div className="naverlogin" onClick={handleNaverLogin}>
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0619 5.48535V13.0196L9.9945 5.48535H4.51953V20.4187H9.97713V12.8844L15.0446 20.4187H20.5195V5.48535H15.0619Z" fill="white"/>
+                            </svg>
+                        </div>
                     </li>
                 </ul>
             </div>

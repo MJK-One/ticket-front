@@ -12,7 +12,6 @@ const Genre = lazy(() => import('./mainpage/genre/genre'));
 const DetailPage = lazy(() => import('./detailpage/DetailPage'));
 const Search = lazy(() => import('./search/search'));
 const Login = lazy(() => import('./login/login'));
-const Register = lazy(() => import('./login/register'));
 const RegisterOne = lazy(() => import('./login/registerone'));
 
 function App() {
@@ -32,7 +31,6 @@ function App() {
           <Route path='/region' element={<RegionPage />} />
           <Route path='/month' element={<MonthPage />} />
           <Route path="/login" element={<Login />} /> 
-          <Route path="/register" element={<Register />} />
           <Route path="registerone" element={<RegisterOne/>} />
         </Routes>
       </Suspense>
