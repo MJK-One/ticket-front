@@ -16,7 +16,7 @@ const MainTop = () => {
     const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url || "/img/normal_poster.png");//포스터 이미지 링크
     
     const [regDate, setRegDate] = useState(detail.registration_date || "정보 없음"); //등록일
-    const [view, setView] = useState(detail.view_count);
+    const [view, setView] = useState(detail.ticketViews.view_cnt);
 
     //티켓캐스트 하트 버튼 이벤트
     const prdCastNum = 7554; //좋아요 수(하트 버튼)
