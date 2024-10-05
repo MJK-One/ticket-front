@@ -299,6 +299,59 @@ button {
     color: white;
     background-color: #007bff; /* 호버시 배경색 변화 */
   }
+
+
+  /**/
+  .search-result-form {
+    width: 500px;
+    max-width: 500px;
+    background: #fff;
+    border-radius: 0 0 25px 25px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    position: absolute;
+    top: 20px;
+    left: 503px;
+    z-index: 0;
+    padding-top : 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .s-r-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .auto-complete-ul {
+    width: 500px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .auto-complete-li {
+    width: 450px;
+    max-width: 450px;
+    height: 3rem;
+    line-height: 3rem;
+    border-bottom: 1px solid #eee;
+  }
+  .auto-complete-li:last-child {
+    border-bottom: none;
+  }
+  .auto-complete-li > a {
+    display: inline-block;
+    width: 450px;
+    height: 3rem;
+    text-align: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .header-bottom {
     display: flex;
     flex-direction: row;

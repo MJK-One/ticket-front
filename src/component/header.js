@@ -49,16 +49,26 @@ function Header() {
   //필터 교차
   const [isLocationFilterVisible, setLocationFilterVisible] = useState(false);
   const [isMonthFilterVisible, setMonthFilterVisible] = useState(false);
+  const [isAutoSearchFormVisible, setAutoSearchFormVisible] = useState(false);
   const toggleLocationSearchFilter = () => {
     setLocationFilterVisible(!isLocationFilterVisible);
     if (isMonthFilterVisible) {
       setMonthFilterVisible(false); // 월 필터 닫기
+      setAutoSearchFormVisible(false); // 검색 자동 완성 창 닫기
     }
   };
   const toggleMonthSearchFilter = () => {
     setMonthFilterVisible(!isMonthFilterVisible);
     if (isLocationFilterVisible) {
       setLocationFilterVisible(false); // 위치 필터 닫기
+      setAutoSearchFormVisible(false); // 검색 자동 완성 창 닫기
+    }
+  };
+  const toggleSearchForm = () => {
+    setAutoSearchFormVisible(!isAutoSearchFormVisible);
+    if(isAutoSearchFormVisible) {
+      setLocationFilterVisible(false); // 위치 필터 닫기
+      setMonthFilterVisible(false); // 월 필터 닫기
     }
   };
   const handleClickOutside = (event) => {
@@ -66,11 +76,14 @@ function Header() {
     if (
       !event.target.closest('.location-form') &&
       !event.target.closest('.month-form') &&
+      !event.target.closest('.search-form') &&
       !event.target.closest('.l-search-filter') &&
-      !event.target.closest('.m-search-filter')
+      !event.target.closest('.m-search-filter') &&
+      !event.target.closest('.search-result-form')
     ) {
       setLocationFilterVisible(false);
       setMonthFilterVisible(false);
+      setAutoSearchFormVisible(false); // 검색 자동 완성 창 닫기
     }
   };
 
@@ -281,7 +294,7 @@ function Header() {
                           </div>
                         </div>
                       )}
-                      <div className="search-form">
+                      <div className="search-form" onClick={toggleSearchForm}>
                         <input gtm-label="검색창" type="text" placeholder="검색창"
                         value={searchValue}
                         onChange={handleSearchInputChange}/>
@@ -289,6 +302,44 @@ function Header() {
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20"><path stroke="#3A3A3A" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.6" d="m17.875 17.877-4.607-4.607c-.462-.462-1.198-.56-1.729-.197-1.345.943-3.084 1.356-4.92.943-2.26-.5-4.087-2.328-4.588-4.587A6.157 6.157 0 0 1 8.23 1.876c3.045.098 5.638 2.534 5.923 5.56.079.844-.02 1.66-.245 2.416l-.295.726"></path></svg>
                         </button>  
                       </div>
+                      {isAutoSearchFormVisible && (
+                        <div className="search-result-form">
+                          <div className="s-r-container">
+                            <ul className="auto-complete-ul">
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                              <li className="auto-complete-li">
+                                <Link to="/">히히</Link>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      )}
                   </div>
                 </div>
               </div>
