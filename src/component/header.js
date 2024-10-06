@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSearchData, resetCurPage, resetAllSearchResult, setRegionFilter, setPeriod, setSearchKeyword } from '../store/slice/searchSlice.js';
+import { resetCurPage, resetAllSearchResult, setRegionFilter, setPeriod, setSearchKeyword } from '../store/slice/searchSlice.js';
+import { autoComplete } from "../api/connect.js";
 import './header.css';
 
 import DatePicker from '../component/datepicker/datepicker.js';
@@ -50,26 +51,22 @@ function Header() {
   const [isLocationFilterVisible, setLocationFilterVisible] = useState(false);
   const [isMonthFilterVisible, setMonthFilterVisible] = useState(false);
   const [isAutoSearchFormVisible, setAutoSearchFormVisible] = useState(false);
+  
   const toggleLocationSearchFilter = () => {
     setLocationFilterVisible(!isLocationFilterVisible);
-    if (isMonthFilterVisible) {
-      setMonthFilterVisible(false); // 월 필터 닫기
-      setAutoSearchFormVisible(false); // 검색 자동 완성 창 닫기
-    }
+    if (isMonthFilterVisible) { setMonthFilterVisible(false);} // 월 필터 닫기
+    if (isAutoSearchFormVisible) { setAutoSearchFormVisible(false);} // 검색 자동 완성 창 닫기
+
   };
   const toggleMonthSearchFilter = () => {
     setMonthFilterVisible(!isMonthFilterVisible);
-    if (isLocationFilterVisible) {
-      setLocationFilterVisible(false); // 위치 필터 닫기
-      setAutoSearchFormVisible(false); // 검색 자동 완성 창 닫기
-    }
+    if (isLocationFilterVisible) { setLocationFilterVisible(false);} // 위치 필터 닫기
+    if (isAutoSearchFormVisible) { setAutoSearchFormVisible(false);} // 검색 자동 완성 창 닫기
   };
   const toggleSearchForm = () => {
     setAutoSearchFormVisible(!isAutoSearchFormVisible);
-    if(isAutoSearchFormVisible) {
-      setLocationFilterVisible(false); // 위치 필터 닫기
-      setMonthFilterVisible(false); // 월 필터 닫기
-    }
+    if (isLocationFilterVisible) { setLocationFilterVisible(false);} // 위치 필터 닫기
+    if (isMonthFilterVisible) { setMonthFilterVisible(false);} // 월 필터 닫기
   };
   const handleClickOutside = (event) => {
     // 클릭한 영역이 필터가 아닐 경우 두 필터 모두 닫기
@@ -188,9 +185,38 @@ function Header() {
   }, []);
 
   const [searchValue, setSearchValue] = useState("");
+  const [autoCompleteComp, setAutoCompleteComp] = useState(null);
   const handleSearchInputChange = (event) => {
     setSearchValue(event.target.value);
   };
+  useEffect(() => {
+    const fetchAutoComplete = async () => {
+      if (searchValue.trim() === "") {
+        setAutoCompleteComp(null); // 검색어가 없으면 자동완성 초기화
+        return;
+      }
+
+      try {
+        const autoCompleteList = await autoComplete(searchValue);
+        if (autoCompleteList && autoCompleteList.length > 0) {
+          setAutoCompleteComp(
+            autoCompleteList.map((item, i) => (
+              <li className="auto-complete-li" key={`auto-cmp-${i}`}>
+                <Link to={`/detail/${item.id}`}>{item.event_name}</Link>
+              </li>
+            ))
+          );
+        } else {
+          setAutoCompleteComp(null);
+        }
+      } catch (error) {
+        console.error("Error fetching autocomplete data:", error);
+        setAutoCompleteComp(null); // 오류가 발생하면 자동완성 초기화
+      }
+    };
+    
+    fetchAutoComplete();
+  },[searchValue]);
 
   // isActiveRegion 업데이트: searchSlice.regionFilter 값이 변경될 때마다
   useEffect(() => {
@@ -306,36 +332,7 @@ function Header() {
                         <div className="search-result-form">
                           <div className="s-r-container">
                             <ul className="auto-complete-ul">
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
-                              <li className="auto-complete-li">
-                                <Link to="/">히히</Link>
-                              </li>
+                              {autoCompleteComp}
                             </ul>
                           </div>
                         </div>
