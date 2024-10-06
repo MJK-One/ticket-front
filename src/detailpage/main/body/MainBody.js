@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import NavInfo from './component/navContent/Info/Info.js';
 import NavPlace from './component/navContent/place/place.js';
+import NavStats from './component/navContent/stats/stats.js';
 
 import './MainBody.css';
 
@@ -45,14 +46,17 @@ const MainBody = () => {
                 <ul className="navList">
                     {hasInfoData && (
                         <li className={`navItem ${activeNav === 'INFO' ? 'is-active' : ''}`}>
-                            <a className="navLink" href="#" onClick={() => navClick('INFO')}>공연정보</a>
+                            <a className="navLink" href="#" onClick={() => navClick('INFO')}>티켓 정보</a>
                         </li>
                     )}
                     {hasPlaceData && (
                         <li className={`navItem ${activeNav === 'PLACE' ? 'is-active' : ''}`}>
-                            <a className="navLink" href="#" onClick={() => navClick('PLACE')}>공연장 정보</a>
+                            <a className="navLink" href="#" onClick={() => navClick('PLACE')}>장소 정보</a>
                         </li>
                     )}
+                    <li className={`navItem ${activeNav === 'STATS' ? 'is-active' : ''}`}>
+                        <a className="navLink" href="#" onClick={() => navClick('STATS')}>관심 통계</a>
+                    </li>
                 </ul>
             </nav>
 
@@ -60,6 +64,7 @@ const MainBody = () => {
             <div>
                 {activeNav === 'INFO' && hasInfoData && <NavInfo />}
                 {activeNav === 'PLACE' && hasPlaceData && <NavPlace />}
+                {activeNav === 'STATS' && <NavStats tid={detail.id} />}
             </div>
 
         </div>

@@ -1,0 +1,93 @@
+.detail {
+    position: relative;
+    padding-bottom: 0 !important;
+}
+
+.detail .content {
+    position: relative;
+    margin: 0 0 6.25rem 0;
+}
+
+.detail .contentTitle {
+    margin-bottom: 1.25rem;
+    line-height: 120%;
+
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/*예매자 통계*/
+.detail .prdStat .statWrap {
+    position: relative;
+    padding: 1.75rem 1.9rem 1.9rem;
+    width: 60%;
+    min-height: 15rem;
+    border-radius: 0.625rem;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail .prdStat .statTitle {
+    display: block;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+    /*statAge*/
+.detail .prdStat .statAge {
+    display: inline-block;
+    width: 30rem;
+    vertical-align: top;
+    box-sizing: border-box;
+    font-size: 0;
+}
+.detail .prdStat .statAge .statAgeBar {
+    font-size: 0;
+    margin-top: 1.875rem;
+}
+.detail .prdStat .statAge .statAgeType {
+    display: inline-block;
+    text-align: center;
+    margin-left: 3rem;
+}
+.detail .prdStat .statAge .statAgeType:first-child {
+    margin-left: 0;
+}
+.detail .prdStat .statAge .statBack {
+    position: relative;
+    width: 2.5rem;
+    height: 4.5rem;
+}
+.detail .prdStat .statAge .statGraph {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    max-height: 5rem;
+    background-color: #5693e0;
+}
+.detail .prdStat .statAge .statGraph::before {
+    position: absolute;
+    top: -1.25rem;
+    /*중앙 정렬*/
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    line-height: 120%;
+    color: #0368e5;
+    font-size: 0.9rem;
+    font-weight: bold;
+    content: attr(data-stat-bar) '%';
+}
+.detail .prdStat .statAge .statAgeName {
+    margin-top: 0.375rem;
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
