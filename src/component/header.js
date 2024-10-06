@@ -64,7 +64,7 @@ function Header() {
     if (isAutoSearchFormVisible) { setAutoSearchFormVisible(false);} // 검색 자동 완성 창 닫기
   };
   const toggleSearchForm = () => {
-    setAutoSearchFormVisible(!isAutoSearchFormVisible);
+    setAutoSearchFormVisible(true);
     if (isLocationFilterVisible) { setLocationFilterVisible(false);} // 위치 필터 닫기
     if (isMonthFilterVisible) { setMonthFilterVisible(false);} // 월 필터 닫기
   };
@@ -202,7 +202,9 @@ function Header() {
           setAutoCompleteComp(
             autoCompleteList.map((item, i) => (
               <li className="auto-complete-li" key={`auto-cmp-${i}`}>
-                <Link to={`/detail/${item.id}`}>{item.event_name}</Link>
+                <Link to={`/detail/${item.id}`} onClick={() => setAutoSearchFormVisible(false)}>
+                  {item.event_name}
+                </Link>
               </li>
             ))
           );
@@ -241,17 +243,25 @@ function Header() {
   
 
   // submit 버튼 핸들러
-  const headerSearchSubmitHandler = () => {
-      // 이전 검색 결과 초기화
-      dispatch(resetCurPage());
-      dispatch(resetAllSearchResult());
+  const headerSearchSubmitHandler = (event) => {
+    event.stopPropagation(); // 이벤트 전파 방지
 
-      // slice 제어
-      dispatch(setRegionFilter(selectedLocation)); // 지역 필터
-      dispatch(setPeriod(calendarDateValue)); // 날짜 필터
-      dispatch(setSearchKeyword(searchValue)); // 검색어
+    // 이전 검색 결과 초기화
+    dispatch(resetCurPage());
+    dispatch(resetAllSearchResult());
 
-      navigate("/search");
+    // slice 제어
+    dispatch(setRegionFilter(selectedLocation)); // 지역 필터
+    dispatch(setPeriod(calendarDateValue)); // 날짜 필터
+    dispatch(setSearchKeyword(searchValue)); // 검색어
+
+    // 검색 필터 및 자동완성 창 닫기
+    setLocationFilterVisible(false);
+    setMonthFilterVisible(false);
+    setAutoSearchFormVisible(false); // search-result-form 닫기
+
+    // 주소 이동
+    navigate("/search");
   };
 
 

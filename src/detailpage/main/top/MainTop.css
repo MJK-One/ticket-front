@@ -201,7 +201,7 @@
 .btnList {
     width: 18.5rem;
     margin-left: 1.5rem;
-    z-index: 99;
+    z-index: 0;
     position: relative;
 }
 

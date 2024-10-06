@@ -345,11 +345,15 @@ button {
     display: inline-block;
     width: 450px;
     height: 3rem;
+    color: #000;
     text-align: center;
 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .auto-complete-li:hover > a {
+    color: #0368e5;
   }
 
   .header-bottom {
