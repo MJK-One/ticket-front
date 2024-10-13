@@ -189,10 +189,21 @@ button {
       left: 503px;
       padding-top : 40px;
     }
+
+    .auto-complete-ul{
+      width: 400px !important;
+    }
+    .auto-complete-li{
+      width: 370px !important;
+      max-width: 370px !important;
+    }
+    .auto-complete-li > a {
+      width: 370px !important;
+    }
   }
 
-  /* 모바일 기본 검색창 css */
-  @media (max-width: 1099px) {
+  /* 모바일 기본 검색창(태블릿) css */
+  @media (max-width: 1099px) and (min-width: 700px) {
     .header-top {
       height: 130px;
       padding-top: 30px;
@@ -272,6 +283,261 @@ button {
     }
   }
 
+  /* 모바일 기본 검색창(스마트폰) css  */
+  @media (max-width: 699px) and (min-width: 370px) {
+    .App-header {
+      font-size: 0.8rem;
+    }
+    .App-header input {
+      font-size: 0.7rem;
+    }
+
+    .logo-img {
+      width : 45px;
+      height : auto;
+    }
+
+    .h-t-logo-search {
+      max-width: 400px;
+      height: 25px;
+    }
+
+    .header-top {
+      height: 70px;
+      padding: 6px;
+    }
+
+    .header-search {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 5px;
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      z-index : 20;
+    }
+
+    .search-wrap {
+      display: flex;
+    }
+    
+    /* form */
+    .location-form {
+      width: 125px !important;
+      min-width: 125px !important;
+      border-radius: 12px 0 0 12px;
+      background: #fff;
+      height: 25px;
+    }
+
+    .l-img-wrap, .m-img-wrap {
+      display: none !important;
+    }
+
+    .location-form div {
+      margin: 1.5px !important;
+    }
+
+    .location-input, .month-input {
+      padding-left: 3px !important;
+    }
+
+    .l-title, .l-result, .m-title, .m-result {
+      line-height: 20px !important;
+    }
+    .l-title, .m-title {
+      min-width: 15px;
+    }
+
+    .month-form {
+      width: 175px !important;
+      min-width: 175px !important;
+      border-radius: 0 12px 12px 0;
+      background: #fff;
+      height: 25px;
+    }
+
+    .month-form div {
+      margin: 1.5px !important;
+    }
+
+    .search-form {
+      width: 300px !important;
+      min-width: 300px !important;
+      border-radius: 12px;
+      background: #fff;
+      height: 25px;
+    }
+    .search-form input {
+      margin-left: 5px !important;
+      border-radius: 12px;
+    }
+
+    /*filter*/
+    .close-btn {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      font-size: 1.5rem;
+    }
+
+    .l-search-filter {
+      border-radius: 12px;
+      width: 300px !important;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -155px; /* width(300) + padding(양쪽 합해서 10)의 절반 */
+      z-index: 99;
+      padding : 40px 5px 5px 5px;
+    }
+    .location-label-wrap {
+      width: 290px !important;
+      margin: 0 auto;
+    }
+
+    .location-label {
+      width: 40px !important;
+      height: 15px !important;
+    }
+    .l-reset-btn {
+      font-size: 0.7rem;
+    }
+
+    .m-search-filter {
+      border-radius: 12px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -155px; /* width(300) + padding(양쪽 합해서 10)의 절반 */
+      z-index: 99;
+      padding: 25px 5px 0 5px;
+    }
+
+    .search-result-form {
+      position: absolute;
+      border-radius: 0 0 12px 12px !important;
+      width: 300px !important;
+      min-width: 300px !important;
+      top: 50px;
+      left: 50%;
+      margin-left: -151px;
+      padding-top : 10px;
+    }
+
+    .search-btn {
+      margin-right: 7px !important;
+    }
+    .search-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .auto-complete-ul{
+      width: 300px !important;
+    }
+    .auto-complete-li{
+      width: 290px !important;
+      max-width: 290px !important;
+    }
+    .auto-complete-li > a {
+      width: 290px !important;
+    }
+
+    /**/
+    .datepicker .month-cur {
+      font-size: 0.85rem !important;
+    }
+  }
+
+  /* 모바일 기본 검색창(작은 스마트폰) css  */
+  @media (max-width: 369px) {
+    .App-header {
+      font-size: 0.8rem;
+    }
+    .App-header input {
+      font-size: 0.7rem;
+    }
+
+    .logo-img {
+      width : 45px;
+      height : auto;
+    }
+
+    .h-t-logo-search {
+      max-width: 350px;
+      height: 25px;
+    }
+
+    .header-top {
+      height: 60px;
+      padding: 6px;
+    }
+
+    .header-search {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 5px;
+      position: relative;
+      width: 100%;
+      max-width: 350px;
+      z-index : 20;
+    }
+
+    .search-wrap {
+      display: flex;
+    }
+    
+    /* form */
+    .search-form {
+      width: 250px !important;
+      min-width: 250px !important;
+      border-radius: 12px;
+      background: #fff;
+      height: 25px;
+    }
+    .search-form input {
+      margin-left: 5px !important;
+      border-radius: 12px;
+    }
+
+    /*filter*/
+    .search-result-form {
+      position: absolute;
+      border-radius: 0 0 12px 12px !important;
+      width: 250px !important;
+      min-width: 250px !important;
+      top: 10px;
+      left: 50%;
+      margin-left: -126px;
+      padding-top : 10px;
+    }
+
+    .search-btn {
+      margin-right: 7px !important;
+    }
+    .search-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .auto-complete-ul{
+      width: 250px !important;
+    }
+    .auto-complete-li{
+      width: 230px !important;
+      max-width: 230px !important;
+    }
+    .auto-complete-li > a {
+      width: 230px !important;
+    }
+
+  }
+
+
+  /**/
   .location-form {
     width: 200px;
     min-width: 200px;
@@ -286,8 +552,14 @@ button {
   }
   .location-form .location-input {
     display: flex;
+    justify-content: center;
     margin-left: 10px;
     z-index: 1;
+  }
+  .l-img-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .location-form img {
     width : 25px;
@@ -299,9 +571,11 @@ button {
   .l-title {
     font-weight: 600;
     color : #0368e5;
+    line-height: 30px;
   }
   .l-result {
     font-weight: 600;
+    line-height: 30px;
   }
   .month-form {
     width: 300px;
@@ -319,6 +593,11 @@ button {
     display: flex;
     z-index: 1;
   }
+  .m-img-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .month-form img {
     width : 25px;
     height: 25px;
@@ -329,11 +608,11 @@ button {
   .m-title {
     color : #0368e5;
     font-weight: 600;
+    line-height: 30px;
   }
   .m-result {
-    font-size: 15px;
     font-weight: 600;
-    padding-top: 1px;
+    line-height: 30px;
   }
   .search-form {
     max-width: 500px;
