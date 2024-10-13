@@ -47,6 +47,16 @@ const RegionPage =  () => {
         }
     }, [region, status]);
 
+    // 화면 크기 체크 함수
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     // submit 이벤트 함수
     const SubmitRegionHandler = () => {
         // 이전 검색 결과 초기화
@@ -61,6 +71,7 @@ const RegionPage =  () => {
         navigate("/search");
     };
 
+    const [isMapVisible, setIsMapVisible] = useState(false);
 
     // if(status === 'loading') {
     //     return <div>Loading...</div>;
@@ -77,12 +88,39 @@ const RegionPage =  () => {
                 <div className="leftBox">
                     <div className='leftBoxTop'>
                         <span className='regionTitle'>{click}</span>
+                        {windowWidth < 1100 && (
+                            <>
+                                {isMapVisible && (
+                                    <button onClick={() => setIsMapVisible(false)} className='regionTitle-btn'>
+                                        ▲
+                                    </button>
+                                )}
+                                {isMapVisible === false && (
+                                    <button onClick={() => setIsMapVisible(true)} className='regionTitle-btn'>
+                                        ▼
+                                    </button>
+                                )}
+                            </>
+                        )}
                     </div>
-                    <div className='leftBoxBottom'>
-                        <div className='mapImg'>
-                            <KoreaMap />
+                    {windowWidth < 1100 ? (
+                        <>
+                            {isMapVisible && (
+                                <div className='leftBoxBottom'>
+                                    <div className='mapImg'>
+                                        <KoreaMap />
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                        
+                    ) : (
+                        <div className='leftBoxBottom'>
+                            <div className='mapImg'>
+                                <KoreaMap />
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 <div className="rightBox">
