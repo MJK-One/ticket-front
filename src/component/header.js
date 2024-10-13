@@ -46,6 +46,8 @@ function CustomLink({ to, children }) {
   );
 }
 
+
+// 헤더(홈화면)
 function Header() {
   //필터 교차
   const [isLocationFilterVisible, setLocationFilterVisible] = useState(false);
@@ -83,12 +85,28 @@ function Header() {
       setAutoSearchFormVisible(false); // 검색 자동 완성 창 닫기
     }
   };
+  // 컴포넌트 마운트 시 이벤트 리스너 추가
+  React.useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  // 화면 크기 체크 함수
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
 
   // slice 선언
   const dispatch = useDispatch();
   const searchSlice = useSelector((state) => state.searchs.searchParams);
-
-  // navigate
   const navigate = useNavigate();
 
   // 지역별 필터
@@ -141,7 +159,6 @@ function Header() {
     {value: "제주", class: "Jeju"}
   ];
   
-  
     // 선택 지역 배열, string
       // 배열
   const [selectedLocation, setSelectedLocation] = useState([]);
@@ -167,7 +184,6 @@ function Header() {
       setSelectedLocationStr("전체");
     }
   }, [selectedLocation]);
-  
 
   // 날짜별 필터
   const [calendarDateValue, setCalendarDateValue] = useState("전체");
@@ -175,15 +191,8 @@ function Header() {
   const handleDateChange = (newDate) => {
     setCalendarDateValue(newDate);
   };
-  
-  // 컴포넌트 마운트 시 이벤트 리스너 추가
-  React.useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
 
+  // 검색어
   const [searchValue, setSearchValue] = useState("");
   const [autoCompleteComp, setAutoCompleteComp] = useState(null);
   const handleSearchInputChange = (event) => {
@@ -265,91 +274,178 @@ function Header() {
   };
 
 
-    return (
-        <div className="App">
-          <header className="App-header">
-              <div className="header-first">
-              <Link to="/login"><div className="h-t-login">로그인</div></Link>
-                <div className="h-t-mypage">마이페이지</div>
-              </div>
-              <div className="header-top">
-                <div className="h-t-logo-search">
-                  <div className="header-logo">
-                  <Link to="/" className="linksty"><img className="logo-img" alt="" src="/img/TOW.png" /></Link></div>
-                  <div className="header-search">
-                      <div className="location-form" onClick={toggleLocationSearchFilter}>
-                        <div className="location-input">
-                          <img className="l-logo-img" alt="" src="/img/map.png" />
-                          <div className="l-title">지역</div>
-                          <div className="l-result">{selectedLocationStr}</div>
+  return (
+      <div className="App">
+        <header className="App-header">
+          {windowWidth >= 1100 && (
+            <div className="header-first">
+            <Link to="/login"><div className="h-t-login">로그인</div></Link>
+              <div className="h-t-mypage">마이페이지</div>
+            </div>
+          )}
+            <div className="header-top">
+              <div className="h-t-logo-search">
+                <div className="header-logo">
+                <Link to="/" className="linksty"><img className="logo-img" alt="" src="/img/TOW.png" /></Link></div>
+                
+                <div className="header-search">
+                  {windowWidth >= 1100 ? (
+                    <div className="search-wrap">
+                      <div className="location-form form" onClick={toggleLocationSearchFilter}>
+                          <div className="location-input">
+                            <img className="l-logo-img" alt="" src="/img/map.png" />
+                            <div className="l-title">지역</div>
+                            <div className="l-result">{selectedLocationStr}</div>
+                          </div>
                         </div>
-                      </div>
-                      {isLocationFilterVisible && (
-                        <div className="l-search-filter">
-                          <div className="location-label-wrap">
-                            {regions.map((region) => (
-                                <label key={region.class} className={`location-label ${isActiveRegion[region.class] ? 'active' : ''}`}>
-                                    <input
-                                        type="checkbox"
-                                        value={region.value}
-                                        onChange={() => ActiveRegionHandler(region.class)}
-                                        className="hidden-ckbox"
-                                    />
-                                    {region.value}
-                                </label>
-                            ))}
-                          </div>
-                          
-                          <div className="l-reset-btn-wrap">
-                            <button onClick={ResetRegionsHandler} className="l-reset-btn">
-                              선택 초기화
-                            </button>
-                          </div>
+                        {isLocationFilterVisible && (
+                          <div className="l-search-filter">
+                            <div className="location-label-wrap">
+                              {regions.map((region) => (
+                                  <label key={region.class} className={`location-label ${isActiveRegion[region.class] ? 'active' : ''}`}>
+                                      <input
+                                          type="checkbox"
+                                          value={region.value}
+                                          onChange={() => ActiveRegionHandler(region.class)}
+                                          className="hidden-ckbox"
+                                      />
+                                      {region.value}
+                                  </label>
+                              ))}
+                            </div>
+                            
+                            <div className="l-reset-btn-wrap">
+                              <button onClick={ResetRegionsHandler} className="l-reset-btn">
+                                선택 초기화
+                              </button>
+                            </div>
 
+                          </div>
+                        )}
+                        <div className="month-form form" onClick={toggleMonthSearchFilter}>
+                          <div className="month-input">
+                            <img className="m-logo-img" alt="" src="/img/month.png" />
+                            <div className="m-title">날짜</div>
+                            <div className="m-result">{calendarDateValue}</div> {/* 결과 값 표시 */}
+                          </div>
                         </div>
-                      )}
-                      <div className="month-form" onClick={toggleMonthSearchFilter}>
-                        <div className="month-input">
-                          <img className="m-logo-img" alt="" src="/img/month.png" />
-                          <div className="m-title">날짜</div>
-                          <div className="m-result">{calendarDateValue}</div> {/* 결과 값 표시 */}
-                        </div>
-                      </div>
-                      {isMonthFilterVisible && (
-                        <div className="m-search-filter">
-                          <div className="m-search-stend">
-                            <div className="m-s-filterContainer">
-                              <div className='m-s-filterHeader'>
-                                <div className='selectedData blind'>
-                                  <span className='blind'>선택된 일자:</span>
-                                  <span className='blind'>{calendarDateValue}</span>
+                        {isMonthFilterVisible && (
+                          <div className="m-search-filter">
+                            <div className="m-search-stend">
+                              <div className="m-s-filterContainer">
+                                <div className='m-s-filterHeader'>
+                                  <div className='selectedData blind'>
+                                    <span className='blind'>선택된 일자:</span>
+                                    <span className='blind'>{calendarDateValue}</span>
+                                  </div>
                                 </div>
+                                <DatePicker onDateChange={handleDateChange} />
                               </div>
-                              <DatePicker onDateChange={handleDateChange} />
                             </div>
                           </div>
+                        )}
+                        <div className="search-form form" onClick={toggleSearchForm}>
+                          <input gtm-label="검색창" type="text" placeholder="검색창"
+                          value={searchValue}
+                          onChange={handleSearchInputChange}/>
+                          <button className="search-btn" onClick={headerSearchSubmitHandler}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20"><path stroke="#3A3A3A" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.6" d="m17.875 17.877-4.607-4.607c-.462-.462-1.198-.56-1.729-.197-1.345.943-3.084 1.356-4.92.943-2.26-.5-4.087-2.328-4.588-4.587A6.157 6.157 0 0 1 8.23 1.876c3.045.098 5.638 2.534 5.923 5.56.079.844-.02 1.66-.245 2.416l-.295.726"></path></svg>
+                          </button>  
                         </div>
-                      )}
-                      <div className="search-form" onClick={toggleSearchForm}>
-                        <input gtm-label="검색창" type="text" placeholder="검색창"
-                        value={searchValue}
-                        onChange={handleSearchInputChange}/>
-                        <button className="search-btn" onClick={headerSearchSubmitHandler}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20"><path stroke="#3A3A3A" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.6" d="m17.875 17.877-4.607-4.607c-.462-.462-1.198-.56-1.729-.197-1.345.943-3.084 1.356-4.92.943-2.26-.5-4.087-2.328-4.588-4.587A6.157 6.157 0 0 1 8.23 1.876c3.045.098 5.638 2.534 5.923 5.56.079.844-.02 1.66-.245 2.416l-.295.726"></path></svg>
-                        </button>  
-                      </div>
-                      {isAutoSearchFormVisible && (
-                        <div className="search-result-form">
-                          <div className="s-r-container">
-                            <ul className="auto-complete-ul">
-                              {autoCompleteComp}
-                            </ul>
+                        {isAutoSearchFormVisible && (
+                          <div className="search-result-form">
+                            <div className="s-r-container">
+                              <ul className="auto-complete-ul">
+                                {autoCompleteComp}
+                              </ul>
+                            </div>
                           </div>
+                        )}
+                    </div>
+                  ):(
+                    <>
+                      <div className="search-wrap">
+                        <div className="location-form form" onClick={toggleLocationSearchFilter}>
+                            <div className="location-input">
+                              <img className="l-logo-img" alt="" src="/img/map.png" />
+                              <div className="l-title">지역</div>
+                              <div className="l-result">{selectedLocationStr}</div>
+                            </div>
+                          </div>
+                          {isLocationFilterVisible && (
+                            <div className="l-search-filter">
+                              <button className="close-btn" onClick={() => setLocationFilterVisible(false)}>×</button>
+                              <div className="location-label-wrap">
+                                {regions.map((region) => (
+                                    <label key={region.class} className={`location-label ${isActiveRegion[region.class] ? 'active' : ''}`}>
+                                        <input
+                                            type="checkbox"
+                                            value={region.value}
+                                            onChange={() => ActiveRegionHandler(region.class)}
+                                            className="hidden-ckbox"
+                                        />
+                                        {region.value}
+                                    </label>
+                                ))}
+                              </div>
+                              
+                              <div className="l-reset-btn-wrap">
+                                <button onClick={ResetRegionsHandler} className="l-reset-btn">
+                                  선택 초기화
+                                </button>
+                              </div>
+
+                            </div>
+                          )}
+                          <div className="month-form form" onClick={toggleMonthSearchFilter}>
+                            <div className="month-input">
+                              <img className="m-logo-img" alt="" src="/img/month.png" />
+                              <div className="m-title">날짜</div>
+                              <div className="m-result">{calendarDateValue}</div> {/* 결과 값 표시 */}
+                            </div>
+                          </div>
+                          {isMonthFilterVisible && (
+                            <div className="m-search-filter">
+                              <div className="m-search-stend">
+                                <div className="m-s-filterContainer">
+                                  <div className='m-s-filterHeader'>
+                                    <div className='selectedData blind'>
+                                      <span className='blind'>선택된 일자:</span>
+                                      <span className='blind'>{calendarDateValue}</span>
+                                    </div>
+                                    <button className="close-btn" onClick={() => setMonthFilterVisible(false)}>×</button>
+                                  </div>
+                                  <DatePicker onDateChange={handleDateChange} />
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                      </div>
+                      <div className="search-wrap">
+                        <div className="search-form form" onClick={toggleSearchForm}>
+                          <input gtm-label="검색창" type="text" placeholder="검색창"
+                          value={searchValue}
+                          onChange={handleSearchInputChange}/>
+                          <button className="search-btn" onClick={headerSearchSubmitHandler}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20"><path stroke="#3A3A3A" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.6" d="m17.875 17.877-4.607-4.607c-.462-.462-1.198-.56-1.729-.197-1.345.943-3.084 1.356-4.92.943-2.26-.5-4.087-2.328-4.588-4.587A6.157 6.157 0 0 1 8.23 1.876c3.045.098 5.638 2.534 5.923 5.56.079.844-.02 1.66-.245 2.416l-.295.726"></path></svg>
+                          </button>  
                         </div>
-                      )}
-                  </div>
+                        {isAutoSearchFormVisible && (
+                          <div className="search-result-form">
+                            <div className="s-r-container">
+                              <ul className="auto-complete-ul">
+                                {autoCompleteComp}
+                              </ul>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
+            </div>
+            {windowWidth >= 1100 && (
               <div className="header-bottom">
                 <div className="h-b-menu">
                   <ul className="normal-header">             
@@ -367,9 +463,11 @@ function Header() {
                   </ul> */}
                 </div>
               </div>
-          </header>
-        </div>
-      );
+            )}
+
+        </header>
+      </div>
+    );
 }
 
 export default Header;
