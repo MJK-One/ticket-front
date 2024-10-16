@@ -45,6 +45,9 @@
 .openticket-info {
     margin-top: 10px;
     width : 180px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 .openticket-info .title {
     margin-top : 5px;
@@ -120,11 +123,12 @@
     margin-bottom: 5px;
 }
 .tic-site2 {
-    width : 30px;
+    width : 100%;
     height : 30px;
 }
 .tic-site2 img {
-    width : 100%;
-    height : 100%;
+    width : 30px;
+    height : 30px;
+    margin-right: 5px;
     border-radius: 10px;
 }

@@ -100,11 +100,11 @@ const MainTop = () => {
             btnClass: "is-interpark",
             btnImgSrc: "/img/other_logo/interpark.png"
         },
-        'Yes24 Ticket': {
+        'Yes24': {
             btnClass: "is-yes24",
             btnImgSrc: "/img/other_logo/yes24ticket.png"
         },
-        'Ticketlink': {
+        'Ticket Link': {
             btnClass: "is-ticketlink",
             btnImgSrc: "/img/other_logo/ticketlink.png"
         }
