@@ -1,0 +1,217 @@
+.mypage {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+}
+
+.mypage-con {
+    display: flex; 
+    justify-content: center; 
+    margin: 30px auto; 
+    width: 100%;
+    max-width: 900px; 
+    height : 150px;
+    border: 1px solid #dddddd;
+    background: #fafafa;
+}
+
+.mypage-info {
+    width: 50%;
+    background: white;
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column;
+    padding: 10px;
+}
+.mypage-info .mypage-email {
+    margin-bottom: 10px; 
+    font-weight: 500;
+    font-size: 30px;
+    margin-left: 10px;
+}
+.mypage-info .mypage-btn {
+    display: flex; /* Flexbox 사용 */
+    justify-content: flex-start; /* 버튼을 왼쪽으로 정렬 */
+}
+.mypage-info button {
+    border: 1px solid #dddddd;
+    background-color: white;
+    font-size: 15px;
+    margin-left: 10px; /* 버튼 간의 간격 */
+}
+
+.mypage-choice {
+    width: 25%;
+    margin: auto;
+    border-right : 1px solid #c5c5c5;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+}
+.mypage-choice .choice-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.mypage-choice .choice-number {
+    font-size : 30px;
+    font-weight: bold;
+}
+
+.mypage-call {
+    width: 25%;
+    margin: auto;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+}
+.mypage-call .call-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.mypage-call .call-number {
+    font-size : 30px;
+    font-weight: bold;
+}
+
+.list-button-con {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    border: 1px solid #dddddd;
+    border-radius: 30px; 
+    width: 100%;
+    padding: 0;
+}
+.choice-btn, .call-btn {
+    border: 3px solid transparent; 
+    border-radius: 30px; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    margin: 0; 
+    z-index: 1; 
+}
+.choice-btn {
+    margin-right: -10px; 
+}
+.choice-btn.active {
+    border-color: #575757;
+    font-weight: 600;
+}
+.call-btn.active {
+    border-color: #575757;
+    font-weight: 600;
+}
+
+.cc-list {
+    margin-top : 20px;
+    border: 1px solid #dddddd;
+    width: 100%;
+    max-width: 900px;
+    min-height : 100px; 
+}
+.choice-ticket {
+    display: flex;
+    margin: 30px;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 20px;
+}
+.cho-img {
+    width : 120px;
+    height : 170px;
+    border : 1px solid #000;
+}
+.cho-info {
+    margin-left : 15px;
+    width : 60%;
+}
+.cho-info-title {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.cho-info-open {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+.cho-info-performance {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+.cho-info-region {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+.cho-info-site {
+    width : 30px;
+    height : 30px;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+.call-cho {
+    display: flex;
+    justify-content: flex-end;
+    width: 20%;
+}
+.cho-tic-call {
+    width : 30px;
+    height : 30px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    margin-left : 10px;
+    margin-right: 10px;
+}
+.cho-tic-cho {
+    width : 30px;
+    height : 30px;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+.call-ticket {
+    display: flex;
+    margin: 30px;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 20px;
+}
+.call-img {
+    width : 120px;
+    height : 170px;
+    border : 1px solid #000;
+}
+.call-info {
+    margin-left : 15px;
+    width : 60%;
+    border-right: 1px solid #dddddd;
+}
+.call-info-title {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.call-info-open {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+.call-option {
+    margin-left: 10px;
+    height: 100%;
+    width : 300px;
+}
+.option-call-btn {
+    width : 30px;
+    height : 30px;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+.call-delete {
+    cursor: pointer;
+    font-size : 19px;
+    font-weight: bold;
+    color : #dddddd;
+}

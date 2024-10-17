@@ -1,3 +1,8 @@
+.register-header {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
 .registerone-box {
     display: flex;
     justify-content: center;

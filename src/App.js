@@ -13,7 +13,7 @@ const DetailPage = lazy(() => import('./detailpage/DetailPage'));
 const Search = lazy(() => import('./search/search'));
 const Login = lazy(() => import('./login/login'));
 const RegisterOne = lazy(() => import('./login/registerone'));
-
+const Mypage = lazy(() => import('./mypage/mypage'));
 function App() {
   return (
     <Router>
@@ -32,6 +32,7 @@ function App() {
           <Route path='/month' element={<MonthPage />} />
           <Route path="/login" element={<Login />} /> 
           <Route path="registerone" element={<RegisterOne/>} />
+          <Route path="/mypage" element={<Mypage/>} />
         </Routes>
       </Suspense>
     </Router>
