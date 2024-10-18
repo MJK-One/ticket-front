@@ -81,33 +81,40 @@
     font-weight: bold;
     margin-bottom: 5px;
 }
-.registerone-input-no {
-    position: relative; 
-    display: table;
-    position: relative;
-    width : 450px;
-    height : 30px;
-    border : none;
-    padding : 8px;
-}
-.registerone-input-no .gender {
+.registerone-input .gender {
     font-size: 18px;
     font-weight: 700;
     margin-left : 10px;
 }
 .registerone-input-gender {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 .registerone-input-gender label {
-    margin-right : 20px;
     font-size: 16px; 
     font-weight: 700;
 }
 
 .registerone-input-gender input {
-    margin-right: 5px;
+    width : 14px;
+    height: 14px;
+}
+
+.registerone-input .age-group {
+    font-size: 18px;
+    font-weight: 700;
+    margin-left : 10px;
+}
+.registerone-input-age-group {
+    display: flex;
+    align-items: center;
+}
+.registerone-input-age-group label {
+    font-size: 16px; 
+    font-weight: 700;
+}
+
+.registerone-input-age-group input {
     width : 14px;
     height: 14px;
 }

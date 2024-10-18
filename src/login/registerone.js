@@ -9,7 +9,6 @@ function RegisterOne() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [emailDomain, setEmailDomain] = useState("direct");
-    const [birthday, setBirthday] = useState("");
     const [gender, setGender] = useState(""); // 성별 상태 추가
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [isPasswordMatch, setIsPasswordMatch] = useState(true);
@@ -18,7 +17,7 @@ function RegisterOne() {
     const [emailId, setEmailId] = useState("");
     const [showRegisterError, setShowRegisterError] = useState(false);
     const [isEmailExists, setIsEmailExists] = useState(false);
-    const [showBirthError, setShowBirthError] = useState(false);
+    const [ageGroup, setAgeGroup] = useState(""); // 연령층 상태 추가
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -81,24 +80,21 @@ function RegisterOne() {
         }
     };
 
-    const handleBirthdayChange = (e) => {
-        const inputBirthday = e.target.value;
-        setBirthday(inputBirthday);
-        
-        const birthPattern = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/;
-        setShowBirthError(!birthPattern.test(inputBirthday));
-    };
-
     const handleGenderChange = (e) => {
         setGender(e.target.value);
+    };
+
+    const handleAgeGroupChange = (e) => {
+        setAgeGroup(e.target.value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const isFormValid = emailId.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== "" &&
-                            phoneNumber.trim() !== "" && birthday.trim() !== "" && gender.trim() !== "" &&
-                            isEmailValid && isPasswordValid && isPasswordMatch && isPhoneValid && !showBirthError;
+          const isFormValid = emailId.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== "" &&
+                            phoneNumber.trim() !== "" && ageGroup.trim() !== "" && gender.trim() !== "" &&
+                            isEmailValid && isPasswordValid && isPasswordMatch && isPhoneValid;
+
 
         if (isFormValid) {
             console.log("가입 완료!");
@@ -225,23 +221,60 @@ function RegisterOne() {
                     <div className="registerone-input-box">
                         <div className="registerone-input">
                             <div className="input-line">
-                                <label>생년월일</label>
-                                <input 
-                                    type="text" 
-                                    className="register-birthday" 
-                                    placeholder="YYYYMMDD (8자리)" 
-                                    value={birthday} 
-                                    onChange={handleBirthdayChange} 
-                                />
+                                <label className="age-group">연령층</label>
+                                <div className="registerone-input-age-group">
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            value="10대" 
+                                            checked={ageGroup === "10대"} 
+                                            onChange={handleAgeGroupChange} 
+                                        />
+                                        10대
+                                    </label>
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            value="20대" 
+                                            checked={ageGroup === "20대"} 
+                                            onChange={handleAgeGroupChange} 
+                                        />
+                                        20대
+                                    </label>
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            value="30대" 
+                                            checked={ageGroup === "30대"} 
+                                            onChange={handleAgeGroupChange} 
+                                        />
+                                        30대
+                                    </label>
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            value="40대" 
+                                            checked={ageGroup === "40대"} 
+                                            onChange={handleAgeGroupChange} 
+                                        />
+                                        40대
+                                    </label>
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            value="50대 이상" 
+                                            checked={ageGroup === "50대 이상"} 
+                                            onChange={handleAgeGroupChange} 
+                                        />
+                                        50대 이상
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div className={`register-check ${showBirthError ? 'visible' : ''}`}>
-                            올바른 생년월일 형식이 아닙니다. (예: 20001213)
                         </div>
                     </div>
 
                     <div className="registerone-input-box">
-                        <div className="registerone-input-no">
+                        <div className="registerone-input">
                             <div className="input-line">
                                 <label className="gender">성별</label>
                                 <div className="registerone-input-gender">
