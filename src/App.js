@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
-        <HeaderWithConditionalRendering />
+        {/*<HeaderWithConditionalRendering />*/}
         <ClearFiltersOnNavigation /> {/* 위치 변화 감지용 컴포넌트 */}
         <Routes>
           <Route path="/" element={<Main />} />
