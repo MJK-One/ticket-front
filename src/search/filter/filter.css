@@ -207,10 +207,10 @@
     }
 
     .search-f-reset-btn, .search-f-submit-btn {
-        font-size: 0.8rem;
-        line-height: 150%;
-        width: 5rem;
-        height: 2rem;
-        border-radius: 0.5rem;
+        font-size: 0.8rem !important;
+        line-height: 150% !important;
+        width: 5rem !important;
+        height: 2rem !important;
+        border-radius: 0.5rem !important;
     }
 }
