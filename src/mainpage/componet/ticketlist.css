@@ -18,7 +18,7 @@
     width : 1100px;
     margin-top : 20px;
 }
-@media screen and (max-width: 1000px) {
+@media (max-width: 1100px) and (min-width: 650px) {
     .openticket-list {
         display : flex;
         flex-wrap: wrap;
@@ -131,4 +131,89 @@
     height : 30px;
     margin-right: 5px;
     border-radius: 10px;
+}
+
+/* 스마트폰(min: 250, 아래는 무시) */
+@media (max-width: 650px) {
+    .openticket-all {
+        margin-bottom: 5px;
+    }
+    .all {
+        font-size: 1.2rem !important;
+    }
+
+    .openticket-list {
+        width: 250px !important;
+        justify-content: center;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .openticket {
+        padding: 9px;
+        margin-bottom: 0;
+    }
+
+    .openticket, .openticket a {
+        display: flex;
+        flex-direction: row;
+        width: 250px;
+        height: 80px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .openticket-img {
+        position: relative;
+        width: 3.6rem !important;
+        height: 4.8rem !important;
+    }
+
+    .openticket-img img {
+        border: 1px solid #6e6e6e;
+    }
+
+    .openticket-info {
+        margin-top: 0;
+        width: 180px !important;
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+    }
+
+    .openticket-info .title {
+        width: 95%;
+        -webkit-line-clamp: 2;
+        font-size: 0.9rem;
+        font-weight: normal;
+    }
+
+    .day {
+        font-size: 0.8rem;
+    }
+
+    .openticket-info .day {
+        margin-top: 0;
+    }
+
+    .open-Timer {
+        font-size: 0.7rem;
+        height: 1rem;
+    }
+
+    .Timer-banner, .pre-banner, .Timer-day {
+        float: left;
+        height: 1.1rem;
+        padding: .2rem .4rem;
+    }
+
+    .pre-banner {
+        margin-left: 5px;
+    }
+
+    .tic-site2 {
+        display: none;
+    }
+
+
 }

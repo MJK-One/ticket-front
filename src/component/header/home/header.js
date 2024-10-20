@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styled from 'styled-components';
 import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetCurPage, resetAllSearchResult, setRegionFilter, setPeriod, setSearchKeyword } from '../../../store/slice/searchSlice.js';
@@ -6,6 +7,18 @@ import { autoComplete } from "../../../api/connect.js";
 import './header.css';
 
 import DatePicker from '../../datepicker/datepicker.js';
+
+// styled-components: 화면 상단 fixed
+const FixedHeader = styled.header`
+  background-color: #fff;
+  @media (max-width: 1100px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* 다른 요소 위로 헤더가 나타나도록 */
+  }
+`;
 
 //메뉴 버튼 클릭시 Router 연결, CSS active
 export function CustomLink({ to, children }) {
@@ -275,6 +288,7 @@ function Header() {
 
 
   return (
+    <FixedHeader>
     <header className="App-header">
       {windowWidth >= 1100 && (
         <div className="header-first">
@@ -475,7 +489,7 @@ function Header() {
         )}
 
     </header>
-    
+    </FixedHeader>
     );
 }
 
