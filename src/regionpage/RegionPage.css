@@ -107,11 +107,87 @@
     }
 }
 
-/* 스마트폰 */
-@media (max-width: 719px) and (min-width: 350px) {
+/* 스마트폰(min: 320) */
+@media (max-width: 719px) and (min-width: 320px) {
     #region-mainContainer .contents {
         flex-direction: column;
         width: 300px;
+    }
+    .leftBox {
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        width: 250px;
+    }
+    .leftBoxTop {
+        height: 1.5rem !important;
+        justify-content: center;
+    }
+    .leftBoxBottom {
+        margin-top: 10px;
+        height: 351px !important;
+    }
+    svg.koreaMap {
+        width: 250px;
+        height: auto;
+        margin: 0 auto;
+    }
+    .regionTitle-btn {
+        font-size: 10px;
+        color: #0368e5;
+    }
+    .leftBoxTop .regionTitle {
+        text-align: center;
+        font-size: 1rem !important;
+        color: #0368e5;
+    }
+    .rightBox {
+        margin: 0 auto;
+        margin-bottom: 20px;
+        width: 250px;
+        justify-content: center;
+    }
+    .rightBoxTop {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .rightBoxTop a {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .rightBoxTop .wrapBox {
+        flex-direction: row !important;
+        max-width: 250px !important;
+    }
+    .rightBoxTop .posterImg {
+        width: 3rem !important;
+        height: 4rem !important;
+    }
+    .rightBoxTop .textWrap {
+        width: 200px !important;
+    }
+    .rightBoxTop .no_result {
+        font-size: 1rem !important;
+        margin: 0 auto !important;
+    }
+    .rightBoxBottom {
+        justify-content: center !important;
+    }
+    .regionGoBtn {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* 스마트폰(min: 250, 아래는 무시) */
+@media (max-width: 320px) {
+    #region-mainContainer .contents {
+        flex-direction: column;
+        width: 250px;
     }
     .leftBox {
         margin: 0 auto;

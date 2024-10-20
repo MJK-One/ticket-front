@@ -11,8 +11,8 @@
     border: 1px solid rgba(0, 0, 0, .15);
 }
 
-/* 스마트폰 */
-@media (max-width: 660px) and (min-width: 250px) {
+/* 스마트폰(min: 250, 아래는 무시) */
+@media (max-width: 660px) {
     .m-s-header {
         height: 75px;
     }
@@ -136,8 +136,8 @@
     color: #0368e5;
   }
 
-  /* 스마트폰 */
-@media (max-width: 660px) and (min-width: 250px) {
+  /* 스마트폰(min: 330) */
+@media (max-width: 660px) and (min-width: 330px) {
     .m-s-header-search{
         height: 30px;
         margin-top: 5px;
@@ -188,6 +188,62 @@
     .m-s-auto-complete-li, .m-s-auto-complete-li > a  {
         width: 230px;
         height: 2rem;
+    }
+}
+
+/* 스마트폰(250까지 커버, 그 이하는 무시) */
+@media (max-width: 330px) {
+    .m-s-header-search{
+        height: 30px;
+        margin-top: 5px;
+        gap: 0;
+    }
+
+    .m-s-logo-img {
+        width: 45px;
+    }
+
+    .m-s-header-logo, .m-s-header-logo-link {
+        width: 45px;
+        height: 20px;
+    }
+
+    .m-s-search-wrap, .m-s-search-form {
+        width: 200px;
+        height: 20px;
+    }
+
+    .m-s-search-form {
+        border-radius: 20px;
+    }
+
+    .m-s-search-form input {
+        margin-left: 8px;
+        font-size: 0.7rem;
+    }
+
+    .m-s-search-btn {
+        width: 14px;
+        height: 14px;
+        margin: 0 8px 0 0;
+    }
+
+    .m-s-search-result-form {
+        width: 200px;
+        padding-top: 20px;
+        border-radius: 12px;
+    }
+
+    .m-s-auto-complete-ul {
+        width: 200px;
+        font-size: 0.8rem;
+    }
+    .m-s-auto-complete-li {
+        line-height: 1.8rem;
+    }
+    .m-s-auto-complete-li, .m-s-auto-complete-li > a  {
+        width: 180px;
+        height: 1.8rem;
     }
 }
 
@@ -372,8 +428,8 @@
     }
 }
 
-/* 스마트폰 */
-@media (max-width: 660px) and (min-width: 250px) {
+/* 스마트폰(min: 330) */
+@media (max-width: 660px) and (min-width: 330px) {
     .filterWrap {
         position: relative;
         display: flex;
@@ -436,6 +492,104 @@
 
     .search-f-reset-btn, .search-f-submit-btn {
         font-size: 0.8rem;
+        line-height: 150%;
+        width: 5rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+    }
+}
+
+/* 스마트폰(min: 250, 아래는 무시) */
+@media (max-width: 330px) {
+    .filterWrap {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding: 0 5px;
+    }
+
+    .s-filter-btn {
+        position: relative;
+        display: flex;
+        height: 20px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0 5px 0 7px;
+        gap: 4px;
+        border-radius: 25px;
+        color: #000;
+        font-size: 0.6rem;
+        font-weight: 700;
+        line-height: 150%;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        cursor: pointer;
+    }
+
+    .s-filter-btn.is-active {
+        color: #0368e5;
+    }
+
+    .filter {
+        position: absolute;
+        width: 250px;
+        top: calc(100% + 10px);
+        left: 50%;
+        margin-left: -125px;
+        background-color: #fff;
+        box-shadow: 0 6px 15px 0 rgba(0, 0, 0, .3);
+        z-index: 99;
+    }
+
+    .filter.is-invisible {
+        display: none;
+    }
+
+    .filterTitle {
+        font-size: 0.8rem !important;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .filter .datepicker, .filter .Calendar {
+        width: 225px;
+    }
+    .filter .month-check-bar, .filter .week-check-bar, .filter .day-check {
+        width: 225px;
+    }
+    .filter .week-check-bar ul > li, .filter .week-check-bar ul {
+        margin: 0;
+    }
+
+    .filter .day-check ul > li {
+        margin: 0;
+    }
+    
+
+    .filterMenu {
+        width: 225px;
+    }
+    .filterMenu .filterBtn {
+        font-size: 0.6rem !important;
+    }
+
+    .filterBtnsWrap {
+        width: 225px;
+    }
+
+    .search-f-reset-btn, .search-f-submit-btn {
+        font-size: 0.6rem;
         line-height: 150%;
         width: 5rem;
         height: 2rem;

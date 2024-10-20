@@ -122,7 +122,7 @@ button {
   }
 
   /* pc 기본 검색창(작음) css */
-  @media (min-width: 1100px) and (max-width: 1199px) {
+  @media (min-width: 1100px) and (max-width: 1200px) {
     .h-t-logo-search {
       gap: 40px;
       margin-right: 20px;
@@ -203,7 +203,7 @@ button {
   }
 
   /* 모바일 기본 검색창(태블릿) css */
-  @media (max-width: 1099px) and (min-width: 700px) {
+  @media (max-width: 1100px) and (min-width: 700px) {
     .header-top {
       height: 130px;
       padding-top: 30px;
@@ -284,7 +284,7 @@ button {
   }
 
   /* 모바일 기본 검색창(스마트폰) css  */
-  @media (max-width: 699px) and (min-width: 370px) {
+  @media (max-width: 700px) and (min-width: 370px) {
     .App-header {
       font-size: 0.8rem;
     }
@@ -452,7 +452,7 @@ button {
   }
 
   /* 모바일 기본 검색창(작은 스마트폰) css  */
-  @media (max-width: 369px) {
+  @media (max-width: 370px) and (min-width: 320px) {
     .App-header {
       font-size: 0.8rem;
     }
@@ -532,6 +532,93 @@ button {
     }
     .auto-complete-li > a {
       width: 230px !important;
+    }
+
+  }
+
+  /* 모바일 기본 검색창(작은 스마트폰(min: 250, 아래는 무시)) css  */
+  @media (max-width: 320px) {
+    .App-header {
+      font-size: 0.8rem;
+    }
+    .App-header input {
+      font-size: 0.7rem;
+    }
+
+    .logo-img {
+      width : 45px;
+      height : auto;
+    }
+
+    .h-t-logo-search {
+      max-width: 250px;
+      height: 25px;
+    }
+
+    .header-top {
+      height: 60px;
+      padding: 0;
+    }
+
+    .header-search {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 5px;
+      position: relative;
+      width: 100%;
+      z-index : 20;
+    }
+
+    .search-wrap {
+      display: flex;
+    }
+    
+    /* form */
+    .search-form {
+      width: 200px !important;
+      min-width: 200px !important;
+      border-radius: 12px;
+      background: #fff;
+      height: 25px;
+    }
+    .search-form input {
+      margin-left: 5px !important;
+      border-radius: 12px;
+    }
+
+    /*filter*/
+    .search-result-form {
+      position: absolute;
+      border-radius: 0 0 12px 12px !important;
+      width: 200px !important;
+      min-width: 200px !important;
+      top: 10px;
+      left: 50%;
+      margin-left: -100.5px;
+      padding-top : 20px;
+    }
+
+    .search-btn {
+      margin-right: 7px !important;
+    }
+    .search-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .auto-complete-ul{
+      width: 200px !important;
+    }
+    .auto-complete-li{
+      width: 180px !important;
+      max-width: 180px !important;
+      height: 2rem !important;
+      line-height: 2rem !important;
+    }
+    .auto-complete-li > a {
+      width: 180px !important;
+      height: 2rem !important;
     }
 
   }

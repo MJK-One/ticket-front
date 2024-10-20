@@ -9,8 +9,8 @@
         margin-bottom: 40px;
     }
 }
-/* 스마트폰 */
-@media (max-width: 660px) and (min-width: 250px) {
+/* 스마트폰(min: 250, 아래는 무시) */
+@media (max-width: 660px) {
     #search-content {
         padding-top: 75px;
         margin-bottom: 40px;

@@ -218,8 +218,8 @@
     }
 }
 
-/* 필터가 상단으로 올라갈 시: 스마트폰 */
-@media (max-width: 660px) and (min-width: 250px) {
+/* 필터가 상단으로 올라갈 시: 스마트폰(min: 250, 아래는 무시) */
+@media (max-width: 660px) {
     .tl-top-wrap {
         width: 250px !important;
         font-size: 0.9rem;
