@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import MainTop from '../componet/mainTop'; // MainTop import 추가
 import Sitemenu from './sitemenu';
+import Header from '../../component/header/home/header';
+import MobileGenreHeader from '../../component/header/genre/MobileGenreHeader';
+import MobileNav from '../../component/header/mobileNav/MobileNav';
 import './genre.css';
 import { getGenre, getTop10ByGenre } from '../../api/connect';
 import { useLocation } from 'react-router-dom';
@@ -48,15 +51,34 @@ function Genre() {
         fetchData();
     }, [location.pathname]); // 경로가 변경될 때마다 데이터를 다시 불러옵니다
 
+    // 화면 크기 체크 함수
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
-        <main id="contents">
-            <section className='maintop'>
-                <MainTop top10Tickets={top10Tickets} /> {/* MainTop에 topTickets 전달 */}
-            </section>
-            <section className='sales_site'>
-                <Sitemenu tickets={tickets} />
-            </section>
-        </main>
+        <>
+            {/* 헤더 */}
+            {windowWidth > 1100 && <Header />}
+            {windowWidth <= 1100 && <MobileGenreHeader />}
+
+            <main id="contents">
+                <section className='maintop'>
+                    <MainTop top10Tickets={top10Tickets} /> {/* MainTop에 topTickets 전달 */}
+                </section>
+                <section className='sales_site'>
+                    <Sitemenu tickets={tickets} />
+                </section>
+            </main>
+
+            {/* 모바일 nav */}
+            {windowWidth <= 1100 && <MobileNav />}
+        </>
     );   
 }
 
