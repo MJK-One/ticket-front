@@ -10,6 +10,17 @@ const addDecimalPoint = (str) => {
 
 //
 const PersonalNaverMap = ({ placeData, placeType }) => {
+    // 화면 크기 체크 함수
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    
+    //
     const navermaps = useNavermaps();
     const [coords, setCoords] = useState(new navermaps.LatLng(37.500751, 126.867891)); //초기 정보
     const [isLoading, setIsLoading] = useState(true); // 로딩 상태
@@ -64,7 +75,7 @@ const PersonalNaverMap = ({ placeData, placeType }) => {
 
   return (
     <MapDiv
-        style={{width: '50rem', height: '30rem'}}>
+        style={ windowWidth > 900 ? {width: '50rem', height: '30rem', marginTop: '15px'} : {width: '100%', height: '300px', marginTop: '15px'} }>
             <NaverMap
                 center={coords}
                 defaultZoom={17}>

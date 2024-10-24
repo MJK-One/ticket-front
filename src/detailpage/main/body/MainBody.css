@@ -1,6 +1,39 @@
 .productMainBody {
     position: relative;
 }
+@media (max-width: 960px) and (min-width: 500px) {
+    .productMainBody{
+        padding: 25px;
+        padding-top: 0;
+    }
+
+    .prdContents {
+        padding: 1rem !important;
+    }
+
+    .detail .contentTitle {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .productMainBody{
+        padding: 15px;
+        padding-top: 0;
+    }
+
+    .prdContents {
+        padding: 1rem !important;
+    }
+
+    .detail .contentTitle {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+    }
+}
+
+
 
 /*navigation bar*/
 .nav {
@@ -8,6 +41,12 @@
     display: block;
     top: 0;
     z-index: 5;
+}
+
+@media (max-width: 1100px) {
+    .nav {
+        top: 40px;
+    }
 }
 
 .nav ul , .nav li {
@@ -73,6 +112,17 @@
 .nav .countNum::after {
     content: '\0029';
     display: inline;
+}
+
+@media (max-width: 500px) {
+    .nav .navItem + .navItem {
+        margin-left: 0.5rem;
+    }
+
+    .nav .navLink {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.9rem;
+    }
 }
 
 /*content*/

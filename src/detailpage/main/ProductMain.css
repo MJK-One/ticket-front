@@ -4,3 +4,17 @@
     margin-left: 1.25rem;
     margin-bottom: 6rem;
 }
+
+@media (max-width: 1120px) and (min-width: 960px) {
+    .productMain {
+        width: 928px;
+    }
+}
+
+@media (max-width: 960px) {
+    .productMain {
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+    }
+}

@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './stats.css';
 
 const NavStats = (props) => {
     // 티켓 아이디
     const ticketId = props.tid;
+
+    // 화면 크기 체크 함수
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // 예매자 통계 데이터(가데이터)
         // 연령
@@ -26,7 +36,7 @@ const NavStats = (props) => {
                 <div className='statAgePercent'>{`${statAgePer}%`}</div>
                 <div className='statBack'>
                     {/* 퍼센트에 맞게 높이 조절 */}
-                    <span className='statGraph' data-stat-bar={statAgePer} style={{height: statGraphHeight + 'rem'}}></span>
+                    <span className='statGraph' data-stat-bar={statAgePer} style={ windowWidth > 430 ? {height: statGraphHeight + 'rem'} : {width: statGraphHeight + 'rem'}}></span>
                 </div>
                 <div className='statAgeName'>{statAgeData[i].age}</div>
             </div> 

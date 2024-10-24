@@ -25,7 +25,7 @@ const NavInfo = () => {
 
     const infoItem = infoList.map((item, i) => (
         (item.text !== null && item.text.length > 0) ? (
-            <div className='content' key={`MB-info-content${i + 1}`}>
+            <div className='contents' key={`MB-info-content${i + 1}`}>
                 <h3 className='contentTitle'>{item.label}</h3>
                 <div className='contentDetail'>
                     <p className='contentDetailText'>{item.text}</p>

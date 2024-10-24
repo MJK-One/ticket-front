@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import './MainTop.css';
+import './MobileMainTop.css';
 
-const MainTop = () => {
+const MobileMainTop = () => {
     // 화면 크기 체크 함수
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -20,7 +20,7 @@ const MainTop = () => {
     const error = useSelector((state) => state.details.error);
 
     const [genre, setGenre] = useState(detail.genre || "정보 없음");
-    const genreText = "> " + genre;
+    const genreText = "장르 > " + genre;
 
     const [prdTitle, setPrdTitle] = useState(detail.event_name || "NONAME");//상품 제목
     const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url || "/img/normal_poster.png");//포스터 이미지 링크
@@ -77,13 +77,13 @@ const MainTop = () => {
         {label: '선예매 오픈', text: infoPreOpenDateTime}]; //p 또는 a 태그인 info
 
     const infoItem = infoList.map((item, i) => (
-        <li className='infoItem' key={`PMT-info-p-${i}`}>
-            <strong className='infoLabel'>{item.label}</strong>
-            <div className='infoDesc'>
+        <li className='m-infoItem' key={`m-PMT-info-p-${i}`}>
+            <strong className='m-infoLabel'>{item.label}</strong>
+            <div className='m-infoDesc'>
                 {(item.label === '공연 장소' && item.link !== "#") ? (
-                    <a href={item.link} className='infoText is-place' target="_blank" rel="noopener noreferrer">{item.text}</a>
+                    <a href={item.link} className='m-infoText is-place' target="_blank" rel="noopener noreferrer">{item.text}</a>
                 ) : (
-                    <p className='infoText'>{item.text}</p>
+                    <p className='m-infoText'>{item.text}</p>
                 )}
             </div>
         </li>
@@ -124,13 +124,17 @@ const MainTop = () => {
         let { btnClass = "", btnImgSrc = "" } = siteConfig[item.site] || {};
     
         return (
-            <li className='is-direct' key={`PMT-info-bookingbtn-isdirect-${i}`}>
-                <a className='bookingBtn' href={item.link} target="_blank" rel="noopener noreferrer">
+            <li className='m-is-direct' key={`m-PMT-info-bookingbtn-isdirect-${i}`}>
+                <a className='m-bookingBtn' href={item.link} target="_blank" rel="noopener noreferrer">
                     <img className={btnClass} src={btnImgSrc} />
                 </a>
             </li>
         );
     });
+
+    // 예매 사이트 목록 visible
+    const [isBookingVisible, setIsBookingVisible] = useState(false);
+
 
     if(status === 'loading') {
         return <div>Loading...</div>;
@@ -142,77 +146,77 @@ const MainTop = () => {
     
     //return
     return (
-        <div className='productMainTop'>
-            <div className='summary'>
-                {/* 장르, 제목 */}
-                <div className='summaryTop'>
-                    <div className='summaryTopLeft'>
-                        <div className='genre'>
-                            <div className='genreText' key={`PMT-info-component-genreText`}>
-                                <span>{genreText}</span>
-                            </div>
-                        </div>
-                        <h2 className='prdTitle' key={`PMT-info-component-prdTitle`}>{prdTitle}</h2>
-                    </div>
-                    
-                    {windowWidth > 1120 && (
-                        <div className='summaryTopRight'>
-                            <div className='regDate' key={`PMT-info-component-regDate`}>
-                                <div className='regDateText'>
-                                    <span>등록일: {regDate}</span>
-                                </div>
-                            </div>
-                            <div className='view' key={`PMT-info-component-view`}>
-                                <div className='viewText'>
-                                    <span>조회수: {view}</span>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+        <div className='m-productMainTop'>
 
+            {/* 포스터, info1(제목, 장르, 좋아요) */}
+            <div className='m-p-main-top-top'>
+                {/* 포스터 */}
+                <div className='m-posterBox'>
+                    <img className='m-posterBoxImage' src={prdPosterSrc} alt={prdTitle} key={`m-PMT-info-component-posterBox`}/>
                 </div>
 
-                {/* 포스터, 정보 */}
-                <div className='summaryBody'>
-                    <div className='posterBox'>
-                        {/* 포스터 이미지 */}
-                        <div className='posterBoxTop'>
-                            <img className='posterBoxImage' src={prdPosterSrc} alt={prdTitle} key={`PMT-info-component-posterBox`}/>
+                {/* info */}
+                <div className='m-infoBox-top'>
+                    <div className='m-prd-title-genre-wrap'>
+                        {/* 제목 */}
+                        <div className='m-prdTitle' key={`m-PMT-info-component-prdTitle`}>
+                            {prdTitle}
                         </div>
 
-                        {/* 좋아요 */}
-                        <div className='posterBoxBottom'>
-                            <div className='prdCast' key={`PMT-info-component-prdCast`}>
-                                <div className='prdCastWrap'>
-                                    <a className={`prdCastBtn ${isTkHeartBtn ? 'is-toggled' : ''}`} role='checkbox' onClick={tkHeartBtnHandler}>
-                                        좋아요
-                                    </a>
-                                    <p className='prdCastNum'>{prdCastNum}</p>
-                                </div>
-                            </div>
+                        {/* 장르 */}
+                        <div className='m-genre' key={`m-PMT-info-component-genreText`}>
+                            <span>{genreText}</span>
                         </div>
                     </div>
 
-                    <div className='infoBox'>
-                        <ul className='info' key={`PMT-info-component-info`}>
-                            {infoItem}
-                        </ul>
-
-                        {/* 예매 버튼 */}
-                        <ul className='btnList' key={`PMT-info-component-btnList`}>
-                            <li className='is-main'>
-                                <a className='bookingBtn' href='#'>
-                                    <span>예매 사이트 바로가기</span>
-                                </a>
-                            </li>
-                            {bookingBtn}
-                        </ul>
-                        
+                    {/* 좋아요 */}
+                    <div className='m-prdCast' key={`m-PMT-info-component-prdCast`}>
+                        <div className='m-prdCastWrap'>
+                            <a className={`m-prdCastBtn ${isTkHeartBtn ? 'is-toggled' : ''}`} role='checkbox' onClick={tkHeartBtnHandler}>
+                                좋아요
+                            </a>
+                            <p className='m-prdCastNum'>{prdCastNum}</p>
+                        </div>
                     </div>
-                    
+                </div>
+
+            </div>
+
+            {/* info2(기간, 장소, 오픈, 선예매) */}
+            <div className='m-p-main-top-bottom'>
+                {/* info */}
+                <div className='m-infoBox-bottom'>
+                    <ul className='m-info' key={`m-PMT-info-component-info`}>
+                        {infoItem}
+                    </ul>
                 </div>
             </div>
+
+            {/* 예매버튼(아래쪽에 고정) */}
+            <div className='m-p-main-top-book-btns-wrap'>
+                {/* 예매 버튼 */}
+                {isBookingVisible ? (
+                    <div className='m-p-main-top-bookig-tap'>
+                        <div className='m-btns-close-btn-wrap'>
+                            <button className='m-btns-close-btn' onClick={() => setIsBookingVisible(false)} >×</button>
+                        </div>
+                        <ul className='m-btns' key={`m-PMT-info-component-btns`}>
+                            {bookingBtn}
+                        </ul>
+                    </div>
+                ): (
+                    <ul className='m-btn' key={`m-PMT-info-component-btn`}>
+                        <li className='m-is-main'>
+                            <a className='m-bookingBtn' href='#' onClick={() => setIsBookingVisible(true)}>
+                                <span>예매 사이트 바로가기</span>
+                            </a>
+                        </li>
+                    </ul>
+                )}
+
+            </div>
+
         </div>
     );
 };
-export default MainTop;
+export default MobileMainTop;
