@@ -37,7 +37,6 @@ a[role='button'] {
 }
 
 .contents {
-    width: 70rem;
     margin: 0 auto;
 }
 
@@ -45,4 +44,29 @@ a[role='button'] {
     position: relative;
     display: flex;
     justify-content: center;
+}
+
+/* 모바일 헤더 반응형 */
+@media (max-width: 1100px) {
+    #container {
+        margin-top: 40px; /* 모바일 헤더가 fixed라 height만큼 내리기 */
+    }
+}
+
+/* contents 반응형 */
+@media (min-width: 1120px) {
+    .contents {
+        width: 70rem;
+    }
+}
+@media (max-width: 1120px) and (min-width: 960px) {
+    .contents{
+        width: 960px;
+    }
+}
+
+@media (max-width: 960px) {
+    .contents{
+        width: 100%;
+    }
 }

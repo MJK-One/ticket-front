@@ -5,7 +5,7 @@ import MonthPage from './monthpage/monthpage';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { clearFilters } from './store/slice/searchSlice';
-import Header from './component/header';
+import Header from './component/header/home/header';
 
 const Main = lazy(() => import('./mainpage/main/main'));
 const Genre = lazy(() => import('./mainpage/genre/genre'));
@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
-        <HeaderWithConditionalRendering />
+        {/*<HeaderWithConditionalRendering />*/}
         <ClearFiltersOnNavigation /> {/* 위치 변화 감지용 컴포넌트 */}
         <Routes>
           <Route path="/" element={<Main />} />

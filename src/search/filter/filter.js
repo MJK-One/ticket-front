@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSearchData, resetCurPage, resetAllSearchResult, setGenreFilter, setRegionFilter, setPeriod } from '../../store/slice/searchSlice.js';
+import { resetCurPage, resetAllSearchResult, setGenreFilter, setRegionFilter, setPeriod } from '../../store/slice/searchSlice.js';
 import DatePicker from '../../component/datepicker/datepicker.js';
 import './filter.css';
 
@@ -18,9 +18,9 @@ const Filter = () => {
    */
     /* 변수 */
     //toggle
-  const [isToggledTopContainer, setIsToggledTopContainer] = useState(false); //top
-  const [isToggledMidContainer, setIsToggledMidContainer] = useState(false); //Middle
-  const [isToggledBotContainer, setIsToggledBotContainer] = useState(false); //Bottom
+  const [isToggledTopContainer, setIsToggledTopContainer] = useState(true); //top
+  const [isToggledMidContainer, setIsToggledMidContainer] = useState(true); //Middle
+  const [isToggledBotContainer, setIsToggledBotContainer] = useState(true); //Bottom
 
   //active
   //genre
@@ -53,6 +53,17 @@ const Filter = () => {
   });
 
     /* 이벤트 함수 */
+  // 화면 크기 체크 함수
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+
   //toggle container
   const toggleContainerTopHandler = () => { //top
     setIsToggledTopContainer(!isToggledTopContainer);
@@ -210,20 +221,16 @@ const Filter = () => {
   필터 버튼
   */
   const ResetBtnHandler = () => { //필터 리셋 버튼
-    // 장르 선택 리셋
-    setIsActiveGenre(prevState => 
-      Object.fromEntries(
-        Object.entries(prevState).map(([genre, _]) => [genre, false])
-      )
-    );
-    // 지역 선택 리셋
-    setIsActiveRegion(prevState => 
-      Object.fromEntries(
-        Object.entries(prevState).map(([region, _]) => [region, false])
-      )
-    );
+    // 이전 검색 결과 초기화
+    dispatch(resetCurPage());
+    dispatch(resetAllSearchResult());
 
-    //달력 리셋은 복잡할 것 같아서 나중에 시간나면 하겠음.
+    //slice 제어
+    dispatch(setGenreFilter([])); //장르 필터
+    dispatch(setRegionFilter([])); //지역 필터
+    dispatch(setPeriod("전체")); //날짜 필터
+
+    navigate("/search");
   };
 
   const SubmitBtnHandler = () => { //필터 적용 버튼
@@ -239,72 +246,277 @@ const Filter = () => {
       navigate("/search");
   };
 
+  /* 필터 상단(windowWidth <= 1400) */
+  // 필터 visible 여부
+  const [isTopGenreFilter, setIsTopGenreFilter] = useState(false); //장르
+  const [isTopRegionFilter, setIsTopRegionFilter] = useState(false); //지역
+  const [isTopDateFilter, setIsTopDateFilter] = useState(false); //날짜
+
+  // 필터 선택 여부
+  const [isSelctedTopGenre, setIsSelctedTopGenre] = useState(false); //장르
+  const [isSelctedTopRegion, setIsSelctedTopRegion] = useState(false); //지역
+  const [isSelctedTopDate, setIsSelctedTopDate] = useState(false); //날짜
+
+  // 선택시 is-visible
+  useEffect(() => {
+    if(selectedGenreStr === "전체"){
+      setIsSelctedTopGenre(false);
+    } else {
+      setIsSelctedTopGenre(true);
+    }
+
+  }, [selectedGenreStr]);
+
+  useEffect(() => {
+    if(selectedRegionStr === "전체") {
+      setIsSelctedTopRegion(false);
+    } else {
+      setIsSelctedTopRegion(true);
+    }
+  }, [selectedRegionStr]);
+
+  useEffect(() => {
+    if(calendarDateValue === "전체") {
+      setIsSelctedTopDate(false);
+    } else {
+      setIsSelctedTopDate(true);
+    }
+  }, [calendarDateValue]);
+
+  // 필터창 선택 함수
+  const topFilterBtnHandler = (filter) => {
+    if(filter === "genre") {
+      setIsTopGenreFilter(true);
+      setIsTopRegionFilter(false);
+      setIsTopDateFilter(false);
+    }
+    else if(filter === "region") {
+      setIsTopGenreFilter(false);
+      setIsTopRegionFilter(true);
+      setIsTopDateFilter(false);
+    }
+    else if(filter === "date") {
+      setIsTopGenreFilter(false);
+      setIsTopRegionFilter(false);
+      setIsTopDateFilter(true);
+    }
+    else {
+      console.log("error");
+    }
+  };
+
+  //
+  const ResetGenreBtnHandler = () => { //장르 필터 리셋 버튼
+    // 이전 검색 결과 초기화
+    dispatch(resetCurPage());
+    dispatch(resetAllSearchResult());
+
+    //slice 제어
+    dispatch(setGenreFilter([])); //장르 필터
+
+    navigate("/search");
+  };
+
+  const ResetRegionBtnHandler = () => { //지역 필터 리셋 버튼
+    // 이전 검색 결과 초기화
+    dispatch(resetCurPage());
+    dispatch(resetAllSearchResult());
+
+    //slice 제어
+    dispatch(setRegionFilter([])); //지역 필터
+
+    navigate("/search");
+  };
+
+  const ResetDateBtnHandler = () => { //날짜 필터 리셋 버튼
+    // 이전 검색 결과 초기화
+    dispatch(resetCurPage());
+    dispatch(resetAllSearchResult());
+
+    //slice 제어
+    dispatch(setPeriod("전체")); //날짜 필터
+
+    navigate("/search");
+  };
+
   //return
   return (
-    <div className='filterWrap'>
-      <div className='filter'>
-        {/* filter */}
-        <div className={`filterContainer ContainerTop ${isToggledTopContainer ? "is-toggled" : null}`}>
-          {/* Container */}
-          <div className='filterHeader'>
-            <a className='filterToggleBtn' role='button' onClick={toggleContainerTopHandler}>
-              <h4 className='filterTitle'>장르</h4>
-              <div className='selectedData'>
-                <span className='blind'>선택된 장르:</span>
-                <span className='selec-genre'>{selectedGenreStr}</span>
+    <>
+      {/* 화면 width > 1400이면 필터 사이드 */}
+      {windowWidth > 1400 && (
+        <div className='filterWrap'>
+          <div className='filter'>
+            {/* filter */}
+            <div className={`filterContainer ContainerTop ${isToggledTopContainer ? "is-toggled" : null}`}>
+              {/* Container */}
+              <div className='filterHeader'>
+                <a className='filterToggleBtn' role='button' onClick={toggleContainerTopHandler}>
+                  <h4 className='filterTitle'>장르</h4>
+                  <div className='selectedData'>
+                    <span className='blind'>선택된 장르:</span>
+                    <span className='selec-genre'>{selectedGenreStr}</span>
+                  </div>
+                </a>
               </div>
-            </a>
+              <div className='filterMenu'>
+                {filterGenreBtns}
+              </div>
+    
+            </div>
+    
+            <div className={`filterContainer ContainerMiddle ${isToggledMidContainer ? "is-toggled" : null}`}>
+              {/* Container */}
+              <div className='filterHeader'>
+                <a className='filterToggleBtn' role='button' onClick={toggleContainerMidHandler}>
+                  <h4 className='filterTitle'>지역</h4>
+                  <div className='selectedData'>
+                    <span className='blind'>선택된 지역:</span>
+                    <span className='selec-region'>{selectedRegionStr}</span>
+                  </div>
+                </a>
+              </div>
+              <div className='filterMenu'>
+                {filterRegionBtns}
+              </div>
+    
+            </div>
+    
+            <div className={`filterContainer ContainerBottom ${isToggledBotContainer ? "is-toggled" : null}`}>
+              {/* Container */}
+              <div className='filterHeader'>
+                <a className='filterToggleBtn' role='button' onClick={toggleContainerBotHandler}>
+                  <h4 className='filterTitle'>관람일</h4>
+                  <div className='selectedData'>
+                    <span className='blind'>선택된 일자:</span>
+                    <span className='date'>{calendarDateValue}</span>
+                  </div>
+                </a>
+              </div>
+    
+              <DatePicker onDateChange={handleDateChange} />
+            </div>
           </div>
-          <div className='filterMenu'>
-            {filterGenreBtns}
+          
+          {/* Button */}
+          <div className='filterBtnsWrap'>
+            <button onClick={ResetBtnHandler} className="search-f-reset-btn">
+              초기화
+            </button>
+            <button onClick={SubmitBtnHandler} className="search-f-submit-btn">
+              적용
+            </button>
+          </div>
+    
+        </div>
+      )}
+
+      {/* 화면 width <= 1400 && > 1100이면 필터 상단 */}
+      {(windowWidth <= 1400 && windowWidth >= 1100) && (
+        <div className='filterWrap'>
+          <button className={`s-filter-btn ${isSelctedTopGenre ? 'is-active' : null}`} onClick={() => topFilterBtnHandler('genre')}>
+            {`${isSelctedTopGenre ? selectedGenreStr : '장르'}`} ▼
+          </button>
+          <button className={`s-filter-btn ${isSelctedTopRegion ? 'is-active' : null}`} onClick={() => topFilterBtnHandler('region')}>
+            {`${isSelctedTopRegion ? selectedRegionStr : '지역'}`} ▼
+          </button>
+          <button className={`s-filter-btn ${isSelctedTopDate ? 'is-active' : null}`} onClick={() => topFilterBtnHandler('date')}>
+            {`${isSelctedTopDate ? calendarDateValue : '관람일'}`} ▼
+          </button>
+
+          {/* 장르 필터 */}
+          <div className={`filter ${isTopGenreFilter ? null : "is-invisible"}`}>
+            <div className={`filterContainer`}>
+              {/* Container */}
+              <div className='filterHeader'>
+                  <h4 className='filterTitle'>장르</h4>
+                  <div className='selectedData'>
+                    <span className='blind'>선택된 장르:</span>
+                    <span className='selec-genre'>{selectedGenreStr}</span>
+                  </div>
+              </div>
+
+              <button className='close-btn' onClick={() => setIsTopGenreFilter(false)}>×</button>
+
+              <div className='filterMenu'>
+                {filterGenreBtns}
+              </div>
+
+              <div className='filterBtnsWrap'>
+                <button onClick={ResetGenreBtnHandler} className="search-f-reset-btn">
+                  초기화
+                </button>
+                <button onClick={SubmitBtnHandler} className="search-f-submit-btn">
+                  적용
+                </button>
+              </div>
+    
+            </div>
+          </div>
+
+          {/* 지역 필터 */}
+          <div className={`filter ${isTopRegionFilter ? null : "is-invisible"}`}>
+            <div className={`filterContainer`}>
+              {/* Container */}
+              <div className='filterHeader'>
+                <h4 className='filterTitle'>지역</h4>
+                <div className='selectedData'>
+                  <span className='blind'>선택된 지역:</span>
+                  <span className='selec-region'>{selectedRegionStr}</span>
+                </div>
+              </div>
+
+              <button className='close-btn' onClick={() => setIsTopRegionFilter(false)}>×</button>
+
+              <div className='filterMenu'>
+                {filterRegionBtns}
+              </div>
+
+              <div className='filterBtnsWrap'>
+                <button onClick={ResetRegionBtnHandler} className="search-f-reset-btn">
+                  초기화
+                </button>
+                <button onClick={SubmitBtnHandler} className="search-f-submit-btn">
+                  적용
+                </button>
+              </div>
+    
+            </div>
+          </div>
+
+          {/* 관람일 필터 */}
+          <div className={`filter ${isTopDateFilter ? null : "is-invisible"}`}>
+            <div className={`filterContainer`}>
+              {/* Container */}
+              <div className='filterHeader'>
+                <h4 className='filterTitle'>관람일</h4>
+                <div className='selectedData'>
+                  <span className='blind'>선택된 일자:</span>
+                  <span className='date'>{calendarDateValue}</span>
+                </div>
+              </div>
+
+              <button className='close-btn' onClick={() => setIsTopDateFilter(false)}>×</button>
+
+              <DatePicker onDateChange={handleDateChange} />
+
+              <div className='filterBtnsWrap'>
+                <button onClick={ResetDateBtnHandler} className="search-f-reset-btn">
+                  초기화
+                </button>
+                <button onClick={SubmitBtnHandler} className="search-f-submit-btn">
+                  적용
+                </button>
+              </div>
+    
+            </div>
           </div>
 
         </div>
+      )}
 
-        <div className={`filterContainer ContainerMiddle ${isToggledMidContainer ? "is-toggled" : null}`}>
-          {/* Container */}
-          <div className='filterHeader'>
-            <a className='filterToggleBtn' role='button' onClick={toggleContainerMidHandler}>
-              <h4 className='filterTitle'>지역</h4>
-              <div className='selectedData'>
-                <span className='blind'>선택된 지역:</span>
-                <span className='selec-region'>{selectedRegionStr}</span>
-              </div>
-            </a>
-          </div>
-          <div className='filterMenu'>
-            {filterRegionBtns}
-          </div>
-
-        </div>
-
-        <div className={`filterContainer ContainerBottom ${isToggledBotContainer ? "is-toggled" : null}`}>
-          {/* Container */}
-          <div className='filterHeader'>
-            <a className='filterToggleBtn' role='button' onClick={toggleContainerBotHandler}>
-              <h4 className='filterTitle'>관람일</h4>
-              <div className='selectedData'>
-                <span className='blind'>선택된 일자:</span>
-                <span className='date'>{calendarDateValue}</span>
-              </div>
-            </a>
-          </div>
-
-          <DatePicker onDateChange={handleDateChange} />
-        </div>
-      </div>
-      
-      {/* Button */}
-      <div className='filterBtnsWrap'>
-        <button onClick={ResetBtnHandler} className="search-f-reset-btn">
-          초기화
-        </button>
-        <button onClick={SubmitBtnHandler} className="search-f-submit-btn">
-          적용
-        </button>
-      </div>
-
-    </div>
+      {/* 화면 width < 1100이면 필터 x */}
+      {windowWidth < 1100 && null}
+    </>
   );
 };
 export default Filter;

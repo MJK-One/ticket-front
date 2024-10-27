@@ -39,8 +39,8 @@ const NavPlace = () => {
 
     //detail text
     const detailList = [
-        {label: '공연 장소', text: venue},
-        {label: '주소', text: addr}
+        {label: '- 공연 장소', text: venue},
+        {label: '- 주소', text: addr}
     ];
     const detailText = detailList.map((item, i) => (
         (item.text !== null && item.text.length > 0) ? (

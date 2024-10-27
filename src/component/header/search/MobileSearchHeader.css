@@ -1,0 +1,598 @@
+.m-s-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 110px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .15);
+}
+
+/* 스마트폰(min: 250, 아래는 무시) */
+@media (max-width: 660px) {
+    .m-s-header {
+        height: 75px;
+    }
+}
+
+/*
+검색창
+*/
+.m-s-header-search {
+    height: 50px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.m-s-header-logo, .m-s-header-logo-link {
+    width: 80px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.m-s-logo-img {
+    width: 80px;
+    height: auto;
+}
+
+.m-s-search-wrap {
+    width: 400px;
+    height: 35px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+.m-s-search-form {
+    width: 400px;
+    height: 35px;
+    border-radius: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, .15);
+    background-color: #fff;
+    z-index: 999;
+  }
+  
+  .m-s-search-form input {
+    height: 18px;
+    flex: 1;
+    margin-left: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    color: #111;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  
+  .m-s-search-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    margin: 0 16px 0 0;
+    padding: 0;
+  }
+
+  .m-s-search-result-form {
+    position: absolute;
+    width: 399px;
+    top: 0;
+    left: 0;
+    padding-top : 40px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 20px;
+    z-index: 99;
+  }
+
+  .m-s-auto-complete-ul {
+    width: 400px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .m-s-auto-complete-li {
+    width: 380px;
+    height: 3rem;
+    line-height: 3rem;
+    border-bottom: 1px solid #eee;
+  }
+  .m-s-auto-complete-li:last-child {
+    border-bottom: none;
+  }
+  .m-s-auto-complete-li > a {
+    display: inline-block;
+    width: 380px;
+    height: 3rem;
+    color: #000;
+    text-align: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .m-s-auto-complete-li:hover > a {
+    color: #0368e5;
+  }
+
+  /* 스마트폰(min: 330) */
+@media (max-width: 660px) and (min-width: 330px) {
+    .m-s-header-search{
+        height: 30px;
+        margin-top: 5px;
+    }
+
+    .m-s-logo-img {
+        width: 45px;
+    }
+
+    .m-s-header-logo, .m-s-header-logo-link {
+        width: 45px;
+        height: 20px;
+    }
+
+    .m-s-search-wrap, .m-s-search-form {
+        width: 250px;
+        height: 20px;
+    }
+
+    .m-s-search-form {
+        border-radius: 20px;
+    }
+
+    .m-s-search-form input {
+        margin-left: 8px;
+        font-size: 0.8rem;
+    }
+
+    .m-s-search-btn {
+        width: 14px;
+        height: 14px;
+        margin: 0 8px 0 0;
+    }
+
+    .m-s-search-result-form {
+        width: 250px;
+        padding-top: 20px;
+        border-radius: 12px;
+    }
+
+    .m-s-auto-complete-ul {
+        width: 250px;
+        font-size: 0.8rem;
+    }
+    .m-s-auto-complete-li {
+        line-height: 2rem;
+    }
+    .m-s-auto-complete-li, .m-s-auto-complete-li > a  {
+        width: 230px;
+        height: 2rem;
+    }
+}
+
+/* 스마트폰(250까지 커버, 그 이하는 무시) */
+@media (max-width: 330px) {
+    .m-s-header-search{
+        height: 30px;
+        margin-top: 5px;
+        gap: 0;
+    }
+
+    .m-s-logo-img {
+        width: 45px;
+    }
+
+    .m-s-header-logo, .m-s-header-logo-link {
+        width: 45px;
+        height: 20px;
+    }
+
+    .m-s-search-wrap, .m-s-search-form {
+        width: 200px;
+        height: 20px;
+    }
+
+    .m-s-search-form {
+        border-radius: 20px;
+    }
+
+    .m-s-search-form input {
+        margin-left: 8px;
+        font-size: 0.7rem;
+    }
+
+    .m-s-search-btn {
+        width: 14px;
+        height: 14px;
+        margin: 0 8px 0 0;
+    }
+
+    .m-s-search-result-form {
+        width: 200px;
+        padding-top: 20px;
+        border-radius: 12px;
+    }
+
+    .m-s-auto-complete-ul {
+        width: 200px;
+        font-size: 0.8rem;
+    }
+    .m-s-auto-complete-li {
+        line-height: 1.8rem;
+    }
+    .m-s-auto-complete-li, .m-s-auto-complete-li > a  {
+        width: 180px;
+        height: 1.8rem;
+    }
+}
+
+
+/*
+필터
+*/
+@import './filterFont.css';
+
+.filter {
+    width: 21rem;
+    margin: 0 auto;
+    border: 0.08rem solid #b6bdc7;
+    border-radius: 1rem;
+}
+
+/*filterContainer*/
+.filterContainer:first-child {
+    border-top: none;
+    padding-top: 0.15rem;
+}
+
+.filterContainer:last-child {
+    padding-bottom: 1.5rem;
+}
+
+.filterContainer {
+    position: relative;
+    padding-bottom: 0.8rem;
+    border-top: 0.08rem solid #dadee3;
+    box-sizing: border-box;
+}
+
+/*filterHeader*/
+.filterHeader {
+    padding: 1.0rem 1.25rem 0;
+    width: 18.5rem;
+    margin: 0 auto;
+
+}
+
+/*filterTitle*/
+.filterTitle {
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    width: 20rem;
+    margin: 0 auto;
+}
+
+.selectedData {
+    display: none;
+    font-size: 0.99rem;
+    font-weight: bold;
+    line-height: 120%;
+}
+
+/*menu btn*/
+.filterMenu {
+    padding: 1.0rem 1.25rem 0;
+    width: 18.5rem;
+    margin: 0 auto;
+}
+
+.filterMenu .filterBtn {
+    cursor: pointer;
+    font-size: normal;
+    font-weight: 700;
+    text-align: center;
+    background-color: #fff;
+    border: 0.08rem solid #e8e8e8;
+
+    margin-right: 0.5rem;
+    margin-bottom: 0.7rem;
+    padding: 0 0.75rem;
+    height: 1.6rem;
+    border-radius: 1.6rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+.filterMenu .filterBtn.is-active {
+    background-color: #b9d8ff;
+    color: #0368e5;
+    border-color: #0368e5;
+}
+
+/* submit, reset 버튼 */
+.filterBtnsWrap {
+    width: 21rem;
+    margin: 0 auto;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.search-f-reset-btn, .search-f-submit-btn {
+    font-family: 'LINESeedKR-Bd';
+    font-size: 0.9rem;
+    width: 10rem;
+    height: 3rem;
+    border: 0.08rem solid #a4a4a4;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.search-f-reset-btn {
+    background-color: #fff;
+    margin-right: 0.5rem;
+}
+.search-f-submit-btn {
+    background-color: #5693e0;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* 태블릿 */
+@media (max-width: 1100px) and (min-width: 660px) {
+    .filterWrap {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px 8px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 0 5px;
+    }
+
+    .s-filter-btn {
+        position: relative;
+        display: flex;
+        height: 30px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px 0 13px;
+        gap: 4px;
+        border-radius: 25px;
+        color: #000;
+        font-size: 0.8rem;
+        font-weight: 700;
+        line-height: 150%;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        cursor: pointer;
+    }
+
+    .s-filter-btn.is-active {
+        color: #0368e5;
+    }
+
+    .filter {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 50%;
+        margin-left: -10.5rem;
+        background-color: #fff;
+        box-shadow: 0 6px 15px 0 rgba(0, 0, 0, .3);
+        z-index: 99;
+    }
+
+    .filter.is-invisible {
+        display: none;
+    }
+
+    .filterTitle {
+        font-size: 1.1rem !important;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .search-f-reset-btn, .search-f-submit-btn {
+        font-size: 0.8rem;
+        line-height: 150%;
+        width: 5rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+    }
+}
+
+/* 스마트폰(min: 330) */
+@media (max-width: 660px) and (min-width: 330px) {
+    .filterWrap {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px 8px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding: 0 5px;
+    }
+
+    .s-filter-btn {
+        position: relative;
+        display: flex;
+        height: 20px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0 5px 0 7px;
+        gap: 4px;
+        border-radius: 25px;
+        color: #000;
+        font-size: 0.7rem;
+        font-weight: 700;
+        line-height: 150%;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        cursor: pointer;
+    }
+
+    .s-filter-btn.is-active {
+        color: #0368e5;
+    }
+
+    .filter {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 50%;
+        margin-left: -10.5rem;
+        background-color: #fff;
+        box-shadow: 0 6px 15px 0 rgba(0, 0, 0, .3);
+        z-index: 99;
+    }
+
+    .filter.is-invisible {
+        display: none;
+    }
+
+    .filterTitle {
+        font-size: 1.1rem !important;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .search-f-reset-btn, .search-f-submit-btn {
+        font-size: 0.8rem;
+        line-height: 150%;
+        width: 5rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+    }
+}
+
+/* 스마트폰(min: 250, 아래는 무시) */
+@media (max-width: 330px) {
+    .filterWrap {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding: 0 5px;
+    }
+
+    .s-filter-btn {
+        position: relative;
+        display: flex;
+        height: 20px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0 5px 0 7px;
+        gap: 4px;
+        border-radius: 25px;
+        color: #000;
+        font-size: 0.6rem;
+        font-weight: 700;
+        line-height: 150%;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        cursor: pointer;
+    }
+
+    .s-filter-btn.is-active {
+        color: #0368e5;
+    }
+
+    .filter {
+        position: absolute;
+        width: 250px;
+        top: calc(100% + 10px);
+        left: 50%;
+        margin-left: -125px;
+        background-color: #fff;
+        box-shadow: 0 6px 15px 0 rgba(0, 0, 0, .3);
+        z-index: 99;
+    }
+
+    .filter.is-invisible {
+        display: none;
+    }
+
+    .filterTitle {
+        font-size: 0.8rem !important;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .filter .datepicker, .filter .Calendar {
+        width: 225px;
+    }
+    .filter .month-check-bar, .filter .week-check-bar, .filter .day-check {
+        width: 225px;
+    }
+    .filter .week-check-bar ul > li, .filter .week-check-bar ul {
+        margin: 0;
+    }
+
+    .filter .day-check ul > li {
+        margin: 0;
+    }
+    
+
+    .filterMenu {
+        width: 225px;
+    }
+    .filterMenu .filterBtn {
+        font-size: 0.6rem !important;
+    }
+
+    .filterBtnsWrap {
+        width: 225px;
+    }
+
+    .search-f-reset-btn, .search-f-submit-btn {
+        font-size: 0.6rem;
+        line-height: 150%;
+        width: 5rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+    }
+}

@@ -3,9 +3,22 @@
     justify-content: center;
     align-items: center; 
 }
+@media (max-width: 1100px) and (min-width: 660px) {
+    #search-content {
+        padding-top: 110px;
+        margin-bottom: 40px;
+    }
+}
+/* 스마트폰(min: 250, 아래는 무시) */
+@media (max-width: 660px) {
+    #search-content {
+        padding-top: 75px;
+        margin-bottom: 40px;
+    }
+}
+
 .search-container {
     display: flex;
-    flex-direction: row;
 }
 
 /*search-side*/
@@ -31,5 +44,37 @@
 /*tickets*/
 .tickets{
     width : 1000px;
-    margin-top : 40px;
+}
+
+/* 필터: 사이드 */
+@media (min-width: 1401px) {
+    .search-container {
+        flex-direction: row;
+    }
+
+    .tickets{
+        margin-top : 40px;
+    }
+}
+
+/* 필터: 상단 */
+@media (max-width: 1400px) and (min-width: 1100px) {
+    .search-container {
+        flex-direction: column;
+    }
+
+    .tickets{
+        margin-top : 10px;
+    }
+}
+
+/* 필터: 헤더 */
+@media (max-width: 1100px) {
+    .search-container {
+        flex-direction: column;
+    }
+
+    .tickets{
+        margin-top : 30px;
+    }
 }

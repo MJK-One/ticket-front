@@ -24,12 +24,12 @@ const initialState = {
       event_description: '',
       agency_info: '',
       genre: '',
-      view_count: 0,
       event_start_date: '',
       event_end_date: '',
       venue: '',
       address: '',
-      eventSites: [{}]
+      eventSites: [{}],
+      ticketViews: {}
     },
     status: 'idle',
     error: null
