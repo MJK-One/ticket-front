@@ -57,6 +57,11 @@
     text-align: center;
 }
 
+.mobile-g-w-a.is-selected {
+    font-weight: bold;
+    color: #0368e5;
+}
+
 .mobile-g-w-a img {
     width: 35px;
     height: 35px;

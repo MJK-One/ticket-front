@@ -54,20 +54,20 @@ const MobileGenreHeader = () => {
                 {/* 장르 선택 wrap */}
                 {isGenreTapVisible && (
                     <div className='mobile-genre-wrap'>
-                        <Link to="/genre/musicall" className='mobile-g-w-a'>
-                            <img src="/img/icon/musical_icon.png" />
+                        <Link to="/genre/musicall" className={`mobile-g-w-a ${selectedGenre === "뮤지컬/연극" && "is-selected"}`}>
+                            <img src={selectedGenre === "뮤지컬/연극" ? "/img/icon/genre/musical_on.png" : "/img/icon/genre/musical_off.png"} />
                             뮤지컬/연극
                         </Link>
-                        <Link to="/genre/consert" className='mobile-g-w-a'>
-                            <img src="/img/icon/concert_icon.png" />
+                        <Link to="/genre/consert" className={`mobile-g-w-a ${selectedGenre === "콘서트" && "is-selected"}`}>
+                            <img src={selectedGenre === "콘서트" ? "/img/icon/genre/concert_on.png" : "/img/icon/genre/concert_off.png"} />
                             콘서트
                         </Link>
-                        <Link to="/genre/exhibitionevent" className='mobile-g-w-a'>
-                            <img src="/img/icon/exh_icon.png" />
+                        <Link to="/genre/exhibitionevent" className={`mobile-g-w-a ${selectedGenre === "전시/행사" && "is-selected"}`}>
+                            <img src={selectedGenre === "전시/행사" ? "/img/icon/genre/exh_on.png" : "/img/icon/genre/exh_off.png"} />
                             전시/행사
                         </Link>
-                        <Link to="/genre/classic" className='mobile-g-w-a'>
-                            <img src="/img/icon/classic_icon.png" />
+                        <Link to="/genre/classic" className={`mobile-g-w-a ${selectedGenre === "클래식" && "is-selected"}`}>
+                            <img src={selectedGenre === "클래식" ? "/img/icon/genre/classic_on.png" : "/img/icon/genre/classic_off.png"} />
                             클래식
                         </Link>
                     </div>

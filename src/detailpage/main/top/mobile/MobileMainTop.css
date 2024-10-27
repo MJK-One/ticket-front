@@ -64,53 +64,49 @@
 
     /* 좋아요 */
 .m-p-main-top-top .m-prdCast {
-    float: left;
-    font-size: 0;
-    margin-bottom: 20px;
+    margin-top: 0.1rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
 }
 
 .m-prdCast .m-prdCastWrap {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .m-prdCast .m-prdCastBtn {
-    position: relative;
-    display: inline-block;
-    line-height: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    height: 1.3rem;
 
-    font-size: 0.9rem;
-    font-weight: inherit;
+    justify-content: center;
+    align-items: center;
 
     cursor: pointer;
 }
 
-.m-prdCast .m-prdCastBtn::before { /*좋아요 하트*/
-    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_heart.png');
-    background-repeat: no-repeat;
-    background-position: 0 0;
-
-    position: relative;
-    display: inline-block;
-    top: 0.15rem;
-    padding-right: 0.4rem;
-
+.m-prdCast .m-prdCastBtn img {
     width: 1rem;
-    height: 0.9rem;
-
-    content: '';
+    height: 1rem;
 }
 
-.m-prdCast .m-prdCastBtn.is-toggled::before { /*하트 선택됨*/
-    background-position: 0 -0.9rem;
+.m-prdCast .m-prdCastName {
+    font-size: 0.9rem;
+    font-weight: inherit;
 }
 
 .m-prdCast .m-prdCastNum {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     font-size: 0.9rem;
     font-weight: bold;
-
-    margin-left: 0.3rem;
 }
 
 
@@ -204,7 +200,7 @@
 }
 
 .m-btns {
-    margin-bottom: 10px;
+    margin-bottom: 50px;
 }
 
 .m-btns-close-btn-wrap {
@@ -263,11 +259,29 @@
     .m-p-main-top-top .m-genre span {
         font-size: 0.8rem;
     }
+
+    /* 좋아요, 알림 */
     .m-p-main-top-top .m-prdCast {
         margin-bottom: 5px;
+        gap: 15px;
     }
 
-    .m-prdCast .m-prdCastBtn, .m-prdCast .m-prdCastNum {
+    .m-prdCast .m-prdCastBtn {
+        gap: 3px;
+        height: 1rem;
+    }
+
+    .m-prdCast .m-prdCastBtn img {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+    
+    .m-prdCast .m-prdCastName {
+        font-size: 0.7rem;
+        font-weight: inherit;
+    }
+
+    .m-prdCast .m-prdCastNum {
         font-size: 0.7rem;
     }
 

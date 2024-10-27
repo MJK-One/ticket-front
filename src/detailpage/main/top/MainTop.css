@@ -81,53 +81,53 @@
 }
 
 .posterBox .prdCast {
-    float: left;
     margin-top: 0.1rem;
-    font-size: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
 }
 
 .prdCast .prdCastWrap {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prdCast .prdCastWrap:first-child {
+    margin-left: 10px;
 }
 
 .prdCast .prdCastBtn {
-    position: relative;
-    display: inline-block;
-    line-height: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    height: 1.3rem;
 
-    font-size: 0.9rem;
-    font-weight: inherit;
+    justify-content: center;
+    align-items: center;
 
     cursor: pointer;
 }
 
-.prdCast .prdCastBtn::before { /*좋아요 하트*/
-    background-image: url('//openimage.interpark.com/ticket-desktop/pages/product/icon_heart.png');
-    background-repeat: no-repeat;
-    background-position: 0 0;
-
-    position: relative;
-    display: inline-block;
-    top: 0.15rem;
-    padding-right: 0.4rem;
-
+.prdCast .prdCastBtn img {
     width: 1rem;
-    height: 0.9rem;
-
-    content: '';
+    height: 1rem;
 }
 
-.prdCast .prdCastBtn.is-toggled::before { /*하트 선택됨*/
-    background-position: 0 -0.9rem;
+.prdCast .prdCastName {
+    font-size: 0.9rem;
+    font-weight: inherit;
 }
 
 .prdCast .prdCastNum {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     font-size: 0.9rem;
     font-weight: bold;
-
-    margin-left: 0.3rem;
 }
 
     /*info*/

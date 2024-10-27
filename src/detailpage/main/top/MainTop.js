@@ -28,14 +28,21 @@ const MainTop = () => {
     const [regDate, setRegDate] = useState(detail.registration_date || "정보 없음"); //등록일
     const [view, setView] = useState(detail.ticketViews.view_cnt);
 
-    //티켓캐스트 하트 버튼 이벤트
-    const prdCastNum = 7554; //좋아요 수(하트 버튼)
-    const [isTkHeartBtn, setisTkHeartBtn] = useState(false);
+    //티켓 하트 버튼 이벤트
+    const prdHeartNum = 7554; //좋아요 수(하트 버튼)
+    const [isHeartBtn, setIsHeartBtn] = useState(false);
         /* 이벤트 함수 */
-    const tkHeartBtnHandler = () => {
-        setisTkHeartBtn(!isTkHeartBtn); //클릭되면 상태를 반전함
+    const HeartBtnHandler = () => {
+        setIsHeartBtn(!isHeartBtn); //클릭되면 상태를 반전함
         //숫자 아직 적용 안함
-    }
+    };
+
+    // 티켓 알림 버튼 이벤트
+    const prdBellNum = 7554; //알림 수
+    const [isBellBtn, setIsBellBtn] = useState(false);
+    const BellBtnHandler = () => {
+        setIsBellBtn(!isBellBtn);
+    };
 
         //p or a tag 항목
     //데이터 불러오기
@@ -180,15 +187,28 @@ const MainTop = () => {
                             <img className='posterBoxImage' src={prdPosterSrc} alt={prdTitle} key={`PMT-info-component-posterBox`}/>
                         </div>
 
-                        {/* 좋아요 */}
+                        {/* 좋아요, 알림 */}
                         <div className='posterBoxBottom'>
                             <div className='prdCast' key={`PMT-info-component-prdCast`}>
+                                {/* 좋아요 */}
                                 <div className='prdCastWrap'>
-                                    <a className={`prdCastBtn ${isTkHeartBtn ? 'is-toggled' : ''}`} role='checkbox' onClick={tkHeartBtnHandler}>
-                                        좋아요
+                                    <a className='prdCastBtn' role='checkbox' onClick={HeartBtnHandler}>
+                                        <img src={isHeartBtn ? "/img/icon/detail/heart_on.png" : "/img/icon/detail/heart_off.png"} />
+                                        <p className='prdCastName'>좋아요</p>
+                                        <p className='prdCastNum'>{prdHeartNum}</p>
                                     </a>
-                                    <p className='prdCastNum'>{prdCastNum}</p>
                                 </div>
+
+                                {/* 알림 */}
+                                {isHeartBtn && (
+                                    <div className='prdCastWrap'>
+                                        <a className='prdCastBtn' role='checkbox' onClick={BellBtnHandler}>
+                                            <img src={isBellBtn ? "/img/icon/detail/bell_on.png" : "/img/icon/detail/bell_off.png"} />
+                                            <p className='prdCastName'>알림</p>
+                                            <p className='prdCastNum'>{prdBellNum}</p>
+                                        </a>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
