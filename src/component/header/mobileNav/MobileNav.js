@@ -17,7 +17,7 @@ const MobileNav = () => {
                 return 'home';
             case '/search':
                 return 'search';
-            case '/my':
+            case '/mypage':
                 return 'my';
             default:
                 return '';
@@ -48,7 +48,7 @@ const MobileNav = () => {
                 검색
             </Link>
 
-            <Link to="/" className={`mobile-nav-a ${selectedNav === "my" && "is-selected"}`}>
+            <Link to="/mypage" className={`mobile-nav-a ${selectedNav === "my" && "is-selected"}`}>
                 <img src={selectedNav === "my" ? "/img/icon/mobile_nav/user_on.png" : "/img/icon/mobile_nav/user_off.png"} />
                 마이
             </Link>

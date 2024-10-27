@@ -281,7 +281,7 @@ function Header() {
       {windowWidth >= 1100 && (
         <div className="header-first">
         <Link to="/login"><div className="h-t-login">로그인</div></Link>
-          <div className="h-t-mypage">마이페이지</div>
+        <Link to="/mypage"><div className="h-t-mypage">마이페이지</div></Link>
         </div>
       )}
         <div className="header-top">
@@ -467,11 +467,10 @@ function Header() {
                 {/* <CustomLink to="/chlidfamliy">아동/가족</CustomLink> */}
                 {/* <CustomLink to="/detail">디테일</CustomLink> */}
               </ul>
-              {/* <div className="menuDivider"></div>
+              <div className="menuDivider"></div>
               <ul className="sep-header">
-                <CustomLink to="/region">지역별</CustomLink>
-                <CustomLink to="/month">날짜별</CustomLink>
-              </ul> */}
+                <CustomLink to="/reservation">예약테스트</CustomLink>
+              </ul>
             </div>
           </div>
         )}
