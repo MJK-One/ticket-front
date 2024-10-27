@@ -304,6 +304,7 @@ function Header() {
                   <div className="menuDivider"></div>
                   <ul className="sep-header">
                     <CustomLink to="/mypage">마이페이지</CustomLink>
+                    <CustomLink to="/reservation">예약테스트</CustomLink>
                   </ul>
                 </div>
               </div>

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 import './registerone.css';
+import axios from 'axios';
 
 function RegisterOne() {
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
     const [password, setPassword] = useState("");
@@ -17,7 +20,9 @@ function RegisterOne() {
     const [emailId, setEmailId] = useState("");
     const [showRegisterError, setShowRegisterError] = useState(false);
     const [isEmailExists, setIsEmailExists] = useState(false);
-    const [ageGroup, setAgeGroup] = useState(""); // 연령층 상태 추가
+    const [age, setAge] = useState(""); // 연령층 상태 추가
+    const [name, setName] = useState(""); // 이름 상태 추가
+
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -59,13 +64,6 @@ function RegisterOne() {
         setIsPasswordMatch(password === inputConfirmPassword);
     };
 
-    const handlePhoneChange = (e) => {
-        const inputPhone = e.target.value;
-        setPhoneNumber(inputPhone);
-        
-        const phonePattern = /^(010[- ]?\d{4}[- ]?\d{4})$/;
-        setIsPhoneValid(phonePattern.test(inputPhone));
-    };
 
     const handleEmailDomainChange = (e) => {
         const newDomain = e.target.value;
@@ -85,20 +83,37 @@ function RegisterOne() {
     };
 
     const handleAgeGroupChange = (e) => {
-        setAgeGroup(e.target.value);
+        setAge(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-          const isFormValid = emailId.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== "" &&
-                            phoneNumber.trim() !== "" && ageGroup.trim() !== "" && gender.trim() !== "" &&
+          const isFormValid = emailId.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== ""
+                            && age.trim() !== "" && gender.trim() !== "" &&
                             isEmailValid && isPasswordValid && isPasswordMatch && isPhoneValid;
 
 
         if (isFormValid) {
-            console.log("가입 완료!");
-            setShowRegisterError(false);
+
+            const userData = {
+                email: `${emailId}@${emailDomain}`,
+                name: name,
+                password: password,
+                phoneNumber: phoneNumber,
+                age: age,
+                gender: gender,
+            };
+            
+            try {
+                const response = await axios.post('http://localhost:8080/register', userData);
+                console.log("가입 완료!", response.data);
+                setShowRegisterError(false);
+                navigate('/');
+            } catch (error) {
+                console.error("가입 실패:", error);
+                setShowRegisterError(true);
+            }
         } else {
             console.log("오류가 있습니다. 모든 필드를 확인하세요.");
             setShowRegisterError(true);
@@ -192,15 +207,15 @@ function RegisterOne() {
                         <div className="registerone-input">
                             <div className="input-line">
                                 <label>이름</label>
-                                <input type="text" className="register-name" placeholder="" />
+                                <input type="text" className="register-name" placeholder="" value={name} onChange={(e) => setName(e.target.value)} />
                             </div>
                         </div>
-                        <div className="register-check">
-                            빈칸
+                        <div className={`register-check ${name.trim() === "" ? 'visible' : ''}`}>
+                            이름을 입력해 주세요.
                         </div>
                     </div>
                     
-                    <div className="registerone-input-box">
+                    {/* <div className="registerone-input-box">
                         <div className="registerone-input">
                             <div className="input-line">
                                 <label>휴대폰</label>
@@ -216,7 +231,7 @@ function RegisterOne() {
                         <div className={`register-check ${showPhoneError ? 'visible' : ''}`}>
                             올바른 전화번호 형식이 아닙니다. (예: 010-1234-5678)
                         </div>
-                    </div>
+                    </div> */}
                     
                     <div className="registerone-input-box">
                         <div className="registerone-input">
@@ -226,8 +241,8 @@ function RegisterOne() {
                                     <label>
                                         <input 
                                             type="radio" 
-                                            value="10대" 
-                                            checked={ageGroup === "10대"} 
+                                            value="10-19" 
+                                            checked={age === "10-19"} 
                                             onChange={handleAgeGroupChange} 
                                         />
                                         10대
@@ -235,8 +250,8 @@ function RegisterOne() {
                                     <label>
                                         <input 
                                             type="radio" 
-                                            value="20대" 
-                                            checked={ageGroup === "20대"} 
+                                            value="20-29" 
+                                            checked={age === "20-29"} 
                                             onChange={handleAgeGroupChange} 
                                         />
                                         20대
@@ -244,8 +259,8 @@ function RegisterOne() {
                                     <label>
                                         <input 
                                             type="radio" 
-                                            value="30대" 
-                                            checked={ageGroup === "30대"} 
+                                            value="30-39" 
+                                            checked={age === "30-39"} 
                                             onChange={handleAgeGroupChange} 
                                         />
                                         30대
@@ -253,8 +268,8 @@ function RegisterOne() {
                                     <label>
                                         <input 
                                             type="radio" 
-                                            value="40대" 
-                                            checked={ageGroup === "40대"} 
+                                            value="40-49" 
+                                            checked={age === "40-49"} 
                                             onChange={handleAgeGroupChange} 
                                         />
                                         40대
@@ -262,11 +277,11 @@ function RegisterOne() {
                                     <label>
                                         <input 
                                             type="radio" 
-                                            value="50대 이상" 
-                                            checked={ageGroup === "50대 이상"} 
+                                            value="50-59" 
+                                            checked={age === "50-59"} 
                                             onChange={handleAgeGroupChange} 
                                         />
-                                        50대 이상
+                                        50대
                                     </label>
                                 </div>
                             </div>
@@ -281,8 +296,8 @@ function RegisterOne() {
                                     <label>
                                         <input 
                                             type="radio" 
-                                            value="male" 
-                                            checked={gender === "male"} 
+                                            value="M" 
+                                            checked={gender === "M"} 
                                             onChange={handleGenderChange} 
                                         />
                                         남성
@@ -290,8 +305,8 @@ function RegisterOne() {
                                     <label>
                                         <input 
                                             type="radio" 
-                                            value="female" 
-                                            checked={gender === "female"} 
+                                            value="F" 
+                                            checked={gender === "F"} 
                                             onChange={handleGenderChange} 
                                         />
                                         여성

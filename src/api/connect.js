@@ -47,3 +47,13 @@ export const naverLogin = async () => {
     const res = await axios.get(`${API_SERVER_HOST}/api/naver/login`);
     return res.data;
 };
+
+export const createReservation = async (reservationData) => {
+    try {
+        const res = await axios.post(`${API_SERVER_HOST}/api/reservations`, reservationData);
+        return res.data; // 성공적으로 생성된 예약 데이터 반환
+    } catch (error) {
+        console.error('Error creating reservation:', error.response ? error.response.data : error.message);
+        throw error; // 호출하는 쪽에서 에러를 처리할 수 있도록 에러 던짐
+    }
+};

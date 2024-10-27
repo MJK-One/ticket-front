@@ -14,6 +14,8 @@ const Search = lazy(() => import('./search/search'));
 const Login = lazy(() => import('./login/login'));
 const RegisterOne = lazy(() => import('./login/registerone'));
 const Mypage = lazy(() => import('./mypage/mypage'));
+const ReservationForm = lazy(() => import('./Reservation'));
+
 function App() {
   return (
     <Router>
@@ -33,6 +35,7 @@ function App() {
           <Route path="/login" element={<Login />} /> 
           <Route path="registerone" element={<RegisterOne/>} />
           <Route path="/mypage" element={<Mypage/>} />
+          <Route path='/reservation' element={<ReservationForm />} />
         </Routes>
       </Suspense>
     </Router>
