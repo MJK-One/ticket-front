@@ -64,7 +64,7 @@ const MainBody = () => {
             <div>
                 {activeNav === 'INFO' && hasInfoData && <NavInfo />}
                 {activeNav === 'PLACE' && hasPlaceData && <NavPlace />}
-                {activeNav === 'STATS' && <NavStats tid={detail.id} />}
+                {activeNav === 'STATS' && <NavStats />}
             </div>
 
         </div>

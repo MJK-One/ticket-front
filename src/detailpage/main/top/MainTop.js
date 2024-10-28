@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { API_SERVER_HOST } from '../../../api/connect';
 
 import './MainTop.css';
 
@@ -15,9 +18,11 @@ const MainTop = () => {
     }, []);
 
     //데이터 불러오기
+    const navigate = useNavigate();
     const detail = useSelector((state) => state.details.detail);
     const status = useSelector((state) => state.details.status);
     const error = useSelector((state) => state.details.error);
+    const { isAuthenticated, email } = useSelector((state) => state.user);
 
     const [genre, setGenre] = useState(detail.genre || "정보 없음");
     const genreText = "> " + genre;
@@ -29,13 +34,69 @@ const MainTop = () => {
     const [view, setView] = useState(detail.ticketViews.view_cnt);
 
     //티켓 하트 버튼 이벤트
-    const prdHeartNum = 7554; //좋아요 수(하트 버튼)
+    const [prdHeartNum, setPrdHeartNum] = useState(0);
     const [isHeartBtn, setIsHeartBtn] = useState(false);
-        /* 이벤트 함수 */
+    const [click, setClick] = useState(false);
+
+    // 버튼 상태
+    useEffect(() => {
+        async function likeState(tId, uId) {
+            try {
+                const res = await axios.get(`${API_SERVER_HOST}/likeCheck?tId=${tId}&uId=${uId}`);
+                setIsHeartBtn(res.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        likeState(detail.id, email);
+    }, [detail, isAuthenticated, email, click]);
+
+    // 하트 수
+    useEffect(() => {
+        async function fetchLikeCnt(tId) {
+            try {
+                const res = await axios.get(`${API_SERVER_HOST}/ticketLike?tId=${tId}`);
+                setPrdHeartNum(res.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchLikeCnt(detail.id);
+    }, [detail, isHeartBtn]);
+
+    /* 이벤트 함수 */
     const HeartBtnHandler = () => {
-        setIsHeartBtn(!isHeartBtn); //클릭되면 상태를 반전함
-        //숫자 아직 적용 안함
+        //로그인 안되어 있으면 로그인 시키기
+        if(isAuthenticated === false) {
+            navigate("/login");
+        }
+            
+        // 전 상태 기준
+        if(isHeartBtn === false) { //좋아요 on
+            async function clickLike(tId, uId) {
+                try {
+                    await axios.get(`${API_SERVER_HOST}/clickLike?tId=${tId}&uId=${uId}`);
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            clickLike(detail.id, email);
+
+        } else { //좋아요 off
+            async function cancelLike(tId, uId) {
+                try {
+                    await axios.get(`${API_SERVER_HOST}/cancelLike?tId=${tId}&uId=${uId}`);
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            cancelLike(detail.id, email);
+        }
+
+        setClick(!click);
     };
+
+    
 
     // 티켓 알림 버튼 이벤트
     const prdBellNum = 7554; //알림 수
