@@ -8,6 +8,12 @@ export const naverSearch = async (placeName) => {
     return res.data;
 };
 
+// SearchController > searchAutoComplete()
+export const autoComplete = async (searchKey) => {
+    const res = await axios.get(`${API_SERVER_HOST}/autoComplete?searchKey=${searchKey}`);
+    return res.data;
+}
+
 // MainPostController > getTop10()
 export const getTop10 = async () => {
     const res = await axios.get(`${API_SERVER_HOST}/top10`);

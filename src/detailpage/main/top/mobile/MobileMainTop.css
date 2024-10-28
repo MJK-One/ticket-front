@@ -1,0 +1,306 @@
+.m-productMainTop {
+    width: 100%;
+    position: relative;
+}
+
+/* 포스터, info1(제목, 장르, 좋아요) */
+.m-p-main-top-top {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 25px;
+    position: relative;
+
+    background-color: #b2b2b2;
+}
+
+    /* 포스터 */
+.m-p-main-top-top .m-posterBox {
+    width: 120px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 0.08rem solid #dadee3;
+}
+
+.m-p-main-top-top .m-posterBoxImage {
+    width: 120px;
+    height: auto;
+}
+
+    /* info */
+.m-p-main-top-top .m-infoBox-top {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 140px);
+    justify-content: space-between;
+}
+
+.m-prd-title-genre-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.m-p-main-top-top .m-prdTitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /*텍스트 2줄로 제한*/
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis; /*텍스트가 넘어가면 ...으로*/
+    overflow: hidden;
+
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.m-p-main-top-top .m-genre span {
+    color: #4a4a4a;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+    /* 좋아요 */
+.m-p-main-top-top .m-prdCast {
+    margin-top: 0.1rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.m-prdCast .m-prdCastWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.m-prdCast .m-prdCastBtn {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    height: 1.3rem;
+
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.m-prdCast .m-prdCastBtn img {
+    width: 1rem;
+    height: 1rem;
+}
+
+.m-prdCast .m-prdCastName {
+    font-size: 0.9rem;
+    font-weight: inherit;
+}
+
+.m-prdCast .m-prdCastNum {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+
+/* info2(기간, 장소, 오픈, 선예매) */
+.m-p-main-top-bottom {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    position: relative;
+}
+
+.m-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.m-infoItem {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    gap: 10px;
+}
+
+.m-infoItem .m-infoLabel {
+    width: 100px;
+    color: #5e5e5e;
+    font-size: 1rem;
+    font-weight: bold;
+    
+    display: flex;
+    align-items: center;
+}
+
+.m-infoDesc {
+    width: calc(100% - 110px);
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+.m-infoDesc .is-place {
+    font-weight: bold;
+
+    width: 100%;
+    display: inline-block;
+    -webkit-line-clamp: 1; /*텍스트 1줄로 제한*/
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /*텍스트가 넘어가면 ...으로*/
+    white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+}
+
+/* 예매버튼(아래쪽에 고정) */
+.m-p-main-top-book-btns-wrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 0.08rem solid #dadee3;
+    box-shadow: 0 6px 15px 0 rgba(0, 0, 0, .3);
+    z-index: 1000; /* 다른 요소 위로 헤더가 나타나도록 */
+}
+
+/**/
+.m-is-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.m-is-main .m-bookingBtn {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+
+    background-color: #5693e0;
+    border: 0.08rem solid #5693e0;
+    border-radius: 0.6rem;
+
+    display: flex;
+    width: calc(100% - 10px);
+    height: 3rem;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.m-btns {
+    margin-bottom: 50px;
+}
+
+.m-btns-close-btn-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+.m-btns-close-btn {
+    font-size: 1.5rem;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.m-is-direct {
+    border-top: 0.08rem solid #dadee3;
+    border-bottom: 0.08rem solid #dadee3;
+    background-color: #fff;
+}
+
+.m-is-direct, .m-bookingBtn {
+    display: flex;
+    width: 100%;
+    height: 2.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.is-melon, .is-interpark, .is-yes24, .is-ticketlink {
+    height: 1.5rem;
+    width: auto;
+}
+
+/**/
+@media (max-width: 500px) {
+    /* top */
+    .m-p-main-top-top {
+        padding: 15px;
+        gap: 10px;
+    }
+    .m-p-main-top-top .m-posterBox {
+        width: 70px;
+        height: auto;
+    }
+    .m-p-main-top-top .m-posterBoxImage {
+        width: 70px;
+        height: auto;
+    }
+
+    .m-p-main-top-top .m-infoBox-top {
+        width: calc(100% - 80px);
+    }
+
+    .m-p-main-top-top .m-prdTitle {
+        font-size: 1rem;
+    }
+
+    .m-p-main-top-top .m-genre span {
+        font-size: 0.8rem;
+    }
+
+    /* 좋아요, 알림 */
+    .m-p-main-top-top .m-prdCast {
+        margin-bottom: 5px;
+        gap: 15px;
+    }
+
+    .m-prdCast .m-prdCastBtn {
+        gap: 3px;
+        height: 1rem;
+    }
+
+    .m-prdCast .m-prdCastBtn img {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+    
+    .m-prdCast .m-prdCastName {
+        font-size: 0.7rem;
+        font-weight: inherit;
+    }
+
+    .m-prdCast .m-prdCastNum {
+        font-size: 0.7rem;
+    }
+
+    /* bottom */
+    .m-p-main-top-bottom {
+        padding: 18px;
+    }
+
+    .m-infoItem {
+        gap: 5px;
+        font-size: 0.85rem;
+    }
+
+    .m-infoItem .m-infoLabel {
+        width: 70px;
+        font-size: 0.85rem;
+    }
+
+    .m-infoDesc {
+        width: calc(100% - 75px);
+    }
+}

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Header from './component/header/home/header';
+import MobileDetailHeader from './component/header/detail/MobileDetailHeader';
 import { createReservation } from './api/connect'; // api.js 파일에서 함수 임포트
 
 const ReservationForm = () => {
@@ -25,31 +27,48 @@ const ReservationForm = () => {
         }
     };
 
+    // 화면 크기 체크 함수
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
-        <form onSubmit={handleSubmit}>
-            <input 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                placeholder="이메일" 
-                required 
-            />
-            <input 
-                type="datetime-local" 
-                value={ticketDate} 
-                onChange={(e) => setTicketDate(e.target.value)} 
-                required 
-            />
-            <input 
-                type="number" 
-                value={notificationHours} 
-                onChange={(e) => setNotificationHours(e.target.value)} 
-                placeholder="알림 시간(시간)" 
-                min="1" // 최소 1시간
-                required 
-            />
-            <button type="submit">예약하기</button>
-        </form>
+        <>
+            {/* 헤더 */}
+            {windowWidth > 1100 && <Header />}
+            {windowWidth <= 1100 && <MobileDetailHeader />}
+
+            <form onSubmit={handleSubmit} style={ windowWidth <= 1100 ? { marginTop: '50px'}  : {marginTop: '10px'}}>
+                <input 
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="이메일" 
+                    required 
+                />
+                <input 
+                    type="datetime-local" 
+                    value={ticketDate} 
+                    onChange={(e) => setTicketDate(e.target.value)} 
+                    required 
+                />
+                <input 
+                    type="number" 
+                    value={notificationHours} 
+                    onChange={(e) => setNotificationHours(e.target.value)} 
+                    placeholder="알림 시간(시간)" 
+                    min="1" // 최소 1시간
+                    required 
+                />
+                <button type="submit">예약하기</button>
+            </form>
+
+        </>
     );
 };
 

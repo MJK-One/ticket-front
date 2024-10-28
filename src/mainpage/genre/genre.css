@@ -5,6 +5,13 @@
     justify-content: center;
     align-items: center; 
 }
+@media (max-width: 1100px) {
+    #contents {
+        margin-top: 2.5rem; /* 모바일 헤더가 fixed라 height만큼 내리기 */
+        margin-bottom: 50px; /* 모바일 nav가 fixed라 height만큼 추가하기 */
+    }
+}
+
 .maintop {
     width : 100%;
     display: flex;

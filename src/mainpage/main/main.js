@@ -4,6 +4,8 @@ import MainTop from '../componet/mainTop';
 import RegionPage from '../../regionpage/RegionPage';
 // import Monthticket from './monthticket';
 import Ticketlist from '../componet/ticketlist';
+import MobileNav from '../../component/header/mobileNav/MobileNav';
+import Header from '../../component/header/home/header';
 import { getMonth, getTop10, getAllList } from '../../api/connect';
 
 function Main() {
@@ -46,21 +48,36 @@ function Main() {
         if (node) observer.current.observe(node);
     }, [hasMore]);
 
+    // 화면 크기 체크 함수
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
-        <main id="contents">
-            <section className='maintop'>
-                <MainTop top10Tickets={top10Tickets} />
-            </section> 
-            {/* <section className='ticket-month'>
-                <Monthticket monthTickets={monthTickets} />
-            </section> */}
-            <section className='ticket-region'>
-                <RegionPage></RegionPage>
-            </section>
-            <section className='ticket-list'>
-                <Ticketlist allTickets={allTickets} lastTicketElementRef={lastTicketElementRef} />
-            </section>
-        </main>
+        <>
+            <Header />
+            <main id="contents">
+                <section className='maintop'>
+                    <MainTop top10Tickets={top10Tickets} />
+                </section> 
+                {/* <section className='ticket-month'>
+                    <Monthticket monthTickets={monthTickets} />
+                </section> */}
+                <section className='ticket-region'>
+                    <RegionPage></RegionPage>
+                </section>
+                <section className='ticket-list'>
+                    <Ticketlist allTickets={allTickets} lastTicketElementRef={lastTicketElementRef} />
+                </section>
+            </main>
+
+            {windowWidth <= 1100 && <MobileNav />}
+        </>
     );   
 }
 
