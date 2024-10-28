@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'; // useNavigate import 추가
-import './login.css';
 import { naverLogin } from '../api/connect'; // naverLogin 함수를 import
+import { useDispatch } from "react-redux";
+import { login } from "../store/slice/userSlice";
+import { API_SERVER_HOST } from "../api/connect";
 import axios from 'axios'; // axios 추가
 
+import './login.css';
 
 function Login() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false); // 비밀번호 표시 상태
     const [email, setEmail] = useState(''); // 이메일 상태
     const [password, setPassword] = useState(''); // 비밀번호 상태
@@ -23,12 +27,14 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault(); // 폼 제출 기본 동작 방지
         try {
-            const response = await axios.post('http://localhost:8080/login', { email, password });
+            const response = await axios.post(`${API_SERVER_HOST}/login`, { email, password });
             console.log('로그인 성공:', response.data);
-            navigate('/');
             // 로그인 성공 후 처리
+            dispatch(login({email}));
+            navigate('/');
         } catch (error) {
             console.error('로그인 실패:', error);
+            alert('아이디나 패스워드가 일치하지 않습니다.');
             // 로그인 실패 처리
         }
     };

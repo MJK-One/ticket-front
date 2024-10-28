@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { logout } from "../../../store/slice/userSlice.js";
 import { resetCurPage, resetAllSearchResult, setRegionFilter, setPeriod, setSearchKeyword } from '../../../store/slice/searchSlice.js';
 import { autoComplete } from "../../../api/connect.js";
 import './header.css';
@@ -50,6 +51,9 @@ export function CustomLink({ to, children }) {
 
 // 헤더(홈화면)
 function Header() {
+  // 로그인 확인
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   //필터 교차
   const [isLocationFilterVisible, setLocationFilterVisible] = useState(false);
   const [isMonthFilterVisible, setMonthFilterVisible] = useState(false);
@@ -275,13 +279,24 @@ function Header() {
   };
 
 
+  // 로그아웃 핸들러
+  const handleLogout = () => {
+    dispatch(logout());
+    alert('로그아웃 되었습니다.');
+  };
+
+  //
   return (
     <FixedHeader>
     <header className="App-header">
       {windowWidth >= 1100 && (
         <div className="header-first">
-        <Link to="/login"><div className="h-t-login">로그인</div></Link>
-        <Link to="/mypage"><div className="h-t-mypage">마이페이지</div></Link>
+          {isAuthenticated ? (
+            <button className="h-t-login" onClick={handleLogout}>로그아웃</button>
+          ) : (
+            <Link to="/login"><div className="h-t-login">로그인</div></Link>
+          )}
+          <Link to="/mypage"><div className="h-t-mypage">마이페이지</div></Link>
         </div>
       )}
         <div className="header-top">
