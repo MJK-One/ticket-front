@@ -10,19 +10,16 @@ function RegisterOne() {
     const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
     const [emailDomain, setEmailDomain] = useState("direct");
-    const [gender, setGender] = useState(""); // 성별 상태 추가
+    const [gender, setGender] = useState("");
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [isPasswordMatch, setIsPasswordMatch] = useState(true);
-    const [isPhoneValid, setIsPhoneValid] = useState(true);
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [emailId, setEmailId] = useState("");
     const [showRegisterError, setShowRegisterError] = useState(false);
     const [isEmailExists, setIsEmailExists] = useState(false);
-    const [age, setAge] = useState(""); // 연령층 상태 추가
-    const [name, setName] = useState(""); // 이름 상태 추가
-
+    const [age, setAge] = useState("");
+    const [name, setName] = useState("");
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -64,15 +61,17 @@ function RegisterOne() {
         setIsPasswordMatch(password === inputConfirmPassword);
     };
 
-
     const handleEmailDomainChange = (e) => {
         const newDomain = e.target.value;
         setEmailDomain(newDomain);
-        
+
+        // 이메일 도메인이 'direct'가 아닐 때 이메일을 처리
         if (newDomain !== "direct") {
-            const newEmailId = emailId.split('@')[0];
-            setEmailId(newEmailId);
-            setIsEmailValid(validateEmail(newEmailId, newDomain));
+            const emailParts = emailId.split('@');
+            if (emailParts.length > 1) {
+                setEmailId(emailParts[0]); // @ 이전 부분만 남김
+            }
+            setIsEmailValid(validateEmail(emailParts[0], newDomain));
         } else {
             setIsEmailValid(validateEmail(emailId, newDomain));
         }
@@ -89,18 +88,17 @@ function RegisterOne() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-          const isFormValid = emailId.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== ""
+        const isFormValid = emailId.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== ""
                             && age.trim() !== "" && gender.trim() !== "" &&
-                            isEmailValid && isPasswordValid && isPasswordMatch && isPhoneValid;
-
+                            isEmailValid && isPasswordValid && isPasswordMatch;
 
         if (isFormValid) {
-
+            const fullEmail = emailDomain === "direct" ? emailId : `${emailId}@${emailDomain}`;
+            
             const userData = {
-                email: `${emailId}@${emailDomain}`,
+                email: fullEmail,
                 name: name,
                 password: password,
-                phoneNumber: phoneNumber,
                 age: age,
                 gender: gender,
             };
@@ -122,8 +120,8 @@ function RegisterOne() {
 
     const showPasswordError = !isPasswordValid && password.length > 0;
     const showConfirmPasswordError = confirmPassword.length >= 2 && !isPasswordMatch;
-    const showPhoneError = !isPhoneValid && phoneNumber.length > 0;
     const showEmailError = !isEmailValid && emailId.length > 0;
+    
     return (
         <div className="registerone-con">
             <div className="register-header">
