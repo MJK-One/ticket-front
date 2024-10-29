@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLikeState, fetchLikeCnt } from '../../../store/slice/detailSlice';
 import axios from 'axios';
 import { API_SERVER_HOST } from '../../../api/connect';
 
@@ -19,84 +20,55 @@ const MainTop = () => {
 
     //데이터 불러오기
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const detail = useSelector((state) => state.details.detail);
+    const like = useSelector((state) => state.details.like);
+    const bell = useSelector((state) => state.details.bell);
+
     const status = useSelector((state) => state.details.status);
     const error = useSelector((state) => state.details.error);
     const { isAuthenticated, email } = useSelector((state) => state.user);
 
-    const [genre, setGenre] = useState(detail.genre || "정보 없음");
+    const genre = detail.genre || "정보 없음";
     const genreText = "> " + genre;
 
-    const [prdTitle, setPrdTitle] = useState(detail.event_name || "NONAME");//상품 제목
-    const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url || "/img/normal_poster.png");//포스터 이미지 링크
+    const prdTitle = detail.event_name || "NONAME";//상품 제목
+    const prdPosterSrc = detail.image_url || "/img/normal_poster.png";//포스터 이미지 링크
     
-    const [regDate, setRegDate] = useState(detail.registration_date || "정보 없음"); //등록일
-    const [view, setView] = useState(detail.ticketViews.view_cnt);
+    const regDate = detail.registration_date || "정보 없음"; //등록일
+    const view = detail.ticketViews.view_cnt;
 
     //티켓 하트 버튼 이벤트
-    const [prdHeartNum, setPrdHeartNum] = useState(0);
-    const [isHeartBtn, setIsHeartBtn] = useState(false);
-    const [click, setClick] = useState(false);
-
-    // 버튼 상태
-    useEffect(() => {
-        async function likeState(tId, uId) {
-            try {
-                const res = await axios.get(`${API_SERVER_HOST}/likeCheck?tId=${tId}&uId=${uId}`);
-                setIsHeartBtn(res.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        likeState(detail.id, email);
-    }, [detail, isAuthenticated, email, click]);
-
-    // 하트 수
-    useEffect(() => {
-        async function fetchLikeCnt(tId) {
-            try {
-                const res = await axios.get(`${API_SERVER_HOST}/ticketLike?tId=${tId}`);
-                setPrdHeartNum(res.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchLikeCnt(detail.id);
-    }, [detail, isHeartBtn]);
+    const prdHeartNum = like.cnt;
+    const isHeartBtn = like.state;
 
     /* 이벤트 함수 */
-    const HeartBtnHandler = () => {
-        //로그인 안되어 있으면 로그인 시키기
-        if(isAuthenticated === false) {
+    const HeartBtnHandler = async () => {
+        // 로그인 확인
+        if (!isAuthenticated) {
             navigate("/login");
+            return;
         }
-            
-        // 전 상태 기준
-        if(isHeartBtn === false) { //좋아요 on
-            async function clickLike(tId, uId) {
-                try {
-                    await axios.get(`${API_SERVER_HOST}/clickLike?tId=${tId}&uId=${uId}`);
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-            clickLike(detail.id, email);
-
-        } else { //좋아요 off
-            async function cancelLike(tId, uId) {
-                try {
-                    await axios.get(`${API_SERVER_HOST}/cancelLike?tId=${tId}&uId=${uId}`);
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-            cancelLike(detail.id, email);
-        }
-
-        setClick(!click);
-    };
-
     
+        try {
+            // 좋아요 상태 변경 비동기 호출
+            const apiUrl = isHeartBtn
+                ? `${API_SERVER_HOST}/cancelLike?tId=${detail.id}&uId=${email}`
+                : `${API_SERVER_HOST}/clickLike?tId=${detail.id}&uId=${email}`;
+    
+            await axios.get(apiUrl);
+    
+            // 좋아요 상태와 카운트 동시에 가져옴
+            await Promise.all([
+                dispatch(fetchLikeState({ tId: detail.id, uId: email })),
+                dispatch(fetchLikeCnt(detail.id)),
+            ]);
+    
+        } catch (error) {
+            console.error("Error in HeartBtnHandler:", error);
+        }
+    };
 
     // 티켓 알림 버튼 이벤트
     const prdBellNum = 7554; //알림 수
@@ -107,8 +79,8 @@ const MainTop = () => {
 
         //p or a tag 항목
     //데이터 불러오기
-    const [startDate, setStartDate] = useState(detail.event_start_date);
-    const [endDate, setEndDate] = useState(detail.event_end_date);
+    const startDate = detail.event_start_date;
+    const endDate = detail.event_end_date;
     const [infoPeriod, setInfoPeriod] = useState("정보 없음")
     
     useEffect(() => {
@@ -122,7 +94,7 @@ const MainTop = () => {
     }, [startDate, endDate]);
 
     //장소
-    const [placeData, setPlaceData] = useState(detail.venue);
+    const placeData = detail.venue;
     const [infoPlace, setInfoPlace] = useState("정보 없음");
     const [placeLink, setPlaceLink] = useState("#");
 
@@ -135,8 +107,8 @@ const MainTop = () => {
         }
     }, [placeData]);
 
-    const [infoOpenDateTime, setInfoOpenDateTime] = useState(detail.ticket_open_date || "정보 없음");
-    const [infoPreOpenDateTime, setInfoPreOpenDateTime] = useState(detail.pre_sale_date || "정보 없음");
+    const infoOpenDateTime = detail.ticket_open_date || "정보 없음";
+    const infoPreOpenDateTime = detail.pre_sale_date || "정보 없음";
 
     const infoList = [
         {label: '공연 기간', text: infoPeriod},

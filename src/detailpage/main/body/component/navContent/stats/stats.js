@@ -5,9 +5,9 @@ import './stats.css';
 import axios from 'axios';
 
 const NavStats = () => {
-    // 티켓 아이디
+    //
     const detail = useSelector((state) => state.details.detail);
-    const ticketId = detail.id;
+    const like = useSelector((state) => state.details.like);
 
     // 화면 크기 체크 함수
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -31,12 +31,13 @@ const NavStats = () => {
                 console.error(error);
             }
         };
-        fetchLikePerForAge(ticketId);
-    }, [ticketId, detail]);
+        fetchLikePerForAge(detail.id);
+        console.log(ageData);
+    }, [detail.id, like]);
 
     const [statAgeData, setStatAgeData] = useState(null);
     useEffect(() => {
-        if(ageData !== null) {
+        if(ageData) {
             setStatAgeData([
                 {age: '10대', percent: ageData.perFor10},
                 {age: '20대', percent: ageData.perFor20},
@@ -45,12 +46,14 @@ const NavStats = () => {
                 {age: '50대', percent: ageData.perFor50},
                 {age: '60대', percent: ageData.perFor60}
             ]);
+        } else {
+            setStatAgeData(null);
         }
     }, [ageData]);
 
     const [statAgeList, setStatAgeList] = useState(null);
     useEffect(() => {
-        if(statAgeData !== null) {
+        if(statAgeData) {
             setStatAgeList(
                 Array.from({length: statAgeData.length}).map((_, i) => {
                     let statBackHeight = 4.5; //rem 단위
@@ -69,7 +72,10 @@ const NavStats = () => {
                     );
                 })
             )
+        } else {
+            setStatAgeList(null);
         }
+        console.log(statAgeList);
     }, [statAgeData]);
 
     //
@@ -78,7 +84,7 @@ const NavStats = () => {
             {/* 관심 통계 */}
             <div className='content prdStat'>
                 <h3 className='contentTitle'>관심 등록 유저 통계</h3>
-                {(statAgeList !== null) && (
+                {(statAgeList !== null && statAgeList.length > 0) && (
                     <div className='statWrap'>
                         <div className='statAge'>
                             <strong className='statTitle'>연령</strong>
