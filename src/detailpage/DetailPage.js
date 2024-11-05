@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchDetail, fetchLikeState, setLikeState, fetchLikeCnt } from '../store/slice/detailSlice.js';
+import { fetchDetail, fetchLikeState, setLikeState, fetchLikeCnt, fetchBellState, setBellState, fetchBellCnt } from '../store/slice/detailSlice.js';
 
 import Header from '../component/header/home/header.js';
 import MobileDetailHeader from '../component/header/detail/MobileDetailHeader.js';
@@ -42,6 +42,19 @@ const DetailPage = () => {
             } else {
                 dispatch(setLikeState(false)); //state
                 dispatch(fetchLikeCnt(id)); //cnt
+            }
+        }
+    }, [id, isAuthenticated, email]);
+
+    // bell 데이터 로딩
+    useEffect(() => {
+        if(id) {
+            if(isAuthenticated) { //로그인 중
+                dispatch(fetchBellState({tId: id, uId: email})); //state
+                dispatch(fetchBellCnt(id)); //cnt
+            } else {
+                dispatch(setBellState(false)); //state
+                dispatch(fetchBellCnt(id)); //cnt
             }
         }
     }, [id, isAuthenticated, email]);

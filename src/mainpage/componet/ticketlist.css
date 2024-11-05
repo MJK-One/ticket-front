@@ -1,6 +1,3 @@
-.openticketlist-container {
-
-}
 .openticket-all {
     display: flex;
     align-items: center;
@@ -15,27 +12,26 @@
 .openticket-list {
     display : flex;
     flex-wrap: wrap;
-    width : 1100px;
-    margin-top : 20px;
 }
+
+@media (min-width: 1100px) {
+    .openticket-list {
+        width : 1100px;
+        margin-top : 20px;
+    }
+}
+
 @media (max-width: 1100px) and (min-width: 650px) {
     .openticket-list {
-        display : flex;
-        flex-wrap: wrap;
         width : 650px;
         margin-top : 20px;
     }
 }
+
 .openticket {
-    width : 191px;
-    height : 400px;
     margin : 0 auto 20px;
     cursor: pointer;
     border-bottom: 1px solid #ddd;
-}
-.openticket-img {
-    width : 191px;
-    height : 254px;
 }
 .openticket-img img{
     width : 100%;
@@ -43,8 +39,6 @@
     border-radius: 10px;
 }
 .openticket-info {
-    margin-top: 10px;
-    width : 180px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -52,7 +46,6 @@
 .openticket-info .title {
     margin-top : 5px;
     font-weight: 600;
-    font-size: 17px;
     width : 100%;
     /* height : 40px; */
     display: -webkit-box;
@@ -61,14 +54,10 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-.openticket-info .day {
-    margin-top : 5px;
-}
 .open-Timer {
     /* display: flex;
     flex-direction: row; */
     align-items: center;
-    height: 1.5rem;
     width:191px;
     padding: 0;
     border-radius: 4px;
@@ -80,8 +69,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 1.3rem;
-    padding: .1rem .3rem;
     border-radius: 4px 0 0 4px;
     color : white;
     background: #1774e6;
@@ -93,8 +80,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 1.3rem;
-    padding: .05rem .6rem;
     color: #1774e6;
     gap: 1rem;
     background: #fff;
@@ -110,8 +95,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 1.3rem;
-    padding: .1rem .3rem;
     border-radius: 4px;
     color : white;
     background: #e61717;
@@ -131,6 +114,53 @@
     height : 30px;
     margin-right: 5px;
     border-radius: 10px;
+}
+
+/**/
+@media (min-width: 650px) {
+    .openticket {
+        width : 191px;
+        height : 400px;
+    }
+    .openticket-img {
+        width : 191px;
+        height : 254px;
+    }
+    .openticket-info {
+        margin-top: 10px;
+        width : 180px;
+    }
+    .openticket-info .title {
+        font-size: 17px;
+    }
+    .openticket-info .day {
+        margin-top : 5px;
+    }
+    .open-Timer {
+        height: 1.5rem;
+    }
+    .Timer-banner {
+        height: 1.3rem;
+        padding: .1rem .3rem;
+    }
+    .Timer-day {
+        height: 1.3rem;
+        padding: .05rem .6rem;
+    }
+    .pre-banner{
+        height: 1.3rem;
+        padding: .1rem .3rem;
+    }
+    .tic-site2 {
+        width : 100%;
+        height : 30px;
+    }
+    .tic-site2 img {
+        width : 30px;
+        height : 30px;
+        margin-right: 5px;
+        border-radius: 10px;
+    }
 }
 
 /* 스마트폰(min: 250, 아래는 무시) */
