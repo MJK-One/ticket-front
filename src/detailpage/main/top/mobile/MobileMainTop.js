@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLikeState, fetchLikeCnt } from '../../../../store/slice/detailSlice';
+import { fetchLikeState, fetchLikeCnt, fetchBellState, fetchBellCnt } from '../../../../store/slice/detailSlice';
 import axios from 'axios';
 import { API_SERVER_HOST } from '../../../../api/connect';
 
@@ -60,6 +60,8 @@ const MobileMainTop = () => {
             await Promise.all([
                 dispatch(fetchLikeState({ tId: detail.id, uId: email })),
                 dispatch(fetchLikeCnt(detail.id)),
+                dispatch(fetchBellState({ tId: detail.id, uId: email })),
+                dispatch(fetchBellCnt(detail.id)),
             ]);
     
         } catch (error) {
@@ -68,11 +70,35 @@ const MobileMainTop = () => {
     };
  
      // 티켓 알림 버튼 이벤트
-     const prdBellNum = 7554; //알림 수
-     const [isBellBtn, setIsBellBtn] = useState(false);
-     const BellBtnHandler = () => {
-         setIsBellBtn(!isBellBtn);
-     };
+    const prdBellNum = bell.cnt;
+    const isBellBtn = bell.state;
+
+    /* 이벤트 함수 */
+    const BellBtnHandler = async () => {
+        // 로그인 확인
+        if (!isAuthenticated) {
+            navigate("/login");
+            return;
+        }
+    
+        try {
+            // 알림 상태 변경 비동기 호출
+            const apiUrl = isBellBtn
+                ? `${API_SERVER_HOST}/cancelBell?tId=${detail.id}&uId=${email}`
+                : `${API_SERVER_HOST}/clickBell?tId=${detail.id}&uId=${email}&bellTime=1`; //기본 알림 시간(1시간 전)
+    
+            await axios.get(apiUrl);
+    
+            // 알림 상태와 카운트 동시에 가져옴
+            await Promise.all([
+                dispatch(fetchBellState({ tId: detail.id, uId: email })),
+                dispatch(fetchBellCnt(detail.id)),
+            ]);
+    
+        } catch (error) {
+            console.error("Error in BellBtnHandler:", error);
+        }
+    };
 
         //p or a tag 항목
     //데이터 불러오기
