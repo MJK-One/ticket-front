@@ -32,7 +32,6 @@ const NavStats = () => {
             }
         };
         fetchLikePerForAge(detail.id);
-        console.log(ageData);
     }, [detail.id, like]);
 
     const [statAgeData, setStatAgeData] = useState(null);
@@ -75,16 +74,15 @@ const NavStats = () => {
         } else {
             setStatAgeList(null);
         }
-        console.log(statAgeList);
     }, [statAgeData]);
 
     //
     return (
         <div className='prdContents detail'>
             {/* 관심 통계 */}
-            <div className='content prdStat'>
-                <h3 className='contentTitle'>관심 등록 유저 통계</h3>
-                {(statAgeList !== null && statAgeList.length > 0) && (
+            {(statAgeList !== null && statAgeList.length > 0) && (
+                <div className='content prdStat'>
+                    <h3 className='contentTitle'>관심 등록 유저 통계</h3>
                     <div className='statWrap'>
                         <div className='statAge'>
                             <strong className='statTitle'>연령</strong>
@@ -93,7 +91,13 @@ const NavStats = () => {
                             </div>
                         </div>
                     </div>
-                )}
+                </div>
+            )}
+            <div className='content prdStat'>
+                <h3 className='contentTitle'>관심 등록 유저의 선택</h3>
+                <div className='statWrap'>
+                    
+                </div>
             </div>
         </div>
     );
