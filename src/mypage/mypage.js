@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Header from "../component/header/home/header";
 import MobileDetailHeader from "../component/header/detail/MobileDetailHeader";
 import MobileNav from "../component/header/mobileNav/MobileNav";
+import { useUser } from '../login/userContext'; 
 import './mypage.css'
 
 function Mypage() {
+    const { user } = useUser(); //userContext에서 사용자 정보 가져오기
     const [activeButton, setActiveButton] = useState("interest"); 
 
     // 화면 크기 체크 함수
@@ -27,7 +29,7 @@ function Mypage() {
             <div className="mypage">
                 <div className="mypage-con">
                     <div className="mypage-info">
-                        <div className="mypage-email">example@naver.com</div>
+                    <div className="mypage-email">{user ? user.email : '로그인 해주세요'}</div> {/* 이메일 표시 */}
                         <div className="mypage-btn">
                             <button>개인정보 수정</button>
                             <button>알람 설정</button>

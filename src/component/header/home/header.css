@@ -18,15 +18,25 @@ button {
   .header-first{
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: flex-end;
+    align-items: center;
     width: 100%;
-    height: 30px;
-    padding: 20px 100px;
+    padding: 10px 100px;
     box-sizing: border-box;
+    font-size: 16px;
+    font-weight: bold;
   }
-  .h-t-mypage{
-    margin-left : 30px;
+  .loging {
+    display: flex;
+    align-items: center; 
+    margin-right : 100px;
+    gap : 20px;
+  }
+  .h-t-logout{
+    cursor: pointer;
+  }
+  .h-t-login {
+    margin-right : 100px;
   }
   .header-top {
     display: flex;

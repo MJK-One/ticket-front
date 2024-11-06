@@ -3,8 +3,9 @@ import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetCurPage, resetAllSearchResult, setRegionFilter, setPeriod, setSearchKeyword } from '../../../store/slice/searchSlice.js';
 import { autoComplete } from "../../../api/connect.js";
+import { useUser } from '../../../login/userContext.js';
 import './header.css';
-
+import axios from 'axios';
 import DatePicker from '../../datepicker/datepicker.js';
 import FixedHeader from "../FixedHeader.js";
 
@@ -50,6 +51,14 @@ export function CustomLink({ to, children }) {
 
 // 헤더(홈화면)
 function Header() {
+  const { user, setUser } = useUser(); //로그인 사용자 정보
+
+  // 로그아웃 처리 함수
+  const handleLogout = async () => {
+    await axios.post('http://localhost:8080/logout'); // 로그아웃 요청
+    setUser(null); // 사용자 정보 초기화
+  };
+
   //필터 교차
   const [isLocationFilterVisible, setLocationFilterVisible] = useState(false);
   const [isMonthFilterVisible, setMonthFilterVisible] = useState(false);
@@ -274,14 +283,23 @@ function Header() {
     navigate("/search");
   };
 
-
   return (
     <FixedHeader>
     <header className="App-header">
       {windowWidth >= 1100 && (
         <div className="header-first">
-        <Link to="/login"><div className="h-t-login">로그인</div></Link>
-        <Link to="/mypage"><div className="h-t-mypage">마이페이지</div></Link>
+          {user ? (
+              // 사용자가 로그인한 경우
+              <>
+                <div className="loging">
+                  <Link to="/mypage"><div className="h-t-mypage">마이페이지</div></Link>
+                  <div className="h-t-logout" onClick={handleLogout}>로그아웃</div>
+                </div>
+              </>
+          ) : (
+              // 사용자가 로그인하지 않은 경우
+              <Link to="/login"><div className="h-t-login">로그인</div></Link>
+          )}
         </div>
       )}
         <div className="header-top">
