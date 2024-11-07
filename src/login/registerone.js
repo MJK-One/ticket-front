@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import { API_SERVER_HOST } from "../api/connect";
 
 import './registerone.css';
 import axios from 'axios';
@@ -104,7 +105,7 @@ function RegisterOne() {
             };
             
             try {
-                const response = await axios.post('http://localhost:8080/register', userData);
+                const response = await axios.post(`${API_SERVER_HOST}/register`, userData);
                 console.log("가입 완료!", response.data);
                 setShowRegisterError(false);
                 navigate('/');

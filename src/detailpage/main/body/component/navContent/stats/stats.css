@@ -5,7 +5,16 @@
 
 .detail .content {
     position: relative;
-    margin: 0 0 6.25rem 0;
+}
+@media (min-width: 960px) {
+    .detail .content {
+        margin: 0 0 6.25rem 0;
+    }
+}
+@media (max-width: 960px) {
+    .detail .content {
+        margin: 0 0 3rem 0 !important;
+    }
 }
 
 .detail .contentTitle {
@@ -38,7 +47,7 @@
     font-weight: bold;
 }
 
-    /*statAge*/
+/*statAge*/
 .detail .prdStat .statAge {
     display: inline-block;
     width: 30rem;
@@ -96,7 +105,6 @@
     font-weight: bold;
 }
 
-/**/
 @media (max-width: 1100px) and (min-width: 640px) {
     .detail .prdStat .statAge {
         width: auto;
@@ -201,5 +209,277 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+}
+
+
+/* statPick */
+.statPick a:hover .stat-pick-title {
+    color: #0368e5;
+}
+@media (min-width: 960px) {
+    .PickStat .statWrap {
+        width: 800px !important;
+        padding: 3rem !important;
+    }
+
+    /**/
+    .statPick {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        row-gap: 40px;
+        column-gap: 20px;
+    }
+    
+    .statPick a, .statPick .pick-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .statPick .stat-pick-poster {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 13.5rem;
+        height: 14rem;
+        position: relative;
+    }
+    
+    .stat-pick-poster .stat-pick-top-img-wrap {
+        position: absolute;
+        z-index: 1;
+        top: -1.5rem;
+        left: -0.5rem;
+        width: 4rem;
+        height: 4rem;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .stat-pick-poster .stat-pick-top-img-wrap img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .stat-pick-poster .stat-pick-poster-img-wrap {
+        position: relative;
+        width: 10.5rem;
+        height: 14rem;
+    
+        border-radius: 1rem;
+        border: 1px solid #9c9c9c;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .stat-pick-poster .stat-pick-poster-img-wrap img {
+        width: 100%;
+        height: 100%;
+        border-radius: 1rem;
+    }
+    
+    .stat-pick-title {
+        width: 12rem;
+        height: 2.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+    
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+}
+
+@media (max-width: 960px) and (min-width: 620px) {
+    .PickStat .statWrap {
+        width: 550px !important;
+        padding: 3rem 1rem 2rem 1rem !important;
+    }
+
+    /**/
+    .statPick {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        row-gap: 30px;
+        column-gap: 30px;
+    }
+    
+    .statPick a, .statPick .pick-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .statPick .stat-pick-poster {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 9rem;
+        height: 10rem;
+        position: relative;
+    }
+    
+    .stat-pick-poster .stat-pick-top-img-wrap {
+        position: absolute;
+        z-index: 1;
+        top: -1.5rem;
+        left: -1rem;
+        width: 3.5rem;
+        height: 3.5rem;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .stat-pick-poster .stat-pick-top-img-wrap img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .stat-pick-poster .stat-pick-poster-img-wrap {
+        position: relative;
+        width: 7.5rem;
+        height: 10rem;
+    
+        border-radius: 0.5rem;
+        border: 0.5px solid #9c9c9c;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .stat-pick-poster .stat-pick-poster-img-wrap img {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+    }
+    
+    .stat-pick-title {
+        width: 9rem;
+        height: 2rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-align: center;
+    
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+}
+
+@media (max-width: 620px) { /* min: 300px 아래 무시 */
+    .PickStat .statWrap {
+        width: 100% !important;
+        min-width: 240px;
+        padding: 1rem !important;
+    }
+
+    /**/
+    .statPick {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+    }
+    
+    .statPick a, .statPick .pick-item {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .statPick a {
+        border-bottom: 0.5px solid #e5e5e5;
+    }
+
+    .statPick a:last-child {
+        border-bottom: none;
+    }
+
+    .statPick .pick-item {
+        padding: 1rem 0.5rem;
+        position: relative;
+    }
+    
+    .statPick .stat-pick-poster {
+        display: flex;
+        flex-direction: row;
+        gap: 7px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .stat-pick-poster .stat-pick-top-img-wrap {
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .stat-pick-poster .stat-pick-top-img-wrap img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .stat-pick-poster .stat-pick-poster-img-wrap {
+        position: relative;
+        width: 3rem;
+        height: 4rem;
+    
+        border-radius: 0.2rem;
+        border: 0.5px solid #9c9c9c;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .stat-pick-poster .stat-pick-poster-img-wrap img {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.2rem;
+    }
+    
+    .stat-pick-title {
+        width: 100%;
+        min-width: 8rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+    
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 }

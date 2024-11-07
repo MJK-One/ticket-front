@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLikeState, fetchLikeCnt, fetchBellState, fetchBellCnt } from '../../../store/slice/detailSlice';
+import axios from 'axios';
+import { API_SERVER_HOST } from '../../../api/connect';
 
 import './MainTop.css';
 
@@ -15,39 +19,95 @@ const MainTop = () => {
     }, []);
 
     //데이터 불러오기
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const detail = useSelector((state) => state.details.detail);
+    const like = useSelector((state) => state.details.like);
+    const bell = useSelector((state) => state.details.bell);
+
     const status = useSelector((state) => state.details.status);
     const error = useSelector((state) => state.details.error);
+    const { isAuthenticated, email } = useSelector((state) => state.user);
 
-    const [genre, setGenre] = useState(detail.genre || "정보 없음");
+    const genre = detail.genre || "정보 없음";
     const genreText = "> " + genre;
 
-    const [prdTitle, setPrdTitle] = useState(detail.event_name || "NONAME");//상품 제목
-    const [prdPosterSrc, setPrdPosterSrc] = useState(detail.image_url || "/img/normal_poster.png");//포스터 이미지 링크
+    const prdTitle = detail.event_name || "NONAME";//상품 제목
+    const prdPosterSrc = detail.image_url || "/img/normal_poster.png";//포스터 이미지 링크
     
-    const [regDate, setRegDate] = useState(detail.registration_date || "정보 없음"); //등록일
-    const [view, setView] = useState(detail.ticketViews.view_cnt);
+    const regDate = detail.registration_date || "정보 없음"; //등록일
+    const view = detail.ticketViews.view_cnt;
 
     //티켓 하트 버튼 이벤트
-    const prdHeartNum = 7554; //좋아요 수(하트 버튼)
-    const [isHeartBtn, setIsHeartBtn] = useState(false);
-        /* 이벤트 함수 */
-    const HeartBtnHandler = () => {
-        setIsHeartBtn(!isHeartBtn); //클릭되면 상태를 반전함
-        //숫자 아직 적용 안함
+    const prdHeartNum = like.cnt;
+    const isHeartBtn = like.state;
+
+    /* 이벤트 함수 */
+    const HeartBtnHandler = async () => {
+        // 로그인 확인
+        if (!isAuthenticated) {
+            navigate("/login");
+            return;
+        }
+    
+        try {
+            // 좋아요 상태 변경 비동기 호출
+            const apiUrl = isHeartBtn
+                ? `${API_SERVER_HOST}/cancelLike?tId=${detail.id}&uId=${email}`
+                : `${API_SERVER_HOST}/clickLike?tId=${detail.id}&uId=${email}`;
+    
+            await axios.get(apiUrl);
+    
+            // 좋아요 상태와 카운트 동시에 가져옴
+            await Promise.all([
+                dispatch(fetchLikeState({ tId: detail.id, uId: email })),
+                dispatch(fetchLikeCnt(detail.id)),
+                dispatch(fetchBellState({ tId: detail.id, uId: email })),
+                dispatch(fetchBellCnt(detail.id)),
+            ]);
+    
+        } catch (error) {
+            console.error("Error in HeartBtnHandler:", error);
+        }
     };
 
     // 티켓 알림 버튼 이벤트
-    const prdBellNum = 7554; //알림 수
-    const [isBellBtn, setIsBellBtn] = useState(false);
-    const BellBtnHandler = () => {
-        setIsBellBtn(!isBellBtn);
+    const prdBellNum = bell.cnt;
+    const isBellBtn = bell.state;
+
+    /* 이벤트 함수 */
+    const BellBtnHandler = async () => {
+        // 로그인 확인
+        if (!isAuthenticated) {
+            navigate("/login");
+            return;
+        }
+    
+        try {
+            // 알림 상태 변경 비동기 호출
+            const apiUrl = isBellBtn
+                ? `${API_SERVER_HOST}/cancelBell?tId=${detail.id}&uId=${email}`
+                : `${API_SERVER_HOST}/clickBell?tId=${detail.id}&uId=${email}&bellTime=1`; //기본 알림 시간(1시간 전)
+    
+            await axios.get(apiUrl);
+    
+            // 알림 상태와 카운트 동시에 가져옴
+            await Promise.all([
+                dispatch(fetchBellState({ tId: detail.id, uId: email })),
+                dispatch(fetchBellCnt(detail.id)),
+            ]);
+    
+        } catch (error) {
+            console.error("Error in BellBtnHandler:", error);
+        }
     };
+
 
         //p or a tag 항목
     //데이터 불러오기
-    const [startDate, setStartDate] = useState(detail.event_start_date);
-    const [endDate, setEndDate] = useState(detail.event_end_date);
+    const startDate = detail.event_start_date;
+    const endDate = detail.event_end_date;
     const [infoPeriod, setInfoPeriod] = useState("정보 없음")
     
     useEffect(() => {
@@ -61,7 +121,7 @@ const MainTop = () => {
     }, [startDate, endDate]);
 
     //장소
-    const [placeData, setPlaceData] = useState(detail.venue);
+    const placeData = detail.venue;
     const [infoPlace, setInfoPlace] = useState("정보 없음");
     const [placeLink, setPlaceLink] = useState("#");
 
@@ -74,8 +134,8 @@ const MainTop = () => {
         }
     }, [placeData]);
 
-    const [infoOpenDateTime, setInfoOpenDateTime] = useState(detail.ticket_open_date || "정보 없음");
-    const [infoPreOpenDateTime, setInfoPreOpenDateTime] = useState(detail.pre_sale_date || "정보 없음");
+    const infoOpenDateTime = detail.ticket_open_date || "정보 없음";
+    const infoPreOpenDateTime = detail.pre_sale_date || "정보 없음";
 
     const infoList = [
         {label: '공연 기간', text: infoPeriod},

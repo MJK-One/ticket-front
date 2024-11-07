@@ -1,9 +1,12 @@
-// import React, { useState } from "react";
-// import { Link, useNavigate } from 'react-router-dom'; // useNavigate import 추가
-// import './login.css';
-// import { naverLogin } from '../api/connect'; // naverLogin 함수를 import
-// import axios from 'axios'; // axios 추가
+//import React, { useState } from "react";
+//import { Link, useNavigate } from 'react-router-dom'; // useNavigate import 추가
+//import { naverLogin } from '../api/connect'; // naverLogin 함수를 import
+//import { useDispatch } from "react-redux";
+//import { login } from "../store/slice/userSlice";
+//import { API_SERVER_HOST } from "../api/connect";
+//import axios from 'axios'; // axios 추가
 
+import './login.css';
 
 // function Login() {
 //     const navigate = useNavigate();
@@ -125,6 +128,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
 import { naverLogin } from '../api/connect';
 import axios from 'axios';
+import { API_SERVER_HOST } from "../api/connect";
 import { useUser } from './userContext.js'; // UserContext import 추가
 
 function Login() {
@@ -147,7 +151,7 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault(); // 폼 제출 기본 동작 방지
         try {
-            const response = await axios.post('http://localhost:8080/login', { email, password });
+            const response = await axios.post(`${API_SERVER_HOST}/login`, { email, password });
             //console.log('로그인 성공:', response.data);
             setUser(response.data); // 로그인 성공 시 사용자 정보 저장
             navigate('/'); // 메인 페이지로 리다이렉트
