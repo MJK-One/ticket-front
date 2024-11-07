@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import Header from "../component/header/home/header";
 import MobileDetailHeader from "../component/header/detail/MobileDetailHeader";
 import MobileNav from "../component/header/mobileNav/MobileNav";
@@ -106,7 +107,7 @@ function PasswordModal({ isOpen, onClose }) {
 function Mypage() {
     const { user } = useUser(); //userContext에서 사용자 정보 가져오기
     const [activeButton, setActiveButton] = useState("interest"); 
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     // 화면 크기 체크 함수
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
