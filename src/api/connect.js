@@ -2,9 +2,16 @@ import axios from "axios";
 
 export const API_SERVER_HOST = "http://localhost:8080";
 
-// naverSearch
-export const naverSearch = async (placeName) => {
-    const res = await axios.get(`${API_SERVER_HOST}/naverSearch?searchPlace=${placeName}`);
+// naverSearch: 장소(venue)로 검색
+export const naverPlaceSearch = async (placeName) => {
+    const res = await axios.get(`${API_SERVER_HOST}/naverPlaceSearch?searchPlace=${placeName}`);
+    return res.data;
+};
+
+// naverSearch: 주소(address)로 검색
+export const naverAddrSearch = async (placeAddr) => {
+    const encodedAddr = encodeURIComponent(placeAddr);
+    const res = await axios.get(`${API_SERVER_HOST}/naverAddrSearch?searchAddr=${encodedAddr}`);
     return res.data;
 };
 

@@ -34,6 +34,7 @@ const NavPlace = () => {
             setPlaceType("name");
         } else { //주소 정보가 존재하는 경우
             setPlaceData(addr);
+            setPlaceType("addr");
         }
     },[venueStr, addr]);
 
