@@ -10,6 +10,7 @@ import './MainBody.css';
 const MainBody = () => {
     // 데이터 불러오기
     const detail = useSelector((state) => state.details.detail);
+    const like = useSelector((state) => state.details.like);
     const status = useSelector((state) => state.details.status);
     const error = useSelector((state) => state.details.error);
     
@@ -54,9 +55,11 @@ const MainBody = () => {
                             <a className="navLink" href="#" onClick={() => navClick('PLACE')}>장소 정보</a>
                         </li>
                     )}
-                    <li className={`navItem ${activeNav === 'STATS' ? 'is-active' : ''}`}>
-                        <a className="navLink" href="#" onClick={() => navClick('STATS')}>관심 통계</a>
-                    </li>
+                    {like.cnt > 0 && (
+                        <li className={`navItem ${activeNav === 'STATS' ? 'is-active' : ''}`}>
+                            <a className="navLink" href="#" onClick={() => navClick('STATS')}>관심 통계</a>
+                        </li>
+                    )}
                 </ul>
             </nav>
 
@@ -64,7 +67,7 @@ const MainBody = () => {
             <div>
                 {activeNav === 'INFO' && hasInfoData && <NavInfo />}
                 {activeNav === 'PLACE' && hasPlaceData && <NavPlace />}
-                {activeNav === 'STATS' && <NavStats tid={detail.id} />}
+                {activeNav === 'STATS' && like.cnt > 0 && <NavStats />}
             </div>
 
         </div>

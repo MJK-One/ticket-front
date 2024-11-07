@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import Header from "../component/header/home/header";
 import MobileDetailHeader from "../component/header/detail/MobileDetailHeader";
 import MobileNav from "../component/header/mobileNav/MobileNav";
@@ -9,6 +12,9 @@ function Mypage() {
     const { user } = useUser(); //userContext에서 사용자 정보 가져오기
     const [activeButton, setActiveButton] = useState("interest"); 
 
+    //
+    const navigate = useNavigate();
+
     // 화면 크기 체크 함수
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -18,6 +24,14 @@ function Mypage() {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // 로그인 확인
+    const { isAuthenticated } = useSelector((state) => state.user);
+    useEffect(() => {
+        if(isAuthenticated === false) {
+            navigate("/login");
+        }
+    }, [isAuthenticated]);
 
     //
     return(

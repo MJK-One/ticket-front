@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { logout } from "../../../store/slice/userSlice.js";
 import { resetCurPage, resetAllSearchResult, setRegionFilter, setPeriod, setSearchKeyword } from '../../../store/slice/searchSlice.js';
 import { autoComplete } from "../../../api/connect.js";
 import { useUser } from '../../../login/userContext.js';
@@ -51,8 +52,8 @@ export function CustomLink({ to, children }) {
 
 // 헤더(홈화면)
 function Header() {
-  const { user, setUser } = useUser(); //로그인 사용자 정보
-
+  //로그인 사용자 정보
+  const { user, setUser } = useUser();
   // 로그아웃 처리 함수
   const handleLogout = async () => {
     await axios.post('http://localhost:8080/logout'); // 로그아웃 요청
@@ -283,6 +284,7 @@ function Header() {
     navigate("/search");
   };
 
+  //
   return (
     <FixedHeader>
     <header className="App-header">
