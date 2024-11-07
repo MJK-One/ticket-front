@@ -221,3 +221,53 @@
     font-weight: bold;
     color : #dddddd;
 }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 220px;
+    z-index: 150;
+    font-size : 20px;
+}
+.modal-content input {
+    border-radius: 20px;
+    height : 20px;
+    font-size: 18px;
+}
+.modal-content h2 {
+    margin: 0 0 10px;
+}
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 15px;
+}
+.password-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.password-input input {
+    flex: 1;
+}
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

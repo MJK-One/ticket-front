@@ -1,13 +1,113 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import Header from "../component/header/home/header";
 import MobileDetailHeader from "../component/header/detail/MobileDetailHeader";
 import MobileNav from "../component/header/mobileNav/MobileNav";
 import { useUser } from '../login/userContext'; 
 import './mypage.css'
 
+function PasswordModal({ isOpen, onClose }) {
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false); // 비밀번호 표시 여부
+
+    const validatePassword = (password) => {
+        const minLength = 8;
+        const maxLength = 12;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumbers = /\d/.test(password);
+        const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        const complexityCount = [hasUpperCase, hasLowerCase, hasNumbers, hasSpecialChars].filter(Boolean).length;
+
+        return (
+            password.length >= minLength &&
+            password.length <= maxLength &&
+            complexityCount >= 2
+        );
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (newPassword !== confirmPassword) {
+            setError("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+        if (!validatePassword(newPassword)) {
+            setError("비밀번호는 8~12자, 영문, 숫자, 특수문자 중 2가지 이상을 포함해야 합니다.");
+            return;
+        }
+
+        // 비밀번호 수정 로직 추가
+        console.log("새 비밀번호:", newPassword);
+        setError(""); // 에러 초기화
+        onClose(); // 모달 닫기
+    };
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <h2>비밀번호 수정</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label>
+                            새 비밀번호:
+                            <div className="password-input">
+                                <input 
+                                    type={showPassword ? "text" : "password"} 
+                                    value={newPassword} 
+                                    onChange={(e) => setNewPassword(e.target.value)} 
+                                    required 
+                                />
+                                <button 
+                                    type="button" 
+                                    className="toggle-password" 
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? "숨기기" : "보기"}
+                                </button>
+                            </div>
+                        </label>
+                    </div>
+                    <div className="form-group">
+                        <label>
+                            비밀번호 확인:
+                            <div className="password-input">
+                                <input 
+                                    type={showPassword ? "text" : "password"} 
+                                    value={confirmPassword} 
+                                    onChange={(e) => setConfirmPassword(e.target.value)} 
+                                    required 
+                                />
+                                <button 
+                                    type="button" 
+                                    className="toggle-password" 
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? "숨기기" : "보기"}
+                                </button>
+                            </div>
+                        </label>
+                    </div>
+                    {error && <div className="error-message">{error}</div>}
+                    <div className="button-group">
+                        <button type="submit">수정하기</button>
+                        <button type="button" onClick={onClose}>닫기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+}
+
+
 function Mypage() {
     const { user } = useUser(); //userContext에서 사용자 정보 가져오기
     const [activeButton, setActiveButton] = useState("interest"); 
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // 화면 크기 체크 함수
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -29,11 +129,17 @@ function Mypage() {
             <div className="mypage">
                 <div className="mypage-con">
                     <div className="mypage-info">
-                    <div className="mypage-email">{user ? user.email : '로그인 해주세요'}</div> {/* 이메일 표시 */}
-                        <div className="mypage-btn">
-                            <button>개인정보 수정</button>
-                            <button>알람 설정</button>
-                        </div>
+                    {user ? (
+                        <>
+                            <div className="mypage-email">{user.email}</div> 
+                            <div className="mypage-btn">
+                                <button onClick={() => setIsModalOpen(true)}>개인정보 수정</button>
+                                <button>알람 설정</button>
+                            </div>
+                        </>
+                    ) : (
+                        <Link to="/login"><div className="mypage-email">로그인</div></Link> //로그인 안된 사용자
+                    )}
                     </div>
                     <div className="mypage-choice">
                         <div className="choice-title">관심내역</div>
@@ -96,6 +202,8 @@ function Mypage() {
                     )}
                 </div>
             </div>
+            {/* 비밀번호 수정 모달 */}
+            <PasswordModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
             {/* 모바일 nav */}
             {windowWidth <= 1100 && <MobileNav />}
