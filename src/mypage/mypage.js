@@ -26,12 +26,14 @@ function Mypage() {
     }, []);
 
     // 로그인 확인
+    /*
     const { isAuthenticated } = useSelector((state) => state.user);
     useEffect(() => {
         if(isAuthenticated === false) {
             navigate("/login");
         }
     }, [isAuthenticated]);
+    */
 
     //
     return(
