@@ -74,7 +74,7 @@ const NavStats = () => {
         } else {
             setStatAgeList(null);
         }
-    }, [statAgeData]);
+    }, [statAgeData, windowWidth]);
 
     //
     return (
@@ -93,10 +93,117 @@ const NavStats = () => {
                     </div>
                 </div>
             )}
-            <div className='content prdStat'>
+            <div className='content prdStat PickStat'>
                 <h3 className='contentTitle'>관심 등록 유저의 선택</h3>
                 <div className='statWrap'>
-                    
+                    <div className='statPick'>
+                        {/* 1 */}
+                        <a href='#'>
+                            <div className='pick-item'>
+                                {/* 포스터 */}
+                                <div className='stat-pick-poster'>
+                                    {/* 순위 */}
+                                    <div className='stat-pick-top-img-wrap'>
+                                        <img src='/img/icon/detail/interest/gold.png' />
+                                    </div>
+
+                                    {/* 포스터 이미지 */}
+                                    <div className='stat-pick-poster-img-wrap'>
+                                        <img src='/img/normal_poster.png' />
+                                    </div>
+                                </div>
+
+                                {/* 제목 */}
+                                <div className='stat-pick-title'>title</div>
+                            </div>
+                        </a>
+
+                        {/* 2 */}
+                        <a href='#'>
+                            <div className='pick-item'>
+                                {/* 포스터 */}
+                                <div className='stat-pick-poster'>
+                                    {/* 순위 */}
+                                    <div className='stat-pick-top-img-wrap'>
+                                        <img src='/img/icon/detail/interest/silver.png' />
+                                    </div>
+
+                                    {/* 포스터 이미지 */}
+                                    <div className='stat-pick-poster-img-wrap'>
+                                        <img src='/img/normal_poster.png' />
+                                    </div>
+                                </div>
+
+                                {/* 제목 */}
+                                <div className='stat-pick-title'>title</div>
+                            </div>
+                        </a>
+
+                        {/* 3 */}
+                        <a href='#'>
+                            <div className='pick-item'>
+                                {/* 포스터 */}
+                                <div className='stat-pick-poster'>
+                                    {/* 순위 */}
+                                    <div className='stat-pick-top-img-wrap'>
+                                        <img src='/img/icon/detail/interest/bronze.png' />
+                                    </div>
+
+                                    {/* 포스터 이미지 */}
+                                    <div className='stat-pick-poster-img-wrap'>
+                                        <img src='/img/normal_poster.png' />
+                                    </div>
+                                </div>
+
+                                {/* 제목 */}
+                                <div className='stat-pick-title'>title</div>
+                            </div>
+                        </a>
+
+                        {/* 4 */}
+                        <a href='#'>
+                            <div className='pick-item'>
+                                {/* 포스터 */}
+                                <div className='stat-pick-poster'>
+                                    {/* 순위 */}
+                                    <div className='stat-pick-top-img-wrap'>
+                                        <img src='/img/icon/detail/interest/4.png' />
+                                    </div>
+
+                                    {/* 포스터 이미지 */}
+                                    <div className='stat-pick-poster-img-wrap'>
+                                        <img src='/img/normal_poster.png' />
+                                    </div>
+                                </div>
+
+                                {/* 제목 */}
+                                <div className='stat-pick-title'>title</div>
+                            </div>
+                        </a>
+
+                        {/* 5 */}
+                        <a href='#'>
+                            <div className='pick-item'>
+                                {/* 포스터 */}
+                                <div className='stat-pick-poster'>
+                                    {/* 순위 */}
+                                    <div className='stat-pick-top-img-wrap'>
+                                        <img src='/img/icon/detail/interest/5.png' />
+                                    </div>
+
+                                    {/* 포스터 이미지 */}
+                                    <div className='stat-pick-poster-img-wrap'>
+                                        <img src='/img/normal_poster.png' />
+                                    </div>
+                                </div>
+
+                                {/* 제목 */}
+                                <div className='stat-pick-title'>title</div>
+                            </div>
+                        </a>
+
+
+                    </div>
                 </div>
             </div>
         </div>
