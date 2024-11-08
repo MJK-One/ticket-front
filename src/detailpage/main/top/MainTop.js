@@ -254,7 +254,7 @@ const MainTop = () => {
                                 <div className='prdCastWrap'>
                                     <a className='prdCastBtn' role='checkbox' onClick={HeartBtnHandler}>
                                         <img src={isHeartBtn ? "/img/icon/detail/heart_on.png" : "/img/icon/detail/heart_off.png"} />
-                                        <p className='prdCastName'>좋아요</p>
+                                        <p className='prdCastName'>관심</p>
                                         <p className='prdCastNum'>{prdHeartNum}</p>
                                     </a>
                                 </div>

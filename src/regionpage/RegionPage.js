@@ -135,7 +135,7 @@ const RegionPage =  () => {
                                     </div>
                                     <div className="textWrap" key="region_page_textWrap_comp">
                                         <span className="posterTitle" key="region_page_posterTitle_comp">{item.name}</span>
-                                        <span className="posterDate" key="region_page_posterDate_comp">{item.period}</span>
+                                        <span className="posterDate" key="region_page_posterDate_comp">{item.period || "정보없음"}</span>
                                     </div>
                                 </div>
                             </Link>
