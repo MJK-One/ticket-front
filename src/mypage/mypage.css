@@ -4,10 +4,17 @@
     align-items: center;
     flex-direction: column;
 }
+@media (min-width: 1100px) {
+    .mypage {
+        margin-bottom: 100px;
+    }
+}
 @media (max-width: 1100px) {
     .mypage {
+        padding: 30px;
+        padding-top: 0;
         margin-top: 40px;
-        margin-bottom: 50px;
+        margin-bottom: 150px;
     }
 }
 
@@ -33,7 +40,7 @@
 .mypage-info .mypage-email {
     margin-bottom: 10px; 
     font-weight: 500;
-    font-size: 30px;
+    font-size: 1.5rem;
     margin-left: 10px;
 }
 .mypage-info .mypage-btn {
@@ -117,67 +124,120 @@
 .cc-list {
     margin-top : 20px;
     border: 1px solid #dddddd;
+    position: relative;
     width: 100%;
     max-width: 900px;
     min-height : 100px; 
 }
+
+.choice-list {
+    position: relative;
+    width: 100%;
+}
+
 .choice-ticket {
     display: flex;
-    margin: 30px;
+    justify-content: space-between; /* 좌우 여백을 균등하게 */
+    align-items: center;
+    padding: 30px;
+    width: calc(100% - 60px);
     border-bottom: 1px solid #dddddd;
-    padding-bottom: 20px;
 }
+
+.choice-ticket:last-child {
+    border-bottom: none;
+}
+
+.choice-ticket-a {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    text-decoration: none; /* 링크 텍스트 장식 제거 */
+}
+
 .cho-img {
-    width : 120px;
-    height : 170px;
-    border : 1px solid #000;
+    position: relative;
+    width: 120px;
+    height: 170px;
+    border: 1px solid #000;
 }
+
+.cho-img img {
+    width: 100%;
+    height: 100%;
+}
+
 .cho-info {
-    margin-left : 15px;
-    width : 60%;
+    margin-left: 15px;
+    width: 65%;
 }
+
+.choice-ticket-a:hover .cho-info-title {
+    color: #0368e5;
+}
+
 .cho-info-title {
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     margin-bottom: 15px;
 }
-.cho-info-open {
-    font-size: 20px;
+
+.cho-info-pre-open, .cho-info-open, .cho-info-performance, .cho-info-region {
+    font-size: 1rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     margin-bottom: 8px;
 }
-.cho-info-performance {
-    font-size: 20px;
-    margin-bottom: 8px;
+
+.cho-info-site-list {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
 }
-.cho-info-region {
-    font-size: 20px;
-    margin-bottom: 8px;
-}
+
 .cho-info-site {
-    width : 30px;
-    height : 30px;
+    position: relative;
+    width: 30px;
+    height: 30px;
     border: 1px solid #000;
     border-radius: 10px;
 }
+
+.cho-info-site img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
 .call-cho {
     display: flex;
     justify-content: flex-end;
-    width: 20%;
+    align-items: center;
+    width: auto; /* 버튼 컨테이너 폭을 자동으로 설정 */
 }
-.cho-tic-call {
-    width : 30px;
-    height : 30px;
-    border: 1px solid #000;
+
+.cho-tic-call, .cho-tic-cho {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 10px;
-    margin-left : 10px;
-    margin-right: 10px;
+    margin-left: 10px;
+    cursor: pointer;
 }
-.cho-tic-cho {
-    width : 30px;
-    height : 30px;
-    border: 1px solid #000;
-    border-radius: 10px;
+
+.cho-tic-call img, .cho-tic-cho img {
+    width: 100%;
+    height: 100%;
 }
+
 
 .call-ticket {
     display: flex;
