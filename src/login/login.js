@@ -125,15 +125,18 @@ import './login.css';
 
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { login } from "../store/slice/userSlice";
 import './login.css';
 import { naverLogin } from '../api/connect';
 import axios from 'axios';
 import { API_SERVER_HOST } from "../api/connect";
-import { useUser } from './userContext.js'; // UserContext import 추가
+//import { useUser } from './userContext.js'; // UserContext import 추가
 
 function Login() {
     const navigate = useNavigate();
-    const { setUser } = useUser(); // UserContext에서 setUser 가져오기
+    const dispatch = useDispatch();
+    //const { setUser } = useUser(); // UserContext에서 setUser 가져오기
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -151,9 +154,13 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault(); // 폼 제출 기본 동작 방지
         try {
-            const response = await axios.post(`${API_SERVER_HOST}/login`, { email, password });
-            //console.log('로그인 성공:', response.data);
-            setUser(response.data); // 로그인 성공 시 사용자 정보 저장
+            const responseEmail = await axios.post(`${API_SERVER_HOST}/login`, { email, password }, { withCredentials: true });
+            const responseType = await axios.get(`${API_SERVER_HOST}/checkLoginType?email=${responseEmail.data.user}`);
+            dispatch(login({
+                email: responseEmail.data.user,
+                type: responseType.data
+            }));
+
             navigate('/'); // 메인 페이지로 리다이렉트
         } catch (error) {
             console.error('로그인 실패:', error);

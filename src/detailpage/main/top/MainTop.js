@@ -28,7 +28,7 @@ const MainTop = () => {
 
     const status = useSelector((state) => state.details.status);
     const error = useSelector((state) => state.details.error);
-    const { isAuthenticated, email } = useSelector((state) => state.user);
+    const { isAuthenticated, user } = useSelector((state) => state.user);
 
     const genre = detail.genre || "정보 없음";
     const genreText = "> " + genre;
@@ -54,16 +54,16 @@ const MainTop = () => {
         try {
             // 좋아요 상태 변경 비동기 호출
             const apiUrl = isHeartBtn
-                ? `${API_SERVER_HOST}/cancelLike?tId=${detail.id}&uId=${email}`
-                : `${API_SERVER_HOST}/clickLike?tId=${detail.id}&uId=${email}`;
+                ? `${API_SERVER_HOST}/cancelLike?tId=${detail.id}&uId=${user.email}`
+                : `${API_SERVER_HOST}/clickLike?tId=${detail.id}&uId=${user.email}`;
     
             await axios.get(apiUrl);
     
             // 좋아요 상태와 카운트 동시에 가져옴
             await Promise.all([
-                dispatch(fetchLikeState({ tId: detail.id, uId: email })),
+                dispatch(fetchLikeState({ tId: detail.id, uId: user.email })),
                 dispatch(fetchLikeCnt(detail.id)),
-                dispatch(fetchBellState({ tId: detail.id, uId: email })),
+                dispatch(fetchBellState({ tId: detail.id, uId: user.email })),
                 dispatch(fetchBellCnt(detail.id)),
             ]);
     
@@ -87,14 +87,14 @@ const MainTop = () => {
         try {
             // 알림 상태 변경 비동기 호출
             const apiUrl = isBellBtn
-                ? `${API_SERVER_HOST}/cancelBell?tId=${detail.id}&uId=${email}`
-                : `${API_SERVER_HOST}/clickBell?tId=${detail.id}&uId=${email}&bellTime=1`; //기본 알림 시간(1시간 전)
+                ? `${API_SERVER_HOST}/cancelBell?tId=${detail.id}&uId=${user.email}`
+                : `${API_SERVER_HOST}/clickBell?tId=${detail.id}&uId=${user.email}&bellTime=1`; //기본 알림 시간(1시간 전)
     
             await axios.get(apiUrl);
     
             // 알림 상태와 카운트 동시에 가져옴
             await Promise.all([
-                dispatch(fetchBellState({ tId: detail.id, uId: email })),
+                dispatch(fetchBellState({ tId: detail.id, uId: user.email })),
                 dispatch(fetchBellCnt(detail.id)),
             ]);
     

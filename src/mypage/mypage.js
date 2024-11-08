@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Header from "../component/header/home/header";
 import MobileDetailHeader from "../component/header/detail/MobileDetailHeader";
 import MobileNav from "../component/header/mobileNav/MobileNav";
-import { useUser } from '../login/userContext'; 
+//import { useUser } from '../login/userContext'; 
 import './mypage.css'
 
 function PasswordModal({ isOpen, onClose }) {
@@ -105,9 +106,10 @@ function PasswordModal({ isOpen, onClose }) {
 
 
 function Mypage() {
-    const { user } = useUser(); //userContext에서 사용자 정보 가져오기
+    //const { user } = useUser(); //userContext에서 사용자 정보 가져오기
     const [activeButton, setActiveButton] = useState("interest"); 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    
     // 화면 크기 체크 함수
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -118,15 +120,15 @@ function Mypage() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const navigate = useNavigate();
+
     // 로그인 확인
-    /*
-    const { isAuthenticated } = useSelector((state) => state.user);
+    const { isAuthenticated, user } = useSelector((state) => state.user);
     useEffect(() => {
         if(isAuthenticated === false) {
             navigate("/login");
         }
     }, [isAuthenticated]);
-    */
 
     //
     return(
@@ -138,7 +140,7 @@ function Mypage() {
             <div className="mypage">
                 <div className="mypage-con">
                     <div className="mypage-info">
-                    {user ? (
+                    {isAuthenticated && (
                         <>
                             <div className="mypage-email">{user.email}</div> 
                             <div className="mypage-btn">
@@ -146,8 +148,6 @@ function Mypage() {
                                 <button>알람 설정</button>
                             </div>
                         </>
-                    ) : (
-                        <Link to="/login"><div className="mypage-email">로그인</div></Link> //로그인 안된 사용자
                     )}
                     </div>
                     <div className="mypage-choice">

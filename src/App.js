@@ -1,10 +1,13 @@
 import React, { Suspense, lazy, useEffect } from 'react';
+import { API_SERVER_HOST } from './api/connect.js';
+import axios from 'axios';
 import './App.css';
 import RegionPage from './regionpage/RegionPage';
 import MonthPage from './monthpage/monthpage';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { UserProvider } from './login/userContext.js';
 import { useDispatch } from 'react-redux';
+import { login, logout } from './store/slice/userSlice.js';
 import { clearFilters } from './store/slice/searchSlice';
 import Header from './component/header/home/header';
 
@@ -19,11 +22,11 @@ const ReservationForm = lazy(() => import('./Reservation'));
 
 function App() {
   return (
-    <UserProvider>
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           {/*<HeaderWithConditionalRendering />*/}
           <ClearFiltersOnNavigation /> {/* 위치 변화 감지용 컴포넌트 */}
+          <CheckLoginSesstion /> {/* 로그인 세션 확인 */}
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/genre/musicall" element={<Genre />} />
@@ -41,10 +44,10 @@ function App() {
           </Routes>
         </Suspense>
       </Router>
-    </UserProvider>
   );
 }
 
+/*
 function HeaderWithConditionalRendering() {
   const location = useLocation();
   
@@ -57,6 +60,38 @@ function HeaderWithConditionalRendering() {
     </>
   );
 }
+*/
+
+// 로그인 세션 체크: 페이지 로드될때마다 체크
+function CheckLoginSesstion() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function checkLogin() {
+      try {
+        const responseSession = await axios.get(`${API_SERVER_HOST}/checkLoginSession`, { withCredentials: true });
+
+        // 로그인 세션의 존재 여부에 따라 redux 업데이트
+        if(responseSession.data.isLoggedIn === true) {
+          const responseType = await axios.get(`${API_SERVER_HOST}/checkLoginType?email=${responseSession.data.user}`);
+          dispatch(login({
+            email: responseSession.data.user,
+            type: responseType.data
+          }));
+        } else {
+          dispatch(logout());
+        }
+
+      } catch (error) {
+        console.log('로그인 체크 실패');
+      }
+    }
+    checkLogin();
+  }, []);
+
+  return null;
+}
+
 
 // 위치 변화 감지용 컴포넌트
 function ClearFiltersOnNavigation() {

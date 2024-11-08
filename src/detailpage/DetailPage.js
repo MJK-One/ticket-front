@@ -22,7 +22,7 @@ const DetailPage = () => {
 
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { isAuthenticated, email } = useSelector((state) => state.user);
+    const { isAuthenticated, user } = useSelector((state) => state.user);
     const status = useSelector((state) => state.details.status);
     const error = useSelector((state) => state.details.error);
 
@@ -37,27 +37,27 @@ const DetailPage = () => {
     useEffect(() => {
         if(id) {
             if(isAuthenticated) { //로그인 중
-                dispatch(fetchLikeState({tId: id, uId: email})); //state
+                dispatch(fetchLikeState({tId: id, uId: user.email})); //state
                 dispatch(fetchLikeCnt(id)); //cnt
             } else {
                 dispatch(setLikeState(false)); //state
                 dispatch(fetchLikeCnt(id)); //cnt
             }
         }
-    }, [id, isAuthenticated, email]);
+    }, [id, isAuthenticated, user.email]);
 
     // bell 데이터 로딩
     useEffect(() => {
         if(id) {
             if(isAuthenticated) { //로그인 중
-                dispatch(fetchBellState({tId: id, uId: email})); //state
+                dispatch(fetchBellState({tId: id, uId: user.email})); //state
                 dispatch(fetchBellCnt(id)); //cnt
             } else {
                 dispatch(setBellState(false)); //state
                 dispatch(fetchBellCnt(id)); //cnt
             }
         }
-    }, [id, isAuthenticated, email]);
+    }, [id, isAuthenticated, user.email]);
 
     if(status === 'loading') {
         return <div>Loading...</div>;

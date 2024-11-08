@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from "../../../store/slice/userSlice.js";
 import { resetCurPage, resetAllSearchResult, setRegionFilter, setPeriod, setSearchKeyword } from '../../../store/slice/searchSlice.js';
 import { autoComplete } from "../../../api/connect.js";
-import { useUser } from '../../../login/userContext.js';
+import { API_SERVER_HOST } from "../../../api/connect.js";
+//import { useUser } from '../../../login/userContext.js';
 import './header.css';
 import axios from 'axios';
 import DatePicker from '../../datepicker/datepicker.js';
@@ -49,15 +50,20 @@ export function CustomLink({ to, children }) {
   );
 }
 
-
 // 헤더(홈화면)
 function Header() {
-  //로그인 사용자 정보
-  const { user, setUser } = useUser();
   // 로그아웃 처리 함수
   const handleLogout = async () => {
-    await axios.post('http://localhost:8080/logout'); // 로그아웃 요청
-    setUser(null); // 사용자 정보 초기화
+    try {
+      await axios.post(`${API_SERVER_HOST}/logout`, {}, { withCredentials: true }); // 로그아웃 요청
+      // 로그아웃 후 쿠키 삭제
+      document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      dispatch(logout());
+      navigate("/");
+    } catch (error) {
+      console.error("로그아웃 실패: ", error);
+    }
+    
   };
 
   //필터 교차
@@ -118,6 +124,7 @@ function Header() {
   // slice 선언
   const dispatch = useDispatch();
   const searchSlice = useSelector((state) => state.searchs.searchParams);
+  const { isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   // 지역별 필터
@@ -290,7 +297,7 @@ function Header() {
     <header className="App-header">
       {windowWidth >= 1100 && (
         <div className="header-first">
-          {user ? (
+          {isAuthenticated ? (
               // 사용자가 로그인한 경우
               <>
                 <div className="loging">
