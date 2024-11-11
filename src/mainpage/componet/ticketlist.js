@@ -29,7 +29,20 @@ export default function Ticketlist({ allTickets, lastTicketElementRef }) {
                                         {ticket.pre_sale_date !== null ? <div className='pre-banner'>선예매</div> : null}
                                     </div>
                                     <div className='title'>{ticket.event_name}</div>
-                                    <div className='day'>{moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>
+                                    <div className='day'>
+                                        {moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}
+                                    </div>
+                                    <div className='day2'>
+                                        공연 날짜 :
+                                        {ticket.event_start_date && ticket.event_end_date ? (
+                                            <>
+                                                {moment(ticket.event_start_date).locale('ko').format('M.DD')}~
+                                                {moment(ticket.event_end_date).locale('ko').format('M.DD')}
+                                            </>
+                                        ) : (
+                                            <span>정보 없음</span>
+                                        )}
+                                    </div>
                                     <div className='tic-site2'>
                                         {ticket.eventSites.map(site => (
                                             <img src={getImageForSite(site.sales_site)} alt={site.sales_site} key={site.id} />

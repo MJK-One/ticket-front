@@ -96,7 +96,7 @@ export default function MainTop({ top10Tickets }) {
                 <div className='poster-img'>
                   <img src={tticket.image_url || "/img/normal_poster.png"} alt={`${tticket.event_name} 이미지`} />
                 </div>
-                <div className='poster-info' style={{ color: isSmallScreen ? textColors[tticket.id] : 'inherit' }}>
+                <div className='poster-info'>
                   <div className='poster-info-cl'>{tticket.genre}</div>
                   <div className='poster-info-title'>{tticket.event_name}</div>
                   <div className='poster-info-day'>{moment(tticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>

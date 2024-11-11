@@ -1,161 +1,97 @@
 .by-site {
     display: flex;
-    gap : 20px;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     font-weight: 700;
 }
+
 .by-site div {
     border: 1px solid #aaa;
     border-radius: 30px;
     display: flex;
     align-items: center; 
     justify-content: center;
-    padding: 10px 20px;
+    padding: 10px 10px;
     cursor: pointer;
 }
+
 .by-site div.active {
-    border :inherit;
+    border: inherit;
     background-color: #1774e6;
     color: white;
 }
+
 .by-site :hover {
     background-color: #1774e6;
     color: white;
 }
-/* .controll-list {
-    margin-left:20px;
-    justify-content: center;
-    width : 1310px;
-}
-.view-type button {
-    width : 36px;
-    height : 36px;
-}
-.view-type {
-    float: left;
-}
-.view-sort {
-    float : right;
-}
-.view-sort li{
-    display: inline;
-    align-items: center; 
-    justify-content: center;
-    padding: 0 10px 0 10px;
-}
-.view-sort li:not(:last-child) {
-    border-right: 1px solid #ccc;
-} */
+
 .openticket-arrange {
-    display : flex;
+    display: flex;
     flex-wrap: wrap;
-    width : 1100px;
-    margin-top : 20px;
+    width: 1100px;
+    margin-top: 20px;
 }
-@media screen and (min-width: 1001px) and (max-width : 1300px) {
+
+/* 미디어 쿼리 추가 */
+@media (min-width: 1100px) {
     .openticket-arrange {
-        display : flex;
-        flex-wrap: wrap;
-        width : 900px;
-        margin-top : 20px;
+        width : 1100px;
     }
+    .site-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    .site-logo img {
+        width: 60px;
+        height: auto; 
+        cursor: pointer;
+        border-radius: 30px;
+    }    
 }
-@media screen and (max-width: 1000px) {
+
+@media (max-width: 1100px) and (min-width: 650px) {
     .openticket-arrange {
-        display : flex;
-        flex-wrap: wrap;
         width : 650px;
-        margin-top : 20px;
     }
+    .site-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    .site-logo img {
+        width: 50px;
+        height: auto; 
+        cursor: pointer;
+        border-radius: 30px;
+    }    
 }
-.openticket {
-    width : 191px;
-    height : 410px;
-    margin : 0 auto 20px;
-    cursor: pointer;
-    border-bottom: 1px solid #eee;
-}
-.openticket-img {
-    width : 191px;
-    height : 254px;
-}
-.openticket-img img{
-    width : 100%;
-    height: 100%;
-    border-radius: 10px;
-}
-.openticket-info {
-    margin-top: 10px;
-    width : 180px;
-    position: relative;
-}
-.openticket-info .title {
-    margin-top : 5px;
-    font-weight: 600;
-    font-size: 17px;
-    width : 100%;
-    height : 40px;
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-.openticket-info .day {
-    margin-top : 5px;
-}
-.open-Timer {
-    align-items: center;
-    height: 1.5rem;
-    padding: 0;
-    border-radius: 4px;
-}
-.Timer-banner {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 1.5rem;
-    padding: .2rem .6rem;
-    border-radius: 4px 0 0 4px;
-    color : white;
-    background: #1774e6;
-}
-.Timer-day {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 1.5rem;
-    padding: .05rem .6rem;
-    color: #1774e6;
-    gap: 1rem;
-    background: #fff;
-    border: 1px solid  #1774e6;
-    border-left-width: 0;
-    border-radius: 0 4px 4px 0;
-    font-weight: 700;
-}
-.ot-info-bot {
-   
-}
-.ot-info-bot .day {
-    float: left;
-    color : #1774e6;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-.tic-site1 {
-    width : 100%;
-    height : 30px;
-    margin-top: 10px;
-}
-.tic-site1 img {
-    width : 30px;
-    height : 30px;
-    margin-right: 5px;
-    border-radius: 10px;
+@media (max-width: 650px) {
+    .by-site {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        right : 20px;
+    }
+    .openticket-arrange {
+        width : 500px;
+    }
+    .site-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    .site-logo img {
+        width: 20px;
+        height: auto; 
+        cursor: pointer;
+        border-radius: 30px;
+    }
+    
 }

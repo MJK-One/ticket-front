@@ -47,7 +47,7 @@
     margin-top : 5px;
     font-weight: 600;
     width : 100%;
-    /* height : 40px; */
+    height : 40px;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -105,6 +105,12 @@
     font-weight: 600;
     margin-bottom: 5px;
 }
+.day2 {
+    float: left;
+    color : #120053;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
 .tic-site2 {
     width : 100%;
     height : 30px;
@@ -120,7 +126,7 @@
 @media (min-width: 650px) {
     .openticket {
         width : 191px;
-        height : 400px;
+        height : 430px;
     }
     .openticket-img {
         width : 191px;
@@ -173,10 +179,10 @@
     }
 
     .openticket-list {
-        width: 250px !important;
+        width: 300px !important;
         justify-content: center;
         margin-top: 0;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
     .openticket {
@@ -187,16 +193,16 @@
     .openticket, .openticket a {
         display: flex;
         flex-direction: row;
-        width: 250px;
-        height: 80px;
+        width: 300px;
+        height: 140px;
         justify-content: center;
         align-items: center;
     }
 
     .openticket-img {
         position: relative;
-        width: 3.6rem !important;
-        height: 4.8rem !important;
+        width: 6rem !important;
+        height: 8rem !important;            
     }
 
     .openticket-img img {
@@ -205,7 +211,7 @@
 
     .openticket-info {
         margin-top: 0;
-        width: 180px !important;
+        width: 180px;
         display: flex;
         flex-direction: column;
         padding-left: 10px;
@@ -215,13 +221,15 @@
         width: 95%;
         -webkit-line-clamp: 2;
         font-size: 0.9rem;
-        font-weight: normal;
+        font-weight: bold;
     }
 
     .day {
         font-size: 0.8rem;
     }
-
+    .day2 {
+        font-size: 0.8rem;
+    }
     .openticket-info .day {
         margin-top: 0;
     }
@@ -236,14 +244,18 @@
         height: 1.1rem;
         padding: .2rem .4rem;
     }
-
-    .pre-banner {
-        margin-left: 5px;
+    .pre-banner{
+        height: 1.3rem;
+        padding: .1rem .3rem;
     }
-
     .tic-site2 {
-        display: none;
+        width : 100%;
+        height : 30px;
     }
-
-
+    .tic-site2 img {
+        width : 30px;
+        height : 30px;
+        margin-right: 5px;
+        border-radius: 10px;
+    }
 }

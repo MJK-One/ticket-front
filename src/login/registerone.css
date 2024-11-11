@@ -59,6 +59,7 @@
     color: orange;
     margin-left: 10px; 
     display: none;
+    font-size: 12px;
 }
 .register-check.visible {
     display: inline;
@@ -117,4 +118,41 @@
 .registerone-input-age-group input {
     width : 14px;
     height: 14px;
+}
+
+@media (max-width: 650px) {
+    .registerone-input {
+        width : 300px;
+    }
+    .registerone-input-box {
+        height: 60px;
+    }
+    .registerone-input label {
+        font-size: 11px;
+    }
+    .registerone-input input {
+        font-size : 11px;
+    }
+    .registerone-input select {
+        font-size: 11px;
+    }
+    .register-check {
+        font-size: 10px;
+    }
+    /* .register-submit{
+        width : 300px;
+    } */
+    .registerone-input .age-group {
+        font-size: 11px;
+    }
+    .registerone-input label {
+
+        margin-left : 0px;
+    }
+    .registerone-input select {
+        font-size: 11px;
+    }
+    .registerone-input .gender {
+        font-size: 11px;
+    }
 }

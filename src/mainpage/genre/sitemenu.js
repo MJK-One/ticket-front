@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './sitemenu.css'
+import '../componet/ticketlist.css'
 import calculateDateDifference from '../componet/calculateDateDifference';
 import getImageForSite from '../componet/getImageForSite';
 import moment from 'moment'; //날짜 변환
@@ -23,31 +24,21 @@ const handleSiteClick = (site) => {
 return( 
   <div className='openticket-container'>
       <menu className='by-site'>
-          <BySite
-              to="all"
-              onClick={() => handleSiteClick('all')}
-              className={activeSite === 'all' ? 'active' : ''}
-          >ALL</BySite>
-          <BySite
-              to="interpark"
-              onClick={() => handleSiteClick('Interpark Ticket')}
-              className={activeSite === 'Interpark Ticket' ? 'active' : ''}
-          >인터파크</BySite>
-          <BySite
-              to="Melon Ticket"
-              onClick={() => handleSiteClick('Melon Ticket')}
-              className={activeSite === 'Melon Ticket' ? 'active' : ''}
-          >멜론</BySite>
-          <BySite
-              to="ticketlink"
-              onClick={() => handleSiteClick('ticketlink')}
-              className={activeSite === 'ticketlink' ? 'active' : ''}
-          >티켓링크</BySite>
-          <BySite
-              to="yes24"
-              onClick={() => handleSiteClick('yes24')}
-              className={activeSite === 'yes24' ? 'active' : ''}
-          >YES24</BySite>
+        <div className={`site-logo ${activeSite === 'all' ? 'active' : ''}`} onClick={() => handleSiteClick('all')}>
+            <img src="/img/siteicon/all.png" alt="ALL" />
+        </div>
+        <div className={`site-logo ${activeSite === 'Interpark Ticket' ? 'active' : ''}`} onClick={() => handleSiteClick('Interpark Ticket')}>
+            <img src="/img/siteicon/interpark.jpg" alt="인터파크" />
+        </div>
+        <div className={`site-logo ${activeSite === 'ticketlink' ? 'active' : ''}`} onClick={() => handleSiteClick('ticketlink')}>
+            <img src="/img/siteicon/ticketlink.jpg" alt="티켓링크" />
+        </div>
+        <div className={`site-logo ${activeSite === 'Melon Ticket' ? 'active' : ''}`} onClick={() => handleSiteClick('Melon Ticket')}>
+            <img src="/img/siteicon/melon.jpg" alt="멜론" />
+        </div>
+        <div className={`site-logo ${activeSite === 'yes24' ? 'active' : ''}`} onClick={() => handleSiteClick('yes24')}>
+            <img src="/img/siteicon/yes24.png" alt="YES24" />
+        </div>
       </menu>
       <div className='openticket-arrange'>
           {tickets
@@ -68,8 +59,19 @@ return(
                                   {ticket.pre_sale_date !== null ? <div className='pre-banner'>선예매</div> : null}
                               </div>
                               <div className='title'>{ticket.event_name}</div>
-                              <div className='day'>{moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>      
-                              <div className='tic-site1'>
+                              <div className='day'>{moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>
+                              <div className='day2'>
+                                        공연 날짜 :
+                                        {ticket.event_start_date && ticket.event_end_date ? (
+                                            <>
+                                                {moment(ticket.event_start_date).locale('ko').format('M.DD')}~
+                                                {moment(ticket.event_end_date).locale('ko').format('M.DD')}
+                                            </>
+                                        ) : (
+                                            <span>정보 없음</span>
+                                        )}
+                                    </div>      
+                              <div className='tic-site2'>
                                   {ticket.eventSites.map(site => (
                                       <img src={getImageForSite(site.sales_site)} alt={site.sales_site} key={site.id} />
                                   ))}
