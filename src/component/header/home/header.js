@@ -494,10 +494,10 @@ function Header() {
                 {/* <CustomLink to="/chlidfamliy">아동/가족</CustomLink> */}
                 {/* <CustomLink to="/detail">디테일</CustomLink> */}
               </ul>
-              <div className="menuDivider"></div>
+              {/*<div className="menuDivider"></div>
               <ul className="sep-header">
                 <CustomLink to="/reservation">예약테스트</CustomLink>
-              </ul>
+              </ul>*/}
             </div>
           </div>
         )}
