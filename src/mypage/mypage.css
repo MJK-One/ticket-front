@@ -1,3 +1,10 @@
+@import './mypageFont.css';
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 .mypage {
     display: flex; 
     justify-content: center; 
@@ -46,12 +53,25 @@
 .mypage-info .mypage-btn {
     display: flex; /* Flexbox 사용 */
     justify-content: flex-start; /* 버튼을 왼쪽으로 정렬 */
+    gap: 10px;
 }
 .mypage-info button {
     border: 1px solid #dddddd;
     background-color: white;
     font-size: 15px;
-    margin-left: 10px; /* 버튼 간의 간격 */
+}
+.mypage-info button:first-child {
+    margin-left: 10px;
+}
+.mypage-btn .naverlogin {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    border : none;
+    background-color: #1ec800;
+    justify-content: center;
+    align-items: center; 
 }
 
 .mypage-choice {
@@ -130,6 +150,7 @@
     min-height : 100px; 
 }
 
+/* 관심 목록 */
 .choice-list {
     position: relative;
     width: 100%;
@@ -238,42 +259,120 @@
     height: 100%;
 }
 
+.choice-list-page { /* page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+}
 
+.choice-list-page-ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.choice-list-page-ul li {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.choice-list-page-left-btns, .choice-list-page-numbers, .choice-list-page-right-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.choice-list-page-left-btns li, .choice-list-page-right-btns li {
+    border: 1px solid #000;
+    font-family: 'SUIT1';
+}
+
+.choice-list-page-num.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+/* 알림 목록 */
 .call-ticket {
     display: flex;
-    margin: 30px;
+    align-items: center;
+    padding: 30px;
     border-bottom: 1px solid #dddddd;
-    padding-bottom: 20px;
+}
+.call-ticket:last-child {
+    border-bottom: none;
+}
+.call-ticket-a {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none; /* 링크 텍스트 장식 제거 */
+}
+.call-ticket-a:hover .call-info-title {
+    color: #0368e5;
 }
 .call-img {
+    position: relative;
     width : 120px;
     height : 170px;
     border : 1px solid #000;
 }
+.call-img img {
+    width: 100%;
+    height: 100%;
+}
 .call-info {
     margin-left : 15px;
-    width : 60%;
-    border-right: 1px solid #dddddd;
+    width : 75%;
 }
 .call-info-title {
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     margin-bottom: 15px;
 }
-.call-info-open {
-    font-size: 20px;
+.call-info-pre-open, .call-info-open {
+    font-size: 1rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     margin-bottom: 8px;
 }
 .call-option {
-    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
     height: 100%;
-    width : 300px;
+}
+.call-option-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 .option-call-btn {
-    width : 30px;
-    height : 30px;
-    border: 1px solid #000;
-    border-radius: 10px;
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+.option-call-btn img {
+    width: 100%;
+    height: 100%;
 }
 .call-delete {
     cursor: pointer;
@@ -282,6 +381,7 @@
     color : #dddddd;
 }
 
+/**/
 .modal-overlay {
     position: fixed;
     top: 0;
