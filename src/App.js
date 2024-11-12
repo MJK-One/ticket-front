@@ -3,7 +3,7 @@ import { API_SERVER_HOST } from './api/connect.js';
 import axios from 'axios';
 import './App.css';
 import RegionPage from './regionpage/RegionPage';
-import MonthPage from './monthpage/monthpage';
+//import MonthPage from './monthpage/monthpage';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { UserProvider } from './login/userContext.js';
 import { useDispatch } from 'react-redux';
@@ -36,7 +36,7 @@ function App() {
             <Route path="/detail/:id" element={<DetailPage />} />
             <Route path="/search" element={<Search />} />
             <Route path='/region' element={<RegionPage />} />
-            <Route path='/month' element={<MonthPage />} />
+            {/*<Route path='/month' element={<MonthPage />} />*/}
             <Route path="/login" element={<Login />} /> 
             <Route path="registerone" element={<RegisterOne/>} />
             <Route path="/mypage" element={<Mypage/>} />

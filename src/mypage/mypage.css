@@ -1,13 +1,27 @@
+@import './mypageFont.css';
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 .mypage {
     display: flex; 
     justify-content: center; 
     align-items: center;
     flex-direction: column;
 }
+@media (min-width: 1100px) {
+    .mypage {
+        margin-bottom: 100px;
+    }
+}
 @media (max-width: 1100px) {
     .mypage {
+        padding: 30px;
+        padding-top: 0;
         margin-top: 40px;
-        margin-bottom: 50px;
+        margin-bottom: 150px;
     }
 }
 
@@ -33,18 +47,31 @@
 .mypage-info .mypage-email {
     margin-bottom: 10px; 
     font-weight: 500;
-    font-size: 30px;
+    font-size: 1.5rem;
     margin-left: 10px;
 }
 .mypage-info .mypage-btn {
     display: flex; /* Flexbox 사용 */
     justify-content: flex-start; /* 버튼을 왼쪽으로 정렬 */
+    gap: 10px;
 }
 .mypage-info button {
     border: 1px solid #dddddd;
     background-color: white;
     font-size: 15px;
-    margin-left: 10px; /* 버튼 간의 간격 */
+}
+.mypage-info button:first-child {
+    margin-left: 10px;
+}
+.mypage-btn .naverlogin {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    border : none;
+    background-color: #1ec800;
+    justify-content: center;
+    align-items: center; 
 }
 
 .mypage-choice {
@@ -117,103 +144,235 @@
 .cc-list {
     margin-top : 20px;
     border: 1px solid #dddddd;
+    position: relative;
     width: 100%;
     max-width: 900px;
     min-height : 100px; 
 }
+
+/* 관심 목록 */
+.choice-list {
+    position: relative;
+    width: 100%;
+}
+
 .choice-ticket {
     display: flex;
-    margin: 30px;
+    justify-content: space-between; /* 좌우 여백을 균등하게 */
+    align-items: center;
+    padding: 30px;
+    width: calc(100% - 60px);
     border-bottom: 1px solid #dddddd;
-    padding-bottom: 20px;
 }
+
+.choice-ticket:last-child {
+    border-bottom: none;
+}
+
+.choice-ticket-a {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    text-decoration: none; /* 링크 텍스트 장식 제거 */
+}
+
 .cho-img {
-    width : 120px;
-    height : 170px;
-    border : 1px solid #000;
+    position: relative;
+    width: 120px;
+    height: 170px;
+    border: 1px solid #000;
 }
+
+.cho-img img {
+    width: 100%;
+    height: 100%;
+}
+
 .cho-info {
-    margin-left : 15px;
-    width : 60%;
+    margin-left: 15px;
+    width: 65%;
 }
+
+.choice-ticket-a:hover .cho-info-title {
+    color: #0368e5;
+}
+
 .cho-info-title {
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     margin-bottom: 15px;
 }
-.cho-info-open {
-    font-size: 20px;
+
+.cho-info-pre-open, .cho-info-open, .cho-info-performance, .cho-info-region {
+    font-size: 1rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     margin-bottom: 8px;
 }
-.cho-info-performance {
-    font-size: 20px;
-    margin-bottom: 8px;
-}
-.cho-info-region {
-    font-size: 20px;
-    margin-bottom: 8px;
-}
-.cho-info-site {
-    width : 30px;
-    height : 30px;
-    border: 1px solid #000;
-    border-radius: 10px;
-}
-.call-cho {
+
+.cho-info-site-list {
     display: flex;
-    justify-content: flex-end;
-    width: 20%;
+    flex-direction: row;
+    gap: 8px;
 }
-.cho-tic-call {
-    width : 30px;
-    height : 30px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    margin-left : 10px;
-    margin-right: 10px;
-}
-.cho-tic-cho {
-    width : 30px;
-    height : 30px;
+
+.cho-info-site {
+    position: relative;
+    width: 30px;
+    height: 30px;
     border: 1px solid #000;
     border-radius: 10px;
 }
 
+.cho-info-site img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.call-cho {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: auto; /* 버튼 컨테이너 폭을 자동으로 설정 */
+}
+
+.cho-tic-call, .cho-tic-cho {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.cho-tic-call img, .cho-tic-cho img {
+    width: 100%;
+    height: 100%;
+}
+
+.choice-list-page { /* page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.choice-list-page-ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.choice-list-page-ul li {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.choice-list-page-left-btns, .choice-list-page-numbers, .choice-list-page-right-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.choice-list-page-left-btns li, .choice-list-page-right-btns li {
+    border: 1px solid #000;
+    font-family: 'SUIT1';
+}
+
+.choice-list-page-num.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+/* 알림 목록 */
 .call-ticket {
     display: flex;
-    margin: 30px;
+    align-items: center;
+    padding: 30px;
     border-bottom: 1px solid #dddddd;
-    padding-bottom: 20px;
+}
+.call-ticket:last-child {
+    border-bottom: none;
+}
+.call-ticket-a {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none; /* 링크 텍스트 장식 제거 */
+}
+.call-ticket-a:hover .call-info-title {
+    color: #0368e5;
 }
 .call-img {
+    position: relative;
     width : 120px;
     height : 170px;
     border : 1px solid #000;
 }
+.call-img img {
+    width: 100%;
+    height: 100%;
+}
 .call-info {
     margin-left : 15px;
-    width : 60%;
-    border-right: 1px solid #dddddd;
+    width : 75%;
 }
 .call-info-title {
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     margin-bottom: 15px;
 }
-.call-info-open {
-    font-size: 20px;
+.call-info-pre-open, .call-info-open {
+    font-size: 1rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     margin-bottom: 8px;
 }
 .call-option {
-    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
     height: 100%;
-    width : 300px;
+}
+.call-option-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 .option-call-btn {
-    width : 30px;
-    height : 30px;
-    border: 1px solid #000;
-    border-radius: 10px;
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+.option-call-btn img {
+    width: 100%;
+    height: 100%;
 }
 .call-delete {
     cursor: pointer;
@@ -222,6 +381,7 @@
     color : #dddddd;
 }
 
+/**/
 .modal-overlay {
     position: fixed;
     top: 0;

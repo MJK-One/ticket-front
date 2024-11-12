@@ -237,7 +237,7 @@ const MobileMainTop = () => {
                         <div className='m-prdCastWrap'>
                             <a className='m-prdCastBtn' role='checkbox' onClick={HeartBtnHandler}>
                                 <img src={isHeartBtn ? "/img/icon/detail/heart_on.png" : "/img/icon/detail/heart_off.png"} />
-                                <p className='m-prdCastName'>좋아요</p>
+                                <p className='m-prdCastName'>관심</p>
                                 <p className='m-prdCastNum'>{prdHeartNum}</p>
                             </a>
                         </div>
