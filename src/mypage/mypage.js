@@ -9,7 +9,7 @@ import { API_SERVER_HOST } from "../api/connect";
 import './mypage.css'
 import axios from "axios";
 
-function PasswordModal({ isOpen, onClose }) {
+function PasswordModal({ isOpen, onClose, user }) {
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
@@ -31,7 +31,7 @@ function PasswordModal({ isOpen, onClose }) {
         );
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (newPassword !== confirmPassword) {
             setError("비밀번호가 일치하지 않습니다.");
@@ -41,11 +41,37 @@ function PasswordModal({ isOpen, onClose }) {
             setError("비밀번호는 8~12자, 영문, 숫자, 특수문자 중 2가지 이상을 포함해야 합니다.");
             return;
         }
+        
+        if (!user) {
+            setError("사용자 정보를 찾을 수 없습니다.");
+            return;
+        }
 
-        // 비밀번호 수정 로직 추가
-        console.log("새 비밀번호:", newPassword);
-        setError(""); // 에러 초기화
-        onClose(); // 모달 닫기
+        try {
+            const response = await axios.post(`${API_SERVER_HOST}/change-password`, {
+                email: user.email,
+                newPassword,
+            });
+            console.log(user.email, newPassword)
+            console.log("비밀번호 변경 성공", response.data);
+            setError(""); // 에러 초기화
+            onClose(); // 모달 닫기
+
+        } catch (error) {
+            console.error("비밀번호 변경 중 오류 발생:", error);
+
+            if (axios.isAxiosError(error)) {
+                if (error.response) {
+                    console.error("서버에서 반환된 오류 메시지:", error.response.data);
+                    const errorMessage = error.response.data.message || "비밀번호 변경 실패";
+                    setError(errorMessage);
+                } else {
+                    setError("서버 오류가 발생했습니다.");
+                }
+            } else {
+                setError("알 수 없는 오류가 발생했습니다.");
+            }
+        }
     };
 
     if (!isOpen) return null;
@@ -339,14 +365,18 @@ function Mypage() {
                         <>
                             <div className="mypage-email">{user.email}</div> 
                             <div className="mypage-btn">
-                                <button onClick={() => setIsModalOpen(true)}>개인정보 수정</button>
+                                {user.type === "normal" && (
+                                    <button onClick={() => setIsModalOpen(true)}>
+                                        개인정보 수정
+                                    </button>
+                                )}
                                 {/*<button>알람 설정</button>*/}
                                 {user.type === "naver" && (
-                                    <div className="naverlogin">
+                                    <button className="naverlogin">
                                         <svg width="15" height="15" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path fillRule="evenodd" clipRule="evenodd" d="M15.0619 5.48535V13.0196L9.9945 5.48535H4.51953V20.4187H9.97713V12.8844L15.0446 20.4187H20.5195V5.48535H15.0619Z" fill="white"/>
                                         </svg>
-                                    </div>
+                                    </button>
                                 )}
                             </div>
                         </>
@@ -625,7 +655,8 @@ function Mypage() {
                 )}
             </div>
             {/* 비밀번호 수정 모달 */}
-            <PasswordModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <PasswordModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} 
+            user={user}/>
 
             {/* 모바일 nav */}
             {windowWidth <= 1100 && <MobileNav />}

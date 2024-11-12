@@ -71,7 +71,8 @@ ul {
     border : none;
     background-color: #1ec800;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+    cursor: default;
 }
 
 .mypage-choice {
