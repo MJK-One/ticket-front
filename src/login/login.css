@@ -139,6 +139,10 @@
     justify-content: center;
     align-items: center; 
 }
+
+.snslogin .kakaologin, .snslogin .naverlogin {
+    cursor: pointer;
+}
 @media (max-width: 650px) {
     .login-box {
         margin-top : 30px;

@@ -29,14 +29,14 @@ button {
   .loging {
     display: flex;
     align-items: center; 
-    margin-right : 100px;
+    /*margin-right : 100px;*/
     gap : 20px;
   }
   .h-t-logout{
     cursor: pointer;
   }
   .h-t-login {
-    margin-right : 100px;
+    /*margin-right : 100px;*/
   }
   .header-top {
     display: flex;

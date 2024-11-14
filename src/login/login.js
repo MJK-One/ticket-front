@@ -227,7 +227,6 @@ function Login() {
             </form>
             <div className="findlist"> 
                 <ul>
-                    <li>아이디 찾기</li>
                     <li>비밀번호 찾기</li>
                     <li><Link to="/registerone">회원가입</Link></li>
                 </ul>
