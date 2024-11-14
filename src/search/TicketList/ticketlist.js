@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import calculateDateDifference from '../../mainpage/componet/calculateDateDifference';
 import getImageForSite from '../../mainpage/componet/getImageForSite';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSearchData, setUpCurPage, resetCurPage, setAllSearchResult, resetAllSearchResult } from '../../store/slice/searchSlice';
+import { fetchSearchData, setUpCurPage, resetCurPage, setAllSearchResult, resetAllSearchResult, setOrderByKey } from '../../store/slice/searchSlice';
 import './ticketlist.css'
 
 function Ticektlist() {
     // dispatch
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     // selecter
     const searchParams = useSelector((state) => state.searchs.searchParams); // 검색 파라미터
@@ -24,17 +25,26 @@ function Ticektlist() {
     const allResults = useSelector((state) => state.searchs.allSearchResults); // 전체 검색 결과
 
     // 정렬 방식 선택
-    const [selectedSorting, setSelectedSorting] = useState("popular");
+    const selectedSorting = searchParams.orderByKey;
     const sortClickHandler = (sorting) => {
-        setSelectedSorting(sorting);
+        // 이전 검색 결과 초기화
+        dispatch(resetCurPage());
+        dispatch(resetAllSearchResult());
+
+        //slice 제어
+        dispatch(setOrderByKey(sorting)); // 정렬
+    
+        navigate("/search");
     };
 
     useEffect(() => {
         const params = {
             genreFilter: searchParams.genreFilter,
             regionFilter: searchParams.regionFilter,
+            siteFilter: searchParams.siteFilter,
             period: searchParams.period,
             searchKeyword: searchParams.searchKeyword,
+            orderByKey: searchParams.orderByKey,
             pageNum: 0,
           };
       
@@ -64,8 +74,10 @@ function Ticektlist() {
             const params = {
                 genreFilter: searchParams.genreFilter, // 장르
                 regionFilter: searchParams.regionFilter, //지역
+                siteFilter: searchParams.siteFilter, //사이트
                 period: searchParams.period, // 공연 기간
                 searchKeyword: searchParams.searchKeyword, //검색어
+                orderByKey: searchParams.orderByKey, // 정렬
                 pageNum: nextPage //현재 페이지 번호
             };
 
@@ -81,24 +93,29 @@ function Ticektlist() {
         <div className='ticketlist'>
             <div className='tl-top-wrap'>
                 <div className='tl-t-wrap'>
-                    <div class="tl-t">티켓오픈</div>
+                    <div className="tl-t">티켓오픈</div>
                     {status === 'succeeded' && <div className='tl-st' key={'tl-subTitle'}>{`(${totalElements})`}</div>}
                 </div>
                 <ul className='tl-sort-ul' key={'tl-sort-ul'}>
-                    <li className={`tl-sort-li ${selectedSorting === "popular" ? "selected" : null}`}
-                        onClick={() => sortClickHandler("popular")}
-                        key={'tl-sort-popular'}>
-                        인기순
-                    </li>
                     <li className={`tl-sort-li ${selectedSorting === "view" ? "selected" : null}`}
                         onClick={() => sortClickHandler("view")}
                         key={'tl-sort-view'}>
                         조회순
                     </li>
+                    <li className={`tl-sort-li ${selectedSorting === "popular" ? "selected" : null}`}
+                        onClick={() => sortClickHandler("popular")}
+                        key={'tl-sort-popular'}>
+                        관심순
+                    </li>
+                    <li className={`tl-sort-li ${selectedSorting === "title" ? "selected" : null}`}
+                        onClick={() => sortClickHandler("title")}
+                        key={'tl-sort-title'}>
+                        가나다순
+                    </li>
                 </ul>
             </div>
             
-            <div class="tl-con">
+            <div className="tl-con">
                 {status === 'loading' && (
                     <div className='s-openticket-arrange'>
                         <div>loading...</div>
@@ -117,8 +134,14 @@ function Ticektlist() {
                 {(status === 'succeeded' && totalElements !== 0) && (
                     <div className='s-openticket-arrange'>
                         {allResults.map((ticket, index) => {
+                            const period = ticket.event_start_date === ticket.event_end_date
+                            ? (ticket.event_start_date ? (moment(ticket.event_start_date).locale('ko').format('M.DD')) : (null))
+                            : (ticket.event_start_date && ticket.event_end_date ? 
+                                (`${moment(ticket.event_start_date).locale('ko').format('M.DD')} ~ 
+                                ${moment(ticket.event_end_date).locale('ko').format('M.DD')}`) : (null));
+
                             return (  
-                                <div className='s-openticket' key={ticket.id}>
+                                <div className='s-openticket' key={`search-openticket-${ticket.id}`}>
                                     <Link to={`/detail/${ticket.id}`}>
                                         <div className='s-openticket-img'>
                                             <img src={ticket.image_url || "/img/normal_poster.png"} alt={`${ticket.event_name} 이미지`} />
@@ -131,6 +154,16 @@ function Ticektlist() {
                                             </div>
                                             <div className='s-title'>{ticket.event_name}</div>
                                             <div className='s-day'>{moment(ticket.ticket_open_date).locale('ko').format('M.DD(ddd) HH:mm')}</div>
+                                            <div className='s-day2'>
+                                                공연 날짜 :
+                                                {period ? (
+                                                    <span style={{marginLeft: '5px'}}>
+                                                        {period}
+                                                    </span>
+                                                ) : (
+                                                    <span style={{marginLeft: '5px'}}>정보 없음</span>
+                                                )}
+                                            </div>
                                             <div className='s-tic-site2'>
                                                 {ticket.eventSites.map(site => (
                                                     <img src={getImageForSite(site.sales_site)} alt={site.sales_site} key={site.id} />

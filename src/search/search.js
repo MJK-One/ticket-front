@@ -25,7 +25,7 @@ function Search() {
             {windowWidth <= 1100 && <MobileSearchHeader />}
 
             <main id="search-content">
-                <div class="search-container">
+                <div className="search-container">
                     {windowWidth > 1400 && (
                         <div id='search-side' className='search-side'>
                             {/* sticky(스크롤하다가 특정 위치가 되면 fixed) */}
@@ -39,7 +39,7 @@ function Search() {
                         <Filter />
                     )}
                     
-                    <div class="tickets">
+                    <div className="tickets">
                         <Ticektlist />
                     </div>
                 </div>

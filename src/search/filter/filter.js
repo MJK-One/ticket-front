@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { resetCurPage, resetAllSearchResult, setGenreFilter, setRegionFilter, setPeriod } from '../../store/slice/searchSlice.js';
+import { resetCurPage, resetAllSearchResult, setGenreFilter, setRegionFilter, setSiteFilter, setPeriod } from '../../store/slice/searchSlice.js';
 import DatePicker from '../../component/datepicker/datepicker.js';
 import './filter.css';
 
@@ -21,6 +21,7 @@ const Filter = () => {
   const [isToggledTopContainer, setIsToggledTopContainer] = useState(true); //top
   const [isToggledMidContainer, setIsToggledMidContainer] = useState(true); //Middle
   const [isToggledBotContainer, setIsToggledBotContainer] = useState(true); //Bottom
+  const [isToggledLastContainer, setIsToggledLastContainer] = useState(true); //last
 
   //active
   //genre
@@ -52,6 +53,14 @@ const Filter = () => {
     Jeju: false
   });
 
+  // site
+  const [isActiveSite, setIsActiveSite] = useState({
+    "Interpark Ticket": false,
+    "Melon Ticket": false,
+    "Ticket Link": false,
+    "Yes24": false
+  });
+
     /* 이벤트 함수 */
   // 화면 크기 체크 함수
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -74,6 +83,9 @@ const Filter = () => {
   const toggleContainerBotHandler = () => { //Bottom
     setIsToggledBotContainer(!isToggledBotContainer);
   };
+  const toggleContainerLastHandler = () => { //last
+    setIsToggledLastContainer(!isToggledLastContainer);
+  };
 
   //active item
   const ActiveGenreHandler = (genre) => {
@@ -87,6 +99,13 @@ const Filter = () => {
     setIsActiveRegion((prevState) => ({
       ...prevState,
       [region]: !prevState[region]
+    }));
+  };
+
+  const ActiveSiteHandler = (site) => {
+    setIsActiveSite((prevState) => ({
+      ...prevState,
+      [site]: !prevState[site]
     }));
   };
 
@@ -124,6 +143,23 @@ const Filter = () => {
       onClick={() => ActiveRegionHandler(item.class)}
       key={`filterBtn-Region-${item.class}`}>
       {item.value}
+    </button>
+  ));
+
+  /*
+    사이트
+   */
+  const filterSite = [{value: "인터파크", img: "/img/siteicon/interpark.jpg", filter: "Interpark Ticket"},
+    {value: "멜론", img: "/img/siteicon/melon.jpg", filter: "Melon Ticket"},
+    {value: "티켓링크", img: "/img/siteicon/ticketlink.jpg", filter: "Ticket Link"},
+    {value: "예스24", img: "/img/siteicon/yes24.png", filter: "Yes24"}
+  ];
+  const filterSiteBtns = filterSite.map(item => (
+    <button className={`filterBtn siteBtn ${isActiveSite[item.filter] ? "is-active" : null}`}
+      onClick={() => ActiveSiteHandler(item.filter)}
+      key={`filterBtn-Site-${item.filter}`}
+    >
+      <img src={item.img} />
     </button>
   ));
 
@@ -193,6 +229,42 @@ const Filter = () => {
     setCalendarDateValue(newDate);
   };
 
+  // 사이트
+  // 선택 사이트 배열, str
+    // 배열
+  const [selectedSite, setSelectedSite] = useState([]);
+  const [selectedSitePost, setSelectedSitePost] = useState([]);
+  useEffect(() => {
+    // 한글(표시)
+    const selectedSites = filterSite
+      .filter(item => isActiveSite[item.filter])
+      .map(item => item.value);
+    setSelectedSite(selectedSites);
+
+    // 영어(백엔드에게 post)
+    const selectedSitesPost = filterSite
+      .filter(item => isActiveSite[item.filter])
+      .map(item => item.filter);
+    setSelectedSitePost(selectedSitesPost);
+  }, [isActiveSite]);
+
+    //  결과 str: '(첫 번째 사이트) 외 N개 사이트'로 표기 예정
+  const [selectedSiteStr, setSelectedSiteStr] = useState("전체");
+  useEffect(() => {
+    if(selectedSite.length > 0) {
+      const firstSite = selectedSite[0];
+      const overSiteLength = selectedSite.length - 1;
+      if(overSiteLength > 0) {
+        setSelectedSiteStr(`${firstSite} 외 ${overSiteLength}개 사이트`);
+      } else {
+        setSelectedSiteStr(firstSite);
+      }
+    } else {
+      setSelectedSiteStr("전체");
+    }
+  }, [selectedSite]);
+
+
   /*
   searchSlice 변경에 따른 업데이트
    */
@@ -216,6 +288,17 @@ const Filter = () => {
     setIsActiveRegion(updatedActiveRegion);
   }, [searchSlice.regionFilter]);
 
+  // isActiveSite 업데이트: searchSlice.siteFilter 값이 변경될 때마다
+  useEffect(() => {
+    const updatedActiveSite = {};
+
+    filterSite.forEach(site => { // 해당하는 값이 있으면 true, 없으면 false
+      updatedActiveSite[site.filter] = searchSlice.siteFilter.includes(site.filter);
+    });
+
+    setIsActiveSite(updatedActiveSite);
+  }, [searchSlice.siteFilter]);
+
 
   /*
   필터 버튼
@@ -228,6 +311,7 @@ const Filter = () => {
     //slice 제어
     dispatch(setGenreFilter([])); //장르 필터
     dispatch(setRegionFilter([])); //지역 필터
+    dispatch(setSiteFilter([])); //사이트 필터
     dispatch(setPeriod("전체")); //날짜 필터
 
     navigate("/search");
@@ -242,7 +326,8 @@ const Filter = () => {
       dispatch(setGenreFilter(selectedGenre)); //장르 필터
       dispatch(setRegionFilter(selectedRegion)); //지역 필터
       dispatch(setPeriod(calendarDateValue)); //날짜 필터
-  
+      dispatch(setSiteFilter(selectedSitePost)); // 사이트 필터
+
       navigate("/search");
   };
 
@@ -251,11 +336,13 @@ const Filter = () => {
   const [isTopGenreFilter, setIsTopGenreFilter] = useState(false); //장르
   const [isTopRegionFilter, setIsTopRegionFilter] = useState(false); //지역
   const [isTopDateFilter, setIsTopDateFilter] = useState(false); //날짜
+  const [isTopSiteFilter, setIsTopSiteFilter] = useState(false); //사이트
 
   // 필터 선택 여부
   const [isSelctedTopGenre, setIsSelctedTopGenre] = useState(false); //장르
   const [isSelctedTopRegion, setIsSelctedTopRegion] = useState(false); //지역
   const [isSelctedTopDate, setIsSelctedTopDate] = useState(false); //날짜
+  const [isSelctedTopSite, setIsSelctedTopSite] = useState(false); //사이트
 
   // 선택시 is-visible
   useEffect(() => {
@@ -283,22 +370,39 @@ const Filter = () => {
     }
   }, [calendarDateValue]);
 
+  useEffect(() => {
+    if(selectedSiteStr === "전체") {
+      setIsSelctedTopSite(false);
+    } else {
+      setIsSelctedTopSite(true);
+    }
+  }, [selectedSiteStr]);
+
   // 필터창 선택 함수
   const topFilterBtnHandler = (filter) => {
     if(filter === "genre") {
       setIsTopGenreFilter(true);
       setIsTopRegionFilter(false);
       setIsTopDateFilter(false);
+      setIsTopSiteFilter(false);
     }
     else if(filter === "region") {
       setIsTopGenreFilter(false);
       setIsTopRegionFilter(true);
       setIsTopDateFilter(false);
+      setIsTopSiteFilter(false);
     }
     else if(filter === "date") {
       setIsTopGenreFilter(false);
       setIsTopRegionFilter(false);
       setIsTopDateFilter(true);
+      setIsTopSiteFilter(false);
+    }
+    else if(filter === "site") {
+      setIsTopGenreFilter(false);
+      setIsTopRegionFilter(false);
+      setIsTopDateFilter(false);
+      setIsTopSiteFilter(true);
     }
     else {
       console.log("error");
@@ -335,6 +439,17 @@ const Filter = () => {
 
     //slice 제어
     dispatch(setPeriod("전체")); //날짜 필터
+
+    navigate("/search");
+  };
+
+  const ResetSiteBtnHandler = () => { //사이트 필터 리셋 버튼
+    // 이전 검색 결과 초기화
+    dispatch(resetCurPage());
+    dispatch(resetAllSearchResult());
+
+    //slice 제어
+    dispatch(setSiteFilter([])); //지역 필터
 
     navigate("/search");
   };
@@ -395,6 +510,24 @@ const Filter = () => {
     
               <DatePicker onDateChange={handleDateChange} />
             </div>
+
+            <div className={`filterContainer ContainerLast ${isToggledLastContainer ? "is-toggled" : null}`}>
+              {/* Container */}
+              <div className='filterHeader'>
+                <a className='filterToggleBtn' role='button' onClick={toggleContainerLastHandler}>
+                  <h4 className='filterTitle'>사이트</h4>
+                  <div className='selectedData'>
+                    <span className='blind'>선택된 사이트:</span>
+                    <span className='selec-genre'>{selectedSiteStr}</span>
+                  </div>
+                </a>
+              </div>
+              <div className='filterMenu'>
+                {filterSiteBtns}
+              </div>
+
+            </div>
+
           </div>
           
           {/* Button */}
@@ -421,6 +554,9 @@ const Filter = () => {
           </button>
           <button className={`s-filter-btn ${isSelctedTopDate ? 'is-active' : null}`} onClick={() => topFilterBtnHandler('date')}>
             {`${isSelctedTopDate ? calendarDateValue : '관람일'}`} ▼
+          </button>
+          <button className={`s-filter-btn ${isSelctedTopSite ? 'is-active' : null}`} onClick={() => topFilterBtnHandler('site')}>
+            {`${isSelctedTopSite ? selectedSiteStr : '사이트'}`} ▼
           </button>
 
           {/* 장르 필터 */}
@@ -501,6 +637,36 @@ const Filter = () => {
 
               <div className='filterBtnsWrap'>
                 <button onClick={ResetDateBtnHandler} className="search-f-reset-btn">
+                  초기화
+                </button>
+                <button onClick={SubmitBtnHandler} className="search-f-submit-btn">
+                  적용
+                </button>
+              </div>
+    
+            </div>
+          </div>
+
+          {/* 사이트 필터 */}
+          <div className={`filter ${isTopSiteFilter ? null : "is-invisible"}`}>
+            <div className={`filterContainer`}>
+              {/* Container */}
+              <div className='filterHeader'>
+                  <h4 className='filterTitle'>사이트</h4>
+                  <div className='selectedData'>
+                    <span className='blind'>선택된 사이트:</span>
+                    <span className='selec-genre'>{selectedSiteStr}</span>
+                  </div>
+              </div>
+
+              <button className='close-btn' onClick={() => setIsTopSiteFilter(false)}>×</button>
+
+              <div className='filterMenu'>
+                {filterSiteBtns}
+              </div>
+
+              <div className='filterBtnsWrap'>
+                <button onClick={ResetSiteBtnHandler} className="search-f-reset-btn">
                   초기화
                 </button>
                 <button onClick={SubmitBtnHandler} className="search-f-submit-btn">

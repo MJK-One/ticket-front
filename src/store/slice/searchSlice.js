@@ -16,8 +16,10 @@ const initialState = {
     searchParams: {
         genreFilter: [],      // 장르 필터 상태
         regionFilter: [],     // 지역 필터 상태
+        siteFilter: [], // 사이트 필터 상태
         period: "전체",             // 날짜 필터 상태
-        searchKeyword: ''      // 검색어 상태
+        searchKeyword: '',     // 검색어 상태
+        orderByKey: "view"
     },
     curPage: 0, // 현재 페이지 번호
     searchResults: [], // 검색 결과
@@ -45,9 +47,17 @@ const searchSlice = createSlice({
         setPeriod: (state, action) => {
             state.searchParams.period = action.payload;
         },
+        // siteFilter 업데이트 액션
+        setSiteFilter: (state, action) => {
+            state.searchParams.siteFilter = action.payload;
+        },
         // searchKeyword 업데이트 액션
         setSearchKeyword: (state, action) => {
             state.searchParams.searchKeyword = action.payload;
+        },
+        // orderByKey 업데이트 액션
+        setOrderByKey: (state, action) => {
+            state.searchParams.orderByKey = action.payload;
         },
         // 페이지 번호 증가 업데이트 액션
         setUpCurPage: (state) => {
@@ -69,8 +79,10 @@ const searchSlice = createSlice({
         clearFilters: (state) => {
             state.searchParams.genreFilter = [];
             state.searchParams.regionFilter = [];
+            state.searchParams.siteFilter = [];
             state.searchParams.period = "전체";
             state.searchParams.searchKeyword = '';
+            state.searchParams.orderByKey = "view";
             state.searchParams.curPage = 0;
             state.searchResults = [];
             state.allSearchResults = [];
@@ -99,7 +111,7 @@ const searchSlice = createSlice({
 });
 
 // 액션 export
-export const { setGenreFilter, setRegionFilter, setPeriod, setSearchKeyword, setUpCurPage, resetCurPage, setAllSearchResult, resetAllSearchResult, clearFilters } = searchSlice.actions;
+export const { setGenreFilter, setRegionFilter, setPeriod, setSiteFilter, setSearchKeyword, setOrderByKey, setUpCurPage, resetCurPage, setAllSearchResult, resetAllSearchResult, clearFilters } = searchSlice.actions;
 
 // 리듀서 export
 export default searchSlice.reducer;

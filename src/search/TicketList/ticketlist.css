@@ -56,10 +56,10 @@
 }
 .s-openticket {
     width : 191px;
-    height : 400px;
-    margin : 0 9px 15px;
+    height : 430px;
+    margin : 0 auto 20px;
     cursor: pointer;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ddd;
 }
 .s-openticket-img {
     width : 191px;
@@ -72,6 +72,9 @@
     border: 1px solid #6b6b6b;
 }
 .s-openticket-info {
+    display: flex;
+    flex-direction: column;
+    position: relative;
     margin-top: 10px;
     width : 180px;
 }
@@ -80,7 +83,6 @@
     font-weight: 600;
     font-size: 17px;
     width : 100%;
-    /* height : 40px; */
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -145,6 +147,12 @@
     float: left;
     color : #1774e6;
     font-weight: 600;
+    margin: 5px 0px;
+}
+.s-day2 {
+    float: left;
+    color : #120053;
+    font-weight: 600;
     margin-bottom: 5px;
 }
 .s-tic-site2 {
@@ -167,6 +175,17 @@
     margin-bottom: 3rem;
 }
 
+
+@media (min-width: 1400px) {
+    .s-openticket-info .s-title {
+        height : 40px;
+    }
+    
+    .s-day, .s-day2 {
+        font-size: 0.9rem;
+    }
+}
+
 /* 필터가 상단으로 올라갈 시: 4열 */
 @media (max-width: 1400px) and (min-width: 900px) {
     .tickets {
@@ -183,6 +202,14 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    .s-openticket-info .s-title {
+        height : 40px;
+    }
+
+    .s-day, .s-day2 {
+        font-size: 0.9rem;
     }
 }
 
@@ -215,6 +242,14 @@
 
     .s-tl-plus {
         width: 630px !important;
+    }
+
+    .s-openticket-info .s-title {
+        height : 40px;
+    }
+
+    .s-day, .s-day2 {
+        font-size: 0.9rem;
     }
 }
 
@@ -292,9 +327,12 @@
         -webkit-line-clamp: 2;
         font-size: 0.9rem;
         font-weight: normal;
+        margin-top: 2px !important;
+        margin-bottom: 3px;
     }
-    .s-day {
-        font-size: 0.8rem;
+    .s-day, .s-day2 {
+        font-size: 0.7rem;
+        margin: 0 !important;
     }
     .s-open-Timer {
         font-size: 0.7rem;
@@ -302,7 +340,7 @@
     }
     .s-Timer-banner, .s-Timer-day, .pre-banner {
         float: left;
-        height: 1.1rem;
+        height: 1rem;
         padding: .2rem .4rem;
     }
     .pre-banner {

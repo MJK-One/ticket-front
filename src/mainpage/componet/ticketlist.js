@@ -16,6 +16,12 @@ export default function Ticketlist({ allTickets, lastTicketElementRef }) {
             </div>
             <div className='openticket-list'>
                 {allTickets.map((ticket, index) => {
+                    const period = ticket.event_start_date === ticket.event_end_date
+                        ? (ticket.event_start_date ? (moment(ticket.event_start_date).locale('ko').format('M.DD')) : (null))
+                        : (ticket.event_start_date && ticket.event_end_date ? 
+                            (`${moment(ticket.event_start_date).locale('ko').format('M.DD')} ~ 
+                            ${moment(ticket.event_end_date).locale('ko').format('M.DD')}`) : (null));
+
                     const TicketComponent = (
                         <div className='openticket' key={ticket.id} ref={index === allTickets.length - 1 ? lastTicketElementRef : null}>
                             <Link to={`/detail/${ticket.id}`}>
@@ -34,13 +40,12 @@ export default function Ticketlist({ allTickets, lastTicketElementRef }) {
                                     </div>
                                     <div className='day2'>
                                         공연 날짜 :
-                                        {ticket.event_start_date && ticket.event_end_date ? (
-                                            <>
-                                                {moment(ticket.event_start_date).locale('ko').format('M.DD')}~
-                                                {moment(ticket.event_end_date).locale('ko').format('M.DD')}
-                                            </>
+                                        {period ? (
+                                            <span style={{marginLeft: '5px'}}>
+                                                {period}
+                                            </span>
                                         ) : (
-                                            <span>정보 없음</span>
+                                            <span style={{marginLeft: '5px'}}>정보 없음</span>
                                         )}
                                     </div>
                                     <div className='tic-site2'>
