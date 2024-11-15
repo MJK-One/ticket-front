@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     font-weight: 700;
+    padding: 0;
 }
 
 .by-site div {
@@ -71,16 +72,25 @@
     }    
 }
 @media (max-width: 650px) {
+    .openticket-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     .by-site {
         display: flex;
         gap: 10px;
         align-items: center;
         justify-content: center;
         position: relative;
-        right : 20px;
+        margin-top: 1rem;
+        margin-bottom: 0;
     }
     .openticket-arrange {
-        width : 500px;
+        width : 300px;
+        justify-content: center;
+        align-items: center;
     }
     .site-logo {
         display: flex;
