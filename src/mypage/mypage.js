@@ -382,14 +382,17 @@ function Mypage() {
                         </>
                     )}
                     </div>
-                    <div className="mypage-choice">
-                        <div className="choice-title">관심내역</div>
-                        <div className="choice-number">{userLikeListCnt}</div>
+                    <div className="mypage-result-cnt-wrap">
+                        <div className="mypage-choice">
+                            <div className="choice-title">관심내역</div>
+                            <div className="choice-number">{userLikeListCnt}</div>
+                        </div>
+                        <div className="mypage-call">
+                            <div className="call-title">알람내역</div>
+                            <div className="call-number">{userBellListCnt}</div>
+                        </div>
                     </div>
-                    <div className="mypage-call">
-                    <div className="call-title">알람내역</div>
-                    <div className="call-number">{userBellListCnt}</div>
-                    </div>
+                    
                 </div>
                 <div className="mypage-list">
                     <div className="list-button-con">
@@ -520,7 +523,7 @@ function Mypage() {
                                                                 BellInputHandler(e, item.id);
                                                             }}
                                                         />
-                                                        <span>시간 전에 알림</span>
+                                                        <span>시간 전에</span>
                                                     </div>
                                                 </div>
                                             </div>

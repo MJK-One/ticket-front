@@ -25,43 +25,145 @@ ul {
     }
 }
 
-.mypage-con {
-    display: flex; 
-    justify-content: center; 
-    margin: 30px auto; 
-    width: 100%;
-    max-width: 900px; 
-    height : 150px;
-    border: 1px solid #dddddd;
-    background: #fafafa;
+/* 태블릿까지 */
+@media (min-width: 500px) {
+    .mypage-con {
+        display: flex; 
+        justify-content: center; 
+        margin: 30px auto; 
+        width: 100%;
+        max-width: 900px; 
+        height : 150px;
+        border: 1px solid #dddddd;
+        background: #fafafa;
+    }
+    
+    .mypage-info {
+        width: 50%;
+        background: white;
+        display: flex; 
+        justify-content: center; 
+        flex-direction: column;
+        padding: 10px;
+    }
+    .mypage-info .mypage-email {
+        margin-bottom: 10px; 
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin-left: 10px;
+    }
+    .mypage-info .mypage-btn {
+        display: flex; /* Flexbox 사용 */
+        justify-content: flex-start; /* 버튼을 왼쪽으로 정렬 */
+        gap: 10px;
+    }
+    
+    .mypage-info button:first-child {
+        margin-left: 10px;
+    }
+
+    .mypage-result-cnt-wrap {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .mypage-choice {
+        width: 50%;
+        border-right : 1px solid #c5c5c5;
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        flex-direction: column;
+    }
+    .mypage-choice .choice-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .mypage-choice .choice-number {
+        font-size : 30px;
+        font-weight: bold;
+    }
+    
+    .mypage-call {
+        width: 50%;
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        flex-direction: column;
+    }
+    .mypage-call .call-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .mypage-call .call-number {
+        font-size : 30px;
+        font-weight: bold;
+    }
+}
+/* 휴대폰 */
+@media (max-width: 500px) {
+    .mypage-con {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 250px;
+        position: relative;
+    }
+    .mypage-info {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        font-size: 1rem;
+
+        background-color: #e4e4e5;
+        border-radius: 0.5rem;
+    }
+    .mypage-info .mypage-btn {
+        display: flex; /* Flexbox 사용 */
+        justify-content: flex-start; /* 버튼을 왼쪽으로 정렬 */
+        gap: 10px;
+    }
+    .mypage-result-cnt-wrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        position: relative;
+    }
+    .mypage-choice, .mypage-call {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .mypage-choice {
+        border-right: 1px solid #dddddd;
+    }
+    .choice-title, .call-title {
+        font-size: 0.9rem;
+    }
+    .choice-number, .call-number {
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
 }
 
-.mypage-info {
-    width: 50%;
-    background: white;
-    display: flex; 
-    justify-content: center; 
-    flex-direction: column;
-    padding: 10px;
-}
-.mypage-info .mypage-email {
-    margin-bottom: 10px; 
-    font-weight: 500;
-    font-size: 1.5rem;
-    margin-left: 10px;
-}
-.mypage-info .mypage-btn {
-    display: flex; /* Flexbox 사용 */
-    justify-content: flex-start; /* 버튼을 왼쪽으로 정렬 */
-    gap: 10px;
-}
 .mypage-info button {
     border: 1px solid #dddddd;
     background-color: white;
     font-size: 15px;
-}
-.mypage-info button:first-child {
-    margin-left: 10px;
 }
 .mypage-btn .naverlogin {
     display: flex;
@@ -75,42 +177,6 @@ ul {
     cursor: default;
 }
 
-.mypage-choice {
-    width: 25%;
-    margin: auto;
-    border-right : 1px solid #c5c5c5;
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    flex-direction: column;
-}
-.mypage-choice .choice-title {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-.mypage-choice .choice-number {
-    font-size : 30px;
-    font-weight: bold;
-}
-
-.mypage-call {
-    width: 25%;
-    margin: auto;
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    flex-direction: column;
-}
-.mypage-call .call-title {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-.mypage-call .call-number {
-    font-size : 30px;
-    font-weight: bold;
-}
 
 .list-button-con {
     display: flex;
@@ -431,4 +497,177 @@ ul {
     background: none;
     border: none;
     cursor: pointer;
+}
+
+@media (max-width: 900px) and (min-width: 500px) {
+    .mypage-con {
+        height: 100px;
+    }
+    .mypage-con .mypage-email{
+        font-size: 1rem;
+    }
+    .mypage-choice .choice-title, .mypage-call .call-title {
+        font-size: 1rem;
+    }
+
+    .mypage-choice .choice-number, .mypage-call .call-number {
+        font-size: 1.5rem;
+    }
+
+    /**/
+    .mypage-list .choice-btn, .mypage-list .call-btn {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+
+    /**/
+    .choice-ticket, .call-ticket {
+        width: calc(100% - 30px);
+        padding: 15px;
+    }
+    .choice-ticket .cho-img, .call-ticket .call-img {
+        width: 4.5rem;
+        height: 6rem;
+    }
+    .cho-info, .call-info {
+        width: 75%;
+    }
+    .cho-info-title, .call-info-title {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+    .cho-info-pre-open, .cho-info-open, .cho-info-performance, .cho-info-region,
+    .call-info-pre-open, .call-info-open {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+    }
+
+    .cho-info-site {
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 0.5rem;
+    }
+    .cho-info-site img {
+        border-radius: 0.5rem;
+    }
+
+    .cho-tic-call, .cho-tic-cho, .option-call-btn {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+    .cho-tic-cho {
+        margin-left: 5px;
+    }
+    .cho-tic-call {
+        margin-left: 0;
+    }
+
+    /**/
+    .choice-list-page-ul {
+        gap: 0.5rem;
+    }
+    .choice-list-page-ul li {
+        width: 1.3rem;
+        height: 1.3rem;
+        line-height: 1.3rem;
+        font-size: 0.9rem;
+    }
+    .choice-list-page-left-btns, .choice-list-page-numbers, .choice-list-page-right-btns {
+        gap: 0.3rem;
+    }
+
+    /**/
+    .call-option-time {
+        font-size: 0.9rem;
+        width: 65px;
+        gap: 5px;
+    }
+    .call-option-time input {
+        width: 30px;
+    } 
+}
+/*min: 280*/
+@media (max-width: 500px) {
+    /**/
+    .mypage-list .choice-btn, .mypage-list .call-btn {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+
+    /**/
+    .choice-ticket, .call-ticket {
+        flex-direction: column;
+        align-items: flex-end;
+        width: calc(100% - 20px);
+        padding: 10px;
+    }
+    .call-ticket {
+        gap: 10px;
+    }
+    .choice-ticket-a, .call-ticket-a {
+        width: 100%;
+    }
+    .cho-img, .call-img {
+        width: 3rem;
+        height: 4rem;
+    }
+    .cho-info, .call-info {
+        width: calc(100% - 3rem);
+    }
+    .cho-tic-call, .cho-tic-cho, .option-call-btn {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+    .cho-tic-cho {
+        margin-left: 5px;
+    }
+    .cho-tic-call {
+        margin-left: 0;
+    }
+
+    .cho-info-title, .call-info-title {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    .cho-info-pre-open, .cho-info-open, .cho-info-performance, .cho-info-region,
+    .call-info-pre-open, .call-info-open {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+    }
+
+    .cho-info-site {
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 0.5rem;
+    }
+    .cho-info-site img {
+        border-radius: 0.5rem;
+    }
+
+    /**/
+    .call-option {
+        flex-direction: row-reverse;
+        gap: 8px;
+    }
+    .call-option-time {
+        font-size: 0.9rem;
+        gap: 5px;
+    }
+    .call-option-time input {
+        width: 30px;
+    }
+
+    /**/
+    .choice-list-page-ul {
+        gap: 0.3rem;
+    }
+    .choice-list-page-ul li {
+        width: 1.1rem;
+        height: 1.1rem;
+        line-height: 1.1rem;
+        font-size: 0.85rem;
+    }
+    .choice-list-page-left-btns, .choice-list-page-numbers, .choice-list-page-right-btns {
+        gap: 0.2rem;
+    }
 }
