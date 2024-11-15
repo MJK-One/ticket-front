@@ -45,7 +45,10 @@ const searchSlice = createSlice({
         },
         // period 업데이트 액션
         setPeriod: (state, action) => {
-            state.searchParams.period = action.payload;
+            state.searchParams = {
+                ...state.searchParams,
+                period: action.payload, // 새로운 객체 생성
+            };
         },
         // siteFilter 업데이트 액션
         setSiteFilter: (state, action) => {

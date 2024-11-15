@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetCurPage, resetAllSearchResult, setGenreFilter, setRegionFilter, setPeriod, setSiteFilter, setSearchKeyword } from '../../../store/slice/searchSlice.js';
@@ -15,6 +15,9 @@ const MobileSearchHeader = () => {
 
     // navigate
     const navigate = useNavigate();
+
+    // Ref to control DatePicker
+    const datePickerRef = useRef(null);
 
     /* 변수 */
     //active
@@ -491,6 +494,9 @@ const MobileSearchHeader = () => {
       dispatch(resetCurPage());
       dispatch(resetAllSearchResult());
   
+      // Reset calendar via the exposed `resetCalendar` function
+      datePickerRef.current.resetCalendar();
+
       //slice 제어
       dispatch(setPeriod("전체")); //날짜 필터
   
@@ -626,7 +632,7 @@ const MobileSearchHeader = () => {
 
                     <button className='close-btn' onClick={() => setIsTopDateFilter(false)}>×</button>
 
-                    <DatePicker onDateChange={handleDateChange} />
+                    <DatePicker ref={datePickerRef} onDateChange={handleDateChange} />
 
                     <div className='filterBtnsWrap'>
                         <button onClick={ResetDateBtnHandler} className="search-f-reset-btn">

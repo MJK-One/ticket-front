@@ -1,10 +1,10 @@
 import { subMonths } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import { useSelector } from 'react-redux';
 import { DAY_LIST , useDatepicker } from './datepickerSetting.js';
 import './datepicker.css';
 
-const DatePicker = ({ onDateChange }) => {
+const DatePicker = forwardRef(({ onDateChange }, ref) => {
 
   /*
     달력, 이벤트 함수 설정
@@ -92,6 +92,18 @@ const DatePicker = ({ onDateChange }) => {
 
   }, [calendar.pickFirstDate, calendar.pickSecDate, onDateChange, finalDateStr]);
 
+  // 리셋 함수
+  const resetCalendar = () => {
+    calendar.setPickFirstdate(null);
+    calendar.setPickSecdate(null);
+    calendar.setPickState(0);
+    setFinalDateStr("전체");
+  };
+
+  // Expose `resetCalendar` to the parent component via the `ref`
+  useImperativeHandle(ref, () => ({
+    resetCalendar,
+  }));
 
     /* 이벤트 함수 설정 */
   // 현재 달력 연도, 달
@@ -197,5 +209,5 @@ const DatePicker = ({ onDateChange }) => {
     </div>
 
   );
-};
+});
 export default DatePicker;

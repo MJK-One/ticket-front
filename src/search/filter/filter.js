@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetCurPage, resetAllSearchResult, setGenreFilter, setRegionFilter, setSiteFilter, setPeriod } from '../../store/slice/searchSlice.js';
@@ -12,6 +12,9 @@ const Filter = () => {
 
   // navigate
   const navigate = useNavigate();
+
+  // Ref to control DatePicker
+  const datePickerRef = useRef(null);
 
   /*
     toggle 기능이 있는 Container에 필요한 변수, 이벤트 함수 설정
@@ -308,6 +311,9 @@ const Filter = () => {
     dispatch(resetCurPage());
     dispatch(resetAllSearchResult());
 
+    // Reset calendar via the exposed `resetCalendar` function
+    datePickerRef.current.resetCalendar();
+
     //slice 제어
     dispatch(setGenreFilter([])); //장르 필터
     dispatch(setRegionFilter([])); //지역 필터
@@ -316,6 +322,7 @@ const Filter = () => {
 
     navigate("/search");
   };
+
 
   const SubmitBtnHandler = () => { //필터 적용 버튼
       // 이전 검색 결과 초기화
@@ -437,6 +444,9 @@ const Filter = () => {
     dispatch(resetCurPage());
     dispatch(resetAllSearchResult());
 
+    // Reset calendar via the exposed `resetCalendar` function
+    datePickerRef.current.resetCalendar();
+
     //slice 제어
     dispatch(setPeriod("전체")); //날짜 필터
 
@@ -508,7 +518,7 @@ const Filter = () => {
                 </a>
               </div>
     
-              <DatePicker onDateChange={handleDateChange} />
+              <DatePicker ref={datePickerRef} onDateChange={handleDateChange} />
             </div>
 
             <div className={`filterContainer ContainerLast ${isToggledLastContainer ? "is-toggled" : null}`}>
@@ -633,7 +643,7 @@ const Filter = () => {
 
               <button className='close-btn' onClick={() => setIsTopDateFilter(false)}>×</button>
 
-              <DatePicker onDateChange={handleDateChange} />
+              <DatePicker ref={datePickerRef} onDateChange={handleDateChange} />
 
               <div className='filterBtnsWrap'>
                 <button onClick={ResetDateBtnHandler} className="search-f-reset-btn">
