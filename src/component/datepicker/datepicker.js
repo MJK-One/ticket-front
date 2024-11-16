@@ -142,24 +142,41 @@ const DatePicker = forwardRef(({ onDateChange }, ref) => {
   const searchSlice = useSelector((state) => state.searchs.searchParams);
   // 달력 상태 업데이트: searchSlice.period 값이 변경될 때마다
   useEffect(() => {
+    const parseDate = (dateStr) => {
+      // YYYY.MM.DD > YYYY-MM-DD: 아이폰 버그 수정
+      return dateStr.replace(/\./g, "-");
+    };
+  
     const sepPeriod = searchSlice.period.split(" ~ "); // 기간인지 아닌지 구분
-    if(sepPeriod.length === 2){ //기간이라면
-      calendar.setPickFirstdate(new Date(sepPeriod[0]));
-      calendar.setPickSecdate(new Date(sepPeriod[1]));
-      calendar.setPickState(2); //상태 > 기간 선택
-    } else if(sepPeriod.length === 1){ //"전체" or 단일 날짜
-      if(sepPeriod[0] === "전체"){
-        //초기화
+  
+    if (sepPeriod.length === 2) { // 기간이라면
+      const firstDate = new Date(parseDate(sepPeriod[0]));
+      const secondDate = new Date(parseDate(sepPeriod[1]));
+      if (!isNaN(firstDate) && !isNaN(secondDate)) { // 유효성 확인
+        calendar.setPickFirstdate(firstDate);
+        calendar.setPickSecdate(secondDate);
+        calendar.setPickState(2); // 상태 > 기간 선택
+      } else {
+        console.error("Invalid date format in sepPeriod:", sepPeriod);
+      }
+    } else if (sepPeriod.length === 1) { //"전체" or 단일 날짜
+      if (sepPeriod[0] === "전체") {
+        // 초기화
         calendar.setPickFirstdate(null);
         calendar.setPickSecdate(null);
-        calendar.setPickState(0); //상태 > 미선택
-      } else { //단일 날짜
-        calendar.setPickFirstdate(new Date(sepPeriod[0]));
-        calendar.setPickSecdate(null);
-        calendar.setPickState(1); //상태 > 날짜 선택
+        calendar.setPickState(0); // 상태 > 미선택
+      } else {
+        const singleDate = new Date(parseDate(sepPeriod[0]));
+        if (!isNaN(singleDate)) { // 유효성 확인
+          calendar.setPickFirstdate(singleDate);
+          calendar.setPickSecdate(null);
+          calendar.setPickState(1); // 상태 > 날짜 선택
+        } else {
+          console.error("Invalid single date format in sepPeriod:", sepPeriod[0]);
+        }
       }
     } else {
-      console.log("error");
+      console.error("Unexpected period format:", sepPeriod);
     }
   }, [searchSlice.period]);
 
