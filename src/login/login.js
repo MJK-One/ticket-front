@@ -242,9 +242,7 @@ function Login() {
                     </li>
                     <li>
                         <div className="naverlogin" onClick={handleNaverLogin}>
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" clipRule="evenodd" d="M15.0619 5.48535V13.0196L9.9945 5.48535H4.51953V20.4187H9.97713V12.8844L15.0446 20.4187H20.5195V5.48535H15.0619Z" fill="white"/>
-                            </svg>
+                            <img src='/img/naver/naver_btn.png' className='naverlogin-img'/>
                         </div>
                     </li>
                 </ul>

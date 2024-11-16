@@ -216,6 +216,11 @@ ul {
     cursor: default;
 }
 
+.naverlogin-img {
+    width: 25px;
+    height: 25px;
+}
+
 
 .list-button-con {
     display: flex;
