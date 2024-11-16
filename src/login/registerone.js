@@ -11,8 +11,7 @@ function RegisterOne() {
     const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [emailDomain, setEmailDomain] = useState("direct");
-    const [gender, setGender] = useState("");
+    const [emailDomain, setEmailDomain] = useState("direct")
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [isPasswordMatch, setIsPasswordMatch] = useState(true);
     const [isEmailValid, setIsEmailValid] = useState(true);
@@ -78,10 +77,6 @@ function RegisterOne() {
         }
     };
 
-    const handleGenderChange = (e) => {
-        setGender(e.target.value);
-    };
-
     const handleAgeGroupChange = (e) => {
         setAge(e.target.value);
     };
@@ -90,7 +85,7 @@ function RegisterOne() {
         e.preventDefault();
 
         const isFormValid = emailId.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== ""
-                            && age.trim() !== "" && gender.trim() !== "" &&
+                            && age.trim() !== "" &&
                             isEmailValid && isPasswordValid && isPasswordMatch;
 
         if (isFormValid) {
@@ -101,7 +96,6 @@ function RegisterOne() {
                 name: name,
                 password: password,
                 age: age,
-                gender: gender,
             };
             
             try {
@@ -287,7 +281,7 @@ function RegisterOne() {
                         </div>
                     </div>
 
-                    <div className="registerone-input-box">
+                    {/* <div className="registerone-input-box">
                         <div className="registerone-input">
                             <div className="input-line">
                                 <label className="gender">성별</label>
@@ -313,7 +307,7 @@ function RegisterOne() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <button className="register-submit" type="submit">가입완료</button>
                     <div className={`register-check ${showRegisterError ? 'visible' : ''}`}>
