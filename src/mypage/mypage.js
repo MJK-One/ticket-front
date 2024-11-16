@@ -159,6 +159,26 @@ function Mypage() {
         }
     }, [isAuthenticated]);
 
+    // 로그인 유저 이름 가져오기
+    const [userName, setUserName] = useState("");
+    useEffect(() => {
+        //
+        async function getUserName(email) {
+            try {
+                const apiUrl = `${API_SERVER_HOST}/getNameWhoLogin?email=${email}`;
+                const res = await axios.get(apiUrl);
+                setUserName(res.data);
+            } catch (error) {
+                console.error("Mypage Bell Input Error: ", error);
+            }
+        };
+        //
+        if(isAuthenticated) {
+            getUserName(user.email);
+        }
+    }, [isAuthenticated, user]);
+
+
     // 유저의 관심, 알림 등록 정보 가져오기
     const [isLoading, setIsLoading] = useState(true);
     // 상단: 프로필
@@ -363,7 +383,8 @@ function Mypage() {
                     <div className="mypage-info">
                     {isAuthenticated && (
                         <>
-                            <div className="mypage-email">{user.email}</div> 
+                            <div className="mypage-name">{`${userName} 님`}</div>
+                            <div className="mypage-email">{`(${user.email})`}</div> 
                             <div className="mypage-btn">
                                 {user.type === "normal" && (
                                     <button onClick={() => setIsModalOpen(true)}>

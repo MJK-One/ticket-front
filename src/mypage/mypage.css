@@ -46,11 +46,27 @@ ul {
         flex-direction: column;
         padding: 10px;
     }
+    .mypage-info .mypage-name {
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-left: 10px;
+
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
     .mypage-info .mypage-email {
         margin-bottom: 10px; 
         font-weight: 500;
-        font-size: 1.5rem;
+        font-size: 1rem;
         margin-left: 10px;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
     }
     .mypage-info .mypage-btn {
         display: flex; /* Flexbox 사용 */
@@ -123,10 +139,33 @@ ul {
         align-items: center;
         gap: 5px;
 
-        font-size: 1rem;
-
         background-color: #e4e4e5;
         border-radius: 0.5rem;
+    }
+    .mypage-info .mypage-name {
+        font-weight: 700;
+        font-size: 1rem;
+
+        width: 95%;
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+
+        text-align: center;
+    }
+    .mypage-info .mypage-email { 
+        font-weight: 500;
+        font-size: 0.8rem;
+        
+        width: 95%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+
+        text-align: center;
     }
     .mypage-info .mypage-btn {
         display: flex; /* Flexbox 사용 */

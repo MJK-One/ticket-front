@@ -124,8 +124,27 @@ function Header() {
   // slice 선언
   const dispatch = useDispatch();
   const searchSlice = useSelector((state) => state.searchs.searchParams);
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const navigate = useNavigate();
+
+  // 로그인 유저 이름 가져오기
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    //
+    async function getUserName(email) {
+      try {
+          const apiUrl = `${API_SERVER_HOST}/getNameWhoLogin?email=${email}`;
+          const res = await axios.get(apiUrl);
+          setUserName(res.data);
+      } catch (error) {
+          console.error("Mypage Bell Input Error: ", error);
+      }
+    };
+    //
+    if(isAuthenticated) {
+      getUserName(user.email);
+    }
+  }, [isAuthenticated, user]);
 
   // 지역별 필터
     // active 지역 useState
@@ -301,6 +320,7 @@ function Header() {
               // 사용자가 로그인한 경우
               <>
                 <div className="loging">
+                  <div className="h-t-name">{`${userName} 님`}</div>
                   <Link to="/mypage"><div className="h-t-mypage">마이페이지</div></Link>
                   <div className="h-t-logout" onClick={handleLogout}>로그아웃</div>
                 </div>

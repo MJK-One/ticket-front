@@ -32,6 +32,9 @@ button {
     /*margin-right : 100px;*/
     gap : 20px;
   }
+  .h-t-name {
+    color: #007bff;
+  }
   .h-t-logout{
     cursor: pointer;
   }
