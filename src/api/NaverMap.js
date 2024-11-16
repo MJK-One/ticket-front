@@ -23,11 +23,12 @@ const PersonalNaverMap = ({ placeData, placeType }) => {
     //
     const navermaps = useNavermaps();
     const [isAvailable, setIsAvailable] = useState(false);
-    const [coords, setCoords] = useState(new navermaps.LatLng(37.500751, 126.867891)); //초기 정보
+    const [coords, setCoords] = useState(null); //초기 정보
     const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsAvailable(false);
             console.log(`placeData: ${placeData}, placeType: ${placeType}`);
             try {
                 if(placeType === "addr" && placeData) { //주소로 불러오기
@@ -75,22 +76,23 @@ const PersonalNaverMap = ({ placeData, placeType }) => {
 
     if (isLoading) {
         return <div>Loading map...</div>; // 로딩 중 표시
+    } else {
+        if (isAvailable === true) {
+            return (
+                <MapDiv
+                    style={ windowWidth > 900 ? {width: '50rem', height: '30rem', marginTop: '15px'} : {width: '100%', height: '300px', marginTop: '15px'} }>
+                        <NaverMap
+                            center={coords}
+                            defaultZoom={17}>
+                            <Marker position={coords} />
+                        </NaverMap>
+                </MapDiv>
+              );
+        } else {
+            return null;
+        }
     }
 
-    if (isAvailable === false) {
-        return null;
-    }
-
-  return (
-    <MapDiv
-        style={ windowWidth > 900 ? {width: '50rem', height: '30rem', marginTop: '15px'} : {width: '100%', height: '300px', marginTop: '15px'} }>
-            <NaverMap
-                center={coords}
-                defaultZoom={17}>
-                <Marker position={coords} />
-            </NaverMap>
-    </MapDiv>
-  );
 };
 
 export default PersonalNaverMap;
