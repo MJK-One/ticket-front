@@ -29,6 +29,29 @@ export default function MainTop({ top10Tickets }) {
     return () => window.removeEventListener('resize', updateScreenSize); // 컴포넌트 언마운트 시 이벤트 리스너 제거
   }, []);
 
+  // 스와이퍼 개수 설정
+  const [slidesPerView, setSlidesPerView] = useState(5); // 기본값 5
+  useEffect(() => {
+    const updateSlidesPerView = () => {
+      const width = window.innerWidth;
+      if (width >= 1420) {
+        setSlidesPerView(5);
+      } else if (width >= 1000) {
+        setSlidesPerView(3);
+      } else {
+        setSlidesPerView(1);
+      }
+    };
+
+    updateSlidesPerView(); // 초기 실행
+    window.addEventListener('resize', updateSlidesPerView); // 크기 변경 시 실행
+
+    return () => window.removeEventListener('resize', updateSlidesPerView); // 컴포넌트 언마운트 시 리스너 제거
+  }, []);
+
+
+
+  //
   useEffect(() => {
     if (isSmallScreen) {
       top10Tickets.forEach(ticket => {
@@ -74,18 +97,20 @@ export default function MainTop({ top10Tickets }) {
         loop={true}
         autoplay={true}
         allowTouchMove={false}
-        navigation={enableNavigation} // 조건부 navigation 활성화
+        navigation={enableNavigation ? {
+          nextEl: '.custom-next', // 커스텀 next 버튼
+          prevEl: '.custom-prev'  // 커스텀 prev 버튼
+        } : false} // 화면 크기에 따라 버튼 활성화 여부 제어
         className="maintop-con-sw"
+        slidesPerView={slidesPerView} // 동적으로 관리되는 slidesPerView 사용
         breakpoints={{
           1000: {
-            slidesPerView: 5,
             spaceBetween: 10,
-            allowTouchMove: false
+            allowTouchMove: false,
           },
           200: {
-            slidesPerView: 1,
             spaceBetween: 0,
-            allowTouchMove: true
+            allowTouchMove: true,
           },
         }}
       >
@@ -105,6 +130,19 @@ export default function MainTop({ top10Tickets }) {
             </Link>
           </SwiperSlide>
         ))}
+
+        {enableNavigation && (
+          <>
+          <div className="custom-prev">
+            <img src="/img/icon/swiper/prev_btn.png" alt="이전" />
+          </div>
+          <div className="custom-next">
+            <img src="/img/icon/swiper/after_btn.png" alt="다음" />
+          </div>
+          </>
+        )}
+        
+
       </Swiper>
     </div>
   );

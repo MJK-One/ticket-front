@@ -1,3 +1,13 @@
+@media screen and (min-width: 1420px) {
+  .maintop-con, .swiper {
+    width: 1400px !important;
+  }
+}
+@media screen and (max-width: 1420px) and (min-width: 1001px) {
+  .maintop-con, .swiper {
+    width: 860px !important;
+  }
+}
 @media screen and (min-width: 1001px) {
   .maintop-con {
     margin-top : 40px;
@@ -19,6 +29,7 @@
     background-color: #000;
     color : white;
   }  */
+    /*
   .maintop-con-sw .swiper-button-prev {
     top: var(--swiper-navigation-top-offset, 42%);
     width: calc(var(--swiper-navigation-size) / 44 * 90);
@@ -39,6 +50,36 @@
     width: 60px;
     height: 60px;
   }
+    */
+
+  /* 스와이퍼 커스텀 버튼 */
+  .custom-prev, .custom-next {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 42%;
+    z-index: 10;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .custom-prev {
+    left: 25px;
+  }
+  
+  .custom-next {
+    right: 25px;
+  }
+  .custom-prev img, .custom-next img {
+    width: 100%;
+    height: 100%;
+  }
+
+
   .poster {
     height : 410px;
     width : 270px;
