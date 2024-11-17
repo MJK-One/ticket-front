@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from "../store/slice/userSlice";
 import Header from "../component/header/home/header";
 import MobileDetailHeader from "../component/header/detail/MobileDetailHeader";
 import MobileNav from "../component/header/mobileNav/MobileNav";
@@ -136,6 +137,24 @@ function PasswordModal({ isOpen, onClose, user }) {
 
 //
 function Mypage() {
+    //
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    // 로그아웃 처리 함수
+    const handleLogout = async () => {
+        try {
+        await axios.post(`${API_SERVER_HOST}/logout`, {}, { withCredentials: true }); // 로그아웃 요청
+        // 로그아웃 후 쿠키 삭제
+        document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        dispatch(logout());
+        navigate("/");
+        } catch (error) {
+        console.error("로그아웃 실패: ", error);
+        }
+        
+    };
+
     //const { user } = useUser(); //userContext에서 사용자 정보 가져오기
     const [activeButton, setActiveButton] = useState("interest"); 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -150,7 +169,6 @@ function Mypage() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const navigate = useNavigate();
 
     // 로그인 확인
     const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -677,6 +695,12 @@ function Mypage() {
                     <div style={{marginTop: '15px'}}>Loading...</div>
                 )}
             </div>
+
+            {isLoading === false && (
+                <div className="mypage-logout" onClick={handleLogout}>
+                    로그아웃
+                </div>
+            )}
             {/* 비밀번호 수정 모달 */}
             <PasswordModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} 
             user={user}/>
