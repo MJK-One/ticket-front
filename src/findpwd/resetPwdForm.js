@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_SERVER_HOST } from '../api/connect';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import './resetPwdForm.css';
 
 const ResetPasswordPage = () => {
@@ -68,6 +68,9 @@ const ResetPasswordPage = () => {
               로그인 후 반드시 비밀번호를 변경해주시기 바랍니다.
             </p>
           </div>
+          <Link to="/login" className="login-button">
+            로그인 페이지로 이동
+          </Link>
         </div>
       </div>
     );
