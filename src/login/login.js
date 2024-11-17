@@ -227,19 +227,19 @@ function Login() {
             </form>
             <div className="findlist"> 
                 <ul>
-                    <li>비밀번호 찾기</li>
+                    <li><Link to="/findPwd">비밀번호 찾기</Link></li>
                     <li><Link to="/registerone">회원가입</Link></li>
                 </ul>
             </div>
             <div className="snslogin">
             <ul>
-                    <li>
+                    {/*<li>
                         <div className="kakaologin">
                             <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fillRule="evenodd" clipRule="evenodd" d="M0.519531 8.61196C0.519531 11.4975 2.37093 14.0321 5.1607 15.4739L4.21824 19.0958C4.18323 19.203 4.20964 19.3196 4.28698 19.3991C4.3427 19.4564 4.41616 19.4854 4.48968 19.4854C4.55233 19.4854 4.61492 19.4648 4.66753 19.4221L8.72156 16.6072C9.30482 16.693 9.90582 16.7384 10.5195 16.7384C16.0423 16.7384 20.5195 13.1004 20.5195 8.61196C20.5195 4.12404 16.0423 0.485352 10.5195 0.485352C4.99677 0.485352 0.519531 4.12404 0.519531 8.61196Z" fill="#4E2828"/>
                             </svg>
                         </div>
-                    </li>
+                    </li>*/}
                     <li>
                         <div className="naverlogin" onClick={handleNaverLogin}>
                             <img src='/img/naver/naver_btn.png' className='naverlogin-img'/>

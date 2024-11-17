@@ -19,6 +19,8 @@ const Login = lazy(() => import('./login/login'));
 const RegisterOne = lazy(() => import('./login/registerone'));
 const Mypage = lazy(() => import('./mypage/mypage'));
 const ReservationForm = lazy(() => import('./Reservation'));
+const FindPasswordForm = lazy(() => import('./findpwd/findPwdForm.js'));
+const ResetPasswordPage = lazy(() => import('./findpwd/resetPwdForm.js'));
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
             <Route path="registerone" element={<RegisterOne/>} />
             <Route path="/mypage" element={<Mypage/>} />
             <Route path='/reservation' element={<ReservationForm />} />
+            <Route path='/findPwd' element={<FindPasswordForm />} />
+            <Route path='/resetPassword' element={<ResetPasswordPage />} />
           </Routes>
         </Suspense>
       </Router>
