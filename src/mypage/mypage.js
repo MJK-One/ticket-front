@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Header from "../component/header/home/header";
 import MobileDetailHeader from "../component/header/detail/MobileDetailHeader";
 import MobileNav from "../component/header/mobileNav/MobileNav";
+import ScrollButtons from "../component/scrollBtn/scrollButtons";
 //import { useUser } from '../login/userContext'; 
 import { API_SERVER_HOST } from "../api/connect";
 import './mypage.css'
@@ -393,8 +394,8 @@ function Mypage() {
                                 )}
                                 {/*<button>알람 설정</button>*/}
                                 {user.type === "naver" && (
-                                    <button className="naverlogin">
-                                        <img src='/img/naver/naver_btn.png' className='naverlogin-img'/>
+                                    <button className="naverlogo">
+                                        <img src='/img/naver/naver_btn.png' className='naverlogo-img'/>
                                     </button>
                                 )}
                             </div>
@@ -679,6 +680,8 @@ function Mypage() {
             {/* 비밀번호 수정 모달 */}
             <PasswordModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} 
             user={user}/>
+
+            <ScrollButtons />
 
             {/* 모바일 nav */}
             {windowWidth <= 1100 && <MobileNav />}

@@ -204,7 +204,7 @@ ul {
     background-color: white;
     font-size: 15px;
 }
-.mypage-btn .naverlogin {
+.mypage-btn .naverlogo {
     display: flex;
     width: 25px;
     height: 25px;
@@ -216,7 +216,7 @@ ul {
     cursor: default;
 }
 
-.naverlogin-img {
+.naverlogo-img {
     width: 25px;
     height: 25px;
 }
