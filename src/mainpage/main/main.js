@@ -61,7 +61,7 @@ function Main() {
     return (
         <>
             <Header />
-            <main id="contents">
+            <main id="contents-home">
                 <section className='maintop'>
                     <MainTop top10Tickets={top10Tickets} />
                 </section> 

@@ -170,7 +170,7 @@ function Login() {
 
     return (
         <div className="login-con">
-            <Link to="/"><img className="logo-img" alt="" src="/img/TOW.png" /></Link>
+            <Link to="/"><img className="login-logo-img" alt="" src="/img/TOW.png" /></Link>
             <form onSubmit={handleLogin}>
                 <div className="login-box">
                     <div className="login-id-box">

@@ -1,4 +1,4 @@
-#contents {
+#contents-home {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,7 @@
     align-items: center; 
 } */
 .ticket-list {
-    margin-top: 10px;
+    margin-top: 20px !important;
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -28,35 +28,35 @@
 
 /* 태블릿 */
 @media (max-width: 1100px) and (min-width: 700px) {
-    #contents {
+    #contents-home {
         margin-top: 100px; /* 헤더 크기 100px */
     }
 }
 
 /* 기본 스마트폰 */
 @media (max-width: 700px) and (min-width: 370px) {
-    #contents {
+    #contents-home {
         margin-top: 70px; /* 헤더 크기 70px */
     }
 }
 
 /* 작은 스마트폰 */
 @media (max-width: 370px) and (min-width: 320px) {
-    #contents {
+    #contents-home {
         margin-top: 60px; /* 헤더 크기 60px */
     }
 }
 
 /* 아주 작은 스마트폰(min: 250, 아래는 무시) */
 @media (max-width: 320px) {
-    #contents {
+    #contents-home {
         margin-top: 60px; /* 헤더 크기 60px */
     }
 }
 
 /* 모바일 nav 추가시 */
 @media (max-width: 1100px) {
-    #contents {
+    #contents-home {
         margin-bottom: 50px; /* 모바일 nav 크기 50px */
     }
 }

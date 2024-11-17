@@ -30,13 +30,13 @@ return(
         <div className={`site-logo ${activeSite === 'Interpark Ticket' ? 'active' : ''}`} onClick={() => handleSiteClick('Interpark Ticket')}>
             <img src="/img/siteicon/interpark.jpg" alt="인터파크" />
         </div>
-        <div className={`site-logo ${activeSite === 'ticketlink' ? 'active' : ''}`} onClick={() => handleSiteClick('ticketlink')}>
+        <div className={`site-logo ${activeSite === 'Ticket Link' ? 'active' : ''}`} onClick={() => handleSiteClick('Ticket Link')}>
             <img src="/img/siteicon/ticketlink.jpg" alt="티켓링크" />
         </div>
         <div className={`site-logo ${activeSite === 'Melon Ticket' ? 'active' : ''}`} onClick={() => handleSiteClick('Melon Ticket')}>
             <img src="/img/siteicon/melon.jpg" alt="멜론" />
         </div>
-        <div className={`site-logo ${activeSite === 'yes24' ? 'active' : ''}`} onClick={() => handleSiteClick('yes24')}>
+        <div className={`site-logo ${activeSite === 'Yes24' ? 'active' : ''}`} onClick={() => handleSiteClick('Yes24')}>
             <img src="/img/siteicon/yes24.png" alt="YES24" />
         </div>
       </menu>
