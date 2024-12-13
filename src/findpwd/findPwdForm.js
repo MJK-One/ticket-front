@@ -18,7 +18,7 @@ const FindPasswordForm = () => {
       await axios.post(`${API_SERVER_HOST}/api/pwdToken/findPassword`, { email });
       setIsSubmitted(true);
     } catch (err) {
-      setError(err.response?.data?.message || '이메일 전송에 실패했습니다.');
+      setError(err.response?.data?.message || '이메일 전송에 실패했습니다. (SNS 로그인 사용자이신가요? SNS 로그인은 비밀번호가 없습니다.)');
     } finally {
       setIsLoading(false);
     }
