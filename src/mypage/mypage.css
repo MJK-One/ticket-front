@@ -11,6 +11,15 @@ ul {
     align-items: center;
     flex-direction: column;
 }
+
+.mypage-logout {
+    margin-bottom: 80px;
+    text-align: center;
+    cursor: pointer;
+    color: #575757;
+    font-size: 1rem;
+}
+
 @media (min-width: 1100px) {
     .mypage {
         margin-bottom: 100px;
@@ -23,14 +32,6 @@ ul {
         margin-top: 40px;
         margin-bottom: 80px;
     }
-
-    .mypage-logout {
-        margin-bottom: 80px;
-        text-align: center;
-        cursor: pointer;
-        color: #575757;
-        font-size: 1rem;
-    }
 }
 
 @media (max-width: 500px) {
@@ -42,10 +43,6 @@ ul {
     }
 
     .mypage-logout {
-        margin-bottom: 65px;
-        text-align: center;
-        cursor: pointer;
-        color: #575757;
         font-size: 0.9rem;
     }
 
